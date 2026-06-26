@@ -10,7 +10,7 @@ const SUPPORT_EMAIL = 'hello@mutianyu-tickets.com';
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Vercel: disable body parsing so Stripe can verify the raw signature
-export const config = { api: { bodyParser: false } };
+module.exports.config = { api: { bodyParser: false } };
 
 module.exports = async (req, res) => {
   if (req.method !== 'POST') return res.status(405).send('Method not allowed');
@@ -33,15 +33,15 @@ module.exports = async (req, res) => {
   if (session.payment_status !== 'paid') return res.json({ received: true });
 
   const m = session.metadata;
-  let visitors = [];
-  try {
-    visitors = JSON.parse(m.visitors || '[]').map(v => ({
-      name: v.n, passportNumber: v.p, nationality: v.nat, dateOfBirth: v.dob, type: v.t
-    }));
-  } catch (_) {}
+  const esc = s => String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  const visitors = Object.entries(m)
+    .filter(([k]) => /^v\d+$/.test(k))
+    .sort((a, b) => parseInt(a[0].slice(1)) - parseInt(b[0].slice(1)))
+    .map(([, val]) => { try { const v = JSON.parse(val); return { name: v.n, passportNumber: v.p, nationality: v.nat, dateOfBirth: v.dob, type: v.t }; } catch (_) { return null; } })
+    .filter(Boolean);
 
   const totalUSD = (session.amount_total / 100).toFixed(2);
-  const firstName = visitors[0]?.name?.split(' ')[0] || 'there';
+  const firstName = esc(visitors[0]?.name?.split(' ')[0] || 'there');
   const FROM = `${BRAND_NAME} <bookings@${process.env.EMAIL_DOMAIN}>`;
 
   const visitorRows = visitors.map((v, i) => `
@@ -50,10 +50,10 @@ module.exports = async (req, res) => {
         ${v.type === 'adult' ? 'Adult' : 'Child'} ${i + 1}
       </td>
     </tr>
-    <tr><td style="padding:7px 10px;border:1px solid #eee;background:#fafafa;font-size:13px;width:130px">Full name</td><td style="padding:7px 10px;border:1px solid #eee;font-size:13px"><strong>${v.name}</strong></td></tr>
-    <tr><td style="padding:7px 10px;border:1px solid #eee;background:#fafafa;font-size:13px">Passport no.</td><td style="padding:7px 10px;border:1px solid #eee;font-size:13px"><strong>${v.passportNumber}</strong></td></tr>
-    <tr><td style="padding:7px 10px;border:1px solid #eee;background:#fafafa;font-size:13px">Nationality</td><td style="padding:7px 10px;border:1px solid #eee;font-size:13px">${v.nationality}</td></tr>
-    <tr><td style="padding:7px 10px;border:1px solid #eee;background:#fafafa;font-size:13px">Date of birth</td><td style="padding:7px 10px;border:1px solid #eee;font-size:13px">${v.dateOfBirth}</td></tr>
+    <tr><td style="padding:7px 10px;border:1px solid #eee;background:#fafafa;font-size:13px;width:130px">Full name</td><td style="padding:7px 10px;border:1px solid #eee;font-size:13px"><strong>${esc(v.name)}</strong></td></tr>
+    <tr><td style="padding:7px 10px;border:1px solid #eee;background:#fafafa;font-size:13px">Passport no.</td><td style="padding:7px 10px;border:1px solid #eee;font-size:13px"><strong>${esc(v.passportNumber)}</strong></td></tr>
+    <tr><td style="padding:7px 10px;border:1px solid #eee;background:#fafafa;font-size:13px">Nationality</td><td style="padding:7px 10px;border:1px solid #eee;font-size:13px">${esc(v.nationality)}</td></tr>
+    <tr><td style="padding:7px 10px;border:1px solid #eee;background:#fafafa;font-size:13px">Date of birth</td><td style="padding:7px 10px;border:1px solid #eee;font-size:13px">${esc(v.dateOfBirth)}</td></tr>
   `).join('');
 
   const operatorHtml = `<div style="font-family:Arial,sans-serif;max-width:600px">
@@ -116,10 +116,14 @@ module.exports = async (req, res) => {
 
   try {
     await resend.emails.send({ from: FROM, to: process.env.OPERATOR_EMAIL, subject: `🎫 New order — ${m.attraction} · ${m.visitDate}`, html: operatorHtml });
+  } catch (err) {
+    console.error('Operator email failed:', err);
+    return res.status(500).json({ error: 'operator_email_failed' });
+  }
+  try {
     await resend.emails.send({ from: FROM, to: m.customerEmail, subject: `Your booking is confirmed — ${m.attraction} · ${m.visitDate}`, html: customerHtml });
   } catch (err) {
-    console.error('Email error:', err);
+    console.error('Customer email failed:', err);
   }
-
   return res.json({ received: true });
 };

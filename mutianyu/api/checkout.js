@@ -43,10 +43,11 @@ module.exports = async (req, res) => {
     });
   }
 
-  // Compact visitor data for Stripe metadata (stored only for order fulfilment, deleted after)
-  const visitorsCompact = JSON.stringify(
-    visitors.map(v => ({ n: v.name, p: v.passportNumber, nat: v.nationality, dob: v.dateOfBirth, t: v.type }))
-  );
+  // One Stripe metadata key per visitor (50 keys × 500 chars — no truncation risk)
+  const visitorMeta = {};
+  visitors.forEach((v, i) => {
+    visitorMeta[`v${i}`] = JSON.stringify({ n: v.name, p: v.passportNumber, nat: v.nationality, dob: v.dateOfBirth, t: v.type });
+  });
 
   try {
     const session = await stripe.checkout.sessions.create({
@@ -62,7 +63,7 @@ module.exports = async (req, res) => {
         adultQty:      String(adults),
         childQty:      String(children),
         customerEmail: email,
-        visitors:      visitorsCompact.slice(0, 490),
+        ...visitorMeta,
       },
       success_url: `${process.env.SITE_URL}/success.html?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url:  `${process.env.SITE_URL}/#book`,

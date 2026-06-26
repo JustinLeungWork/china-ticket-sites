@@ -43,9 +43,10 @@ module.exports = async (req, res) => {
     });
   }
 
-  const visitorsCompact = JSON.stringify(
-    visitors.map(v => ({ n: v.name, p: v.passportNumber, nat: v.nationality, dob: v.dateOfBirth, t: v.type }))
-  );
+  const visitorMeta = {};
+  visitors.forEach((v, i) => {
+    visitorMeta[`v${i}`] = JSON.stringify({ n: v.name, p: v.passportNumber, nat: v.nationality, dob: v.dateOfBirth, t: v.type });
+  });
 
   try {
     const session = await stripe.checkout.sessions.create({
@@ -56,7 +57,7 @@ module.exports = async (req, res) => {
       metadata: {
         attraction: ATTRACTION, ticketType, ticketName: ticket.name,
         visitDate, adultQty: String(adults), childQty: String(children),
-        customerEmail: email, visitors: visitorsCompact.slice(0, 490),
+        customerEmail: email, ...visitorMeta,
       },
       success_url: `${process.env.SITE_URL}/success.html?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url:  `${process.env.SITE_URL}/#book`,
