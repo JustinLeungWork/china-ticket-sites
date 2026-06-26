@@ -116,6 +116,9 @@
     .pp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
     .pp-grid .span2 { grid-column: 1 / -1; }
     .back-link { background: none; border: none; font-size: 12px; color: var(--muted); cursor: pointer; text-decoration: underline; display: block; text-align: center; margin-top: 8px; }
+    .consent-block { margin: 16px 0 10px; }
+    .consent-label { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: #555; line-height: 1.55; cursor: pointer; }
+    .consent-label input[type="checkbox"] { margin-top: 2px; flex-shrink: 0; width: 15px; height: 15px; cursor: pointer; accent-color: var(--primary); }
 
     .guide-section { padding: 72px 32px; }
     .guide-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
@@ -276,8 +279,14 @@
             <input type="email" id="cust-email" placeholder="your@email.com">
           </div>
           <div class="summary-box" id="pp-summary" style="display:block; margin-top:16px"></div>
+          <div class="consent-block">
+            <label class="consent-label">
+              <input type="checkbox" id="consent-box">
+              <span>I have read and agree to the <a href="/terms.html" target="_blank" style="color:var(--primary)">Terms of Service</a> and <a href="/privacy.html" target="_blank" style="color:var(--primary)">Privacy Policy</a>, and consent to my passport details being used solely to complete this booking.</span>
+            </label>
+          </div>
           <button class="btn-primary" id="btn-pay" onclick="submitBooking()">Pay Securely →</button>
-          <p class="pay-note">Secured by Stripe · Visa, Mastercard, Apple Pay · <a href="/privacy.html" style="color:var(--primary)">Privacy Policy</a> · <a href="/refunds.html" style="color:var(--primary)">Refunds</a></p>
+          <p class="pay-note">Secured by Stripe · Visa, Mastercard, Apple Pay · <a href="/terms.html" style="color:var(--primary)">Terms</a> · <a href="/privacy.html" style="color:var(--primary)">Privacy</a> · <a href="/refunds.html" style="color:var(--primary)">Refunds</a></p>
           <button class="back-link" onclick="backToSelect()">← Change ticket selection</button>
         </div>
       </div>
@@ -357,6 +366,7 @@
       <div>Independent English-language ticket procurement service. Not affiliated with Zhangjiajie National Forest Park or any government body.</div>
     </div>
     <div class="footer-links">
+      <a href="/terms.html">Terms of Service</a>
       <a href="/privacy.html">Privacy Policy</a>
       <a href="/refunds.html">Refund Policy</a>
       <a href="#faq">FAQ</a>
@@ -446,6 +456,7 @@
       visitors.push({ name: names[i].value.trim().toUpperCase(), passportNumber: nums[i].value.trim().toUpperCase(), nationality: nats[i].value.trim(), dateOfBirth: dobs[i].value, type: i < adults ? 'adult' : 'child' });
     }
     if (!email || !email.includes('@')) { alert('Please enter a valid email address.'); return; }
+    if (!document.getElementById('consent-box').checked) { alert('Please agree to the Terms of Service and Privacy Policy to continue.'); return; }
     btn.disabled = true; btn.textContent = 'Redirecting to payment…';
     try {
       const res = await fetch('/api/checkout', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ticketType: type, visitDate: date, adultQty: adults, childQty: children, email, visitors }) });

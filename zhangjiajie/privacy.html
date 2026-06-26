@@ -14,11 +14,16 @@
   header a { color:rgba(255,255,255,.7); text-decoration:none; font-size:14px; }
   header h1 { font-family:'Playfair Display',serif; font-size:22px; margin-top:6px; }
   main { max-width:720px; margin:48px auto; padding:0 24px 80px; }
-  h2 { font-family:'Playfair Display',serif; color:var(--primary); font-size:20px; margin:36px 0 12px; }
+  h2 { font-family:'Playfair Display',serif; color:var(--primary); font-size:20px; margin:36px 0 12px; border-bottom:1px solid #eee; padding-bottom:8px; }
   p { line-height:1.75; margin-bottom:14px; color:#444; }
   ul { padding-left:20px; margin-bottom:14px; }
   li { line-height:1.75; margin-bottom:6px; color:#444; }
   .updated { font-size:13px; color:#888; margin-bottom:36px; }
+  .notice { background:#f0f4f0; border-left:4px solid var(--primary); padding:14px 16px; margin:24px 0; border-radius:2px; font-size:14px; line-height:1.65; }
+  table { width:100%; border-collapse:collapse; margin:16px 0 20px; font-size:14px; }
+  th { background:var(--primary); color:#fff; padding:9px 12px; text-align:left; font-weight:500; }
+  td { padding:9px 12px; border-bottom:1px solid #eee; color:#444; vertical-align:top; }
+  tr:nth-child(even) td { background:#f9f9f9; }
   a { color:var(--primary); }
 </style>
 </head>
@@ -28,41 +33,82 @@
   <h1>Privacy Policy</h1>
 </header>
 <main>
-  <p class="updated">Last updated: June 2026 &nbsp;·&nbsp; Governed by Singapore PDPA</p>
+  <p class="updated">Last updated: June 2026 &nbsp;·&nbsp; Governed by Singapore PDPA 2012</p>
 
-  <p>ZhangjiajieTickets.com ("we", "us") operates as an independent ticket procurement service. This policy explains what personal data we collect, why, and how we protect it.</p>
+  <div class="notice">
+    ZhangjiajieTickets.com is an independent ticket procurement service operated from Singapore. This policy explains how we collect, use, store, and protect your personal data, and your rights under the Singapore Personal Data Protection Act 2012 (PDPA).
+  </div>
 
-  <h2>1. What We Collect</h2>
-  <p>To purchase official Chinese attraction tickets on your behalf, we collect:</p>
+  <h2>1. Who We Are (Data Controller)</h2>
+  <p>ZhangjiajieTickets.com ("we", "us", "our") is the data controller for personal data collected through this website. Contact us at <a href="mailto:hello@zhangjiajie-tickets.com">hello@zhangjiajie-tickets.com</a>.</p>
+
+  <h2>2. What Personal Data We Collect</h2>
+  <table>
+    <tr><th>Data</th><th>Why we collect it</th></tr>
+    <tr><td>Email address</td><td>Booking confirmation and QR code delivery</td></tr>
+    <tr><td>Full name (per visitor)</td><td>Required by Chinese real-name ticketing system</td></tr>
+    <tr><td>Passport number (per visitor)</td><td>Required by Chinese real-name ticketing system</td></tr>
+    <tr><td>Nationality (per visitor)</td><td>Required by Chinese real-name ticketing system</td></tr>
+    <tr><td>Date of birth (per visitor)</td><td>Required by Chinese real-name ticketing system</td></tr>
+    <tr><td>Visit date and ticket type</td><td>To purchase the correct ticket for the correct date</td></tr>
+  </table>
+  <p>We do not collect payment card details (handled by Stripe) or special categories of personal data.</p>
+
+  <h2>3. Legal Basis for Processing</h2>
   <ul>
-    <li>Email address (booking confirmation and QR code delivery)</li>
-    <li>Full name, passport number, nationality, and date of birth for each visitor (required by the Chinese real-name ticketing system)</li>
-    <li>Visit date and ticket type</li>
+    <li><strong>Contractual necessity:</strong> processing your booking requires your name, passport, and email.</li>
+    <li><strong>Explicit consent:</strong> you tick a consent checkbox before submitting passport details. You may withdraw consent at any time (see Section 8).</li>
+    <li><strong>Legitimate interest:</strong> retaining transaction records for dispute resolution.</li>
   </ul>
-  <p>We do not collect payment card details. All payments are processed by Stripe, Inc., which is PCI-DSS Level 1 certified.</p>
 
-  <h2>2. Why We Need Passport Details</h2>
-  <p>The official Chinese attraction ticketing system requires real-name registration for every ticket. Each ticket is linked to a specific passport number and the name must match exactly at the gate. We cannot purchase tickets on your behalf without this information.</p>
+  <h2>4. Why We Need Passport Details</h2>
+  <p>China's official attraction ticketing system mandates real-name registration. Every ticket is registered to a specific passport number and the name must match exactly at the gate. This is a legal requirement of the Chinese system — we have no alternative way to purchase tickets on your behalf.</p>
 
-  <h2>3. How Your Data Is Stored</h2>
-  <p>Passport details are stored in Stripe's secure payment metadata, which is encrypted at rest and in transit. This data is transmitted to our operator via email when your payment is confirmed.</p>
-  <p>We do not maintain our own database of passport information.</p>
+  <h2>5. How Your Data Is Stored and Transmitted</h2>
+  <p>Passport details are stored within Stripe's secure payment metadata (AES-256 at rest, TLS 1.2+ in transit). When payment is confirmed, these details are emailed to our operator via Resend, Inc. to action the purchase. We do not store passport data in our own database.</p>
 
-  <h2>4. Data Retention and Deletion</h2>
-  <p>Under our PDPA commitment, passport details are deleted from our operator's email inbox and Stripe metadata after your ticket QR code has been issued — typically within 24 hours of purchase. Email confirmation records (without passport details) are retained for up to 12 months for dispute resolution.</p>
+  <h2>6. Data Retention</h2>
+  <table>
+    <tr><th>Data type</th><th>Retention period</th></tr>
+    <tr><td>Passport details (Stripe metadata + operator email)</td><td>Deleted within 24 hours of QR code being issued</td></tr>
+    <tr><td>Email address and booking record</td><td>Up to 12 months for dispute resolution, then deleted</td></tr>
+    <tr><td>Payment records</td><td>Held by Stripe per their retention policy</td></tr>
+  </table>
 
-  <h2>5. Third Parties</h2>
+  <h2>7. Cookies</h2>
+  <p>This website uses minimal cookies. We do not use tracking, advertising, or analytics cookies. The only cookies that may be set are essential Stripe session cookies during checkout (fraud prevention, governed by Stripe's policy). No consent banner is required as we use no non-essential cookies.</p>
+
+  <h2>8. Third-Party Data Processors</h2>
+  <table>
+    <tr><th>Processor</th><th>Purpose</th><th>Location</th></tr>
+    <tr><td>Stripe, Inc.</td><td>Payment processing and metadata storage</td><td>United States (SCCs in place)</td></tr>
+    <tr><td>Resend, Inc.</td><td>Transactional email delivery</td><td>United States (SCCs in place)</td></tr>
+    <tr><td>Vercel, Inc.</td><td>Website hosting and serverless functions</td><td>United States (SCCs in place)</td></tr>
+  </table>
+  <p>We do not sell or share your data with any other party, and we do not use your data for marketing.</p>
+
+  <h2>9. Your Rights Under the Singapore PDPA</h2>
   <ul>
-    <li><strong>Stripe, Inc.</strong> — payment processing and metadata storage. See <a href="https://stripe.com/privacy" target="_blank">stripe.com/privacy</a>.</li>
-    <li><strong>Resend, Inc.</strong> — transactional email delivery. See <a href="https://resend.com/privacy" target="_blank">resend.com/privacy</a>.</li>
+    <li><strong>Right of access:</strong> request a copy of data we hold about you.</li>
+    <li><strong>Right of correction:</strong> request that inaccurate data be corrected.</li>
+    <li><strong>Right of withdrawal:</strong> withdraw consent at any time. Note: withdrawing after booking may prevent fulfilment (full refund will be issued).</li>
+    <li><strong>Right to erasure:</strong> request deletion, subject to our legal retention obligations.</li>
   </ul>
-  <p>We do not sell your data to third parties.</p>
+  <p>Email <a href="mailto:hello@zhangjiajie-tickets.com">hello@zhangjiajie-tickets.com</a> with subject "Data Request". We respond within 10 business days.</p>
 
-  <h2>6. Your Rights (Singapore PDPA)</h2>
-  <p>You have the right to access, correct, or request deletion of your personal data. To exercise these rights, email us at <a href="mailto:hello@zhangjiajie-tickets.com">hello@zhangjiajie-tickets.com</a>. We will respond within 10 business days.</p>
+  <h2>10. Data Breach Notification</h2>
+  <p>In the event of a breach likely to cause significant harm, we will notify the Singapore PDPC within 3 calendar days and notify you directly as soon as practicable, per the PDPA mandatory breach notification obligation.</p>
 
-  <h2>7. Contact</h2>
-  <p>For privacy questions: <a href="mailto:hello@zhangjiajie-tickets.com">hello@zhangjiajie-tickets.com</a></p>
+  <h2>11. Children's Privacy</h2>
+  <p>This service is for adults (18+) booking on behalf of themselves or their children. We do not knowingly collect data directly from children under 13.</p>
+
+  <h2>12. Changes to This Policy</h2>
+  <p>We will update the "Last updated" date above when changes are made. Continued use constitutes acceptance.</p>
+
+  <h2>13. Contact and Complaints</h2>
+  <p>Privacy questions: <a href="mailto:hello@zhangjiajie-tickets.com">hello@zhangjiajie-tickets.com</a></p>
+  <p>Complaints may be lodged with the Singapore PDPC at <a href="https://www.pdpc.gov.sg" target="_blank">pdpc.gov.sg</a>.</p>
+  <p>See also: <a href="/terms.html">Terms of Service</a> · <a href="/refunds.html">Refund Policy</a></p>
 </main>
 </body>
 </html>

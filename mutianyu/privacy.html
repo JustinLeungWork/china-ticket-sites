@@ -14,11 +14,16 @@
   header a { color:rgba(255,255,255,.7); text-decoration:none; font-size:14px; }
   header h1 { font-family:'Playfair Display',serif; font-size:22px; margin-top:6px; }
   main { max-width:720px; margin:48px auto; padding:0 24px 80px; }
-  h2 { font-family:'Playfair Display',serif; color:var(--primary); font-size:20px; margin:36px 0 12px; }
+  h2 { font-family:'Playfair Display',serif; color:var(--primary); font-size:20px; margin:36px 0 12px; border-bottom:1px solid #eee; padding-bottom:8px; }
   p { line-height:1.75; margin-bottom:14px; color:#444; }
   ul { padding-left:20px; margin-bottom:14px; }
   li { line-height:1.75; margin-bottom:6px; color:#444; }
   .updated { font-size:13px; color:#888; margin-bottom:36px; }
+  .notice { background:#f0f4f8; border-left:4px solid var(--primary); padding:14px 16px; margin:24px 0; border-radius:2px; font-size:14px; line-height:1.65; }
+  table { width:100%; border-collapse:collapse; margin:16px 0 20px; font-size:14px; }
+  th { background:var(--primary); color:#fff; padding:9px 12px; text-align:left; font-weight:500; }
+  td { padding:9px 12px; border-bottom:1px solid #eee; color:#444; vertical-align:top; }
+  tr:nth-child(even) td { background:#f9f9f9; }
   a { color:var(--primary); }
 </style>
 </head>
@@ -28,41 +33,91 @@
   <h1>Privacy Policy</h1>
 </header>
 <main>
-  <p class="updated">Last updated: June 2026 &nbsp;·&nbsp; Governed by Singapore PDPA</p>
+  <p class="updated">Last updated: June 2026 &nbsp;·&nbsp; Governed by Singapore PDPA 2012</p>
 
-  <p>MutianyuTickets.com ("we", "us") operates as an independent ticket procurement service. This policy explains what personal data we collect, why, and how we protect it.</p>
+  <div class="notice">
+    MutianyuTickets.com is an independent ticket procurement service operated from Singapore. This policy explains how we collect, use, store, and protect your personal data, and your rights under the Singapore Personal Data Protection Act 2012 (PDPA).
+  </div>
 
-  <h2>1. What We Collect</h2>
-  <p>To purchase official Chinese attraction tickets on your behalf, we collect:</p>
+  <h2>1. Who We Are (Data Controller)</h2>
+  <p>MutianyuTickets.com ("we", "us", "our") is the data controller for personal data collected through this website. We are responsible for how your data is handled and can be contacted at <a href="mailto:hello@mutianyu-tickets.com">hello@mutianyu-tickets.com</a>.</p>
+
+  <h2>2. What Personal Data We Collect</h2>
+  <table>
+    <tr><th>Data</th><th>Why we collect it</th></tr>
+    <tr><td>Email address</td><td>Sending booking confirmation and QR code delivery</td></tr>
+    <tr><td>Full name (per visitor)</td><td>Required by Chinese real-name ticketing system</td></tr>
+    <tr><td>Passport number (per visitor)</td><td>Required by Chinese real-name ticketing system</td></tr>
+    <tr><td>Nationality (per visitor)</td><td>Required by Chinese real-name ticketing system</td></tr>
+    <tr><td>Date of birth (per visitor)</td><td>Required by Chinese real-name ticketing system</td></tr>
+    <tr><td>Visit date and ticket type</td><td>To purchase the correct ticket for the correct date</td></tr>
+  </table>
+  <p>We do not collect payment card details — these are handled entirely by Stripe, Inc.</p>
+  <p>We do not collect any special categories of personal data (health, biometric, racial origin, etc.).</p>
+
+  <h2>3. Legal Basis for Processing</h2>
+  <p>We process your personal data on the following bases under the PDPA:</p>
   <ul>
-    <li>Email address (booking confirmation and QR code delivery)</li>
-    <li>Full name, passport number, nationality, and date of birth for each visitor (required by the Chinese real-name ticketing system)</li>
-    <li>Visit date and ticket type</li>
+    <li><strong>Contractual necessity:</strong> processing your booking requires your name, passport, and email.</li>
+    <li><strong>Explicit consent:</strong> you tick a consent checkbox before submitting your passport details, confirming you understand how your data will be used. You may withdraw this consent at any time (see Section 8).</li>
+    <li><strong>Legitimate interest:</strong> retaining transaction records for dispute resolution.</li>
   </ul>
-  <p>We do not collect payment card details. All payments are processed by Stripe, Inc., which is PCI-DSS Level 1 certified.</p>
 
-  <h2>2. Why We Need Passport Details</h2>
-  <p>The official Chinese attraction ticketing system requires real-name registration for every ticket. Each ticket is linked to a specific passport number and the name must match exactly at the gate. We cannot purchase tickets on your behalf without this information.</p>
+  <h2>4. Why We Need Passport Details</h2>
+  <p>China's official attraction ticketing system mandates real-name registration. Every ticket is registered to a specific passport number, and the name must match exactly at the entrance gate. This is a legal requirement of the Chinese system — not a policy choice of ours. We have no alternative way to purchase tickets on your behalf.</p>
 
-  <h2>3. How Your Data Is Stored</h2>
-  <p>Passport details are stored in Stripe's secure payment metadata, which is encrypted at rest and in transit. This data is transmitted to our operator via email when your payment is confirmed.</p>
-  <p>We do not maintain our own database of passport information.</p>
+  <h2>5. How Your Data Is Stored and Transmitted</h2>
+  <p>Passport details are stored within Stripe's secure payment metadata, which is encrypted at rest (AES-256) and in transit (TLS 1.2+). When payment is confirmed, these details are transmitted to our operator via encrypted email (Resend, Inc.) to action the ticket purchase. We do not store passport data in our own database.</p>
 
-  <h2>4. Data Retention and Deletion</h2>
-  <p>Under our PDPA commitment, passport details are deleted from our operator's email inbox and Stripe metadata after your ticket QR code has been issued — typically within 24 hours of purchase. Email confirmation records (without passport details) are retained for up to 12 months for dispute resolution.</p>
+  <h2>6. Data Retention</h2>
+  <table>
+    <tr><th>Data type</th><th>Retention period</th></tr>
+    <tr><td>Passport details (Stripe metadata)</td><td>Deleted within 24 hours of ticket QR code being issued</td></tr>
+    <tr><td>Passport details (operator email)</td><td>Deleted from inbox within 24 hours of ticket QR code being issued</td></tr>
+    <tr><td>Email address and booking record</td><td>Up to 12 months for dispute resolution, then deleted</td></tr>
+    <tr><td>Payment records</td><td>Held by Stripe per their retention policy (typically 7 years for financial compliance)</td></tr>
+  </table>
 
-  <h2>5. Third Parties</h2>
+  <h2>7. Cookies</h2>
+  <p>This website uses minimal cookies. We do not use tracking, advertising, or analytics cookies. The only cookies that may be set are:</p>
   <ul>
-    <li><strong>Stripe, Inc.</strong> — payment processing and metadata storage. See <a href="https://stripe.com/privacy" target="_blank">stripe.com/privacy</a>.</li>
-    <li><strong>Resend, Inc.</strong> — transactional email delivery. See <a href="https://resend.com/privacy" target="_blank">resend.com/privacy</a>.</li>
+    <li><strong>Stripe:</strong> essential session cookies set during the checkout process to prevent fraud. These are set by Stripe's domain and governed by Stripe's cookie policy.</li>
   </ul>
-  <p>We do not sell your data to third parties.</p>
+  <p>No consent banner is shown because we do not use non-essential cookies. If this changes, we will update this policy and add a consent mechanism.</p>
 
-  <h2>6. Your Rights (Singapore PDPA)</h2>
-  <p>You have the right to access, correct, or request deletion of your personal data. To exercise these rights, email us at <a href="mailto:hello@mutianyu-tickets.com">hello@mutianyu-tickets.com</a>. We will respond within 10 business days.</p>
+  <h2>8. Third-Party Data Processors</h2>
+  <p>We share your data only with the following processors, who are contractually obligated to protect it:</p>
+  <table>
+    <tr><th>Processor</th><th>Purpose</th><th>Location</th></tr>
+    <tr><td>Stripe, Inc.</td><td>Payment processing and metadata storage</td><td>United States (SCCs in place)</td></tr>
+    <tr><td>Resend, Inc.</td><td>Transactional email delivery</td><td>United States (SCCs in place)</td></tr>
+    <tr><td>Vercel, Inc.</td><td>Website hosting and serverless functions</td><td>United States (SCCs in place)</td></tr>
+  </table>
+  <p>We do not sell, rent, or share your personal data with any other party. We do not use your data for marketing purposes.</p>
 
-  <h2>7. Contact</h2>
-  <p>For privacy questions: <a href="mailto:hello@mutianyu-tickets.com">hello@mutianyu-tickets.com</a></p>
+  <h2>9. Your Rights Under the Singapore PDPA</h2>
+  <p>You have the following rights regarding your personal data:</p>
+  <ul>
+    <li><strong>Right of access:</strong> request a copy of the personal data we hold about you.</li>
+    <li><strong>Right of correction:</strong> request that inaccurate data be corrected.</li>
+    <li><strong>Right of withdrawal:</strong> withdraw your consent to data processing at any time. Note that withdrawing consent after a booking is placed may mean we cannot fulfil your ticket order (and a refund will be issued).</li>
+    <li><strong>Right to erasure:</strong> request deletion of your personal data, subject to our legal retention obligations.</li>
+  </ul>
+  <p>To exercise any of these rights, email <a href="mailto:hello@mutianyu-tickets.com">hello@mutianyu-tickets.com</a> with the subject line "Data Request". We will respond within 10 business days.</p>
+
+  <h2>10. Data Breach Notification</h2>
+  <p>In the event of a data breach that is likely to result in significant harm to you, we will notify the Singapore Personal Data Protection Commission (PDPC) within 3 calendar days of discovery, and notify you directly as soon as practicable, in accordance with the PDPA mandatory breach notification obligation.</p>
+
+  <h2>11. Children's Privacy</h2>
+  <p>This service is intended for use by adults (18+) booking on behalf of themselves or their children. We do not knowingly collect data directly from children under 13. If you believe we have inadvertently collected such data, contact us and we will delete it promptly.</p>
+
+  <h2>12. Changes to This Policy</h2>
+  <p>We may update this policy from time to time. We will update the "Last updated" date above. Continued use of the service after changes constitutes acceptance of the updated policy.</p>
+
+  <h2>13. Contact and Complaints</h2>
+  <p>For privacy questions or to exercise your rights: <a href="mailto:hello@mutianyu-tickets.com">hello@mutianyu-tickets.com</a></p>
+  <p>If you are unsatisfied with our response, you may lodge a complaint with the Singapore Personal Data Protection Commission at <a href="https://www.pdpc.gov.sg" target="_blank">pdpc.gov.sg</a>.</p>
+  <p>See also: <a href="/terms.html">Terms of Service</a> · <a href="/refunds.html">Refund Policy</a></p>
 </main>
 </body>
 </html>
