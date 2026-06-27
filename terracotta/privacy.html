@@ -40,7 +40,8 @@
   </div>
 
   <h2>1. Who We Are (Data Controller)</h2>
-  <p>TerracottaWarriorsTickets.com ("we", "us", "our") is the data controller for personal data collected through this website. Contact us at <a href="mailto:hello@terracotta-tickets.com">hello@terracotta-tickets.com</a>.</p>
+  <p>TerracottaWarriorsTickets.com ("we", "us", "our") is the data controller for personal data collected through this website. We are an independent ticket procurement service operated from Singapore.</p>
+  <p>Our <strong>Data Protection Officer (DPO)</strong> can be reached at <a href="mailto:hello@terracotta-tickets.com">hello@terracotta-tickets.com</a> for any privacy question, access or correction request, or complaint.</p>
 
   <h2>2. What Personal Data We Collect</h2>
   <table>
@@ -65,27 +66,30 @@
   <p>The Terracotta Warriors Museum (Emperor Qinshihuang's Mausoleum Site Museum) uses China's real-name ticketing system, which legally requires every visitor's full name and passport number. One ticket can be issued per passport per day. The name on the ticket must match the passport exactly at the entrance gate. This is a legal requirement we cannot work around.</p>
 
   <h2>5. How Your Data Is Stored and Transmitted</h2>
-  <p>Passport details are stored within Stripe's secure payment metadata (AES-256 at rest, TLS 1.2+ in transit). On payment confirmation, these details are emailed via Resend, Inc. to our operator who purchases the ticket. We do not maintain our own database of passport information.</p>
+  <p>We do not maintain our own database of passport information. During the booking, your passport details are held within Stripe's secure payment metadata (encrypted at rest, TLS 1.2+ in transit) and transmitted via Resend, Inc. to our operator, who purchases your ticket. To issue the ticket, your full name and passport number are then entered into the museum's official Chinese real-name booking system — this transfer is necessary to fulfil your booking and is covered by the consent you give at checkout (see Section 8).</p>
 
   <h2>6. Data Retention</h2>
+  <p>Singapore's PDPA does not fix a maximum retention period; we keep personal data only as long as it is needed for your booking and for related legal or business purposes (such as rebooking, name corrections, and refund or dispute resolution), and then delete it. We apply different periods to different data, keeping the most sensitive data for the shortest time.</p>
   <table>
     <tr><th>Data type</th><th>Retention period</th></tr>
-    <tr><td>Passport details (Stripe metadata + operator email)</td><td>Deleted within 24 hours of QR code being issued</td></tr>
-    <tr><td>Email address and booking record</td><td>Up to 12 months for dispute resolution, then deleted</td></tr>
+    <tr><td>Passport number &amp; date of birth</td><td>Until <strong>30 days after your visit date</strong>, to handle rebooking, name corrections and refund/dispute resolution — then deleted from the systems we control (operator mailbox and Stripe metadata)</td></tr>
+    <tr><td>Name, email, visit date &amp; booking reference</td><td>Up to 12 months for dispute resolution, then deleted</td></tr>
+    <tr><td>Financial / transaction records (amount, date, invoice — no passport data)</td><td>Up to 5 years, to meet Singapore tax and accounting record-keeping requirements</td></tr>
     <tr><td>Payment records</td><td>Held by Stripe per their retention policy</td></tr>
   </table>
 
   <h2>7. Cookies</h2>
   <p>This website uses minimal cookies. We do not use tracking, advertising, or analytics cookies. The only cookies that may be set are essential Stripe session cookies during the checkout process (fraud prevention, governed by Stripe's cookie policy). We do not show a cookie banner as we use no non-essential cookies.</p>
 
-  <h2>8. Third-Party Data Processors</h2>
+  <h2>8. Third-Party Recipients &amp; Overseas Transfers</h2>
   <table>
-    <tr><th>Processor</th><th>Purpose</th><th>Location</th></tr>
-    <tr><td>Stripe, Inc.</td><td>Payment processing and metadata storage</td><td>United States (SCCs in place)</td></tr>
-    <tr><td>Resend, Inc.</td><td>Transactional email delivery</td><td>United States (SCCs in place)</td></tr>
-    <tr><td>Vercel, Inc.</td><td>Website hosting and serverless functions</td><td>United States (SCCs in place)</td></tr>
+    <tr><th>Recipient</th><th>Purpose</th><th>Location</th></tr>
+    <tr><td>Emperor Qinshihuang's Mausoleum Site Museum — official real-name booking system</td><td>Issuing your ticket (your name + passport number are legally required to book)</td><td>China</td></tr>
+    <tr><td>Stripe, Inc.</td><td>Payment processing and checkout metadata</td><td>United States</td></tr>
+    <tr><td>Resend, Inc.</td><td>Transactional email delivery</td><td>United States</td></tr>
+    <tr><td>Vercel, Inc.</td><td>Website hosting and serverless functions</td><td>United States</td></tr>
   </table>
-  <p>We do not sell, rent, or share your data with any other party, and we do not use your data for marketing.</p>
+  <p>Some recipients are located outside Singapore. Where personal data is transferred overseas we rely on the transfer being <strong>necessary to perform our contract with you</strong> (booking your ticket) together with your <strong>explicit consent at checkout</strong>, and on each recipient's own data-protection commitments — consistent with the PDPA's Transfer Limitation Obligation. The transfer to the museum's Chinese booking system is unavoidable: the ticket cannot legally be issued without your name and passport number. We do not sell, rent, or share your data with any other party, and we do not use it for marketing.</p>
 
   <h2>9. Your Rights Under the Singapore PDPA</h2>
   <ul>
