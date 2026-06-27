@@ -4,7 +4,7 @@ const { Resend } = require('resend');
 // ── Attraction config ─────────────────────────────────────────────────────
 const BRAND_NAME    = 'TerracottaWarriorsTickets.com';
 const BRAND_COLOR   = '#6B3200';
-const SUPPORT_EMAIL = 'hello@terracottawarriors-tickets.com';
+const SUPPORT_EMAIL = 'hello@terracotta-tickets.com';
 // ─────────────────────────────────────────────────────────────────────────
 
 const resend = new Resend(process.env.RESEND_API_KEY);
