@@ -61,8 +61,9 @@ module.exports = async (req, res) => {
       },
       success_url: `${process.env.SITE_URL}/success.html?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url:  `${process.env.SITE_URL}/#book`,
-      expires_at:       Math.floor(Date.now() / 1000) + 30 * 60,
-      adaptive_pricing: { enabled: true },
+      expires_at:          Math.floor(Date.now() / 1000) + 30 * 60,
+      adaptive_pricing:    { enabled: true },
+      statement_descriptor: 'TERRACOTTA TCKTS',
     });
     return res.status(200).json({ url: session.url });
   } catch (err) {
