@@ -66,7 +66,7 @@
   <p>The Terracotta Warriors Museum (Emperor Qinshihuang's Mausoleum Site Museum) uses China's real-name ticketing system, which legally requires every visitor's full name and passport number. One ticket can be issued per passport per day. The name on the ticket must match the passport exactly at the entrance gate. This is a legal requirement we cannot work around.</p>
 
   <h2>5. How Your Data Is Stored and Transmitted</h2>
-  <p>We do not maintain our own database of passport information. During the booking, your passport details are held within Stripe's secure payment metadata (encrypted at rest, TLS 1.2+ in transit) and transmitted via Resend, Inc. to our operator, who purchases your ticket. To issue the ticket, your full name and passport number are then entered into the museum's official Chinese real-name booking system — this transfer is necessary to fulfil your booking and is covered by the consent you give at checkout (see Section 8).</p>
+  <p>Your passport details are held in our own secure booking database (hosted by Neon, encrypted at rest, TLS in transit) and are <strong>deliberately not sent to our payment processor</strong> — Stripe only receives your payment, email, and a booking reference. After payment, your details are transmitted via Resend, Inc. to our operator, who purchases your ticket. To issue the ticket, your full name and passport number are then entered into the museum's official Chinese real-name booking system — this transfer is necessary to fulfil your booking and is covered by the consent you give at checkout (see Section 8). Your passport data is deleted automatically after your visit date (see Section 6).</p>
 
   <h2>6. Data Retention</h2>
   <p>Singapore's PDPA does not fix a maximum retention period; we keep personal data only as long as it is needed for your booking and for related legal or business purposes (such as rebooking, name corrections, and refund or dispute resolution), and then delete it. We apply different periods to different data, keeping the most sensitive data for the shortest time.</p>
@@ -85,7 +85,8 @@
   <table>
     <tr><th>Recipient</th><th>Purpose</th><th>Location</th></tr>
     <tr><td>Emperor Qinshihuang's Mausoleum Site Museum — official real-name booking system</td><td>Issuing your ticket (your name + passport number are legally required to book)</td><td>China</td></tr>
-    <tr><td>Stripe, Inc.</td><td>Payment processing and checkout metadata</td><td>United States</td></tr>
+    <tr><td>Neon, Inc.</td><td>Booking database (stores your passport details until deleted)</td><td>Singapore</td></tr>
+    <tr><td>Stripe, Inc.</td><td>Payment processing (no passport data)</td><td>United States</td></tr>
     <tr><td>Resend, Inc.</td><td>Transactional email delivery</td><td>United States</td></tr>
     <tr><td>Vercel, Inc.</td><td>Website hosting and serverless functions</td><td>United States</td></tr>
   </table>

@@ -6,6 +6,7 @@ The site now uses a Neon Postgres database as the system of record for bookings.
 ## 1. Provision Neon (recommended: via Vercel)
 
 - Vercel dashboard → your project → **Storage** → **Create Database** → **Neon** (Postgres).
+- **Choose the Singapore region** — keeps passport data in-region (the privacy policy states Singapore) and is closest to your users.
 - Vercel automatically injects the connection string env var. Make sure the variable is
   named **`DATABASE_URL`** (rename/add it if the integration uses a different name), and
   that it's enabled for **Production** (and Preview, if you test there).
