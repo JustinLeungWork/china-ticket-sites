@@ -46,8 +46,10 @@
 </div>
 <script>
   const p = new URLSearchParams(location.search);
+  const invoice = p.get('invoice');
   const sid = p.get('session_id');
-  if (sid) document.getElementById('ref').textContent = 'Reference: ' + sid.slice(-12).toUpperCase();
+  if (invoice) document.getElementById('ref').textContent = 'Booking reference: ' + invoice;
+  else if (sid) document.getElementById('ref').textContent = 'Reference: ' + sid.slice(-12).toUpperCase();
 </script>
 </body>
 </html>
