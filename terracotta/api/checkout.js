@@ -2,50 +2,36 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 // ── Attraction config ─────────────────────────────────────────────────────
 const ATTRACTION = "Terracotta Warriors Museum, Xi'an";
-const TICKETS = {
-  standard: { name: 'Standard Admission',          adultCents: 2000, childCents: 1000 },
-  audio:    { name: 'Admission + Audio Guide',      adultCents: 2900, childCents: 1500 },
-  guided:   { name: 'Admission + English Live Guide', adultCents: 5500, childCents: 2800 },
-};
+// Single full-price admission ticket. Every visitor (incl. children) pays the
+// same — the museum's discounted child/student/senior tickets require Chinese
+// ID and aren't available to foreign passport holders. The English private
+// guide is handled separately as a request (see /api/enquiry), not here.
+const ADMISSION = { name: 'Full-Price Admission', cents: 2599 };
 // ─────────────────────────────────────────────────────────────────────────
 
 module.exports = async (req, res) => {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const { ticketType, visitDate, adultQty, childQty, email, visitors } = req.body || {};
+  const { visitDate, visitorQty, email, visitors } = req.body || {};
 
-  if (!ticketType || !visitDate || !email || !Array.isArray(visitors) || visitors.length === 0)
+  if (!visitDate || !email || !Array.isArray(visitors) || visitors.length === 0)
     return res.status(400).json({ error: 'Missing required fields' });
 
-  const ticket = TICKETS[ticketType];
-  if (!ticket) return res.status(400).json({ error: 'Invalid ticket type' });
-
-  const adults   = Math.max(1, parseInt(adultQty)  || 1);
-  const children = Math.max(0, parseInt(childQty)  || 0);
+  // Number of visitors = number of passport entries (each needs its own ticket).
+  const qty = Math.max(1, parseInt(visitorQty) || visitors.length);
 
   const lineItems = [{
     price_data: {
       currency: 'usd',
-      product_data: { name: `${ticket.name} — Adult`, description: `${ATTRACTION} · ${visitDate}` },
-      unit_amount: ticket.adultCents,
+      product_data: { name: ADMISSION.name, description: `${ATTRACTION} · ${visitDate}` },
+      unit_amount: ADMISSION.cents,
     },
-    quantity: adults,
+    quantity: qty,
   }];
-
-  if (children > 0) {
-    lineItems.push({
-      price_data: {
-        currency: 'usd',
-        product_data: { name: `${ticket.name} — Child (under 18)`, description: `${ATTRACTION} · ${visitDate}` },
-        unit_amount: ticket.childCents,
-      },
-      quantity: children,
-    });
-  }
 
   const visitorMeta = {};
   visitors.forEach((v, i) => {
-    visitorMeta[`v${i}`] = JSON.stringify({ n: v.name, p: v.passportNumber, nat: v.nationality, dob: v.dateOfBirth, t: v.type });
+    visitorMeta[`v${i}`] = JSON.stringify({ n: v.name, p: v.passportNumber, nat: v.nationality, dob: v.dateOfBirth });
   });
 
   try {
@@ -55,8 +41,8 @@ module.exports = async (req, res) => {
       line_items: lineItems,
       customer_email: email,
       metadata: {
-        attraction: ATTRACTION, ticketType, ticketName: ticket.name,
-        visitDate, adultQty: String(adults), childQty: String(children),
+        attraction: ATTRACTION, ticketType: 'admission', ticketName: ADMISSION.name,
+        visitDate, visitorQty: String(qty),
         customerEmail: email, ...visitorMeta,
       },
       success_url: `${process.env.SITE_URL}/success.html?session_id={CHECKOUT_SESSION_ID}`,

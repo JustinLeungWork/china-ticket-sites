@@ -24,7 +24,7 @@
     "description": "秦始皇帝陵博物院。中国初代皇帝とともに埋葬された8,000体を超える等身大の兵士像、馬、馬車。ユネスコ世界遺産。",
     "url": "https://terracotta-tickets.com",
     "address": { "@type": "PostalAddress", "addressLocality": "Lintong District", "addressRegion": "Xi'an, Shaanxi", "addressCountry": "CN" },
-    "offers": { "@type": "Offer", "priceCurrency": "USD", "price": "20", "availability": "https://schema.org/InStock" }
+    "offers": { "@type": "Offer", "priceCurrency": "USD", "price": "25.99", "availability": "https://schema.org/InStock" }
   }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -140,8 +140,9 @@
     .form-body { padding: 28px; }
     .form-group { margin-bottom: 20px; }
     label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; color: var(--text); }
-    select, input[type="date"], input[type="number"], input[type="email"], input[type="text"] { width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--r-sm); font-family: 'DM Sans', sans-serif; font-size: 14.5px; color: var(--text); background: var(--white); -webkit-appearance: none; appearance: none; transition: border-color 0.18s, box-shadow 0.18s; }
-    select:focus, input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(107,50,0,0.12); }
+    select, input[type="date"], input[type="number"], input[type="email"], input[type="text"], textarea { width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--r-sm); font-family: 'DM Sans', sans-serif; font-size: 14.5px; color: var(--text); background: var(--white); -webkit-appearance: none; appearance: none; transition: border-color 0.18s, box-shadow 0.18s; }
+    textarea { resize: vertical; min-height: 72px; line-height: 1.5; }
+    select:focus, input:focus, textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(107,50,0,0.12); }
     .sel-wrap { position: relative; }
     .sel-wrap::after { content: '▾'; position: absolute; right: 14px; top: 50%; transform: translateY(-50%); pointer-events: none; font-size: 11px; color: var(--muted); }
     .qty-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
@@ -165,6 +166,34 @@
     .date-card.selected .dc-dow, .date-card.selected .dc-day, .date-card.selected .dc-mon { color: var(--white); }
     .date-hint { font-size: 12px; color: var(--muted); margin-top: 2px; }
     .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* Two-card ticket grid + card CTAs */
+    .tickets-grid--two { max-width: 880px; grid-template-columns: repeat(2, 1fr); }
+    .ticket-cta { display: inline-block; margin-top: 16px; font-size: 13.5px; font-weight: 600; color: var(--primary); }
+    .ticket-card:hover .ticket-cta { color: var(--accent); }
+    .ticket-badge { display: inline-block; font-size: 10.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; background: var(--accent-light); color: var(--primary-dark); padding: 3px 10px; border-radius: 100px; margin-bottom: 10px; }
+
+    /* Booking form: plan banner + kids note */
+    .plan-banner { display: flex; justify-content: space-between; align-items: center; background: var(--accent-light); border: 1px solid #ECD9A6; border-radius: var(--r-md); padding: 14px 16px; margin-bottom: 14px; }
+    .plan-banner .pb-name { font-weight: 600; font-size: 15px; color: var(--primary-dark); }
+    .plan-banner .pb-price { font-size: 19px; font-weight: 700; color: var(--primary-dark); letter-spacing: -0.01em; }
+    .plan-banner .pb-price span { font-size: 12px; font-weight: 500; color: var(--muted); }
+    .kids-note { font-size: 12px; color: var(--muted); background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 11px 13px; margin-bottom: 20px; line-height: 1.55; }
+
+    /* Private guide request section */
+    .guide-request-section { padding: var(--section-y) var(--section-x); background: var(--white); }
+    .gr-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 420px; gap: clamp(40px, 5vw, 64px); align-items: start; }
+    .gr-intro h2 { font-size: clamp(24px, 2.8vw, 32px); margin-bottom: 14px; letter-spacing: -0.01em; }
+    .gr-intro > p { color: var(--muted); font-size: 15.5px; margin-bottom: 22px; line-height: 1.75; }
+    .gr-points { list-style: none; padding: 0; margin: 0 0 20px; }
+    .gr-points li { position: relative; padding-left: 28px; font-size: 14.5px; color: var(--text); line-height: 1.55; margin-bottom: 12px; }
+    .gr-points li::before { content: '✓'; position: absolute; left: 0; top: 0; color: var(--accent); font-weight: 700; }
+    .gr-foot { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .gr-form-wrap { background: var(--white); border: 1px solid var(--border); border-radius: var(--r-lg); box-shadow: var(--shadow-md); overflow: hidden; }
+    #gr-success { text-align: center; padding: 24px 8px; }
+    .gr-success-icon { width: 52px; height: 52px; margin: 0 auto 16px; border-radius: 50%; background: var(--accent-light); color: var(--primary); font-size: 26px; display: flex; align-items: center; justify-content: center; }
+    #gr-success h4 { font-family: 'Playfair Display', serif; font-size: 20px; margin-bottom: 10px; }
+    #gr-success p { font-size: 14px; color: var(--muted); line-height: 1.7; }
     .pay-note { font-size: 11px; color: var(--muted); text-align: center; margin-top: 9px; line-height: 1.5; }
     #passport-section { display: none; padding-top: 20px; border-top: 1px solid var(--border); margin-top: 20px; }
     #passport-section h4 { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
@@ -237,6 +266,7 @@
     @media (max-width: 900px) {
       .booking-grid { grid-template-columns: 1fr; }
       .booking-form-wrap { position: static; }
+      .gr-grid { grid-template-columns: 1fr; }
       .highlights-grid { grid-template-columns: 1fr 1fr; }
       .highlight-card--wide { grid-template-columns: 1fr; }
       .highlight-card--wide .highlight-img { min-height: 220px; }
@@ -245,8 +275,8 @@
       .guide-grid { grid-template-columns: 1fr; }
       .highlights-grid { grid-template-columns: 1fr; }
       .practical-grid { grid-template-columns: 1fr; }
+      .tickets-grid--two { grid-template-columns: 1fr; }
       .hero { min-height: 520px; }
-      .qty-row { grid-template-columns: 1fr 1fr; }
       .footer-inner { flex-direction: column; align-items: flex-start; }
       nav { padding: 0 16px; }
       .nav-logo { font-size: 13px; }
@@ -298,7 +328,7 @@
 
 <div class="steps">
   <div class="steps-inner">
-    <div class="step"><div class="step-num">01</div><h3>チケットを選ぶ</h3><p>日程、チケットの種類、人数をお選びください。日本語音声ガイドやガイド付きツアーを追加してより深い体験を。</p></div>
+    <div class="step"><div class="step-num">01</div><h3>日程を選ぶ</h3><p>訪問日と必要なチケット枚数をお選びください。日本語ガイドをご希望ですか？リクエストいただければ、まず空き状況を確認します。</p></div>
     <div class="step"><div class="step-num">02</div><h3>パスポート情報を入力</h3><p>博物館の実名制システムではパスポート番号が必要です。ゲートでQRコードがご本人と紐付くよう、代行して予約を完了します。</p></div>
     <div class="step"><div class="step-num">03</div><h3>安全にお支払い</h3><p>Visa、Mastercard、Apple Pay対応。中国の決済方法は不要です。</p></div>
     <div class="step"><div class="step-num">04</div><h3>QRコードを受信</h3><p>4時間以内に入場確認をメールでお送りします。博物館の入口でご提示ください — 紙のチケットは不要です。</p></div>
@@ -310,38 +340,30 @@
     <div class="section-label">訪問オプション</div>
     <h2>チケットパッケージ</h2>
   </div>
-  <div class="tickets-grid">
-    <div class="ticket-card" data-ticket="standard" data-ap="20" data-cp="10">
+  <div class="tickets-grid tickets-grid--two">
+    <div class="ticket-card" data-scroll="book">
       <div class="ticket-img">
         <img src="/images/pexels-202387659-28844770.jpg" alt="Terracotta Warriors Pit 1" loading="lazy">
       </div>
       <div class="ticket-body">
-        <div class="ticket-name">標準入場券</div>
-        <div class="ticket-includes">3つの発掘坑すべてへの入場 · 麗山園へのアクセス · 銅車馬展示 · 自由見学</div>
-        <div class="ticket-pricing"><span class="ticket-price">$20</span><span class="ticket-face">大人1名 · 額面¥120</span></div>
-        <div class="ticket-fee">サービス料$3.50込み</div>
+        <div class="ticket-name">通常料金入場券</div>
+        <div class="ticket-includes">3つの発掘坑すべてへの入場 · 麗山園へのアクセス · 銅車馬展示 · 各施設間の無料シャトル。チケットは訪問者1名につき1枚です。</div>
+        <div class="ticket-pricing"><span class="ticket-price">$25.99</span><span class="ticket-face">訪問者1名あたり · 額面¥120</span></div>
+        <div class="ticket-fee">お子様を含むすべての訪問者に通常料金のチケットが必要です — 外国パスポートには子ども割引はありません。</div>
+        <span class="ticket-cta">入場券を予約する →</span>
       </div>
     </div>
-    <div class="ticket-card" data-ticket="audio" data-ap="29" data-cp="15">
+    <div class="ticket-card" data-scroll="guide-request">
       <div class="ticket-img">
-        <img src="/images/pexels-ruben-vp-2151134060-37555249.jpg" alt="Terracotta Warriors close-up" loading="lazy">
+        <img src="/images/pexels-nguy-n-du-1595594339-38237298.jpg" alt="Private English guide at the Terracotta Warriors" loading="lazy">
       </div>
       <div class="ticket-body">
-        <div class="ticket-name">入場券＋日本語音声ガイド</div>
-        <div class="ticket-includes">全館入場 · 専門家ナレーションの日本語音声ガイド（ダウンロード式） · ご自身のスマートフォンでご利用いただけます</div>
-        <div class="ticket-pricing"><span class="ticket-price">$29</span><span class="ticket-face">大人1名 · 額面¥175</span></div>
-        <div class="ticket-fee">サービス料$4.50込み</div>
-      </div>
-    </div>
-    <div class="ticket-card" data-ticket="guided" data-ap="55" data-cp="28">
-      <div class="ticket-img">
-        <img src="/images/pexels-nguy-n-du-1595594339-38237298.jpg" alt="Terracotta Warriors museum" loading="lazy">
-      </div>
-      <div class="ticket-body">
-        <div class="ticket-name">入場券＋日本語ガイド付きツアー</div>
-        <div class="ticket-includes">全館入場 · 少人数制ガイドツアー（最大10名、2.5時間） · 日本語対応の専門ガイド · 最も充実した内容</div>
-        <div class="ticket-pricing"><span class="ticket-price">$55</span><span class="ticket-face">大人1名 · 額面¥350</span></div>
-        <div class="ticket-fee">サービス料$7込み · おすすめ</div>
+        <span class="ticket-badge">リクエスト制</span>
+        <div class="ticket-name">プライベート日本語ガイド</div>
+        <div class="ticket-includes">博物館認定の資格を持つ日本語ガイドがグループに同行 · 3つの坑を約2.5時間でご案内 · 最大10名。入場券は別途ご予約ください。</div>
+        <div class="ticket-pricing"><span class="ticket-price">$150</span><span class="ticket-face">均一料金 · 1〜10名、グループの人数を問わず</span></div>
+        <div class="ticket-fee">空き状況には限りがあります — お支払い前に日程を確定します。</div>
+        <span class="ticket-cta">ガイドをリクエストする →</span>
       </div>
     </div>
   </div>
@@ -359,7 +381,7 @@
           <li>入場口では<strong>パスポート原本</strong>が必要です — 氏名はチケットと完全に一致していなければなりません</li>
           <li>博物館では<strong>1パスポートにつき1日1枚</strong>のチケットのみ購入可能です</li>
           <li>チケットは7日前から発売 — ピーク日程は早めにご計画ください</li>
-          <li>ガイド付きツアーのチケットは少なくとも48時間前にご予約ください</li>
+          <li>お子様にも<strong>通常料金のチケット</strong>が必要です — 博物館の子ども割引は外国パスポートにはご利用いただけません</li>
           <li>博物館は毎日開館。最終入場は閉館2時間前です</li>
         </ul>
       </div>
@@ -368,31 +390,25 @@
       <div class="form-head"><h3>兵馬俑チケット予約</h3></div>
       <div class="form-body">
         <div id="step-select">
-          <div class="form-group">
-            <label for="ticket-type">チケットパッケージ</label>
-            <div class="sel-wrap">
-              <select id="ticket-type">
-                <option value="">— パッケージを選択 —</option>
-                <option value="standard">標準入場券 — $20 / 大人</option>
-                <option value="audio">入場券＋日本語音声ガイド — $29 / 大人</option>
-                <option value="guided">入場券＋日本語ガイド付きツアー — $55 / 大人</option>
-              </select>
-            </div>
+          <div class="plan-banner">
+            <span class="pb-name">通常料金入場券</span>
+            <span class="pb-price">$25.99 <span>/ 訪問者1名</span></span>
           </div>
+          <input type="hidden" id="ticket-type" value="admission">
+          <p class="kids-note">お子様を含むすべての訪問者に通常料金のチケットが必要です。博物館の割引チケット（子ども・学生・シニア）は中国の身分証が必要で、外国パスポートをお持ちの方にはご利用いただけません。</p>
           <div class="form-group">
             <label>訪問日</label>
             <div class="date-strip" id="date-strip" role="radiogroup" aria-label="Choose your visit date"></div>
             <div class="date-hint" id="date-hint">チケットは約7日前から発売されます — 予約可能な日程からお選びください。</div>
             <input type="hidden" id="visit-date">
           </div>
-          <div class="qty-row">
-            <div class="form-group"><label for="adult-qty">大人</label><input type="number" id="adult-qty" value="2" min="1" max="10"></div>
-            <div class="form-group"><label for="child-qty">子ども（18歳未満）</label><input type="number" id="child-qty" value="0" min="0" max="10"></div>
+          <div class="form-group">
+            <label for="visitor-qty">訪問者の人数</label>
+            <input type="number" id="visitor-qty" value="2" min="1" max="10">
           </div>
           <div class="summary-box" id="order-summary">
             <div class="sum-row"><span id="sum-name" style="color:var(--text)"></span></div>
-            <div class="sum-row"><span>大人 × <span id="sum-adults"></span></span><span>$<span id="sum-at"></span></span></div>
-            <div class="sum-row" id="sum-child-row" style="display:none"><span>子ども × <span id="sum-children"></span></span><span>$<span id="sum-ct"></span></span></div>
+            <div class="sum-row"><span>入場券 × <span id="sum-visitors"></span></span><span>$<span id="sum-at"></span></span></div>
             <div class="sum-row total"><span>合計</span><span>$<span id="sum-total"></span> USD</span></div>
           </div>
           <button class="btn-primary" onclick="goToPassport()">次へ →</button>
@@ -420,8 +436,61 @@
             </div>
             <button class="btn-primary" id="btn-pay" onclick="submitBooking()">安全にお支払い →</button>
             <p class="pay-note">Stripe セキュア決済 · Visa、Mastercard、Apple Pay · <a href="/terms.html" style="color:var(--primary)">利用規約</a> · <a href="/privacy.html" style="color:var(--primary)">プライバシー</a> · <a href="/refunds.html" style="color:var(--primary)">返金</a></p>
-            <button class="back-link" onclick="backToSelect()">← チケット選択に戻る</button>
+            <button class="back-link" onclick="backToSelect()">← 日程と訪問者の入力に戻る</button>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="guide-request-section" id="guide-request">
+  <div class="gr-grid">
+    <div class="gr-intro">
+      <div class="section-label">リクエスト制</div>
+      <h2>プライベート日本語ガイド</h2>
+      <p>博物館認定の資格を持つ日本語ガイドが、兵馬俑の世界を生き生きと伝えます — 兵士像がどのように作られたか、なぜ埋められたか、秦王朝について何を物語っているか。グループ全員で均一料金です。</p>
+      <ul class="gr-points">
+        <li>均一料金<strong>$150 USD</strong> — 1〜10名まで同一料金</li>
+        <li>博物館認定の資格を持つ日本語ガイド</li>
+        <li>3つの坑を約2.5時間でご案内</li>
+        <li><strong>今すぐのお支払いは不要</strong> — 日程の空きを確認後、安全な決済リンクをメールでお送りします</li>
+      </ul>
+      <p class="gr-foot">博物館の入場券は上記で別途ご予約ください — ガイド料金はガイドサービスのみに対するものです。</p>
+    </div>
+    <div class="gr-form-wrap">
+      <div class="form-head"><h3>ガイドをリクエスト</h3></div>
+      <div class="form-body">
+        <div id="gr-step">
+          <div class="form-group">
+            <label>ご希望の日程</label>
+            <div class="date-strip" id="guide-date-strip" role="radiogroup" aria-label="Choose your preferred guide date"></div>
+            <div class="date-hint">ご希望の日程をお選びください — ガイドの空き状況を確認します。</div>
+            <input type="hidden" id="guide-date">
+          </div>
+          <div class="form-group">
+            <label for="guide-size">グループ人数（最大10名）</label>
+            <input type="number" id="guide-size" value="2" min="1" max="10">
+          </div>
+          <div class="form-group">
+            <label for="guide-name">お名前</label>
+            <input type="text" id="guide-name" placeholder="例：田中 由紀">
+          </div>
+          <div class="form-group">
+            <label for="guide-email">メールアドレス</label>
+            <input type="email" id="guide-email" placeholder="your@email.com">
+          </div>
+          <div class="form-group">
+            <label for="guide-msg">その他ご要望（任意）</label>
+            <textarea id="guide-msg" rows="3" placeholder="ご希望の時間枠、バリアフリーのご要望、その他のご質問など…"></textarea>
+          </div>
+          <button class="btn-primary" id="btn-guide" onclick="submitEnquiry()">空き状況をリクエスト →</button>
+          <p class="pay-note">今すぐのお支払いは不要 · 24時間以内に空き状況と安全な$150決済リンクをご返信します</p>
+        </div>
+        <div id="gr-success" style="display:none">
+          <div class="gr-success-icon">✓</div>
+          <h4>リクエストを受け付けました</h4>
+          <p>ありがとうございます — ご希望の日程でガイドの空き状況を確認し、24時間以内に確認のご連絡と安全な決済リンクをメールでお送りします。お支払いはまだ発生しません。</p>
         </div>
       </div>
     </div>
@@ -588,8 +657,8 @@
       <div class="faq-a">訪問日の48時間以上前のキャンセルは全額返金対象です。48時間以内はキャンセル不可となります。日程変更は少なくとも72時間前にご連絡いただければ、空き状況次第で対応いたします。</div>
     </div>
     <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">日本語ガイド付きツアーは価値がありますか？</button>
-      <div class="faq-a">ほとんどの方にとって、はい価値があります。1号坑の視覚的なインパクトは圧倒的ですが、兵馬俑がどのように作られたか、なぜ埋められたか、秦王朝について何を語っているか — こうした背景知識があってこそ体験が深まります。ガイドは博物館認定の資格を持ち、1グループ最大10名に限定しているので、40人もの観光客の中で聞き取ろうとするストレスはありません。一人旅やカップルには日本語音声ガイドも良い選択肢です。</div>
+      <button class="faq-q" onclick="toggleFaq(this)">プライベート日本語ガイドは価値がありますか？</button>
+      <div class="faq-a">ほとんどの方にとって、はい価値があります。1号坑の視覚的なインパクトは圧倒的ですが、兵馬俑がどのように作られたか、なぜ埋められたか、秦王朝について何を語っているか — こうした背景知識があってこそ体験が深まります。ガイドは博物館認定の資格を持ち、最大10名のグループを貸し切りでご案内するので、40人もの観光客の中で聞き取ろうとするストレスはありません。グループ全員で均一料金$150、リクエスト制です — リクエストをお送りいただければ、お支払い前に空き状況を確認します。</div>
     </div>
     <div class="faq-item">
       <button class="faq-q" onclick="toggleFaq(this)">チケットには実際に何が含まれていますか？</button>
@@ -623,41 +692,30 @@
 </footer>
 
 <script>
-  const TICKETS = {
-    standard: { name: '標準入場券', ap: 20, cp: 10 },
-    audio:    { name: '入場券＋日本語音声ガイド', ap: 29, cp: 15 },
-    guided:   { name: '入場券＋日本語ガイド付きツアー', ap: 55, cp: 28 }
-  };
+  const ADMISSION = { name: '通常料金入場券', price: 25.99 };
 
-  document.querySelectorAll('.ticket-card').forEach(c => {
+  // Ticket cards scroll to their section (admission → booking form, guide → request).
+  document.querySelectorAll('.ticket-card[data-scroll]').forEach(c => {
     c.addEventListener('click', () => {
-      document.querySelectorAll('.ticket-card').forEach(x => x.classList.remove('selected'));
-      c.classList.add('selected');
-      document.getElementById('ticket-type').value = c.dataset.ticket;
-      updateSummary();
-      document.getElementById('book').scrollIntoView({ behavior: 'smooth' });
+      const target = document.getElementById(c.dataset.scroll);
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
     });
   });
 
   function updateSummary() {
-    const type = document.getElementById('ticket-type').value;
-    const adults = parseInt(document.getElementById('adult-qty').value) || 0;
-    const children = parseInt(document.getElementById('child-qty').value) || 0;
+    const visitors = parseInt(document.getElementById('visitor-qty').value) || 0;
     const date = document.getElementById('visit-date').value;
     const box = document.getElementById('order-summary');
-    if (!type || !date || adults < 1) { box.style.display = 'none'; return; }
-    const tk = TICKETS[type];
-    const at = adults * tk.ap, ct = children * tk.cp;
-    document.getElementById('sum-name').textContent = tk.name + ' · ' + fmtDate(date);
-    document.getElementById('sum-adults').textContent = adults;
-    document.getElementById('sum-at').textContent = at;
-    const cr = document.getElementById('sum-child-row');
-    if (children > 0) { cr.style.display = 'flex'; document.getElementById('sum-children').textContent = children; document.getElementById('sum-ct').textContent = ct; } else { cr.style.display = 'none'; }
-    document.getElementById('sum-total').textContent = at + ct;
+    if (!date || visitors < 1) { box.style.display = 'none'; return; }
+    const total = visitors * ADMISSION.price;
+    document.getElementById('sum-name').textContent = ADMISSION.name + ' · ' + fmtDate(date);
+    document.getElementById('sum-visitors').textContent = visitors;
+    document.getElementById('sum-at').textContent = total.toFixed(2);
+    document.getElementById('sum-total').textContent = total.toFixed(2);
     box.style.display = 'block';
   }
 
-  ['ticket-type','adult-qty','child-qty'].forEach(id => document.getElementById(id).addEventListener('change', updateSummary));
+  document.getElementById('visitor-qty').addEventListener('change', updateSummary);
 
   // Date helpers
   const DOW = ['日','月','火','水','木','金','土'];
@@ -671,13 +729,14 @@
     return MON[m - 1] + day + '日（' + DOW[d.getDay()] + '）';
   }
 
-  // Build the modern date-card strip — tickets release ~7 days ahead,
-  // so we offer the bookable window (today+2 … today+7) as selectable cards.
-  (function buildDateStrip() {
-    const strip = document.getElementById('date-strip');
-    const hidden = document.getElementById('visit-date');
-    const start = 2, end = 7;
-    for (let i = start; i <= end; i++) {
+  // Build a modern date-card strip into a container, writing the chosen ISO to a
+  // hidden input. Tickets release ~7 days ahead, so we offer the bookable window
+  // (today+2 … today+7) as selectable cards.
+  function buildDateStrip(stripId, hiddenId, onPick) {
+    const strip = document.getElementById(stripId);
+    const hidden = document.getElementById(hiddenId);
+    if (!strip || !hidden) return;
+    for (let i = 2; i <= 7; i++) {
       const d = new Date(); d.setHours(0,0,0,0); d.setDate(d.getDate() + i);
       const iso = isoOf(d);
       const card = document.createElement('button');
@@ -692,31 +751,28 @@
         card.classList.add('selected');
         card.setAttribute('aria-checked', 'true');
         hidden.value = iso;
-        updateSummary();
+        if (onPick) onPick();
       });
       strip.appendChild(card);
     }
-  })();
+  }
+  buildDateStrip('date-strip', 'visit-date', updateSummary);
+  buildDateStrip('guide-date-strip', 'guide-date');
 
   function goToPassport() {
-    const type = document.getElementById('ticket-type').value;
     const date = document.getElementById('visit-date').value;
-    const adults = parseInt(document.getElementById('adult-qty').value) || 0;
-    const children = parseInt(document.getElementById('child-qty').value) || 0;
-    if (!type) { alert('チケットパッケージを選択してください。'); return; }
+    const visitors = parseInt(document.getElementById('visitor-qty').value) || 0;
     if (!date) { alert('訪問日を選択してください。'); return; }
-    if (adults < 1) { alert('大人を1名以上入力してください。'); return; }
+    if (visitors < 1) { alert('訪問者を1名以上入力してください。'); return; }
     const today = new Date().toISOString().split('T')[0];
     const forms = document.getElementById('pp-forms');
     forms.innerHTML = '';
-    for (let i = 0; i < adults + children; i++) {
-      const lbl = i < adults ? '大人 ' + (i + 1) : '子ども ' + (i - adults + 1);
+    for (let i = 0; i < visitors; i++) {
       // TODO: Populate nationality as a dropdown from official booking site bmy.albatrip.cn — currently free-text
-      forms.innerHTML += `<div class="visitor-block"><div class="visitor-title">${lbl}</div><div class="pp-grid"><div class="form-group span2"><label>氏名（パスポート記載のとおり）</label><input type="text" class="pp-name" placeholder="例：TANAKA YUKI" autocomplete="off" required></div><div class="form-group"><label>パスポート番号</label><input type="text" class="pp-num" placeholder="例：TK1234567" required></div><div class="form-group"><label>国籍</label><input type="text" class="pp-nat" placeholder="例：日本" required></div><div class="form-group span2"><label>生年月日</label><input type="date" class="pp-dob" max="${today}" required></div></div></div>`;
+      forms.innerHTML += `<div class="visitor-block"><div class="visitor-title">訪問者 ${i + 1}</div><div class="pp-grid"><div class="form-group span2"><label>氏名（パスポート記載のとおり）</label><input type="text" class="pp-name" placeholder="例：TANAKA YUKI" autocomplete="off" required></div><div class="form-group"><label>パスポート番号</label><input type="text" class="pp-num" placeholder="例：TK1234567" required></div><div class="form-group"><label>国籍</label><input type="text" class="pp-nat" placeholder="例：日本" required></div><div class="form-group span2"><label>生年月日</label><input type="date" class="pp-dob" max="${today}" required></div></div></div>`;
     }
-    const tk = TICKETS[type];
-    const at = adults * tk.ap, ct = children * tk.cp;
-    document.getElementById('pp-summary').innerHTML = `<div class="sum-row"><span style="color:var(--text)">${tk.name} · ${fmtDate(date)}</span></div><div class="sum-row"><span>大人 × ${adults}</span><span>$${at}</span></div>${children > 0 ? `<div class="sum-row"><span>子ども × ${children}</span><span>$${ct}</span></div>` : ''}<div class="sum-row total"><span>合計</span><span>$${at + ct} USD</span></div>`;
+    const total = visitors * ADMISSION.price;
+    document.getElementById('pp-summary').innerHTML = `<div class="sum-row"><span style="color:var(--text)">${ADMISSION.name} · ${fmtDate(date)}</span></div><div class="sum-row"><span>入場券 × ${visitors}</span><span>$${total.toFixed(2)}</span></div><div class="sum-row total"><span>合計</span><span>$${total.toFixed(2)} USD</span></div>`;
     document.getElementById('step-select').style.display = 'none';
     const pp = document.getElementById('passport-section');
     pp.style.display = 'block';
@@ -735,32 +791,57 @@
 
   async function submitBooking() {
     const btn = document.getElementById('btn-pay');
-    const type = document.getElementById('ticket-type').value;
     const date = document.getElementById('visit-date').value;
-    const adults = parseInt(document.getElementById('adult-qty').value) || 0;
-    const children = parseInt(document.getElementById('child-qty').value) || 0;
     const email = document.getElementById('cust-email').value.trim();
     const names = [...document.querySelectorAll('.pp-name')];
     const nums  = [...document.querySelectorAll('.pp-num')];
     const nats  = [...document.querySelectorAll('.pp-nat')];
     const dobs  = [...document.querySelectorAll('.pp-dob')];
     const today = new Date().toISOString().split('T')[0];
-    const visitors = [];
+    const visitorList = [];
     for (let i = 0; i < names.length; i++) {
       if (!names[i].value || !nums[i].value || !nats[i].value || !dobs[i].value) { alert('すべてのパスポート情報を入力してください。'); return; }
       if (dobs[i].value > today) { alert('生年月日に未来の日付は指定できません。訪問者' + (i + 1) + 'をご確認ください。'); return; }
-      visitors.push({ name: names[i].value.trim().toUpperCase(), passportNumber: nums[i].value.trim().toUpperCase(), nationality: nats[i].value.trim(), dateOfBirth: dobs[i].value, type: i < adults ? 'adult' : 'child' });
+      visitorList.push({ name: names[i].value.trim().toUpperCase(), passportNumber: nums[i].value.trim().toUpperCase(), nationality: nats[i].value.trim(), dateOfBirth: dobs[i].value });
     }
     if (!email || !email.includes('@')) { alert('有効なメールアドレスを入力してください。'); return; }
     if (!document.getElementById('consent-box').checked) { alert('続行するには利用規約およびプライバシーポリシーに同意してください。'); return; }
     btn.disabled = true; btn.textContent = 'お支払いページに移動中…';
     try {
-      const res = await fetch('/api/checkout', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ticketType: type, visitDate: date, adultQty: adults, childQty: children, email, visitors }) });
+      const res = await fetch('/api/checkout', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ticketType: 'admission', visitDate: date, visitorQty: visitorList.length, email, visitors: visitorList }) });
       const data = await res.json();
       if (data.url) { window.location.href = data.url; } else { throw new Error(data.error || 'Unknown error'); }
     } catch (e) {
       alert('エラーが発生しました。もう一度お試しいただくか、hello@terracotta-tickets.comまでお問い合わせください。');
       btn.disabled = false; btn.textContent = '安全にお支払い →';
+    }
+  }
+
+  // Private English guide — request only (no payment). Emails an enquiry so we can
+  // confirm availability, then send a payment link.
+  async function submitEnquiry() {
+    const btn = document.getElementById('btn-guide');
+    const date = document.getElementById('guide-date').value;
+    const size = parseInt(document.getElementById('guide-size').value) || 0;
+    const name = document.getElementById('guide-name').value.trim();
+    const email = document.getElementById('guide-email').value.trim();
+    const message = document.getElementById('guide-msg').value.trim();
+    if (!date) { alert('ご希望の日程を選択してください。'); return; }
+    if (size < 1) { alert('グループ人数を入力してください。'); return; }
+    if (!name) { alert('お名前を入力してください。'); return; }
+    if (!email || !email.includes('@')) { alert('有効なメールアドレスを入力してください。'); return; }
+    btn.disabled = true; btn.textContent = '送信中…';
+    try {
+      const res = await fetch('/api/enquiry', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name, email, visitDate: date, groupSize: size, message }) });
+      const data = await res.json();
+      if (data.ok) {
+        document.getElementById('gr-step').style.display = 'none';
+        document.getElementById('gr-success').style.display = 'block';
+        document.getElementById('guide-request').scrollIntoView({ behavior: 'smooth' });
+      } else { throw new Error(data.error || 'Unknown error'); }
+    } catch (e) {
+      alert('エラーが発生しました。もう一度お試しいただくか、hello@terracotta-tickets.comまでお問い合わせください。');
+      btn.disabled = false; btn.textContent = '空き状況をリクエスト →';
     }
   }
 

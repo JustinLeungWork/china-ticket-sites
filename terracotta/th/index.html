@@ -24,7 +24,7 @@
     "description": "พิพิธภัณฑ์สุสานจักรพรรดิจิ๋นซีฮ่องเต้ ทหารดินเผาขนาดเท่าคนจริงกว่า 8,000 ตัว พร้อมม้าและรถรบที่ฝังร่วมกับจักรพรรดิองค์แรกของจีน มรดกโลกขององค์การยูเนสโก",
     "url": "https://terracotta-tickets.com",
     "address": { "@type": "PostalAddress", "addressLocality": "Lintong District", "addressRegion": "Xi'an, Shaanxi", "addressCountry": "CN" },
-    "offers": { "@type": "Offer", "priceCurrency": "USD", "price": "20", "availability": "https://schema.org/InStock" }
+    "offers": { "@type": "Offer", "priceCurrency": "USD", "price": "25.99", "availability": "https://schema.org/InStock" }
   }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -140,8 +140,9 @@
     .form-body { padding: 28px; }
     .form-group { margin-bottom: 20px; }
     label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; color: var(--text); }
-    select, input[type="date"], input[type="number"], input[type="email"], input[type="text"] { width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--r-sm); font-family: 'DM Sans', sans-serif; font-size: 14.5px; color: var(--text); background: var(--white); -webkit-appearance: none; appearance: none; transition: border-color 0.18s, box-shadow 0.18s; }
-    select:focus, input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(107,50,0,0.12); }
+    select, input[type="date"], input[type="number"], input[type="email"], input[type="text"], textarea { width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--r-sm); font-family: 'DM Sans', sans-serif; font-size: 14.5px; color: var(--text); background: var(--white); -webkit-appearance: none; appearance: none; transition: border-color 0.18s, box-shadow 0.18s; }
+    textarea { resize: vertical; min-height: 72px; line-height: 1.5; }
+    select:focus, input:focus, textarea:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(107,50,0,0.12); }
     .sel-wrap { position: relative; }
     .sel-wrap::after { content: '▾'; position: absolute; right: 14px; top: 50%; transform: translateY(-50%); pointer-events: none; font-size: 11px; color: var(--muted); }
     .qty-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
@@ -165,6 +166,34 @@
     .date-card.selected .dc-dow, .date-card.selected .dc-day, .date-card.selected .dc-mon { color: var(--white); }
     .date-hint { font-size: 12px; color: var(--muted); margin-top: 2px; }
     .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* Two-card ticket grid + card CTAs */
+    .tickets-grid--two { max-width: 880px; grid-template-columns: repeat(2, 1fr); }
+    .ticket-cta { display: inline-block; margin-top: 16px; font-size: 13.5px; font-weight: 600; color: var(--primary); }
+    .ticket-card:hover .ticket-cta { color: var(--accent); }
+    .ticket-badge { display: inline-block; font-size: 10.5px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; background: var(--accent-light); color: var(--primary-dark); padding: 3px 10px; border-radius: 100px; margin-bottom: 10px; }
+
+    /* Booking form: plan banner + kids note */
+    .plan-banner { display: flex; justify-content: space-between; align-items: center; background: var(--accent-light); border: 1px solid #ECD9A6; border-radius: var(--r-md); padding: 14px 16px; margin-bottom: 14px; }
+    .plan-banner .pb-name { font-weight: 600; font-size: 15px; color: var(--primary-dark); }
+    .plan-banner .pb-price { font-size: 19px; font-weight: 700; color: var(--primary-dark); letter-spacing: -0.01em; }
+    .plan-banner .pb-price span { font-size: 12px; font-weight: 500; color: var(--muted); }
+    .kids-note { font-size: 12px; color: var(--muted); background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 11px 13px; margin-bottom: 20px; line-height: 1.55; }
+
+    /* Private guide request section */
+    .guide-request-section { padding: var(--section-y) var(--section-x); background: var(--white); }
+    .gr-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 420px; gap: clamp(40px, 5vw, 64px); align-items: start; }
+    .gr-intro h2 { font-size: clamp(24px, 2.8vw, 32px); margin-bottom: 14px; letter-spacing: -0.01em; }
+    .gr-intro > p { color: var(--muted); font-size: 15.5px; margin-bottom: 22px; line-height: 1.75; }
+    .gr-points { list-style: none; padding: 0; margin: 0 0 20px; }
+    .gr-points li { position: relative; padding-left: 28px; font-size: 14.5px; color: var(--text); line-height: 1.55; margin-bottom: 12px; }
+    .gr-points li::before { content: '✓'; position: absolute; left: 0; top: 0; color: var(--accent); font-weight: 700; }
+    .gr-foot { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .gr-form-wrap { background: var(--white); border: 1px solid var(--border); border-radius: var(--r-lg); box-shadow: var(--shadow-md); overflow: hidden; }
+    #gr-success { text-align: center; padding: 24px 8px; }
+    .gr-success-icon { width: 52px; height: 52px; margin: 0 auto 16px; border-radius: 50%; background: var(--accent-light); color: var(--primary); font-size: 26px; display: flex; align-items: center; justify-content: center; }
+    #gr-success h4 { font-family: 'Playfair Display', serif; font-size: 20px; margin-bottom: 10px; }
+    #gr-success p { font-size: 14px; color: var(--muted); line-height: 1.7; }
     .pay-note { font-size: 11px; color: var(--muted); text-align: center; margin-top: 9px; line-height: 1.5; }
     #passport-section { display: none; padding-top: 20px; border-top: 1px solid var(--border); margin-top: 20px; }
     #passport-section h4 { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
@@ -237,6 +266,7 @@
     @media (max-width: 900px) {
       .booking-grid { grid-template-columns: 1fr; }
       .booking-form-wrap { position: static; }
+      .gr-grid { grid-template-columns: 1fr; }
       .highlights-grid { grid-template-columns: 1fr 1fr; }
       .highlight-card--wide { grid-template-columns: 1fr; }
       .highlight-card--wide .highlight-img { min-height: 220px; }
@@ -245,8 +275,8 @@
       .guide-grid { grid-template-columns: 1fr; }
       .highlights-grid { grid-template-columns: 1fr; }
       .practical-grid { grid-template-columns: 1fr; }
+      .tickets-grid--two { grid-template-columns: 1fr; }
       .hero { min-height: 520px; }
-      .qty-row { grid-template-columns: 1fr 1fr; }
       .footer-inner { flex-direction: column; align-items: flex-start; }
       nav { padding: 0 16px; }
       .nav-logo { font-size: 13px; }
@@ -298,7 +328,7 @@
 
 <div class="steps">
   <div class="steps-inner">
-    <div class="step"><div class="step-num">01</div><h3>เลือกบัตร</h3><p>เลือกวันที่ ประเภทบัตร และจำนวนผู้เยี่ยมชม เพิ่มไกด์เสียงภาษาไทยหรือทัวร์ไกด์สดเพื่อประสบการณ์ที่สมบูรณ์ยิ่งขึ้น</p></div>
+    <div class="step"><div class="step-num">01</div><h3>เลือกวันที่</h3><p>เลือกวันที่เยี่ยมชมและจำนวนบัตรที่ต้องการ ต้องการไกด์ส่วนตัวภาษาอังกฤษไหม? ส่งคำขอมา — เราตรวจสอบความพร้อมให้ก่อน</p></div>
     <div class="step"><div class="step-num">02</div><h3>กรอกข้อมูลหนังสือเดินทาง</h3><p>ระบบชื่อจริงของพิพิธภัณฑ์ต้องการหมายเลขหนังสือเดินทาง เราดำเนินการจองเพื่อให้ QR Code ของคุณผูกกับตัวตนที่ประตูเข้าชม</p></div>
     <div class="step"><div class="step-num">03</div><h3>ชำระเงินอย่างปลอดภัย</h3><p>รับบัตร Visa, Mastercard, Apple Pay ไม่ต้องใช้ช่องทางชำระเงินของจีน</p></div>
     <div class="step"><div class="step-num">04</div><h3>รับ QR Code ของคุณ</h3><p>เราส่งการยืนยันการเข้าชมทางอีเมลภายใน 4 ชั่วโมง แสดงที่ทางเข้าพิพิธภัณฑ์ — ไม่ต้องพิมพ์บัตร</p></div>
@@ -310,38 +340,30 @@
     <div class="section-label">ตัวเลือกการเยี่ยมชม</div>
     <h2>แพ็คเกจบัตร</h2>
   </div>
-  <div class="tickets-grid">
-    <div class="ticket-card" data-ticket="standard" data-ap="20" data-cp="10">
+  <div class="tickets-grid tickets-grid--two">
+    <div class="ticket-card" data-scroll="book">
       <div class="ticket-img">
         <img src="/images/pexels-202387659-28844770.jpg" alt="Terracotta Warriors Pit 1" loading="lazy">
       </div>
       <div class="ticket-body">
-        <div class="ticket-name">บัตรเข้าชมมาตรฐาน</div>
-        <div class="ticket-includes">เข้าชมหลุมขุดค้น 3 หลุม · เข้าถึงสวนลีซาน · นิทรรศการรถรบสำริด · เยี่ยมชมด้วยตัวเอง</div>
-        <div class="ticket-pricing"><span class="ticket-price">$20</span><span class="ticket-face">ต่อผู้ใหญ่ · ราคาหน้าบัตร ¥120</span></div>
-        <div class="ticket-fee">รวมค่าบริการ $3.50</div>
+        <div class="ticket-name">บัตรเข้าชมราคาเต็ม</div>
+        <div class="ticket-includes">เข้าชมหลุมขุดค้นทั้ง 3 หลุม · อุทยานสุสานสวนลีซาน · นิทรรศการรถรบสำริด · รถรับส่งฟรีระหว่างสถานที่ หนึ่งบัตรต่อผู้เยี่ยมชมหนึ่งคน</div>
+        <div class="ticket-pricing"><span class="ticket-price">$25.99</span><span class="ticket-face">ต่อผู้เยี่ยมชม · ราคาหน้าบัตร ¥120</span></div>
+        <div class="ticket-fee">ผู้เยี่ยมชมทุกคนรวมถึงเด็กต้องใช้บัตรราคาเต็ม — ไม่มีส่วนลดเด็กสำหรับหนังสือเดินทางต่างชาติ</div>
+        <span class="ticket-cta">จองบัตรเข้าชม →</span>
       </div>
     </div>
-    <div class="ticket-card" data-ticket="audio" data-ap="29" data-cp="15">
+    <div class="ticket-card" data-scroll="guide-request">
       <div class="ticket-img">
-        <img src="/images/pexels-ruben-vp-2151134060-37555249.jpg" alt="Terracotta Warriors close-up" loading="lazy">
+        <img src="/images/pexels-nguy-n-du-1595594339-38237298.jpg" alt="Private English guide at the Terracotta Warriors" loading="lazy">
       </div>
       <div class="ticket-body">
-        <div class="ticket-name">บัตรเข้าชม + ไกด์เสียงภาษาไทย</div>
-        <div class="ticket-includes">เข้าชมพิพิธภัณฑ์ครบทุกส่วน · ไกด์เสียงดาวน์โหลดได้บรรยายโดยผู้เชี่ยวชาญ · ใช้งานบนโทรศัพท์ของคุณเอง</div>
-        <div class="ticket-pricing"><span class="ticket-price">$29</span><span class="ticket-face">ต่อผู้ใหญ่ · ราคาหน้าบัตร ¥175</span></div>
-        <div class="ticket-fee">รวมค่าบริการ $4.50</div>
-      </div>
-    </div>
-    <div class="ticket-card" data-ticket="guided" data-ap="55" data-cp="28">
-      <div class="ticket-img">
-        <img src="/images/pexels-nguy-n-du-1595594339-38237298.jpg" alt="Terracotta Warriors museum" loading="lazy">
-      </div>
-      <div class="ticket-body">
-        <div class="ticket-name">บัตรเข้าชม + ไกด์สดภาษาไทย</div>
-        <div class="ticket-includes">เข้าชมพิพิธภัณฑ์ครบทุกส่วน · ทัวร์กลุ่มเล็ก (สูงสุด 10 คน 2.5 ชม.) · ไกด์ที่เชี่ยวชาญ · ให้ข้อมูลมากที่สุด</div>
-        <div class="ticket-pricing"><span class="ticket-price">$55</span><span class="ticket-face">ต่อผู้ใหญ่ · ราคาหน้าบัตร ¥350</span></div>
-        <div class="ticket-fee">รวมค่าบริการ $7 · แนะนำ</div>
+        <span class="ticket-badge">ตามคำขอ</span>
+        <div class="ticket-name">ไกด์ส่วนตัวภาษาอังกฤษ</div>
+        <div class="ticket-includes">ไกด์ภาษาอังกฤษที่มีใบอนุญาตและได้รับการรับรองจากพิพิธภัณฑ์สำหรับกลุ่มของคุณ · ประมาณ 2.5 ชั่วโมงทั่วทั้งสามหลุม · สูงสุด 10 คน จองบัตรเข้าชมแยกต่างหาก</div>
+        <div class="ticket-pricing"><span class="ticket-price">$150</span><span class="ticket-face">ราคาเหมา · 1–10 คน ทุกขนาดกลุ่ม</span></div>
+        <div class="ticket-fee">ที่ว่างมีจำกัด — เรายืนยันวันที่ของคุณก่อนการชำระเงินใด ๆ</div>
+        <span class="ticket-cta">ขอไกด์ →</span>
       </div>
     </div>
   </div>
@@ -359,7 +381,7 @@
           <li>กรุณานำ<strong>หนังสือเดินทางฉบับจริง</strong>ไปที่ทางเข้า — ชื่อต้องตรงกับบัตรทุกประการ</li>
           <li>พิพิธภัณฑ์อนุญาต<strong>หนึ่งบัตรต่อหนังสือเดินทางต่อวัน</strong>เท่านั้น</li>
           <li>บัตรเปิดจำหน่ายล่วงหน้าสูงสุด 7 วัน — วางแผนให้เหมาะสมสำหรับวันหยุดสำคัญ</li>
-          <li>บัตรทัวร์ไกด์สดต้องจองล่วงหน้าอย่างน้อย 48 ชั่วโมง</li>
+          <li>เด็กก็ต้องใช้<strong>บัตรราคาเต็ม</strong>เช่นกัน — ส่วนลดเด็กของพิพิธภัณฑ์ใช้กับหนังสือเดินทางต่างชาติไม่ได้</li>
           <li>พิพิธภัณฑ์เปิดทุกวัน รับนักท่องเที่ยวครั้งสุดท้าย 2 ชั่วโมงก่อนปิด</li>
         </ul>
       </div>
@@ -368,31 +390,25 @@
       <div class="form-head"><h3>จองบัตรทหารดินเผา</h3></div>
       <div class="form-body">
         <div id="step-select">
-          <div class="form-group">
-            <label for="ticket-type">แพ็คเกจบัตร</label>
-            <div class="sel-wrap">
-              <select id="ticket-type">
-                <option value="">— เลือกแพ็คเกจ —</option>
-                <option value="standard">บัตรเข้าชมมาตรฐาน — $20 / ผู้ใหญ่</option>
-                <option value="audio">บัตรเข้าชม + ไกด์เสียง — $29 / ผู้ใหญ่</option>
-                <option value="guided">บัตรเข้าชม + ไกด์สด — $55 / ผู้ใหญ่</option>
-              </select>
-            </div>
+          <div class="plan-banner">
+            <span class="pb-name">บัตรเข้าชมราคาเต็ม</span>
+            <span class="pb-price">$25.99 <span>/ ผู้เยี่ยมชม</span></span>
           </div>
+          <input type="hidden" id="ticket-type" value="admission">
+          <p class="kids-note">ผู้เยี่ยมชมทุกคน — รวมถึงเด็ก — ต้องใช้บัตรราคาเต็ม บัตรลดราคาสำหรับเด็ก / นักเรียน / ผู้สูงอายุของพิพิธภัณฑ์ต้องใช้บัตรประจำตัวจีนและไม่สามารถใช้กับผู้ถือหนังสือเดินทางต่างชาติได้</p>
           <div class="form-group">
             <label>วันที่เยี่ยมชม</label>
             <div class="date-strip" id="date-strip" role="radiogroup" aria-label="เลือกวันที่เยี่ยมชม"></div>
             <div class="date-hint" id="date-hint">บัตรเปิดจำหน่ายล่วงหน้าประมาณ 7 วัน — เลือกจากวันที่ที่มีให้</div>
             <input type="hidden" id="visit-date">
           </div>
-          <div class="qty-row">
-            <div class="form-group"><label for="adult-qty">ผู้ใหญ่</label><input type="number" id="adult-qty" value="2" min="1" max="10"></div>
-            <div class="form-group"><label for="child-qty">เด็ก (อายุต่ำกว่า 18 ปี)</label><input type="number" id="child-qty" value="0" min="0" max="10"></div>
+          <div class="form-group">
+            <label for="visitor-qty">จำนวนผู้เยี่ยมชม</label>
+            <input type="number" id="visitor-qty" value="2" min="1" max="10">
           </div>
           <div class="summary-box" id="order-summary">
             <div class="sum-row"><span id="sum-name" style="color:var(--text)"></span></div>
-            <div class="sum-row"><span>ผู้ใหญ่ × <span id="sum-adults"></span></span><span>$<span id="sum-at"></span></span></div>
-            <div class="sum-row" id="sum-child-row" style="display:none"><span>เด็ก × <span id="sum-children"></span></span><span>$<span id="sum-ct"></span></span></div>
+            <div class="sum-row"><span>บัตรเข้าชม × <span id="sum-visitors"></span></span><span>$<span id="sum-at"></span></span></div>
             <div class="sum-row total"><span>รวมทั้งหมด</span><span>$<span id="sum-total"></span> USD</span></div>
           </div>
           <button class="btn-primary" onclick="goToPassport()">ดำเนินการต่อ →</button>
@@ -420,8 +436,61 @@
             </div>
             <button class="btn-primary" id="btn-pay" onclick="submitBooking()">ชำระเงินอย่างปลอดภัย →</button>
             <p class="pay-note">ปลอดภัยด้วย Stripe · Visa, Mastercard, Apple Pay · <a href="/terms.html" style="color:var(--primary)">ข้อกำหนด</a> · <a href="/privacy.html" style="color:var(--primary)">ความเป็นส่วนตัว</a> · <a href="/refunds.html" style="color:var(--primary)">การคืนเงิน</a></p>
-            <button class="back-link" onclick="backToSelect()">← เปลี่ยนแพ็คเกจบัตร</button>
+            <button class="back-link" onclick="backToSelect()">← กลับไปเลือกวันที่และผู้เยี่ยมชม</button>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="guide-request-section" id="guide-request">
+  <div class="gr-grid">
+    <div class="gr-intro">
+      <div class="section-label">ตามคำขอ</div>
+      <h2>ไกด์ส่วนตัวภาษาอังกฤษ</h2>
+      <p>ไกด์ภาษาอังกฤษที่มีใบอนุญาตและได้รับการรับรองจากพิพิธภัณฑ์จะทำให้สถานที่มีชีวิตชีวา — ทหารถูกสร้างขึ้นอย่างไร ทำไมจึงถูกฝัง และบอกอะไรเราเกี่ยวกับราชวงศ์ฉิน ราคาเหมาเดียวสำหรับทั้งกลุ่มของคุณ</p>
+      <ul class="gr-points">
+        <li>ราคาเหมา <strong>$150 USD</strong> — ราคาเดียวสำหรับ 1–10 คน</li>
+        <li>ไกด์ภาษาอังกฤษที่มีใบอนุญาตและได้รับการรับรองจากพิพิธภัณฑ์</li>
+        <li>ประมาณ 2.5 ชั่วโมงทั่วทั้งสามหลุม</li>
+        <li><strong>ยังไม่ต้องชำระเงิน</strong> — เรายืนยันว่าวันที่ของคุณว่าง แล้วจึงส่งลิงก์ชำระเงินที่ปลอดภัยทางอีเมล</li>
+      </ul>
+      <p class="gr-foot">บัตรเข้าชมพิพิธภัณฑ์จองแยกต่างหากด้านบน — ค่าไกด์ครอบคลุมเฉพาะบริการนำชมเท่านั้น</p>
+    </div>
+    <div class="gr-form-wrap">
+      <div class="form-head"><h3>ขอไกด์</h3></div>
+      <div class="form-body">
+        <div id="gr-step">
+          <div class="form-group">
+            <label>วันที่ต้องการ</label>
+            <div class="date-strip" id="guide-date-strip" role="radiogroup" aria-label="เลือกวันที่ที่ต้องการไกด์"></div>
+            <div class="date-hint">เลือกวันที่ที่คุณต้องการ — เราจะยืนยันความพร้อมของไกด์</div>
+            <input type="hidden" id="guide-date">
+          </div>
+          <div class="form-group">
+            <label for="guide-size">ขนาดกลุ่ม (สูงสุด 10)</label>
+            <input type="number" id="guide-size" value="2" min="1" max="10">
+          </div>
+          <div class="form-group">
+            <label for="guide-name">ชื่อของคุณ</label>
+            <input type="text" id="guide-name" placeholder="เช่น สมชาย ใจดี">
+          </div>
+          <div class="form-group">
+            <label for="guide-email">อีเมล</label>
+            <input type="email" id="guide-email" placeholder="your@email.com">
+          </div>
+          <div class="form-group">
+            <label for="guide-msg">มีอะไรอื่นอีกไหม? (ไม่บังคับ)</label>
+            <textarea id="guide-msg" rows="3" placeholder="ช่วงเวลาที่ต้องการ ความต้องการด้านการเข้าถึง คำถามอื่น ๆ…"></textarea>
+          </div>
+          <button class="btn-primary" id="btn-guide" onclick="submitEnquiry()">ขอตรวจสอบความพร้อม →</button>
+          <p class="pay-note">ยังไม่ต้องชำระเงิน · เราจะตอบกลับภายใน 24 ชั่วโมงพร้อมความพร้อมและลิงก์ชำระเงิน $150 ที่ปลอดภัย</p>
+        </div>
+        <div id="gr-success" style="display:none">
+          <div class="gr-success-icon">✓</div>
+          <h4>ได้รับคำขอแล้ว</h4>
+          <p>ขอบคุณ — เรากำลังตรวจสอบความพร้อมของไกด์สำหรับวันที่ของคุณ และจะส่งอีเมลถึงคุณภายใน 24 ชั่วโมงเพื่อยืนยันและส่งลิงก์ชำระเงินที่ปลอดภัย ยังไม่มีการเรียกเก็บเงินในตอนนี้</p>
         </div>
       </div>
     </div>
@@ -588,8 +657,8 @@
       <div class="faq-a">การยกเลิกที่ทำก่อนวันเยี่ยมชม 48 ชั่วโมงขึ้นไปจะได้รับเงินคืนเต็มจำนวน ภายใน 48 ชั่วโมง บัตรไม่สามารถคืนเงินได้ สำหรับการเปลี่ยนวัน ติดต่อเราล่วงหน้าอย่างน้อย 72 ชั่วโมง — เราจะพยายามจัดการให้ขึ้นอยู่กับความพร้อมใช้งาน</div>
     </div>
     <div class="faq-item">
-      <button class="faq-q" onclick="toggleFaq(this)">ไกด์สดคุ้มค่าไหม?</button>
-      <div class="faq-a">คุ้มค่าสำหรับนักท่องเที่ยวส่วนใหญ่ ผลกระทบทางสายตาของหลุม 1 เห็นได้ทันที แต่เรื่องราวเบื้องหลังสถานที่ — ทหารถูกสร้างขึ้นอย่างไร ทำไมถึงฝังไว้ บอกอะไรเราเกี่ยวกับราชวงศ์ฉิน — ต้องการบริบทจึงจะเข้าใจได้ ไกด์ของเรามีการรับรองจากพิพิธภัณฑ์และจำกัดกลุ่มไว้ที่ 10 คน คุณจึงไม่ต้องเบียดฟังพร้อมกับคน 40 คน สำหรับนักเดินทางเดี่ยวหรือคู่ ไกด์เสียงเป็นทางเลือกที่ดี</div>
+      <button class="faq-q" onclick="toggleFaq(this)">ไกด์ส่วนตัวภาษาอังกฤษคุ้มค่าไหม?</button>
+      <div class="faq-a">คุ้มค่าสำหรับนักท่องเที่ยวส่วนใหญ่ ผลกระทบทางสายตาของหลุม 1 เห็นได้ทันที แต่เรื่องราวเบื้องหลังสถานที่ — ทหารถูกสร้างขึ้นอย่างไร ทำไมถึงฝังไว้ บอกอะไรเราเกี่ยวกับราชวงศ์ฉิน — ต้องการบริบทจึงจะเข้าใจได้ ไกด์ของเรามีการรับรองจากพิพิธภัณฑ์ และกลุ่มของคุณสูงสุด 10 คนมีไกด์เป็นของกลุ่มเอง คุณจึงไม่ต้องเบียดฟังพร้อมกับคนอีก 40 คน ราคาเหมา $150 สำหรับทั้งกลุ่ม จองตามคำขอ — ส่งคำขอมาแล้วเราจะยืนยันความพร้อมก่อนที่คุณจะชำระเงินใด ๆ</div>
     </div>
     <div class="faq-item">
       <button class="faq-q" onclick="toggleFaq(this)">บัตรของฉันครอบคลุมอะไรบ้าง?</button>
@@ -623,41 +692,30 @@
 </footer>
 
 <script>
-  const TICKETS = {
-    standard: { name: 'บัตรเข้าชมมาตรฐาน', ap: 20, cp: 10 },
-    audio:    { name: 'บัตรเข้าชม + ไกด์เสียงภาษาไทย', ap: 29, cp: 15 },
-    guided:   { name: 'บัตรเข้าชม + ไกด์สดภาษาไทย', ap: 55, cp: 28 }
-  };
+  const ADMISSION = { name: 'บัตรเข้าชมราคาเต็ม', price: 25.99 };
 
-  document.querySelectorAll('.ticket-card').forEach(c => {
+  // Ticket cards scroll to their section (admission → booking form, guide → request).
+  document.querySelectorAll('.ticket-card[data-scroll]').forEach(c => {
     c.addEventListener('click', () => {
-      document.querySelectorAll('.ticket-card').forEach(x => x.classList.remove('selected'));
-      c.classList.add('selected');
-      document.getElementById('ticket-type').value = c.dataset.ticket;
-      updateSummary();
-      document.getElementById('book').scrollIntoView({ behavior: 'smooth' });
+      const target = document.getElementById(c.dataset.scroll);
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
     });
   });
 
   function updateSummary() {
-    const type = document.getElementById('ticket-type').value;
-    const adults = parseInt(document.getElementById('adult-qty').value) || 0;
-    const children = parseInt(document.getElementById('child-qty').value) || 0;
+    const visitors = parseInt(document.getElementById('visitor-qty').value) || 0;
     const date = document.getElementById('visit-date').value;
     const box = document.getElementById('order-summary');
-    if (!type || !date || adults < 1) { box.style.display = 'none'; return; }
-    const tk = TICKETS[type];
-    const at = adults * tk.ap, ct = children * tk.cp;
-    document.getElementById('sum-name').textContent = tk.name + ' · ' + fmtDate(date);
-    document.getElementById('sum-adults').textContent = adults;
-    document.getElementById('sum-at').textContent = at;
-    const cr = document.getElementById('sum-child-row');
-    if (children > 0) { cr.style.display = 'flex'; document.getElementById('sum-children').textContent = children; document.getElementById('sum-ct').textContent = ct; } else { cr.style.display = 'none'; }
-    document.getElementById('sum-total').textContent = at + ct;
+    if (!date || visitors < 1) { box.style.display = 'none'; return; }
+    const total = visitors * ADMISSION.price;
+    document.getElementById('sum-name').textContent = ADMISSION.name + ' · ' + fmtDate(date);
+    document.getElementById('sum-visitors').textContent = visitors;
+    document.getElementById('sum-at').textContent = total.toFixed(2);
+    document.getElementById('sum-total').textContent = total.toFixed(2);
     box.style.display = 'block';
   }
 
-  ['ticket-type','adult-qty','child-qty'].forEach(id => document.getElementById(id).addEventListener('change', updateSummary));
+  document.getElementById('visitor-qty').addEventListener('change', updateSummary);
 
   // Date helpers
   const DOW = ['อา.','จ.','อ.','พ.','พฤ.','ศ.','ส.'];
@@ -671,13 +729,14 @@
     return DOW[d.getDay()] + ' ' + day + ' ' + MON[m - 1];
   }
 
-  // Build the modern date-card strip — tickets release ~7 days ahead,
-  // so we offer the bookable window (today+2 … today+7) as selectable cards.
-  (function buildDateStrip() {
-    const strip = document.getElementById('date-strip');
-    const hidden = document.getElementById('visit-date');
-    const start = 2, end = 7;
-    for (let i = start; i <= end; i++) {
+  // Build a modern date-card strip into a container, writing the chosen ISO to a
+  // hidden input. Tickets release ~7 days ahead, so we offer the bookable window
+  // (today+2 … today+7) as selectable cards.
+  function buildDateStrip(stripId, hiddenId, onPick) {
+    const strip = document.getElementById(stripId);
+    const hidden = document.getElementById(hiddenId);
+    if (!strip || !hidden) return;
+    for (let i = 2; i <= 7; i++) {
       const d = new Date(); d.setHours(0,0,0,0); d.setDate(d.getDate() + i);
       const iso = isoOf(d);
       const card = document.createElement('button');
@@ -692,31 +751,28 @@
         card.classList.add('selected');
         card.setAttribute('aria-checked', 'true');
         hidden.value = iso;
-        updateSummary();
+        if (onPick) onPick();
       });
       strip.appendChild(card);
     }
-  })();
+  }
+  buildDateStrip('date-strip', 'visit-date', updateSummary);
+  buildDateStrip('guide-date-strip', 'guide-date');
 
   function goToPassport() {
-    const type = document.getElementById('ticket-type').value;
     const date = document.getElementById('visit-date').value;
-    const adults = parseInt(document.getElementById('adult-qty').value) || 0;
-    const children = parseInt(document.getElementById('child-qty').value) || 0;
-    if (!type) { alert('กรุณาเลือกแพ็คเกจบัตร'); return; }
+    const visitors = parseInt(document.getElementById('visitor-qty').value) || 0;
     if (!date) { alert('กรุณาเลือกวันที่เยี่ยมชม'); return; }
-    if (adults < 1) { alert('กรุณากรอกจำนวนผู้ใหญ่อย่างน้อย 1 คน'); return; }
+    if (visitors < 1) { alert('กรุณากรอกจำนวนผู้เยี่ยมชมอย่างน้อย 1 คน'); return; }
     const today = new Date().toISOString().split('T')[0];
     const forms = document.getElementById('pp-forms');
     forms.innerHTML = '';
-    for (let i = 0; i < adults + children; i++) {
-      const lbl = i < adults ? 'ผู้ใหญ่ ' + (i + 1) : 'เด็ก ' + (i - adults + 1);
+    for (let i = 0; i < visitors; i++) {
       // TODO: Populate nationality as a dropdown from official booking site bmy.albatrip.cn — currently free-text
-      forms.innerHTML += `<div class="visitor-block"><div class="visitor-title">${lbl}</div><div class="pp-grid"><div class="form-group span2"><label>ชื่อ-นามสกุล (ตามหนังสือเดินทาง)</label><input type="text" class="pp-name" placeholder="เช่น SOMCHAI JAIDEE" autocomplete="off" required></div><div class="form-group"><label>หมายเลขหนังสือเดินทาง</label><input type="text" class="pp-num" placeholder="เช่น AA1234567" required></div><div class="form-group"><label>สัญชาติ</label><input type="text" class="pp-nat" placeholder="เช่น ไทย" required></div><div class="form-group span2"><label>วันเกิด</label><input type="date" class="pp-dob" max="${today}" required></div></div></div>`;
+      forms.innerHTML += `<div class="visitor-block"><div class="visitor-title">ผู้เยี่ยมชม ${i + 1}</div><div class="pp-grid"><div class="form-group span2"><label>ชื่อ-นามสกุล (ตามหนังสือเดินทาง)</label><input type="text" class="pp-name" placeholder="เช่น SOMCHAI JAIDEE" autocomplete="off" required></div><div class="form-group"><label>หมายเลขหนังสือเดินทาง</label><input type="text" class="pp-num" placeholder="เช่น AA1234567" required></div><div class="form-group"><label>สัญชาติ</label><input type="text" class="pp-nat" placeholder="เช่น ไทย" required></div><div class="form-group span2"><label>วันเกิด</label><input type="date" class="pp-dob" max="${today}" required></div></div></div>`;
     }
-    const tk = TICKETS[type];
-    const at = adults * tk.ap, ct = children * tk.cp;
-    document.getElementById('pp-summary').innerHTML = `<div class="sum-row"><span style="color:var(--text)">${tk.name} · ${fmtDate(date)}</span></div><div class="sum-row"><span>ผู้ใหญ่ × ${adults}</span><span>$${at}</span></div>${children > 0 ? `<div class="sum-row"><span>เด็ก × ${children}</span><span>$${ct}</span></div>` : ''}<div class="sum-row total"><span>รวมทั้งหมด</span><span>$${at + ct} USD</span></div>`;
+    const total = visitors * ADMISSION.price;
+    document.getElementById('pp-summary').innerHTML = `<div class="sum-row"><span style="color:var(--text)">${ADMISSION.name} · ${fmtDate(date)}</span></div><div class="sum-row"><span>บัตรเข้าชม × ${visitors}</span><span>$${total.toFixed(2)}</span></div><div class="sum-row total"><span>รวมทั้งหมด</span><span>$${total.toFixed(2)} USD</span></div>`;
     document.getElementById('step-select').style.display = 'none';
     const pp = document.getElementById('passport-section');
     pp.style.display = 'block';
@@ -735,32 +791,57 @@
 
   async function submitBooking() {
     const btn = document.getElementById('btn-pay');
-    const type = document.getElementById('ticket-type').value;
     const date = document.getElementById('visit-date').value;
-    const adults = parseInt(document.getElementById('adult-qty').value) || 0;
-    const children = parseInt(document.getElementById('child-qty').value) || 0;
     const email = document.getElementById('cust-email').value.trim();
     const names = [...document.querySelectorAll('.pp-name')];
     const nums  = [...document.querySelectorAll('.pp-num')];
     const nats  = [...document.querySelectorAll('.pp-nat')];
     const dobs  = [...document.querySelectorAll('.pp-dob')];
     const today = new Date().toISOString().split('T')[0];
-    const visitors = [];
+    const visitorList = [];
     for (let i = 0; i < names.length; i++) {
       if (!names[i].value || !nums[i].value || !nats[i].value || !dobs[i].value) { alert('กรุณากรอกข้อมูลหนังสือเดินทางให้ครบถ้วน'); return; }
       if (dobs[i].value > today) { alert('วันเกิดต้องไม่เป็นวันในอนาคต กรุณาตรวจสอบผู้เยี่ยมชมคนที่ ' + (i + 1)); return; }
-      visitors.push({ name: names[i].value.trim().toUpperCase(), passportNumber: nums[i].value.trim().toUpperCase(), nationality: nats[i].value.trim(), dateOfBirth: dobs[i].value, type: i < adults ? 'adult' : 'child' });
+      visitorList.push({ name: names[i].value.trim().toUpperCase(), passportNumber: nums[i].value.trim().toUpperCase(), nationality: nats[i].value.trim(), dateOfBirth: dobs[i].value });
     }
     if (!email || !email.includes('@')) { alert('กรุณากรอกอีเมลที่ถูกต้อง'); return; }
     if (!document.getElementById('consent-box').checked) { alert('กรุณายอมรับข้อกำหนดการใช้บริการและนโยบายความเป็นส่วนตัวเพื่อดำเนินการต่อ'); return; }
     btn.disabled = true; btn.textContent = 'กำลังเปลี่ยนหน้าไปยังหน้าชำระเงิน…';
     try {
-      const res = await fetch('/api/checkout', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ticketType: type, visitDate: date, adultQty: adults, childQty: children, email, visitors }) });
+      const res = await fetch('/api/checkout', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ticketType: 'admission', visitDate: date, visitorQty: visitorList.length, email, visitors: visitorList }) });
       const data = await res.json();
       if (data.url) { window.location.href = data.url; } else { throw new Error(data.error || 'Unknown error'); }
     } catch (e) {
       alert('เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้งหรือติดต่อ hello@terracotta-tickets.com');
       btn.disabled = false; btn.textContent = 'ชำระเงินอย่างปลอดภัย →';
+    }
+  }
+
+  // Private English guide — request only (no payment). Emails an enquiry so we can
+  // confirm availability, then send a payment link.
+  async function submitEnquiry() {
+    const btn = document.getElementById('btn-guide');
+    const date = document.getElementById('guide-date').value;
+    const size = parseInt(document.getElementById('guide-size').value) || 0;
+    const name = document.getElementById('guide-name').value.trim();
+    const email = document.getElementById('guide-email').value.trim();
+    const message = document.getElementById('guide-msg').value.trim();
+    if (!date) { alert('กรุณาเลือกวันที่ที่ต้องการ'); return; }
+    if (size < 1) { alert('กรุณากรอกขนาดกลุ่มของคุณ'); return; }
+    if (!name) { alert('กรุณากรอกชื่อของคุณ'); return; }
+    if (!email || !email.includes('@')) { alert('กรุณากรอกอีเมลที่ถูกต้อง'); return; }
+    btn.disabled = true; btn.textContent = 'กำลังส่ง…';
+    try {
+      const res = await fetch('/api/enquiry', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name, email, visitDate: date, groupSize: size, message }) });
+      const data = await res.json();
+      if (data.ok) {
+        document.getElementById('gr-step').style.display = 'none';
+        document.getElementById('gr-success').style.display = 'block';
+        document.getElementById('guide-request').scrollIntoView({ behavior: 'smooth' });
+      } else { throw new Error(data.error || 'Unknown error'); }
+    } catch (e) {
+      alert('เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้งหรือติดต่อ hello@terracotta-tickets.com');
+      btn.disabled = false; btn.textContent = 'ขอตรวจสอบความพร้อม →';
     }
   }
 

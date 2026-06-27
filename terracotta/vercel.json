@@ -1,7 +1,8 @@
 {
   "functions": {
     "api/checkout.js": { "memory": 256 },
-    "api/webhook.js":  { "memory": 256 }
+    "api/webhook.js":  { "memory": 256 },
+    "api/enquiry.js":  { "memory": 256 }
   },
   "routes": [
     {
@@ -12,6 +13,10 @@
     {
       "src": "/api/checkout",
       "dest": "/api/checkout.js"
+    },
+    {
+      "src": "/api/enquiry",
+      "dest": "/api/enquiry.js"
     }
   ]
 }
