@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>บัตรทหารดินเผา 2026 — จองภาษาไทย ไม่ต้องมี WeChat</title>
-  <meta name="description" content="ซื้อบัตรทหารดินเผาเป็นภาษาไทย เราจัดการระบบจองชื่อจริงของจีนให้คุณ — รับบัตร Visa, Mastercard ยืนยันภายใน 4 ชั่วโมง">
+  <meta name="description" content="ซื้อบัตรทหารดินเผาเป็นภาษาไทย เราจัดการระบบจองชื่อจริงของจีนให้คุณ — รับบัตร Visa, Mastercard, Apple Pay ยืนยันการเข้าชมภายใน 4 ชั่วโมง">
   <meta property="og:title" content="บัตรทหารดินเผา — จองภาษาไทย ไม่ต้องมี WeChat">
   <meta property="og:description" content="ข้ามขั้นตอนการจองของจีน เราซื้อบัตรทหารดินเผาให้คุณโดยใช้หนังสือเดินทาง รองรับภาษาไทย ยืนยันภายใน 4 ชั่วโมง">
   <meta property="og:type" content="website">
@@ -21,7 +21,7 @@
     "@context": "https://schema.org",
     "@type": "TouristAttraction",
     "name": "Terracotta Warriors Museum, Xi'an",
-    "description": "The Emperor Qinshihuang Mausoleum Site Museum. Over 8,000 life-size clay soldiers, horses and chariots buried with China's first emperor. UNESCO World Heritage Site.",
+    "description": "พิพิธภัณฑ์สุสานจักรพรรดิจิ๋นซีฮ่องเต้ ทหารดินเผาขนาดเท่าคนจริงกว่า 8,000 ตัว พร้อมม้าและรถรบที่ฝังร่วมกับจักรพรรดิองค์แรกของจีน มรดกโลกขององค์การยูเนสโก",
     "url": "https://terracotta-tickets.com",
     "address": { "@type": "PostalAddress", "addressLocality": "Lintong District", "addressRegion": "Xi'an, Shaanxi", "addressCountry": "CN" },
     "offers": { "@type": "Offer", "priceCurrency": "USD", "price": "20", "availability": "https://schema.org/InStock" }
@@ -29,7 +29,7 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -37,84 +37,133 @@
       --primary-dark: #4A2300;
       --accent: #C8960C;
       --accent-light: #F5E6C4;
-      --text: #1A1A1A;
-      --muted: #6B6B6B;
-      --surface: #F8F4EF;
-      --border: #E4DDD4;
+      --text: #241A12;
+      --muted: #7C6F60;
+      --surface: #F7F1E9;
+      --border: #E7DECF;
       --white: #FFFFFF;
+      /* spacing scale */
+      --s-1: 8px; --s-2: 16px; --s-3: 24px; --s-4: 36px; --s-5: 56px;
+      --section-x: clamp(20px, 5vw, 48px);
+      --section-y: clamp(60px, 8vw, 108px);
+      /* radius */
+      --r-sm: 8px; --r-md: 12px; --r-lg: 18px;
+      /* warm elevation */
+      --shadow-sm: 0 1px 2px rgba(74,35,0,0.05), 0 4px 14px rgba(74,35,0,0.05);
+      --shadow-md: 0 6px 20px rgba(74,35,0,0.09), 0 16px 40px rgba(74,35,0,0.06);
+      --shadow-lg: 0 24px 60px rgba(74,35,0,0.18);
     }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+    }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 2px; }
     html { scroll-behavior: smooth; }
     body { font-family: 'DM Sans', system-ui, sans-serif; font-size: 16px; line-height: 1.6; color: var(--text); background: var(--white); }
     h1, h2, h3 { font-family: 'Playfair Display', Georgia, serif; line-height: 1.2; }
     a { color: inherit; text-decoration: none; }
 
-    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(107,50,0,0.97); backdrop-filter: blur(8px); padding: 0 32px; height: 58px; display: flex; align-items: center; justify-content: space-between; }
-    .nav-logo { font-family: 'Playfair Display', serif; font-size: 16px; color: var(--white); letter-spacing: 0.02em; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(107,50,0,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,0.08); padding: 0 var(--section-x); height: 64px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 17px; color: var(--white); letter-spacing: 0.01em; margin-right: auto; }
     .nav-logo span { color: var(--accent); }
-    .btn-nav { background: var(--accent); color: var(--primary-dark); border: none; padding: 8px 22px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; border-radius: 2px; }
-    .btn-nav:hover { background: #D4A015; }
-    .lang-select { background: transparent; border: 1px solid rgba(255,255,255,0.35); color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 13px; padding: 5px 10px; border-radius: 2px; cursor: pointer; margin-right: 12px; }
+    .btn-nav { background: var(--accent); color: var(--primary-dark); border: none; padding: 9px 24px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; border-radius: var(--r-sm); transition: background 0.18s, transform 0.18s; }
+    .btn-nav:hover { background: #DBA516; transform: translateY(-1px); }
+    .lang-select { width: auto; background: transparent; border: 1px solid rgba(255,255,255,0.3); color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 13px; padding: 6px 12px; border-radius: var(--r-sm); cursor: pointer; margin-right: 14px; transition: border-color 0.18s; }
+    .lang-select:hover { border-color: rgba(255,255,255,0.6); }
     .lang-select option { background: #1a1a1a; color: #fff; }
     .lang-select:focus { outline: none; }
 
-    .hero { margin-top: 58px; height: 580px; background: url('https://images.unsplash.com/photo-1608037521277-154cd1b89191?w=1600&q=80') center/cover no-repeat; position: relative; display: flex; align-items: flex-end; }
-    .hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(74,35,0,0.9) 0%, rgba(74,35,0,0.3) 55%, transparent 100%); }
-    .hero-content { position: relative; z-index: 1; padding: 52px 40px; max-width: 700px; }
-    .eyebrow { display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
-    .hero h1 { font-size: clamp(30px, 4.5vw, 50px); color: var(--white); margin-bottom: 16px; }
-    .hero-sub { font-size: 16px; color: rgba(255,255,255,0.82); margin-bottom: 28px; max-width: 500px; line-height: 1.6; }
-    .badges { display: flex; flex-wrap: wrap; gap: 8px; }
-    .badge { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: var(--white); font-size: 12px; padding: 5px 12px; border-radius: 2px; }
+    /* Language modal */
+    .lang-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 500; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.25s; }
+    .lang-overlay.show { opacity: 1; pointer-events: all; }
+    .lang-modal { background: var(--white); width: 320px; max-width: calc(100vw - 32px); border-radius: 4px; overflow: hidden; transform: translateY(16px); transition: transform 0.25s; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+    .lang-overlay.show .lang-modal { transform: translateY(0); }
+    .lang-modal-head { background: var(--primary); padding: 20px 24px 16px; position: relative; }
+    .lang-modal-head h3 { font-family: 'Playfair Display', serif; color: var(--white); font-size: 17px; }
+    .lang-modal-head p { color: rgba(255,255,255,0.65); font-size: 12px; margin-top: 3px; }
+    .lang-modal-x { position: absolute; top: 14px; right: 16px; background: none; border: none; color: rgba(255,255,255,0.6); font-size: 22px; cursor: pointer; line-height: 1; padding: 0; }
+    .lang-modal-x:hover { color: var(--white); }
+    .lang-opts { padding: 6px; }
+    .lang-opt { display: flex; align-items: center; gap: 10px; padding: 11px 14px; border-radius: 2px; cursor: pointer; border: none; background: none; width: 100%; text-align: left; font-family: 'DM Sans', sans-serif; transition: background 0.15s; }
+    .lang-opt:hover { background: var(--surface); }
+    .lang-opt.suggest { background: var(--accent-light); }
+    .lang-opt .ln { font-size: 15px; font-weight: 500; color: var(--text); }
+    .lang-opt .ls { font-size: 12px; color: var(--muted); margin-left: 2px; }
+    .lang-opt .lb { margin-left: auto; font-size: 11px; background: var(--accent); color: var(--primary-dark); padding: 2px 7px; border-radius: 10px; font-weight: 600; }
 
-    .steps { background: var(--primary); padding: 52px 32px; }
-    .steps-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 36px; }
+    .hero { margin-top: 64px; min-height: 620px; background: url('/images/pexels-nanling-liu-1430151-37356687.jpg') center/cover no-repeat; position: relative; display: flex; align-items: flex-end; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(50,23,0,0.92) 0%, rgba(74,35,0,0.35) 52%, rgba(74,35,0,0.15) 100%); }
+    .hero-content { position: relative; z-index: 1; padding: clamp(40px, 6vw, 72px) var(--section-x); max-width: 760px; animation: hero-rise 0.7s cubic-bezier(0.2,0.7,0.2,1) both; }
+    @keyframes hero-rise { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .eyebrow { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+    .hero h1 { font-size: clamp(34px, 5.2vw, 58px); color: var(--white); margin-bottom: 18px; letter-spacing: -0.01em; }
+    .hero-sub { font-size: clamp(15px, 1.6vw, 18px); color: rgba(255,255,255,0.86); margin-bottom: 30px; max-width: 540px; line-height: 1.65; }
+    .badges { display: flex; flex-wrap: wrap; gap: 10px; }
+    .badge { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.22); backdrop-filter: blur(4px); color: var(--white); font-size: 12.5px; padding: 7px 14px; border-radius: 100px; }
+
+    .steps { background: var(--primary); padding: var(--section-y) var(--section-x); }
+    .steps-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: clamp(28px, 4vw, 48px); }
     .step { color: var(--white); }
-    .step-num { font-size: 28px; font-family: 'Playfair Display', serif; color: var(--accent); line-height: 1; margin-bottom: 10px; }
-    .step h3 { font-size: 15px; font-weight: 500; margin-bottom: 6px; font-family: 'DM Sans', sans-serif; }
-    .step p { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.55; }
+    .step-num { font-size: 34px; font-family: 'Playfair Display', serif; color: var(--accent); line-height: 1; margin-bottom: 14px; }
+    .step h3 { font-size: 16px; font-weight: 600; margin-bottom: 8px; font-family: 'DM Sans', sans-serif; }
+    .step p { font-size: 13.5px; color: rgba(255,255,255,0.65); line-height: 1.6; }
 
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
-    .section-label { font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 8px; }
-    .section-header { text-align: center; margin-bottom: 44px; }
-    .section-header h2 { font-size: clamp(24px, 3vw, 34px); }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 var(--section-x); }
+    .section-label { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 10px; }
+    .section-header { text-align: center; margin-bottom: clamp(40px, 5vw, 60px); }
+    .section-header h2 { font-size: clamp(26px, 3.4vw, 38px); letter-spacing: -0.01em; }
 
-    .tickets-section { padding: 72px 32px; }
-    .tickets-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 24px; }
-    .ticket-card { border: 1px solid var(--border); border-radius: 2px; overflow: hidden; cursor: pointer; transition: border-color 0.15s, box-shadow 0.15s; }
-    .ticket-card:hover { border-color: var(--primary); box-shadow: 0 4px 20px rgba(107,50,0,0.1); }
-    .ticket-card.selected { border-color: var(--primary); outline: 2px solid var(--primary); }
-    .ticket-img { height: 175px; overflow: hidden; }
-    .ticket-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .ticket-body { padding: 20px; }
-    .ticket-name { font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 6px; }
-    .ticket-includes { font-size: 13px; color: var(--muted); margin-bottom: 16px; line-height: 1.5; }
+    .tickets-section { padding: var(--section-y) var(--section-x); }
+    .tickets-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: clamp(20px, 2.5vw, 28px); }
+    .ticket-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; cursor: pointer; box-shadow: var(--shadow-sm); transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s; }
+    .ticket-card:hover { transform: translateY(-4px); border-color: rgba(107,50,0,0.25); box-shadow: var(--shadow-md); }
+    .ticket-card.selected { border-color: var(--primary); box-shadow: 0 0 0 2px var(--primary), var(--shadow-md); }
+    .ticket-img { height: 190px; overflow: hidden; }
+    .ticket-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+    .ticket-card:hover .ticket-img img { transform: scale(1.05); }
+    .ticket-body { padding: 26px; }
+    .ticket-name { font-family: 'Playfair Display', serif; font-size: 20px; margin-bottom: 8px; }
+    .ticket-includes { font-size: 13.5px; color: var(--muted); margin-bottom: 20px; line-height: 1.6; }
     .ticket-pricing { display: flex; align-items: baseline; gap: 8px; }
-    .ticket-price { font-size: 24px; font-weight: 500; }
+    .ticket-price { font-size: 28px; font-weight: 600; letter-spacing: -0.01em; }
     .ticket-face { font-size: 12px; color: var(--muted); }
-    .ticket-fee { font-size: 11px; color: var(--muted); margin-top: 3px; }
+    .ticket-fee { font-size: 11.5px; color: var(--muted); margin-top: 5px; }
 
-    .booking-section { background: var(--surface); padding: 72px 32px; }
-    .booking-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 400px; gap: 56px; align-items: start; }
-    .booking-intro h2 { font-size: clamp(22px, 2.5vw, 30px); margin-bottom: 12px; }
-    .booking-intro p { color: var(--muted); font-size: 15px; margin-bottom: 28px; line-height: 1.7; }
-    .booking-notes h4 { font-family: 'Playfair Display', serif; font-size: 17px; margin-bottom: 10px; }
-    .booking-notes ul { font-size: 14px; color: var(--muted); padding-left: 18px; line-height: 2.1; }
-    .booking-form-wrap { background: var(--white); border: 1px solid var(--border); border-radius: 2px; }
-    .form-head { background: var(--primary); padding: 18px 24px; color: var(--white); }
-    .form-head h3 { font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; }
-    .form-body { padding: 24px; }
-    .form-group { margin-bottom: 15px; }
-    label { display: block; font-size: 13px; font-weight: 500; margin-bottom: 5px; }
-    select, input[type="date"], input[type="number"], input[type="email"], input[type="text"] { width: 100%; padding: 9px 12px; border: 1px solid var(--border); border-radius: 2px; font-family: 'DM Sans', sans-serif; font-size: 14px; color: var(--text); background: var(--white); -webkit-appearance: none; appearance: none; }
-    select:focus, input:focus { outline: 2px solid var(--primary); outline-offset: -1px; }
+    .booking-section { background: var(--surface); padding: var(--section-y) var(--section-x); }
+    .booking-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 420px; gap: clamp(40px, 5vw, 64px); align-items: start; }
+    .booking-intro h2 { font-size: clamp(24px, 2.8vw, 32px); margin-bottom: 14px; letter-spacing: -0.01em; }
+    .booking-intro p { color: var(--muted); font-size: 15.5px; margin-bottom: 30px; line-height: 1.75; }
+    .booking-notes h4 { font-family: 'Playfair Display', serif; font-size: 19px; margin-bottom: 14px; }
+    .booking-notes ul { font-size: 14.5px; color: var(--muted); padding-left: 20px; line-height: 2.1; }
+    .booking-form-wrap { background: var(--white); border: 1px solid var(--border); border-radius: var(--r-lg); box-shadow: var(--shadow-md); overflow: hidden; position: sticky; top: 84px; }
+    .form-head { background: var(--primary); padding: 20px 28px; color: var(--white); }
+    .form-head h3 { font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 600; }
+    .form-body { padding: 28px; }
+    .form-group { margin-bottom: 20px; }
+    label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; color: var(--text); }
+    select, input[type="date"], input[type="number"], input[type="email"], input[type="text"] { width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--r-sm); font-family: 'DM Sans', sans-serif; font-size: 14.5px; color: var(--text); background: var(--white); -webkit-appearance: none; appearance: none; transition: border-color 0.18s, box-shadow 0.18s; }
+    select:focus, input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(107,50,0,0.12); }
     .sel-wrap { position: relative; }
-    .sel-wrap::after { content: '▾'; position: absolute; right: 12px; top: 50%; transform: translateY(-50%); pointer-events: none; font-size: 11px; color: var(--muted); }
-    .qty-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    .summary-box { background: var(--surface); border: 1px solid var(--border); border-radius: 2px; padding: 14px; margin-bottom: 18px; font-size: 14px; display: none; }
-    .sum-row { display: flex; justify-content: space-between; margin-bottom: 5px; color: var(--muted); }
-    .sum-row.total { font-weight: 500; color: var(--text); padding-top: 9px; border-top: 1px solid var(--border); margin-top: 5px; margin-bottom: 0; }
-    .btn-primary { width: 100%; background: var(--primary); color: var(--white); border: none; padding: 13px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; cursor: pointer; border-radius: 2px; margin-top: 4px; }
-    .btn-primary:hover { background: var(--primary-dark); }
+    .sel-wrap::after { content: '▾'; position: absolute; right: 14px; top: 50%; transform: translateY(-50%); pointer-events: none; font-size: 11px; color: var(--muted); }
+    .qty-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .summary-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-md); padding: 18px; margin-bottom: 20px; font-size: 14px; display: none; }
+    .sum-row { display: flex; justify-content: space-between; margin-bottom: 7px; color: var(--muted); }
+    .sum-row.total { font-weight: 600; font-size: 15px; color: var(--text); padding-top: 11px; border-top: 1px solid var(--border); margin-top: 9px; margin-bottom: 0; }
+    .btn-primary { width: 100%; background: var(--primary); color: var(--white); border: none; padding: 15px; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; border-radius: var(--r-sm); margin-top: 6px; transition: background 0.18s, transform 0.18s, box-shadow 0.18s; }
+    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); box-shadow: 0 8px 20px rgba(74,35,0,0.22); }
+    .btn-primary:active { transform: translateY(0); }
+
+    /* Modern date-card strip */
+    .date-strip { display: flex; gap: 10px; overflow-x: auto; padding: 4px 2px 10px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+    .date-strip::-webkit-scrollbar { height: 6px; }
+    .date-strip::-webkit-scrollbar-thumb { background: var(--border); border-radius: 100px; }
+    .date-card { flex: 0 0 auto; min-width: 62px; scroll-snap-align: start; background: var(--white); border: 1px solid var(--border); border-radius: var(--r-md); padding: 12px 8px 11px; text-align: center; cursor: pointer; transition: transform 0.16s, border-color 0.16s, box-shadow 0.16s, background 0.16s; }
+    .date-card:hover { border-color: rgba(107,50,0,0.35); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+    .date-card .dc-dow { font-size: 10.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+    .date-card .dc-day { font-family: 'Playfair Display', serif; font-size: 22px; line-height: 1.1; margin: 3px 0; color: var(--text); }
+    .date-card .dc-mon { font-size: 10.5px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+    .date-card.selected { background: var(--primary); border-color: var(--primary); box-shadow: 0 8px 20px rgba(74,35,0,0.22); }
+    .date-card.selected .dc-dow, .date-card.selected .dc-day, .date-card.selected .dc-mon { color: var(--white); }
+    .date-hint { font-size: 12px; color: var(--muted); margin-top: 2px; }
     .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
     .pay-note { font-size: 11px; color: var(--muted); text-align: center; margin-top: 9px; line-height: 1.5; }
     #passport-section { display: none; padding-top: 20px; border-top: 1px solid var(--border); margin-top: 20px; }
@@ -129,40 +178,100 @@
     .consent-label { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: #555; line-height: 1.55; cursor: pointer; }
     .consent-label input[type="checkbox"] { margin-top: 2px; flex-shrink: 0; width: 15px; height: 15px; cursor: pointer; accent-color: var(--primary); }
 
-    .guide-section { padding: 72px 32px; }
-    .guide-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
-    .guide-block h3 { font-size: 20px; margin-bottom: 12px; }
-    .guide-block p { font-size: 15px; color: var(--muted); line-height: 1.75; }
-    .guide-block ul { padding-left: 18px; font-size: 15px; color: var(--muted); line-height: 2; }
+    .guide-section { padding: var(--section-y) var(--section-x); }
+    .guide-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(36px, 4.5vw, 56px); }
+    .guide-block h3 { font-size: 22px; margin-bottom: 14px; }
+    .guide-block p { font-size: 15.5px; color: var(--muted); line-height: 1.8; }
+    .guide-block ul { padding-left: 20px; font-size: 15.5px; color: var(--muted); line-height: 2; }
 
-    .faq-section { background: var(--surface); padding: 72px 32px; }
-    .faq-inner { max-width: 760px; margin: 0 auto; }
+    /* Museum Highlights */
+    .highlights-section { padding: var(--section-y) var(--section-x); background: var(--white); }
+    .highlights-section .section-header { max-width: 1100px; margin: 0 auto clamp(40px, 5vw, 56px); }
+    .highlights-section .section-header p { color: var(--muted); font-size: 15.5px; margin-top: 12px; }
+    .highlights-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(18px, 2.2vw, 26px); }
+    .highlight-card { border: 1px solid var(--border); border-radius: var(--r-md); overflow: hidden; display: flex; flex-direction: column; box-shadow: var(--shadow-sm); transition: transform 0.22s, box-shadow 0.22s; }
+    .highlight-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+    .highlight-card--wide { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; flex-direction: unset; }
+    .highlight-img { height: 220px; background-size: cover; background-position: center; flex-shrink: 0; transition: transform 0.5s ease; }
+    .highlight-card:hover .highlight-img { transform: scale(1.04); }
+    .highlight-card--wide .highlight-img { height: auto; min-height: 280px; }
+    .highlight-body { padding: 26px 28px; flex: 1; }
+    .highlight-tag { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+    .highlight-body h3 { font-size: 20px; margin-bottom: 12px; }
+    .highlight-body p { font-size: 13.5px; color: var(--muted); line-height: 1.8; }
+
+    /* Practical Info */
+    .practical-section { padding: var(--section-y) var(--section-x); background: var(--primary); }
+    .practical-inner { max-width: 1100px; margin: 0 auto; }
+    .practical-section .section-header { text-align: center; margin-bottom: clamp(40px, 5vw, 56px); }
+    .practical-section .section-label { color: var(--accent); }
+    .practical-section h2 { color: var(--white); }
+    .practical-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(18px, 2.2vw, 24px); }
+    .practical-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--r-md); padding: 32px; }
+    .practical-icon { font-size: 24px; margin-bottom: 14px; }
+    .practical-card h4 { font-size: 14px; font-weight: 600; color: var(--white); margin-bottom: 18px; text-transform: uppercase; letter-spacing: 0.08em; }
+    .price-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 14px; color: rgba(255,255,255,0.72); }
+    .price-row:last-of-type { border-bottom: none; }
+    .price-row strong { color: var(--accent); }
+    .practical-note { font-size: 12px; color: rgba(255,255,255,0.48); margin-top: 16px; line-height: 1.65; }
+    .timeslots-wrap { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+    .timeslot { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); border-radius: 100px; padding: 6px 13px; font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.82); }
+    .prohibited-list, .services-list { padding-left: 20px; font-size: 13.5px; color: rgba(255,255,255,0.68); line-height: 2; }
+    .services-list strong { color: rgba(255,255,255,0.92); }
+
+    .faq-section { background: var(--surface); padding: var(--section-y) var(--section-x); }
+    .faq-inner { max-width: 780px; margin: 0 auto; }
     .faq-item { border-bottom: 1px solid var(--border); }
-    .faq-q { width: 100%; background: none; border: none; text-align: left; padding: 18px 0; font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
-    .faq-q::after { content: '+'; font-size: 18px; color: var(--muted); flex-shrink: 0; }
+    .faq-q { width: 100%; background: none; border: none; text-align: left; padding: 22px 0; font-family: 'DM Sans', sans-serif; font-size: 15.5px; font-weight: 600; color: var(--text); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+    .faq-q::after { content: '+'; font-size: 20px; color: var(--accent); flex-shrink: 0; transition: transform 0.2s; }
     .faq-item.open .faq-q::after { content: '−'; }
-    .faq-a { display: none; font-size: 14px; color: var(--muted); padding-bottom: 18px; line-height: 1.75; }
+    .faq-a { display: none; font-size: 14.5px; color: var(--muted); padding-bottom: 22px; line-height: 1.8; }
     .faq-item.open .faq-a { display: block; }
 
-    footer { background: var(--primary-dark); color: rgba(255,255,255,0.55); padding: 40px 32px; font-size: 13px; }
+    footer { background: var(--primary-dark); color: rgba(255,255,255,0.55); padding: clamp(40px, 5vw, 56px) var(--section-x); font-size: 13px; }
     .footer-inner { max-width: 1100px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px; }
-    .footer-brand { font-family: 'Playfair Display', serif; font-size: 15px; color: var(--white); margin-bottom: 5px; }
-    .footer-links { display: flex; gap: 24px; }
+    .footer-brand { font-family: 'Playfair Display', serif; font-size: 16px; color: var(--white); margin-bottom: 6px; }
+    .footer-links { display: flex; gap: 26px; flex-wrap: wrap; }
     .footer-links a:hover { color: var(--white); }
 
-    @media (max-width: 860px) {
+    @media (max-width: 900px) {
       .booking-grid { grid-template-columns: 1fr; }
-      .guide-grid { grid-template-columns: 1fr; }
-      .hero { height: 460px; }
-      .hero-content { padding: 36px 24px; }
-      nav { padding: 0 20px; }
+      .booking-form-wrap { position: static; }
+      .highlights-grid { grid-template-columns: 1fr 1fr; }
+      .highlight-card--wide { grid-template-columns: 1fr; }
+      .highlight-card--wide .highlight-img { min-height: 220px; }
     }
+    @media (max-width: 640px) {
+      .guide-grid { grid-template-columns: 1fr; }
+      .highlights-grid { grid-template-columns: 1fr; }
+      .practical-grid { grid-template-columns: 1fr; }
+      .hero { min-height: 520px; }
+      .qty-row { grid-template-columns: 1fr 1fr; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+      nav { padding: 0 16px; }
+      .nav-logo { font-size: 13px; }
+      .dotcom { display: none; }
+      .lang-select { padding: 6px 8px; margin-right: 8px; }
+      .btn-nav { padding: 8px 16px; }
+    }
+
+    /* Passport fullscreen overlay */
+    .pp-overlay-head { display: none; }
+    #passport-section.fullscreen { position: fixed; inset: 0; z-index: 300; overflow-y: auto; background: var(--white); border: none; margin: 0; padding: 0 !important; animation: slide-up-pp 0.28s ease; }
+    @keyframes slide-up-pp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    #passport-section.fullscreen .pp-overlay-head { display: flex; position: sticky; top: 0; background: var(--primary); color: var(--white); align-items: center; gap: 14px; padding: 14px 24px; z-index: 1; box-shadow: 0 2px 12px rgba(0,0,0,0.15); }
+    #passport-section.fullscreen .pp-overlay-head h3 { font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500; flex: 1; color: var(--white); }
+    .pp-back-btn { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 13px; padding: 7px 15px; border-radius: var(--r-sm); cursor: pointer; flex-shrink: 0; transition: background 0.18s; }
+    .pp-back-btn:hover { background: rgba(255,255,255,0.25); }
+    .pp-overlay-steps { font-size: 12px; color: rgba(255,255,255,0.55); flex-shrink: 0; }
+    #passport-section.fullscreen .pp-overlay-body { max-width: 680px; margin: 0 auto; padding: 28px 24px 60px; }
+    #passport-section.fullscreen .back-link { display: none; }
   </style>
 </head>
 <body>
 
 <nav>
-  <div class="nav-logo">ทหารดินเผา<span>บัตร</span>.com</div>
+  <div class="nav-logo">TerracottaWarriors<span>Tickets</span><span class="dotcom">.com</span></div>
   <select class="lang-select" onchange="location.href=this.value" aria-label="Language">
     <option value="/">EN</option>
     <option value="/ko/">한국어</option>
@@ -204,7 +313,7 @@
   <div class="tickets-grid">
     <div class="ticket-card" data-ticket="standard" data-ap="20" data-cp="10">
       <div class="ticket-img">
-        <img src="https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=600&q=80" alt="Terracotta Warriors Pit 1" loading="lazy">
+        <img src="/images/pexels-202387659-28844770.jpg" alt="Terracotta Warriors Pit 1" loading="lazy">
       </div>
       <div class="ticket-body">
         <div class="ticket-name">บัตรเข้าชมมาตรฐาน</div>
@@ -215,10 +324,10 @@
     </div>
     <div class="ticket-card" data-ticket="audio" data-ap="29" data-cp="15">
       <div class="ticket-img">
-        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Terracotta Warriors close-up" loading="lazy">
+        <img src="/images/pexels-ruben-vp-2151134060-37555249.jpg" alt="Terracotta Warriors close-up" loading="lazy">
       </div>
       <div class="ticket-body">
-        <div class="ticket-name">บัตรเข้าชม + ไกด์เสียง</div>
+        <div class="ticket-name">บัตรเข้าชม + ไกด์เสียงภาษาไทย</div>
         <div class="ticket-includes">เข้าชมพิพิธภัณฑ์ครบทุกส่วน · ไกด์เสียงดาวน์โหลดได้บรรยายโดยผู้เชี่ยวชาญ · ใช้งานบนโทรศัพท์ของคุณเอง</div>
         <div class="ticket-pricing"><span class="ticket-price">$29</span><span class="ticket-face">ต่อผู้ใหญ่ · ราคาหน้าบัตร ¥175</span></div>
         <div class="ticket-fee">รวมค่าบริการ $4.50</div>
@@ -226,10 +335,10 @@
     </div>
     <div class="ticket-card" data-ticket="guided" data-ap="55" data-cp="28">
       <div class="ticket-img">
-        <img src="https://images.unsplash.com/photo-1505778276668-26b3ff7af103?w=600&q=80" alt="Terracotta Warriors museum" loading="lazy">
+        <img src="/images/pexels-nguy-n-du-1595594339-38237298.jpg" alt="Terracotta Warriors museum" loading="lazy">
       </div>
       <div class="ticket-body">
-        <div class="ticket-name">บัตรเข้าชม + ไกด์สด</div>
+        <div class="ticket-name">บัตรเข้าชม + ไกด์สดภาษาไทย</div>
         <div class="ticket-includes">เข้าชมพิพิธภัณฑ์ครบทุกส่วน · ทัวร์กลุ่มเล็ก (สูงสุด 10 คน 2.5 ชม.) · ไกด์ที่เชี่ยวชาญ · ให้ข้อมูลมากที่สุด</div>
         <div class="ticket-pricing"><span class="ticket-price">$55</span><span class="ticket-face">ต่อผู้ใหญ่ · ราคาหน้าบัตร ¥350</span></div>
         <div class="ticket-fee">รวมค่าบริการ $7 · แนะนำ</div>
@@ -271,8 +380,10 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="visit-date">วันที่เยี่ยมชม</label>
-            <input type="date" id="visit-date">
+            <label>วันที่เยี่ยมชม</label>
+            <div class="date-strip" id="date-strip" role="radiogroup" aria-label="เลือกวันที่เยี่ยมชม"></div>
+            <div class="date-hint" id="date-hint">บัตรเปิดจำหน่ายล่วงหน้าประมาณ 7 วัน — เลือกจากวันที่ที่มีให้</div>
+            <input type="hidden" id="visit-date">
           </div>
           <div class="qty-row">
             <div class="form-group"><label for="adult-qty">ผู้ใหญ่</label><input type="number" id="adult-qty" value="2" min="1" max="10"></div>
@@ -287,23 +398,30 @@
           <button class="btn-primary" onclick="goToPassport()">ดำเนินการต่อ →</button>
         </div>
         <div id="passport-section">
-          <h4>ข้อมูลหนังสือเดินทางผู้เยี่ยมชม</h4>
-          <p class="pp-note">จำเป็นตามระบบชื่อจริงของพิพิธภัณฑ์ หนึ่งบัตรต่อหนังสือเดินทางต่อวัน กรุณานำหนังสือเดินทางฉบับจริงไปในวันเยี่ยมชม — ชื่อต้องตรงกันทุกประการ เราจะลบข้อมูลหนังสือเดินทางของคุณทันทีหลังจากยืนยันบัตรแล้ว</p>
-          <div id="pp-forms"></div>
-          <div class="form-group">
-            <label for="cust-email">อีเมล (สำหรับส่ง QR Code)</label>
-            <input type="email" id="cust-email" placeholder="อีเมล@ตัวอย่าง.com">
+          <div class="pp-overlay-head">
+            <button class="pp-back-btn" onclick="backToSelect()">← ย้อนกลับ</button>
+            <h3>ข้อมูลผู้เยี่ยมชม</h3>
+            <span class="pp-overlay-steps">ขั้นตอนที่ 2 จาก 2</span>
           </div>
-          <div class="summary-box" id="pp-summary" style="display:block; margin-top:16px"></div>
-          <div class="consent-block">
-            <label class="consent-label">
-              <input type="checkbox" id="consent-box">
-              <span>ฉันได้อ่านและยอมรับ<a href="/terms.html" target="_blank" style="color:var(--primary)">ข้อกำหนดการใช้บริการ</a>และ<a href="/privacy.html" target="_blank" style="color:var(--primary)">นโยบายความเป็นส่วนตัว</a>แล้ว และยินยอมให้ใช้ข้อมูลหนังสือเดินทางของฉันเพื่อดำเนินการจองนี้เท่านั้น</span>
-            </label>
+          <div class="pp-overlay-body">
+            <h4>ข้อมูลหนังสือเดินทางผู้เยี่ยมชม</h4>
+            <p class="pp-note">จำเป็นตามระบบชื่อจริงของพิพิธภัณฑ์ หนึ่งบัตรต่อหนังสือเดินทางต่อวัน กรุณานำหนังสือเดินทางฉบับจริงไปในวันเยี่ยมชม — ชื่อต้องตรงกันทุกประการ เราจะลบข้อมูลของคุณทันทีหลังจากยืนยันบัตรแล้ว</p>
+            <div id="pp-forms"></div>
+            <div class="form-group">
+              <label for="cust-email">อีเมล (สำหรับส่ง QR Code)</label>
+              <input type="email" id="cust-email" placeholder="your@email.com">
+            </div>
+            <div class="summary-box" id="pp-summary" style="display:block; margin-top:16px"></div>
+            <div class="consent-block">
+              <label class="consent-label">
+                <input type="checkbox" id="consent-box">
+                <span>ฉันได้อ่านและยอมรับ<a href="/terms.html" target="_blank" style="color:var(--primary)">ข้อกำหนดการใช้บริการ</a>และ<a href="/privacy.html" target="_blank" style="color:var(--primary)">นโยบายความเป็นส่วนตัว</a>แล้ว และยินยอมให้ใช้ข้อมูลหนังสือเดินทางของฉันเพื่อดำเนินการจองนี้เท่านั้น</span>
+              </label>
+            </div>
+            <button class="btn-primary" id="btn-pay" onclick="submitBooking()">ชำระเงินอย่างปลอดภัย →</button>
+            <p class="pay-note">ปลอดภัยด้วย Stripe · Visa, Mastercard, Apple Pay · <a href="/terms.html" style="color:var(--primary)">ข้อกำหนด</a> · <a href="/privacy.html" style="color:var(--primary)">ความเป็นส่วนตัว</a> · <a href="/refunds.html" style="color:var(--primary)">การคืนเงิน</a></p>
+            <button class="back-link" onclick="backToSelect()">← เปลี่ยนแพ็คเกจบัตร</button>
           </div>
-          <button class="btn-primary" id="btn-pay" onclick="submitBooking()">ชำระเงินอย่างปลอดภัย →</button>
-          <p class="pay-note">ปลอดภัยด้วย Stripe · Visa, Mastercard, Apple Pay · <a href="/terms.html" style="color:var(--primary)">ข้อกำหนด</a> · <a href="/privacy.html" style="color:var(--primary)">ความเป็นส่วนตัว</a> · <a href="/refunds.html" style="color:var(--primary)">การคืนเงิน</a></p>
-          <button class="back-link" onclick="backToSelect()">← เปลี่ยนแพ็คเกจบัตร</button>
         </div>
       </div>
     </div>
@@ -341,6 +459,108 @@
   </div>
 </section>
 
+<section class="highlights-section">
+  <div class="section-header">
+    <div class="section-label">ภายในพิพิธภัณฑ์</div>
+    <h2>หลุมขุดค้น 3 หลุม + อุทยานสุสานจักรพรรดิ</h2>
+    <p>บัตรของคุณครอบคลุมทั้งสองสถานที่ — เชื่อมต่อกันด้วยรถรับส่งฟรี ควรเผื่อเวลารวม 3–4 ชั่วโมง</p>
+  </div>
+  <div class="highlights-grid">
+    <div class="highlight-card">
+      <div class="highlight-img" style="background-image: url('/images/pexels-nanling-liu-1430151-37356687.jpg')"></div>
+      <div class="highlight-body">
+        <div class="highlight-tag">หลุม 1 · 一号坑</div>
+        <h3>กองทัพหลัก</h3>
+        <p>พื้นที่ 14,260 ตร.ม. บรรจุทหารและม้าดินเผาประมาณ 6,000 ตัว ค้นพบในปี พ.ศ. 2517 โดยชาวนาที่ขุดบ่อน้ำ เป็นหลุมที่ใหญ่ที่สุด มีทหารราบและรถรบที่ยังคงถูกขุดค้นอยู่จนถึงทุกวันนี้</p>
+      </div>
+    </div>
+    <div class="highlight-card">
+      <div class="highlight-img" style="background-image: url('/images/pexels-eden-rebello-2155768213-33890165.jpg')"></div>
+      <div class="highlight-body">
+        <div class="highlight-tag">หลุม 2 · 二号坑</div>
+        <h3>ทหารม้าและพลธนู</h3>
+        <p>พื้นที่ 6,000 ตร.ม. ในรูปทรงตัว L อันโดดเด่น มีรูปปั้น 939 ตัว — หน่วยหน้าไม้ กองทหารม้า และรถรบในรูปขบวนผสมที่ซับซ้อน ถือเป็นไฮไลต์เชิงยุทธวิธีของสถานที่</p>
+      </div>
+    </div>
+    <div class="highlight-card">
+      <div class="highlight-img" style="background-image: url('/images/pexels-hoffman11-37670364.jpg')"></div>
+      <div class="highlight-body">
+        <div class="highlight-tag">หลุม 3 · 三号坑</div>
+        <h3>ศูนย์บัญชาการ</h3>
+        <p>หลุมที่เล็กที่สุด (520 ตร.ม.) มีรูปปั้น 68 ตัวที่เชื่อว่าเป็นกองบัญชาการกองทัพ มีเอกลักษณ์เหนือทั้งสี่หลุม: ไม่เคยถูกไฟเผา สีที่ทาไว้เดิมจึงยังคงอยู่ในสภาพดีกว่าที่อื่น</p>
+      </div>
+    </div>
+    <div class="highlight-card highlight-card--wide">
+      <div class="highlight-img" style="background-image: url('/images/pexels-hoffman11-37670351.jpg')"></div>
+      <div class="highlight-body">
+        <div class="highlight-tag">สวนลีซาน · 丽山园 — รวมในบัตร, รถรับส่งฟรี</div>
+        <h3>อุทยานสุสานจักรพรรดิ</h3>
+        <p>อุทยานโบราณคดีพื้นที่ 50 ตร.กม. ล้อมรอบเนินสุสานที่ฝังพระศพจักรพรรดิจริง ไฮไลต์ได้แก่ <strong>หอรถรบสำริด</strong> — รถม้าสำริดอันงดงามสองคันที่หล่อขึ้นก่อนปี 210 ก่อนคริสต์ศักราชด้วยขนาดครึ่งหนึ่งของม้าจริง — และหลุมบริวารที่ขุดค้นแล้วกว่า 180 หลุม รถรับส่งฟรีวิ่งระหว่างพิพิธภัณฑ์ทหารดินเผากับสวนลีซานทุกไม่กี่นาที ควรเผื่อเวลาที่นี่อย่างน้อย 1.5 ชั่วโมง</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="practical-section">
+  <div class="practical-inner">
+    <div class="section-header">
+      <div class="section-label">ก่อนออกเดินทาง</div>
+      <h2>ข้อมูลที่เป็นประโยชน์</h2>
+    </div>
+    <div class="practical-grid">
+      <div class="practical-card">
+        <div class="practical-icon">🎫</div>
+        <h4>ราคาบัตรอย่างเป็นทางการ</h4>
+        <div class="price-row"><span>ผู้ใหญ่ (16–64 ปี)</span><strong>¥120 (~US$17)</strong></div>
+        <div class="price-row"><span>นักศึกษาเต็มเวลา (มีบัตรประจำตัว)</span><strong>¥60</strong></div>
+        <div class="price-row"><span>ผู้สูงอายุ 65+ / เด็ก ≤16 ปี มากับผู้ปกครอง</span><strong>ฟรี</strong></div>
+        <div class="price-row"><span>ผู้พิการ / ทหาร</span><strong>ฟรี</strong></div>
+        <p class="practical-note">ค่าบริการของเราครอบคลุมการจองชื่อจริงผ่านระบบของจีน ราคาบัตรอย่างเป็นทางการข้างต้นเราชำระแทนคุณ</p>
+      </div>
+      <div class="practical-card">
+        <div class="practical-icon">🕐</div>
+        <h4>ช่วงเวลาเข้าชม</h4>
+        <div class="timeslots-wrap">
+          <span class="timeslot">08:30 – 09:30</span>
+          <span class="timeslot">09:31 – 10:30</span>
+          <span class="timeslot">10:31 – 11:30</span>
+          <span class="timeslot">11:31 – 12:30</span>
+          <span class="timeslot">12:31 – 13:30</span>
+          <span class="timeslot">13:31 – 14:30</span>
+          <span class="timeslot">14:31 – 15:30</span>
+          <span class="timeslot">15:31 – 17:00</span>
+        </div>
+        <p class="practical-note">มาถึงก่อนช่วงเวลาของคุณ 30 นาที บัตรใช้ได้ตลอดทั้งวันและถูกตรวจ 3 ครั้งทั่วบริเวณ เลือกช่วงเวลาที่ต้องการได้ตอนชำระเงิน</p>
+      </div>
+      <div class="practical-card">
+        <div class="practical-icon">🚫</div>
+        <h4>สิ่งของต้องห้าม</h4>
+        <ul class="prohibited-list">
+          <li>วัตถุไวไฟ / วัตถุระเบิด และไฟแช็ก</li>
+          <li>อาวุธมีคม กระบอง ไม้พลอง</li>
+          <li>โดรน ว่าว เครื่องบินบังคับวิทยุ</li>
+          <li>สัตว์เลี้ยงทุกชนิด</li>
+          <li>เครื่องขยายเสียงหรืออุปกรณ์ถ่ายวิดีโอขนาดใหญ่</li>
+          <li>ปืนฉีดน้ำ โฮเวอร์บอร์ด สเกตบอร์ด จักรยาน</li>
+          <li>สารกัมมันตรังสีหรือสารกัดกร่อน</li>
+        </ul>
+      </div>
+      <div class="practical-card">
+        <div class="practical-icon">🏛️</div>
+        <h4>บริการในสถานที่</h4>
+        <ul class="services-list">
+          <li><strong>รถไฟฟ้า</strong> — ¥5 ในพิพิธภัณฑ์ทหารดินเผา, ¥15 ในสวนลีซาน</li>
+          <li><strong>ฝากสัมภาระฟรี</strong> — ฝั่งตะวันออกของโถงจำหน่ายบัตร</li>
+          <li><strong>ห้องพยาบาล</strong> — ในลานหลุม 1 ที่ศูนย์บริการนักท่องเที่ยว</li>
+          <li><strong>รถเข็นและรถเข็นเด็ก</strong> — บริการที่จุดบริการประตูทิศเหนือ</li>
+          <li><strong>ทางเข้าปลอดอุปสรรค</strong> — เส้นทางเฉพาะทั่วทั้งสองสถานที่</li>
+          <li><strong>สอบถามเรื่องบัตร:</strong> 029-81399127</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="faq-section">
   <div class="faq-inner">
     <div class="section-header">
@@ -371,6 +591,18 @@
       <button class="faq-q" onclick="toggleFaq(this)">ไกด์สดคุ้มค่าไหม?</button>
       <div class="faq-a">คุ้มค่าสำหรับนักท่องเที่ยวส่วนใหญ่ ผลกระทบทางสายตาของหลุม 1 เห็นได้ทันที แต่เรื่องราวเบื้องหลังสถานที่ — ทหารถูกสร้างขึ้นอย่างไร ทำไมถึงฝังไว้ บอกอะไรเราเกี่ยวกับราชวงศ์ฉิน — ต้องการบริบทจึงจะเข้าใจได้ ไกด์ของเรามีการรับรองจากพิพิธภัณฑ์และจำกัดกลุ่มไว้ที่ 10 คน คุณจึงไม่ต้องเบียดฟังพร้อมกับคน 40 คน สำหรับนักเดินทางเดี่ยวหรือคู่ ไกด์เสียงเป็นทางเลือกที่ดี</div>
     </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">บัตรของฉันครอบคลุมอะไรบ้าง?</button>
+      <div class="faq-a">บัตรหนึ่งใบครอบคลุมทั้งพิพิธภัณฑ์ทหารดินเผา (หลุม 1, 2 และ 3 พร้อมหอรถรบสำริด) และอุทยานสุสานสวนลีซาน — มีรถรับส่งฟรีวิ่งระหว่างทั้งสองแห่ง บัตรใช้ได้ตลอดทั้งวันและถูกตรวจสามครั้งทั่วบริเวณ ควรเผื่อเวลาประมาณ 1.5 ชั่วโมงต่อสถานที่ และ 3–4 ชั่วโมงสำหรับทั้งสองแห่งแบบสบาย ๆ</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">เลือกช่วงเวลาเข้าชมได้ไหม?</button>
+      <div class="faq-a">ได้ — พิพิธภัณฑ์แบ่งวันออกเป็นช่วงเข้าชมแปดช่วง ช่วงละหนึ่งชั่วโมงตั้งแต่ 08:30 ถึง 17:00 เราจะสอบถามช่วงเวลาที่คุณต้องการตอนชำระเงินและจองให้ตามนั้น ช่วงเช้า (08:30–10:30) คนน้อยที่สุด ส่วนช่วง 10:31–12:30 มักหนาแน่นที่สุด ควรมาถึงอย่างน้อย 30 นาทีก่อนช่วงเวลาของคุณเพื่อผ่านคิวตรวจความปลอดภัย</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">สิ่งของใดบ้างที่ห้ามนำเข้าพิพิธภัณฑ์?</button>
+      <div class="faq-a">พิพิธภัณฑ์ห้ามนำ: วัตถุไวไฟหรือวัตถุระเบิด อาวุธมีคมหรือกระบองทุกชนิด โดรนและว่าว สัตว์เลี้ยง เครื่องขยายเสียงและอุปกรณ์ถ่ายวิดีโอขนาดใหญ่ ปืนฉีดน้ำ โฮเวอร์บอร์ด สเกตบอร์ด และจักรยาน ส่วนสิ่งของพกพาทั่วไป — กระเป๋า กล้องถ่ายรูป (ห้ามขาตั้งกล้องหรือแฟลช) อาหาร น้ำดื่ม — นำเข้าได้ทั้งหมด มีบริการฝากสัมภาระฟรีที่ฝั่งตะวันออกของโถงจำหน่ายบัตรหากจำเป็น</div>
+    </div>
   </div>
 </section>
 
@@ -392,14 +624,10 @@
 
 <script>
   const TICKETS = {
-    standard: { name: 'Standard Admission', ap: 20, cp: 10 },
-    audio:    { name: 'Admission + Audio Guide', ap: 29, cp: 15 },
-    guided:   { name: 'Admission + Live Guide', ap: 55, cp: 28 }
+    standard: { name: 'บัตรเข้าชมมาตรฐาน', ap: 20, cp: 10 },
+    audio:    { name: 'บัตรเข้าชม + ไกด์เสียงภาษาไทย', ap: 29, cp: 15 },
+    guided:   { name: 'บัตรเข้าชม + ไกด์สดภาษาไทย', ap: 55, cp: 28 }
   };
-
-  const di = document.getElementById('visit-date');
-  const t = new Date(); t.setDate(t.getDate() + 2);
-  di.min = t.toISOString().split('T')[0];
 
   document.querySelectorAll('.ticket-card').forEach(c => {
     c.addEventListener('click', () => {
@@ -420,7 +648,7 @@
     if (!type || !date || adults < 1) { box.style.display = 'none'; return; }
     const tk = TICKETS[type];
     const at = adults * tk.ap, ct = children * tk.cp;
-    document.getElementById('sum-name').textContent = tk.name + ' · ' + date;
+    document.getElementById('sum-name').textContent = tk.name + ' · ' + fmtDate(date);
     document.getElementById('sum-adults').textContent = adults;
     document.getElementById('sum-at').textContent = at;
     const cr = document.getElementById('sum-child-row');
@@ -429,7 +657,46 @@
     box.style.display = 'block';
   }
 
-  ['ticket-type','visit-date','adult-qty','child-qty'].forEach(id => document.getElementById(id).addEventListener('change', updateSummary));
+  ['ticket-type','adult-qty','child-qty'].forEach(id => document.getElementById(id).addEventListener('change', updateSummary));
+
+  // Date helpers
+  const DOW = ['อา.','จ.','อ.','พ.','พฤ.','ศ.','ส.'];
+  const MON = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+  function pad(n) { return String(n).padStart(2, '0'); }
+  function isoOf(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+  function fmtDate(iso) {
+    if (!iso) return '';
+    const [y, m, day] = iso.split('-').map(Number);
+    const d = new Date(y, m - 1, day);
+    return DOW[d.getDay()] + ' ' + day + ' ' + MON[m - 1];
+  }
+
+  // Build the modern date-card strip — tickets release ~7 days ahead,
+  // so we offer the bookable window (today+2 … today+7) as selectable cards.
+  (function buildDateStrip() {
+    const strip = document.getElementById('date-strip');
+    const hidden = document.getElementById('visit-date');
+    const start = 2, end = 7;
+    for (let i = start; i <= end; i++) {
+      const d = new Date(); d.setHours(0,0,0,0); d.setDate(d.getDate() + i);
+      const iso = isoOf(d);
+      const card = document.createElement('button');
+      card.type = 'button';
+      card.className = 'date-card';
+      card.setAttribute('role', 'radio');
+      card.setAttribute('aria-checked', 'false');
+      card.dataset.iso = iso;
+      card.innerHTML = `<div class="dc-dow">${DOW[d.getDay()]}</div><div class="dc-day">${d.getDate()}</div><div class="dc-mon">${MON[d.getMonth()]}</div>`;
+      card.addEventListener('click', () => {
+        strip.querySelectorAll('.date-card').forEach(c => { c.classList.remove('selected'); c.setAttribute('aria-checked','false'); });
+        card.classList.add('selected');
+        card.setAttribute('aria-checked', 'true');
+        hidden.value = iso;
+        updateSummary();
+      });
+      strip.appendChild(card);
+    }
+  })();
 
   function goToPassport() {
     const type = document.getElementById('ticket-type').value;
@@ -439,20 +706,32 @@
     if (!type) { alert('กรุณาเลือกแพ็คเกจบัตร'); return; }
     if (!date) { alert('กรุณาเลือกวันที่เยี่ยมชม'); return; }
     if (adults < 1) { alert('กรุณากรอกจำนวนผู้ใหญ่อย่างน้อย 1 คน'); return; }
+    const today = new Date().toISOString().split('T')[0];
     const forms = document.getElementById('pp-forms');
     forms.innerHTML = '';
     for (let i = 0; i < adults + children; i++) {
       const lbl = i < adults ? 'ผู้ใหญ่ ' + (i + 1) : 'เด็ก ' + (i - adults + 1);
-      forms.innerHTML += `<div class="visitor-block"><div class="visitor-title">${lbl}</div><div class="pp-grid"><div class="form-group span2"><label>ชื่อ-นามสกุล (ตามหนังสือเดินทาง)</label><input type="text" class="pp-name" placeholder="เช่น SOMCHAI JAIDEE (ตามหนังสือเดินทาง)" autocomplete="off" required></div><div class="form-group"><label>หมายเลขหนังสือเดินทาง</label><input type="text" class="pp-num" placeholder="เช่น AA1234567" required></div><div class="form-group"><label>สัญชาติ</label><input type="text" class="pp-nat" placeholder="เช่น ไทย" required></div><div class="form-group span2"><label>วันเกิด</label><input type="date" class="pp-dob" required></div></div></div>`;
+      // TODO: Populate nationality as a dropdown from official booking site bmy.albatrip.cn — currently free-text
+      forms.innerHTML += `<div class="visitor-block"><div class="visitor-title">${lbl}</div><div class="pp-grid"><div class="form-group span2"><label>ชื่อ-นามสกุล (ตามหนังสือเดินทาง)</label><input type="text" class="pp-name" placeholder="เช่น SOMCHAI JAIDEE" autocomplete="off" required></div><div class="form-group"><label>หมายเลขหนังสือเดินทาง</label><input type="text" class="pp-num" placeholder="เช่น AA1234567" required></div><div class="form-group"><label>สัญชาติ</label><input type="text" class="pp-nat" placeholder="เช่น ไทย" required></div><div class="form-group span2"><label>วันเกิด</label><input type="date" class="pp-dob" max="${today}" required></div></div></div>`;
     }
     const tk = TICKETS[type];
     const at = adults * tk.ap, ct = children * tk.cp;
-    document.getElementById('pp-summary').innerHTML = `<div class="sum-row"><span style="color:var(--text)">${tk.name} · ${date}</span></div><div class="sum-row"><span>ผู้ใหญ่ × ${adults}</span><span>$${at}</span></div>${children > 0 ? `<div class="sum-row"><span>เด็ก × ${children}</span><span>$${ct}</span></div>` : ''}<div class="sum-row total"><span>รวมทั้งหมด</span><span>$${at + ct} USD</span></div>`;
+    document.getElementById('pp-summary').innerHTML = `<div class="sum-row"><span style="color:var(--text)">${tk.name} · ${fmtDate(date)}</span></div><div class="sum-row"><span>ผู้ใหญ่ × ${adults}</span><span>$${at}</span></div>${children > 0 ? `<div class="sum-row"><span>เด็ก × ${children}</span><span>$${ct}</span></div>` : ''}<div class="sum-row total"><span>รวมทั้งหมด</span><span>$${at + ct} USD</span></div>`;
     document.getElementById('step-select').style.display = 'none';
-    document.getElementById('passport-section').style.display = 'block';
+    const pp = document.getElementById('passport-section');
+    pp.style.display = 'block';
+    pp.classList.add('fullscreen');
+    document.body.style.overflow = 'hidden';
+    pp.scrollTop = 0;
   }
 
-  function backToSelect() { document.getElementById('step-select').style.display = 'block'; document.getElementById('passport-section').style.display = 'none'; }
+  function backToSelect() {
+    const pp = document.getElementById('passport-section');
+    pp.classList.remove('fullscreen');
+    pp.style.display = 'none';
+    document.body.style.overflow = '';
+    document.getElementById('step-select').style.display = 'block';
+  }
 
   async function submitBooking() {
     const btn = document.getElementById('btn-pay');
@@ -465,9 +744,11 @@
     const nums  = [...document.querySelectorAll('.pp-num')];
     const nats  = [...document.querySelectorAll('.pp-nat')];
     const dobs  = [...document.querySelectorAll('.pp-dob')];
+    const today = new Date().toISOString().split('T')[0];
     const visitors = [];
     for (let i = 0; i < names.length; i++) {
       if (!names[i].value || !nums[i].value || !nats[i].value || !dobs[i].value) { alert('กรุณากรอกข้อมูลหนังสือเดินทางให้ครบถ้วน'); return; }
+      if (dobs[i].value > today) { alert('วันเกิดต้องไม่เป็นวันในอนาคต กรุณาตรวจสอบผู้เยี่ยมชมคนที่ ' + (i + 1)); return; }
       visitors.push({ name: names[i].value.trim().toUpperCase(), passportNumber: nums[i].value.trim().toUpperCase(), nationality: nats[i].value.trim(), dateOfBirth: dobs[i].value, type: i < adults ? 'adult' : 'child' });
     }
     if (!email || !email.includes('@')) { alert('กรุณากรอกอีเมลที่ถูกต้อง'); return; }
@@ -491,6 +772,39 @@
   if (!s) return;
   var p = location.pathname;
   s.value = p.startsWith('/ko') ? '/ko/' : p.startsWith('/ja') ? '/ja/' : p.startsWith('/id') ? '/id/' : p.startsWith('/th') ? '/th/' : '/';
+})();
+</script>
+
+<div class="lang-overlay" id="langOverlay">
+  <div class="lang-modal">
+    <div class="lang-modal-head">
+      <button class="lang-modal-x" id="langClose">×</button>
+      <h3>เลือกภาษา</h3>
+      <p>เลือกภาษาที่คุณต้องการเพื่อดำเนินการต่อ</p>
+    </div>
+    <div class="lang-opts">
+      <button class="lang-opt" data-href="/"><span class="ln">English</span></button>
+      <button class="lang-opt" data-href="/ko/" data-code="ko"><span class="ln">한국어</span><span class="ls">Korean</span></button>
+      <button class="lang-opt" data-href="/ja/" data-code="ja"><span class="ln">日本語</span><span class="ls">Japanese</span></button>
+      <button class="lang-opt" data-href="/id/" data-code="id"><span class="ln">Bahasa Indonesia</span><span class="ls">Indonesian</span></button>
+      <button class="lang-opt" data-href="/th/" data-code="th"><span class="ln">ภาษาไทย</span><span class="ls">Thai</span></button>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  if (localStorage.getItem('lang-chosen') || location.pathname !== '/') return;
+  var overlay = document.getElementById('langOverlay');
+  var nav = (navigator.language || '').toLowerCase().slice(0, 2);
+  var match = overlay.querySelector('[data-code="' + nav + '"]');
+  if (match) { match.classList.add('suggest'); var b = document.createElement('span'); b.className = 'lb'; b.textContent = 'Suggested'; match.appendChild(b); }
+  setTimeout(function(){ overlay.classList.add('show'); }, 400);
+  overlay.addEventListener('click', function(e){ if (e.target === overlay) dismiss(); });
+  document.getElementById('langClose').addEventListener('click', dismiss);
+  overlay.querySelectorAll('.lang-opt').forEach(function(btn){
+    btn.addEventListener('click', function(){ localStorage.setItem('lang-chosen','1'); location.href = this.dataset.href; });
+  });
+  function dismiss(){ localStorage.setItem('lang-chosen','1'); overlay.classList.remove('show'); }
 })();
 </script>
 </body>
