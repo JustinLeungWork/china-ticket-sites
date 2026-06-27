@@ -59,6 +59,9 @@
     .nav-logo span { color: var(--accent); }
     .btn-nav { background: var(--accent); color: var(--primary-dark); border: none; padding: 8px 22px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; cursor: pointer; border-radius: 2px; }
     .btn-nav:hover { background: #D4A843; }
+    .lang-select { background: transparent; border: 1px solid rgba(255,255,255,0.35); color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 13px; padding: 5px 10px; border-radius: 2px; cursor: pointer; margin-right: 12px; }
+    .lang-select option { background: #1a1a1a; color: #fff; }
+    .lang-select:focus { outline: none; }
 
     /* Hero */
     .hero { margin-top: 58px; height: 580px; background: url('https://images.unsplash.com/photo-1508804185872-d7badad00f7d?w=1600&q=80') center/cover no-repeat; position: relative; display: flex; align-items: flex-end; }
@@ -179,6 +182,13 @@
 
 <nav>
   <div class="nav-logo">Mutianyu<span>Tiket</span>.com</div>
+  <select class="lang-select" onchange="location.href=this.value" aria-label="Language">
+    <option value="/">EN</option>
+    <option value="/ko/">한국어</option>
+    <option value="/ja/">日本語</option>
+    <option value="/id/">Indonesia</option>
+    <option value="/th/">ภาษาไทย</option>
+  </select>
   <a href="#book" class="btn-nav">Pesan Sekarang</a>
 </nav>
 
@@ -555,6 +565,14 @@
   }
 
   function toggleFaq(btn) { btn.closest('.faq-item').classList.toggle('open'); }
+</script>
+<script>
+(function(){
+  var s = document.querySelector('.lang-select');
+  if (!s) return;
+  var p = location.pathname;
+  s.value = p.startsWith('/ko') ? '/ko/' : p.startsWith('/ja') ? '/ja/' : p.startsWith('/id') ? '/id/' : p.startsWith('/th') ? '/th/' : '/';
+})();
 </script>
 </body>
 </html>
