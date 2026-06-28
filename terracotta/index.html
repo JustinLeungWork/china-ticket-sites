@@ -596,6 +596,12 @@
   const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   function pad(n) { return String(n).padStart(2, '0'); }
   function isoOf(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+  // Today (or +offsetDays) in China Standard Time (GMT+8) as YYYY-MM-DD, so the
+  // bookable window is anchored to Beijing regardless of the visitor's timezone.
+  function bjDateStr(offsetDays) {
+    const d = new Date(Date.now() + 8 * 3600000 + (offsetDays || 0) * 86400000);
+    return d.getUTCFullYear() + '-' + pad(d.getUTCMonth() + 1) + '-' + pad(d.getUTCDate());
+  }
   function fmtDate(iso) {
     if (!iso) return '';
     const [y, m, day] = iso.split('-').map(Number);
@@ -609,23 +615,27 @@
     const wrap = document.getElementById(containerId);
     const hidden = document.getElementById(hiddenId);
     if (!wrap || !hidden) return;
-    const min = new Date(); min.setHours(0,0,0,0); min.setDate(min.getDate() + 2);
-    const max = new Date(2026, 8, 30); max.setHours(0,0,0,0);
-    let view = new Date(min.getFullYear(), min.getMonth(), 1);
+    // Earliest bookable day = Beijing today + 2 (today & tomorrow are too late to
+    // secure same-/next-day entry). Compared as YYYY-MM-DD strings so the cutoff
+    // tracks Beijing time, not the visitor's device clock.
+    const minStr = bjDateStr(2);
+    const maxStr = '2026-09-30';
+    const minY = +minStr.slice(0, 4), minMo = +minStr.slice(5, 7) - 1;
+    const maxY = +maxStr.slice(0, 4), maxMo = +maxStr.slice(5, 7) - 1;
+    let view = new Date(minY, minMo, 1);
     let selected = null;
     function render() {
       const y = view.getFullYear(), mo = view.getMonth();
       const startDow = new Date(y, mo, 1).getDay();
       const days = new Date(y, mo + 1, 0).getDate();
-      const prevOff = (y < min.getFullYear()) || (y === min.getFullYear() && mo <= min.getMonth());
-      const nextOff = (y > max.getFullYear()) || (y === max.getFullYear() && mo >= max.getMonth());
+      const prevOff = (y < minY) || (y === minY && mo <= minMo);
+      const nextOff = (y > maxY) || (y === maxY && mo >= maxMo);
       let h = `<div class="cal-head"><button type="button" class="cal-nav" data-nav="-1"${prevOff ? ' disabled' : ''} aria-label="Previous month">‹</button><span class="cal-title">${MON[mo]} ${y}</span><button type="button" class="cal-nav" data-nav="1"${nextOff ? ' disabled' : ''} aria-label="Next month">›</button></div><div class="cal-grid">`;
       for (let i = 0; i < 7; i++) h += `<div class="cal-dow">${DOW[i]}</div>`;
       for (let i = 0; i < startDow; i++) h += '<div></div>';
       for (let d = 1; d <= days; d++) {
-        const cur = new Date(y, mo, d);
-        const ciso = isoOf(cur);
-        const off = cur < min || cur > max;
+        const ciso = y + '-' + pad(mo + 1) + '-' + pad(d);
+        const off = ciso < minStr || ciso > maxStr;
         h += `<button type="button" class="cal-day${selected === ciso ? ' selected' : ''}" data-iso="${ciso}"${off ? ' disabled' : ''}>${d}</button>`;
       }
       wrap.innerHTML = h + '</div>';

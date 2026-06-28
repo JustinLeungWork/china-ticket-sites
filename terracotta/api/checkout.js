@@ -18,6 +18,14 @@ module.exports = async (req, res) => {
   if (!visitDate || !email || !Array.isArray(visitors) || visitors.length === 0)
     return res.status(400).json({ error: 'Missing required fields' });
 
+  // Authoritative visit-date guard, anchored to Beijing time (GMT+8): the earliest
+  // bookable day is Beijing today + 2, so today/tomorrow can never be booked even
+  // if the client clock is wrong or the request is crafted. Mirrors the calendar.
+  const minDate = new Date(Date.now() + 8 * 3600000 + 2 * 86400000).toISOString().slice(0, 10);
+  const MAX_DATE = '2026-09-30';
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(visitDate) || visitDate < minDate || visitDate > MAX_DATE)
+    return res.status(400).json({ error: 'Invalid visit date' });
+
   const qty = Math.max(1, parseInt(visitorQty) || visitors.length);
   const amountCents = ADMISSION.cents * qty;
   const invoiceId = newInvoiceId();
