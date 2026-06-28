@@ -1,10 +1,10 @@
 # Zhangjiajie Forest Park Tickets
 
-> Independent English-language concierge that books Zhangjiajie National Forest Park (Wulingyuan) tickets for international visitors — no WeChat Pay, Alipay, or Chinese phone number required.
+> Independent English-language concierge that books Zhangjiajie National Forest Park (Wulingyuan) tickets for international visitors — no Chinese payment app, Alipay, or Chinese phone number required.
 
 ## What we do
 
-China's official Wulingyuan ticketing system requires SMS verification via a Chinese phone number and payment through Alipay or WeChat Pay. International visitors without Chinese payment methods cannot book directly. Zhangjiajie Forest Park Tickets holds the necessary accounts and submits bookings through China's real-name reservation system on behalf of customers, delivering confirmed QR codes by email within 24 hours.
+China's official Wulingyuan ticketing system requires SMS verification via a Chinese phone number and payment through Chinese payment apps. International visitors without Chinese payment methods cannot book directly. Zhangjiajie Forest Park Tickets holds the necessary accounts and submits bookings through China's real-name reservation system on behalf of customers, delivering confirmed QR codes by email within 24 hours.
 
 - Customers pay in USD by Visa, Mastercard, or Apple Pay via Stripe
 - Tickets are 4-day park passes valid from the first entry date chosen
@@ -41,8 +41,8 @@ China's official Wulingyuan ticketing system requires SMS verification via a Chi
 
 ## Common questions answered
 
-**Can foreigners buy Zhangjiajie tickets without WeChat Pay?**
-Yes — through Zhangjiajie Forest Park Tickets. The official system requires WeChat Pay or Alipay and a Chinese phone number for SMS verification. We handle the Chinese-side booking; you pay in USD with any standard card.
+**Can foreigners buy Zhangjiajie tickets without Chinese payment app?**
+Yes — through Zhangjiajie Forest Park Tickets. The official system requires Chinese payment apps and a Chinese phone number for SMS verification. We handle the Chinese-side booking; you pay in USD with any standard card.
 
 **How many days do you need at Zhangjiajie?**
 Most visitors need 2–3 full days to cover the main areas. The ticket is valid for 4 consecutive days — giving enough time for Yuanjiajie (Avatar zone), Tianzishan, Huangshi Village, and Golden Whip Stream at a comfortable pace.
