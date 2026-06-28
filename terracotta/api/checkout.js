@@ -13,7 +13,7 @@ const ADMISSION = { name: 'Full-Price Admission', cents: 2599 };
 module.exports = async (req, res) => {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const { visitDate, visitorQty, email, visitors } = req.body || {};
+  const { visitDate, visitorQty, email, visitors, guideRequested } = req.body || {};
 
   if (!visitDate || !email || !Array.isArray(visitors) || visitors.length === 0)
     return res.status(400).json({ error: 'Missing required fields' });
@@ -46,7 +46,7 @@ module.exports = async (req, res) => {
     console.error('Booking DB unavailable — falling back to Stripe metadata:', dbErr.message);
   }
 
-  const metadata = { invoiceId, attraction: ATTRACTION, ticketName: ADMISSION.name, visitDate, visitorQty: String(qty), customerEmail: email };
+  const metadata = { invoiceId, attraction: ATTRACTION, ticketName: ADMISSION.name, visitDate, visitorQty: String(qty), customerEmail: email, guide: guideRequested ? 'yes' : 'no' };
   if (!dbStored) {
     // Fallback only: pack passports into metadata so the operator still gets them.
     cleanVisitors.forEach((v, i) => { metadata[`v${i}`] = JSON.stringify({ n: v.name, p: v.passportNumber, nat: v.nationality, dob: v.dateOfBirth }); });

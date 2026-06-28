@@ -167,6 +167,25 @@
     .date-hint { font-size: 12px; color: var(--muted); margin-top: 2px; }
     .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
 
+    /* Inline calendar (visit date) */
+    .cal { border: 1px solid var(--border); border-radius: var(--r-md); padding: 12px; background: var(--white); }
+    .cal-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+    .cal-title { font-family: 'Playfair Display', serif; font-size: 16px; }
+    .cal-nav { width: 32px; height: 32px; border: 1px solid var(--border); background: var(--white); border-radius: var(--r-sm); cursor: pointer; font-size: 16px; line-height: 1; color: var(--primary); }
+    .cal-nav:disabled { opacity: 0.3; cursor: not-allowed; }
+    .cal-nav:hover:not(:disabled) { background: var(--surface); }
+    .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+    .cal-dow { text-align: center; font-size: 11px; font-weight: 600; color: var(--muted); padding: 4px 0; }
+    .cal-day { aspect-ratio: 1; border: 1px solid transparent; background: var(--surface); border-radius: var(--r-sm); cursor: pointer; font: 500 13px 'DM Sans', sans-serif; color: var(--text); transition: background 0.15s, border-color 0.15s; }
+    .cal-day:hover:not([disabled]) { border-color: var(--primary); background: var(--accent-light); }
+    .cal-day.selected { background: var(--primary); color: var(--white); border-color: var(--primary); font-weight: 600; }
+    .cal-day[disabled] { opacity: 0.28; cursor: not-allowed; background: transparent; }
+
+    /* Guide add-on toggle */
+    .addon-label { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: #555; line-height: 1.55; cursor: pointer; background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 12px 13px; }
+    .addon-label input[type="checkbox"] { margin-top: 2px; width: 16px; height: 16px; accent-color: var(--primary); flex-shrink: 0; cursor: pointer; }
+    .addon-label strong { color: var(--text); }
+
     /* Two-card ticket grid + card CTAs */
     .tickets-grid--two { max-width: 880px; grid-template-columns: repeat(2, 1fr); }
     .ticket-cta { display: inline-block; margin-top: 16px; font-size: 13.5px; font-weight: 600; color: var(--primary); }
@@ -180,20 +199,6 @@
     .plan-banner .pb-price span { font-size: 12px; font-weight: 500; color: var(--muted); }
     .kids-note { font-size: 12px; color: var(--muted); background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 11px 13px; margin-bottom: 20px; line-height: 1.55; }
 
-    /* Private guide request section */
-    .guide-request-section { padding: var(--section-y) var(--section-x); background: var(--white); }
-    .gr-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 420px; gap: clamp(40px, 5vw, 64px); align-items: start; }
-    .gr-intro h2 { font-size: clamp(24px, 2.8vw, 32px); margin-bottom: 14px; letter-spacing: -0.01em; }
-    .gr-intro > p { color: var(--muted); font-size: 15.5px; margin-bottom: 22px; line-height: 1.75; }
-    .gr-points { list-style: none; padding: 0; margin: 0 0 20px; }
-    .gr-points li { position: relative; padding-left: 28px; font-size: 14.5px; color: var(--text); line-height: 1.55; margin-bottom: 12px; }
-    .gr-points li::before { content: '✓'; position: absolute; left: 0; top: 0; color: var(--accent); font-weight: 700; }
-    .gr-foot { font-size: 13px; color: var(--muted); line-height: 1.6; }
-    .gr-form-wrap { background: var(--white); border: 1px solid var(--border); border-radius: var(--r-lg); box-shadow: var(--shadow-md); overflow: hidden; }
-    #gr-success { text-align: center; padding: 24px 8px; }
-    .gr-success-icon { width: 52px; height: 52px; margin: 0 auto 16px; border-radius: 50%; background: var(--accent-light); color: var(--primary); font-size: 26px; display: flex; align-items: center; justify-content: center; }
-    #gr-success h4 { font-family: 'Playfair Display', serif; font-size: 20px; margin-bottom: 10px; }
-    #gr-success p { font-size: 14px; color: var(--muted); line-height: 1.7; }
     .pay-note { font-size: 11px; color: var(--muted); text-align: center; margin-top: 9px; line-height: 1.5; }
     #passport-section { display: none; padding-top: 20px; border-top: 1px solid var(--border); margin-top: 20px; }
     #passport-section h4 { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
@@ -266,7 +271,6 @@
     @media (max-width: 900px) {
       .booking-grid { grid-template-columns: 1fr; }
       .booking-form-wrap { position: static; }
-      .gr-grid { grid-template-columns: 1fr; }
       .highlights-grid { grid-template-columns: 1fr 1fr; }
       .highlight-card--wide { grid-template-columns: 1fr; }
       .highlight-card--wide .highlight-img { min-height: 220px; }
@@ -350,17 +354,17 @@
         <span class="ticket-cta">Book admission →</span>
       </div>
     </div>
-    <div class="ticket-card" data-scroll="guide-request">
+    <div class="ticket-card" data-scroll="book">
       <div class="ticket-img">
         <img src="/images/pexels-nguy-n-du-1595594339-38237298.jpg" alt="Private English guide at the Terracotta Warriors" loading="lazy">
       </div>
       <div class="ticket-body">
-        <span class="ticket-badge">On request</span>
+        <span class="ticket-badge">Optional add-on</span>
         <div class="ticket-name">Private English Guide</div>
-        <div class="ticket-includes">Licensed, museum-accredited English-speaking guide for your group · ~2.5 hours across the three pits · Up to 10 people. Admission tickets booked separately.</div>
+        <div class="ticket-includes">Licensed, museum-accredited English-speaking guide for your group · ~2.5 hours across the three pits · Up to 10 people. Just tick the box when you book.</div>
         <div class="ticket-pricing"><span class="ticket-price">$150</span><span class="ticket-face">flat · 1–10 people, any group size</span></div>
-        <div class="ticket-fee">Availability is limited — we confirm your date before any payment.</div>
-        <span class="ticket-cta">Request a guide →</span>
+        <div class="ticket-fee">Availability is limited — we confirm your date before charging the guide fee.</div>
+        <span class="ticket-cta">Add at checkout →</span>
       </div>
     </div>
   </div>
@@ -395,13 +399,19 @@
           <p class="kids-note">Every visitor — including children — needs a full-price ticket. The museum's discounted child / student / senior tickets require Chinese ID and aren't available to foreign passport holders.</p>
           <div class="form-group">
             <label>Visit date</label>
-            <div class="date-strip" id="date-strip" role="radiogroup" aria-label="Choose your visit date"></div>
-            <div class="date-hint" id="date-hint">Tickets release ~7 days ahead — choose from the available dates.</div>
+            <div class="cal" id="calendar" aria-label="Choose your visit date"></div>
+            <div class="date-hint" id="date-hint">Pick any available date through 30 September 2026.</div>
             <input type="hidden" id="visit-date">
           </div>
           <div class="form-group">
             <label for="visitor-qty">Number of visitors</label>
             <input type="number" id="visitor-qty" value="2" min="1" max="10">
+          </div>
+          <div class="form-group">
+            <label class="addon-label">
+              <input type="checkbox" id="guide-addon">
+              <span><strong>Add a private English guide</strong> — $150 flat for up to 10 people, ~2.5 hours. We confirm availability and email a separate payment link; no extra charge now.</span>
+            </label>
           </div>
           <div class="summary-box" id="order-summary">
             <div class="sum-row"><span id="sum-name" style="color:var(--text)"></span></div>
@@ -449,59 +459,6 @@
     <div class="step"><div class="step-num">04</div><h3>Receive your QR code</h3><p>We email your entry confirmation within 4 hours. Show it at the museum entrance — no printed ticket needed.</p></div>
   </div>
 </div>
-
-<section class="guide-request-section" id="guide-request">
-  <div class="gr-grid">
-    <div class="gr-intro">
-      <div class="section-label">On request</div>
-      <h2>Private English Guide</h2>
-      <p>A licensed, museum-accredited English-speaking guide brings the site to life — how the warriors were made, why they were buried, and what they reveal about the Qin dynasty. One flat price for your whole group.</p>
-      <ul class="gr-points">
-        <li>Flat <strong>$150 USD</strong> — same price for 1–10 people</li>
-        <li>Licensed, museum-accredited English-speaking guide</li>
-        <li>About 2.5 hours across the three pits</li>
-        <li><strong>No payment now</strong> — we confirm your date is available, then email a secure payment link</li>
-      </ul>
-      <p class="gr-foot">Museum admission is booked separately above — the guide fee covers the guiding service only.</p>
-    </div>
-    <div class="gr-form-wrap">
-      <div class="form-head"><h3>Request a Guide</h3></div>
-      <div class="form-body">
-        <div id="gr-step">
-          <div class="form-group">
-            <label>Preferred date</label>
-            <div class="date-strip" id="guide-date-strip" role="radiogroup" aria-label="Choose your preferred guide date"></div>
-            <div class="date-hint">Pick your preferred date — we'll confirm guide availability.</div>
-            <input type="hidden" id="guide-date">
-          </div>
-          <div class="form-group">
-            <label for="guide-size">Group size (max 10)</label>
-            <input type="number" id="guide-size" value="2" min="1" max="10">
-          </div>
-          <div class="form-group">
-            <label for="guide-name">Your name</label>
-            <input type="text" id="guide-name" placeholder="e.g. Sarah Johnson">
-          </div>
-          <div class="form-group">
-            <label for="guide-email">Email</label>
-            <input type="email" id="guide-email" placeholder="your@email.com">
-          </div>
-          <div class="form-group">
-            <label for="guide-msg">Anything else? (optional)</label>
-            <textarea id="guide-msg" rows="3" placeholder="Preferred time slot, accessibility needs, other questions…"></textarea>
-          </div>
-          <button class="btn-primary" id="btn-guide" onclick="submitEnquiry()">Request availability →</button>
-          <p class="pay-note">No payment now · We reply within 24 hours with availability and a secure $150 payment link</p>
-        </div>
-        <div id="gr-success" style="display:none">
-          <div class="gr-success-icon">✓</div>
-          <h4>Request received</h4>
-          <p>Thanks — we're checking guide availability for your date and will email you within 24 hours to confirm and send a secure payment link. No payment is due yet.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <section class="highlights-section">
   <div class="section-header">
@@ -645,35 +602,38 @@
     return DOW[d.getDay()] + ', ' + MON[m - 1] + ' ' + day;
   }
 
-  // Build a modern date-card strip into a container, writing the chosen ISO to a
-  // hidden input. Tickets release ~7 days ahead, so we offer the bookable window
-  // (today+2 … today+7) as selectable cards.
-  function buildDateStrip(stripId, hiddenId, onPick) {
-    const strip = document.getElementById(stripId);
+  // Inline calendar for the visit date (today+2 … 30 Sep 2026). Reuses the
+  // localized DOW/MON arrays so it ports cleanly to every language.
+  function buildCalendar(containerId, hiddenId, onPick) {
+    const wrap = document.getElementById(containerId);
     const hidden = document.getElementById(hiddenId);
-    if (!strip || !hidden) return;
-    for (let i = 2, _m = Math.round((new Date(2026, 8, 30) - new Date().setHours(0,0,0,0)) / 864e5); i <= _m; i++) {
-      const d = new Date(); d.setHours(0,0,0,0); d.setDate(d.getDate() + i);
-      const iso = isoOf(d);
-      const card = document.createElement('button');
-      card.type = 'button';
-      card.className = 'date-card';
-      card.setAttribute('role', 'radio');
-      card.setAttribute('aria-checked', 'false');
-      card.dataset.iso = iso;
-      card.innerHTML = `<div class="dc-dow">${DOW[d.getDay()]}</div><div class="dc-day">${d.getDate()}</div><div class="dc-mon">${MON[d.getMonth()]}</div>`;
-      card.addEventListener('click', () => {
-        strip.querySelectorAll('.date-card').forEach(c => { c.classList.remove('selected'); c.setAttribute('aria-checked','false'); });
-        card.classList.add('selected');
-        card.setAttribute('aria-checked', 'true');
-        hidden.value = iso;
-        if (onPick) onPick();
-      });
-      strip.appendChild(card);
+    if (!wrap || !hidden) return;
+    const min = new Date(); min.setHours(0,0,0,0); min.setDate(min.getDate() + 2);
+    const max = new Date(2026, 8, 30); max.setHours(0,0,0,0);
+    let view = new Date(min.getFullYear(), min.getMonth(), 1);
+    let selected = null;
+    function render() {
+      const y = view.getFullYear(), mo = view.getMonth();
+      const startDow = new Date(y, mo, 1).getDay();
+      const days = new Date(y, mo + 1, 0).getDate();
+      const prevOff = (y < min.getFullYear()) || (y === min.getFullYear() && mo <= min.getMonth());
+      const nextOff = (y > max.getFullYear()) || (y === max.getFullYear() && mo >= max.getMonth());
+      let h = `<div class="cal-head"><button type="button" class="cal-nav" data-nav="-1"${prevOff ? ' disabled' : ''} aria-label="Previous month">‹</button><span class="cal-title">${MON[mo]} ${y}</span><button type="button" class="cal-nav" data-nav="1"${nextOff ? ' disabled' : ''} aria-label="Next month">›</button></div><div class="cal-grid">`;
+      for (let i = 0; i < 7; i++) h += `<div class="cal-dow">${DOW[i]}</div>`;
+      for (let i = 0; i < startDow; i++) h += '<div></div>';
+      for (let d = 1; d <= days; d++) {
+        const cur = new Date(y, mo, d);
+        const ciso = isoOf(cur);
+        const off = cur < min || cur > max;
+        h += `<button type="button" class="cal-day${selected === ciso ? ' selected' : ''}" data-iso="${ciso}"${off ? ' disabled' : ''}>${d}</button>`;
+      }
+      wrap.innerHTML = h + '</div>';
+      wrap.querySelectorAll('[data-nav]').forEach(b => b.addEventListener('click', () => { view = new Date(view.getFullYear(), view.getMonth() + parseInt(b.dataset.nav), 1); render(); }));
+      wrap.querySelectorAll('.cal-day:not([disabled])').forEach(b => b.addEventListener('click', () => { selected = b.dataset.iso; hidden.value = selected; render(); if (onPick) onPick(); }));
     }
+    render();
   }
-  buildDateStrip('date-strip', 'visit-date', updateSummary);
-  buildDateStrip('guide-date-strip', 'guide-date');
+  buildCalendar('calendar', 'visit-date', updateSummary);
 
   function goToPassport() {
     const date = document.getElementById('visit-date').value;
@@ -688,7 +648,8 @@
       forms.innerHTML += `<div class="visitor-block"><div class="visitor-title">Visitor ${i + 1}</div><div class="pp-grid"><div class="form-group span2"><label>Full name (exactly as on passport)</label><input type="text" class="pp-name" placeholder="e.g. SARAH JOHNSON" autocomplete="off" required></div><div class="form-group"><label>Passport number</label><input type="text" class="pp-num" placeholder="e.g. AB1234567" required></div><div class="form-group"><label>Nationality</label><input type="text" class="pp-nat" placeholder="e.g. British" required></div><div class="form-group span2"><label>Date of birth</label><input type="date" class="pp-dob" max="${today}" required></div></div></div>`;
     }
     const total = visitors * ADMISSION.price;
-    document.getElementById('pp-summary').innerHTML = `<div class="sum-row"><span style="color:var(--text)">${ADMISSION.name} · ${fmtDate(date)}</span></div><div class="sum-row"><span>Admission × ${visitors}</span><span>$${total.toFixed(2)}</span></div><div class="sum-row total"><span>Total</span><span>$${total.toFixed(2)} USD</span></div>`;
+    const guide = document.getElementById('guide-addon').checked;
+    document.getElementById('pp-summary').innerHTML = `<div class="sum-row"><span style="color:var(--text)">${ADMISSION.name} · ${fmtDate(date)}</span></div><div class="sum-row"><span>Admission × ${visitors}</span><span>$${total.toFixed(2)}</span></div>${guide ? `<div class="sum-row" style="color:var(--primary)"><span>+ Private English guide</span><span>$150 · billed separately</span></div>` : ''}<div class="sum-row total"><span>Total now</span><span>$${total.toFixed(2)} USD</span></div>`;
     document.getElementById('step-select').style.display = 'none';
     const pp = document.getElementById('passport-section');
     pp.style.display = 'block';
@@ -708,6 +669,7 @@
   async function submitBooking() {
     const btn = document.getElementById('btn-pay');
     const date = document.getElementById('visit-date').value;
+    const guideRequested = document.getElementById('guide-addon').checked;
     const email = document.getElementById('cust-email').value.trim();
     const names = [...document.querySelectorAll('.pp-name')];
     const nums  = [...document.querySelectorAll('.pp-num')];
@@ -724,40 +686,12 @@
     if (!document.getElementById('consent-box').checked) { alert('Please agree to the Terms of Service and Privacy Policy to continue.'); return; }
     btn.disabled = true; btn.textContent = 'Redirecting to payment…';
     try {
-      const res = await fetch('/api/checkout', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ticketType: 'admission', visitDate: date, visitorQty: visitorList.length, email, visitors: visitorList }) });
+      const res = await fetch('/api/checkout', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ticketType: 'admission', visitDate: date, visitorQty: visitorList.length, email, visitors: visitorList, guideRequested }) });
       const data = await res.json();
       if (data.url) { window.location.href = data.url; } else { throw new Error(data.error || 'Unknown error'); }
     } catch (e) {
       alert('Something went wrong. Please try again or email hello@terracotta-tickets.com');
       btn.disabled = false; btn.textContent = 'Pay Securely →';
-    }
-  }
-
-  // Private English guide — request only (no payment). Emails an enquiry so we can
-  // confirm availability, then send a payment link.
-  async function submitEnquiry() {
-    const btn = document.getElementById('btn-guide');
-    const date = document.getElementById('guide-date').value;
-    const size = parseInt(document.getElementById('guide-size').value) || 0;
-    const name = document.getElementById('guide-name').value.trim();
-    const email = document.getElementById('guide-email').value.trim();
-    const message = document.getElementById('guide-msg').value.trim();
-    if (!date) { alert('Please choose a preferred date.'); return; }
-    if (size < 1) { alert('Please enter your group size.'); return; }
-    if (!name) { alert('Please enter your name.'); return; }
-    if (!email || !email.includes('@')) { alert('Please enter a valid email address.'); return; }
-    btn.disabled = true; btn.textContent = 'Sending…';
-    try {
-      const res = await fetch('/api/enquiry', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name, email, visitDate: date, groupSize: size, message }) });
-      const data = await res.json();
-      if (data.ok) {
-        document.getElementById('gr-step').style.display = 'none';
-        document.getElementById('gr-success').style.display = 'block';
-        document.getElementById('guide-request').scrollIntoView({ behavior: 'smooth' });
-      } else { throw new Error(data.error || 'Unknown error'); }
-    } catch (e) {
-      alert('Something went wrong. Please try again or email hello@terracotta-tickets.com');
-      btn.disabled = false; btn.textContent = 'Request availability →';
     }
   }
 
