@@ -3,7 +3,7 @@ const { Resend } = require('resend');
 // ── Config ─────────────────────────────────────────────────────────────────
 const BRAND_NAME    = 'Terracotta Tickets';
 const BRAND_COLOR   = '#6B3200';
-const SUPPORT_EMAIL = 'hello@terracotta-tickets.com';
+const SUPPORT_EMAIL = 'support@terracotta-tickets.com';
 const GUIDE_PRICE   = '$150 USD';   // flat, up to 10 people
 // ─────────────────────────────────────────────────────────────────────────
 

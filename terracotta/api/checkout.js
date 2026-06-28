@@ -7,7 +7,7 @@ const ATTRACTION = "Terracotta Warriors Museum, Xi'an";
 // same — the museum's discounted child/student/senior tickets require Chinese
 // ID and aren't available to foreign passport holders. The English private
 // guide is handled separately as a request (see /api/enquiry), not here.
-const ADMISSION = { name: 'Full-Price Admission', cents: 2599 };
+const ADMISSION = { name: 'Full-Price Admission', cents: 2600 };
 // ─────────────────────────────────────────────────────────────────────────
 
 module.exports = async (req, res) => {
