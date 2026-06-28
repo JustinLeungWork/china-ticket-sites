@@ -10,15 +10,24 @@ const SUPPORT_EMAIL = 'support@terracotta-tickets.com';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-// Vercel: disable body parsing so Stripe can verify the raw signature
-module.exports.config = { api: { bodyParser: false } };
-
 module.exports = async (req, res) => {
   if (req.method !== 'POST') return res.status(405).send('Method not allowed');
 
+  // Body parsing is disabled (see config at the bottom of this file) so we can
+  // read the EXACT raw bytes Stripe signed — verification fails on a re-parsed
+  // body. Buffer the raw request stream before verifying.
+  let rawBody;
+  try {
+    const chunks = [];
+    for await (const chunk of req) chunks.push(typeof chunk === 'string' ? Buffer.from(chunk) : chunk);
+    rawBody = Buffer.concat(chunks);
+  } catch (e) {
+    return res.status(400).send('Webhook Error: could not read request body');
+  }
+
   let event;
   try {
-    event = stripe.webhooks.constructEvent(req.body, req.headers['stripe-signature'], process.env.STRIPE_WEBHOOK_SECRET);
+    event = stripe.webhooks.constructEvent(rawBody, req.headers['stripe-signature'], process.env.STRIPE_WEBHOOK_SECRET);
   } catch (err) {
     return res.status(400).send(`Webhook Error: ${err.message}`);
   }
@@ -86,3 +95,8 @@ module.exports = async (req, res) => {
   }
   return res.json({ received: true });
 };
+
+// Disable Vercel's automatic body parsing so the handler can read the raw body
+// for Stripe signature verification. MUST come AFTER the module.exports assignment
+// above, or reassigning module.exports would wipe it.
+module.exports.config = { api: { bodyParser: false } };
