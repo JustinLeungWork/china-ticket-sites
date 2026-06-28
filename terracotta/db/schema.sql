@@ -1,4 +1,4 @@
--- Booking database for TerracottaWarriorsTickets.com (Neon Postgres).
+-- Booking database for Terracotta Tickets (Neon Postgres).
 -- The app also creates this automatically (api/_db.js ensureSchema); this file is
 -- for reference or to run once manually in the Neon SQL editor.
 

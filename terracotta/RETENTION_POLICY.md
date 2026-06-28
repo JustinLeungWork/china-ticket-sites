@@ -1,4 +1,4 @@
-# Data Retention Policy — TerracottaWarriorsTickets.com
+# Data Retention Policy — Terracotta Tickets
 
 Internal record of our personal-data retention schedule and rationale, kept to satisfy
 the **PDPA Retention Limitation Obligation** (s.25): retain personal data only as long

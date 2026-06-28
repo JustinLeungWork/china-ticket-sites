@@ -3,7 +3,7 @@ const { Resend } = require('resend');
 const { getSql, ensureSchema } = require('./_db');
 
 // ── Attraction config ─────────────────────────────────────────────────────
-const BRAND_NAME    = 'TerracottaWarriorsTickets.com';
+const BRAND_NAME    = 'Terracotta Tickets';
 const BRAND_COLOR   = '#6B3200';
 const SUPPORT_EMAIL = 'hello@terracotta-tickets.com';
 // ─────────────────────────────────────────────────────────────────────────
