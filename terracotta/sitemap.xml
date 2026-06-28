@@ -11,6 +11,16 @@
     <xhtml:link rel="alternate" hreflang="ja"      href="https://terracotta-tickets.com/ja/"/>
     <xhtml:link rel="alternate" hreflang="id"      href="https://terracotta-tickets.com/id/"/>
     <xhtml:link rel="alternate" hreflang="th"      href="https://terracotta-tickets.com/th/"/>
+    <xhtml:link rel="alternate" hreflang="es"      href="https://terracotta-tickets.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://terracotta-tickets.com/"/>
+  </url>
+  <url>
+    <loc>https://terracotta-tickets.com/es/</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es"      href="https://terracotta-tickets.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="en"      href="https://terracotta-tickets.com/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://terracotta-tickets.com/"/>
   </url>
   <url>

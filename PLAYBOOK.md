@@ -128,7 +128,7 @@ These patterns apply to any service site in this network, not just tickets.
 | `.env` loading | Force-override: `process.env[key] = val` unconditionally (Windows system vars shadow site .env otherwise) |
 | Admin dashboard | Multi-site: `SITES=terracotta,mutianyu`; per-site prefixed vars (`TERRACOTTA_DATABASE_URL`) |
 | SEO/GEO schema | See SEO_GEO_PLAYBOOK.md |
-| Multilingual pages | `/ko/`, `/ja/`, `/id/`, `/th/` subfolders + hreflang |
+| Multilingual pages | `/ko/`, `/ja/`, `/id/`, `/th/`, `/es/` subfolders + hreflang |
 | Analytics | `<script defer src="/_vercel/insights/script.js"></script>` before `</head>` |
 
 ---
@@ -195,7 +195,7 @@ ADMIN_PORT=8787
 - [ ] Write Visitor Guide page (`/guide.html`)
 - [ ] Write About page (`/about.html`) — reuse founder story, update attraction details
 - [ ] Write `llms.txt` (see terracotta template)
-- [ ] Translate all 4 locales (ko, ja, id, th) — human review required
+- [ ] Translate all 5 locales (ko, ja, id, th, es) — human review required
 
 ### 4. SEO/GEO — required before launch
 Full detail in `docs/SEO_GEO_PLAYBOOK.md`. Minimum required:
