@@ -129,14 +129,16 @@
     .ticket-fee { font-size: 11.5px; color: var(--muted); margin-top: 5px; }
 
     .booking-section { background: var(--surface); padding: var(--section-y) var(--section-x); }
-    .booking-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 420px; gap: clamp(40px, 5vw, 64px); align-items: start; }
-    .booking-intro h2 { font-size: clamp(24px, 2.8vw, 32px); margin-bottom: 14px; letter-spacing: -0.01em; }
-    .booking-intro p { color: var(--muted); font-size: 15.5px; margin-bottom: 30px; line-height: 1.75; }
-    .booking-notes h4 { font-family: 'Playfair Display', serif; font-size: 19px; margin-bottom: 14px; }
-    .booking-notes ul { font-size: 14.5px; color: var(--muted); padding-left: 20px; line-height: 2.1; }
-    .booking-form-wrap { background: var(--white); border: 1px solid var(--border); border-radius: var(--r-lg); box-shadow: var(--shadow-md); overflow: hidden; position: sticky; top: 84px; }
-    .form-head { background: var(--primary); padding: 20px 28px; color: var(--white); }
-    .form-head h3 { font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 600; }
+    .booking-grid { max-width: 560px; margin: 0 auto; }
+    .booking-section-head { text-align: center; margin-bottom: 28px; }
+    .booking-section-head h2 { font-size: clamp(24px, 2.8vw, 32px); margin-bottom: 8px; letter-spacing: -0.01em; }
+    .booking-section-head p { color: var(--muted); font-size: 15px; }
+    .booking-form-wrap { background: var(--white); border: 1px solid var(--border); border-radius: var(--r-lg); box-shadow: var(--shadow-md); overflow: hidden; }
+    .form-head { background: var(--primary); padding: 16px 24px; color: var(--white); display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .form-head h3 { font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 600; }
+    .form-close-btn { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); color: rgba(255,255,255,0.85); font-size: 18px; width: 30px; height: 30px; border-radius: 50%; cursor: pointer; line-height: 1; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.18s; font-family: inherit; }
+    .form-close-btn:hover { background: rgba(255,255,255,0.28); color: #fff; }
+    .book-prereqs { font-size: 13px; color: var(--muted); background: var(--surface); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 11px 14px; margin-bottom: 16px; line-height: 1.6; }
     .form-body { padding: 28px; }
     .form-group { margin-bottom: 20px; }
     label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; color: var(--text); }
@@ -264,8 +266,6 @@
     .footer-links a:hover { color: var(--white); }
 
     @media (max-width: 900px) {
-      .booking-grid { grid-template-columns: 1fr; }
-      .booking-form-wrap { position: static; }
       .gr-grid { grid-template-columns: 1fr; }
       .highlights-grid { grid-template-columns: 1fr 1fr; }
       .highlight-card--wide { grid-template-columns: 1fr; }
@@ -377,23 +377,16 @@
 
 <section class="booking-section" id="book">
   <div class="booking-grid">
-    <div class="booking-intro">
+    <div class="booking-section-head">
       <div class="section-label">방문 예약</div>
       <h2>티켓 예약하기</h2>
-      <p>병마용갱 박물관은 엄격한 실명제 예약 시스템을 운영합니다 — 모든 티켓이 특정 여권에 연결됩니다. 공식 시스템을 통해 티켓을 구매해 드리니 바로 입장 게이트로 가시면 됩니다.</p>
-      <div class="booking-notes">
-        <h4>예약 전 확인 사항</h4>
-        <ul>
-          <li>입구에서 <strong>여권 원본</strong>을 지참하세요 — 이름이 티켓과 정확히 일치해야 합니다</li>
-          <li>박물관은 <strong>여권 1개당 하루 1매</strong>만 발권합니다</li>
-          <li>티켓은 최대 7일 전부터 예매 가능 — 성수기 날짜는 미리 계획하세요</li>
-          <li>어린이도 <strong>정가 티켓</strong>이 필요합니다 — 박물관의 어린이 할인은 해외 여권에는 적용되지 않습니다</li>
-          <li>박물관은 매일 운영되며, 마감 2시간 전이 마지막 입장입니다</li>
-        </ul>
-      </div>
+      <p>Visa, Mastercard, Apple Pay — 24시간 이내 확인.</p>
     </div>
     <div class="booking-form-wrap">
-      <div class="form-head"><h3>병마용갱 티켓 예약</h3></div>
+      <div class="form-head">
+        <h3>병마용갱 티켓 예약</h3>
+        <button class="form-close-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="맨 위로" title="맨 위로">×</button>
+      </div>
       <div class="form-body">
         <div id="step-select">
           <div class="plan-banner">
@@ -430,6 +423,7 @@
             <div class="sum-row"><span>입장권 × <span id="sum-visitors"></span></span><span>$<span id="sum-at"></span></span></div>
             <div class="sum-row total"><span>합계</span><span>$<span id="sum-total"></span> USD</span></div>
           </div>
+          <div class="book-prereqs"><strong>여권 원본</strong>을 지참하세요 — 이름이 정확히 일치해야 합니다. 여권 1개당 하루 1매. 어린이도 <strong>정가 티켓</strong>이 필요합니다 (해외 여권 할인 없음).</div>
           <button class="btn-primary" onclick="goToPassport()">다음 →</button>
         </div>
         <div id="passport-section">
