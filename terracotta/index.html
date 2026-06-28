@@ -736,7 +736,7 @@
     const strip = document.getElementById(stripId);
     const hidden = document.getElementById(hiddenId);
     if (!strip || !hidden) return;
-    for (let i = 2; i <= 7; i++) {
+    for (let i = 2, _m = Math.round((new Date(2026, 8, 30) - new Date().setHours(0,0,0,0)) / 864e5); i <= _m; i++) {
       const d = new Date(); d.setHours(0,0,0,0); d.setDate(d.getDate() + i);
       const iso = isoOf(d);
       const card = document.createElement('button');

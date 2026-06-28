@@ -22,7 +22,7 @@ module.exports = async (req, res) => {
   const amountCents = ADMISSION.cents * qty;
   const invoiceId = newInvoiceId();
 
-  // Keep only the fields we need; this is what's stored (in OUR database, never Stripe).
+  // Keep only the fields we need.
   const cleanVisitors = visitors.map(v => ({
     name: String(v.name || '').trim(),
     passportNumber: String(v.passportNumber || '').trim(),
@@ -30,15 +30,29 @@ module.exports = async (req, res) => {
     dateOfBirth: String(v.dateOfBirth || '').trim(),
   }));
 
+  // Store passport details in OUR database when available (so they never reach
+  // Stripe). If the DB isn't configured yet (no DATABASE_URL) or is briefly
+  // unavailable, fall back to Stripe metadata so checkout still works — this
+  // self-heals the moment DATABASE_URL is set.
+  let dbStored = false;
   try {
     await ensureSchema();
     const sql = getSql();
-
-    // Passport details go into our booking database, keyed by the invoice id.
     await sql`
       INSERT INTO bookings (invoice_id, email, visit_date, visitor_qty, amount_cents, currency, ticket_type, passport_data, status)
       VALUES (${invoiceId}, ${email}, ${visitDate}, ${qty}, ${amountCents}, 'usd', 'admission', ${JSON.stringify(cleanVisitors)}::jsonb, 'pending')`;
+    dbStored = true;
+  } catch (dbErr) {
+    console.error('Booking DB unavailable — falling back to Stripe metadata:', dbErr.message);
+  }
 
+  const metadata = { invoiceId, attraction: ATTRACTION, ticketName: ADMISSION.name, visitDate, visitorQty: String(qty), customerEmail: email };
+  if (!dbStored) {
+    // Fallback only: pack passports into metadata so the operator still gets them.
+    cleanVisitors.forEach((v, i) => { metadata[`v${i}`] = JSON.stringify({ n: v.name, p: v.passportNumber, nat: v.nationality, dob: v.dateOfBirth }); });
+  }
+
+  try {
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       mode: 'payment',
@@ -52,15 +66,15 @@ module.exports = async (req, res) => {
       }],
       customer_email: email,
       client_reference_id: invoiceId,
-      // Stripe receives ONLY the invoice reference + non-sensitive fields.
-      // No passport data is ever sent to Stripe.
-      metadata: { invoiceId, attraction: ATTRACTION, ticketName: ADMISSION.name, visitDate, visitorQty: String(qty) },
+      metadata,
       success_url: `${process.env.SITE_URL}/success.html?invoice=${invoiceId}&session_id={CHECKOUT_SESSION_ID}`,
       cancel_url:  `${process.env.SITE_URL}/#book`,
       expires_at: Math.floor(Date.now() / 1000) + 30 * 60,
     });
 
-    await sql`UPDATE bookings SET stripe_session_id = ${session.id} WHERE invoice_id = ${invoiceId}`;
+    if (dbStored) {
+      try { const sql = getSql(); await sql`UPDATE bookings SET stripe_session_id = ${session.id} WHERE invoice_id = ${invoiceId}`; } catch (e) {}
+    }
     return res.status(200).json({ url: session.url });
   } catch (err) {
     console.error('Checkout error:', err.message);

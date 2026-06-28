@@ -31,7 +31,9 @@ module.exports = async (req, res) => {
   const invoiceId = m.invoiceId || session.client_reference_id;
   const esc = s => String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 
-  // Passport details live in OUR database, not in Stripe — look them up by invoice id.
+  // Passport details normally live in OUR database, not in Stripe — look them up
+  // by invoice id. If the DB wasn't available at checkout, they were packed into
+  // Stripe metadata as a fallback (see checkout.js) — read them from there instead.
   let visitors = [];
   try {
     await ensureSchema();
@@ -41,6 +43,13 @@ module.exports = async (req, res) => {
     await sql`UPDATE bookings SET status = 'paid', paid_at = now() WHERE invoice_id = ${invoiceId}`;
   } catch (err) {
     console.error('Booking lookup/update failed:', err.message);
+  }
+  if (visitors.length === 0) {
+    visitors = Object.entries(m)
+      .filter(([k]) => /^v\d+$/.test(k))
+      .sort((a, b) => parseInt(a[0].slice(1)) - parseInt(b[0].slice(1)))
+      .map(([, val]) => { try { const v = JSON.parse(val); return { name: v.n, passportNumber: v.p, nationality: v.nat, dateOfBirth: v.dob }; } catch (_) { return null; } })
+      .filter(Boolean);
   }
 
   const customerEmail = m.customerEmail || session.customer_details?.email || session.customer_email;
