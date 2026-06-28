@@ -74,9 +74,6 @@
   .badge-blue   { background: #dbeafe; color: #1e40af; }
   .badge-gray   { background: #f3f4f6; color: #374151; }
 
-  /* ── Passport toggle ── */
-  .btn-pp { font-size: 11px; padding: 3px 8px; border: 1px solid var(--border); border-radius: 4px; background: var(--surface); cursor: pointer; }
-  .pp-data { font-family: monospace; font-size: 11px; background: #f3f4f6; padding: 6px 8px; border-radius: 4px; margin-top: 4px; max-width: 300px; white-space: pre-wrap; word-break: break-all; }
 
   /* ── Guide send ── */
   .btn-guide { font-size: 12px; padding: 5px 10px; border-radius: 5px; border: 1px solid transparent; cursor: pointer; font-weight: 600; white-space: nowrap; }
@@ -172,6 +169,12 @@ function fmtDateTime(v) {
   if (!v) return '—';
   const d = new Date(v);
   return isNaN(d) ? v : d.toISOString().slice(0,16).replace('T',' ');
+}
+function fmtRemaining(ms) {
+  if (ms <= 0) return 'expired';
+  const h = Math.floor(ms / 3600000);
+  const m = Math.floor((ms % 3600000) / 60000);
+  return h > 0 ? `${h}h ${m}m left` : `${m}m left`;
 }
 function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
@@ -279,7 +282,7 @@ function renderTable() {
     <thead><tr>
       <th>Invoice</th><th>Booked</th><th>Visit date</th><th>Slot</th>
       <th>Pax</th><th>Email</th><th>Status</th>${stripeHeader}
-      <th>Amount</th><th>Passport</th><th>Guide</th>
+      <th>Amount</th><th>Name</th><th>Passport #</th><th>DOB</th><th>Guide</th><th>Info email</th>
     </tr></thead>
     <tbody>${rows.map(rowHtml).join('')}</tbody>
   </table>`;
@@ -296,20 +299,16 @@ function rowHtml(b) {
       : '—'
   }</td>` : '';
 
-  const ppId = 'pp'+b.invoice_id.replace(/\W/g,'');
-  let pp = '—';
+  let visitors = [];
   if (b.passport_data) {
-    let display;
     try {
-      // Neon returns JSONB already parsed; only JSON.parse if it's still a string
       const parsed = (typeof b.passport_data === 'string') ? JSON.parse(b.passport_data) : b.passport_data;
-      if (Array.isArray(parsed))
-        display = parsed.map((p,i)=>`[${i+1}] ${p.name||((p.first_name||'')+' '+(p.last_name||'')).trim()||'?'} · ${p.passportNumber||p.passport_number||'?'} · DOB ${p.dateOfBirth||'?'}`).join('\n');
-      else display = JSON.stringify(parsed, null, 2);
-    } catch { display = String(b.passport_data); }
-    pp = `<button class="btn-pp" onclick="togglePP('${ppId}')">Show</button>
-          <div class="pp-data" id="${ppId}" style="display:none">${esc(display)}</div>`;
+      visitors = Array.isArray(parsed) ? parsed : [parsed];
+    } catch { visitors = []; }
   }
+  const ppCol = field => visitors.length
+    ? visitors.map(p => `<div style="font-size:12px;line-height:1.7">${esc(String(p[field]||'—'))}</div>`).join('')
+    : '<span style="color:var(--muted)">—</span>';
 
   return `<tr>
     <td><strong>${esc(b.invoice_id)}</strong></td>
@@ -321,59 +320,80 @@ function rowHtml(b) {
     <td>${status}</td>
     ${stripeCell}
     <td>${fmt(b.amount_cents, b.currency)}</td>
-    <td>${pp}</td>
+    <td>${ppCol('name')}</td>
+    <td style="font-family:monospace">${ppCol('passportNumber')}</td>
+    <td>${ppCol('dateOfBirth')}</td>
     <td>${guideHtml(b)}</td>
+    <td>${guideInfoHtml(b)}</td>
   </tr>`;
 }
 
 function guideHtml(b) {
-  const id = b.invoice_id;
+  const id  = b.invoice_id;
+  const sid = id.replace(/\W/g,'');
+  const notes        = b.guide_notes || '';
   const agencyChecked = !!b.guide_agency_checked;
-  const checkedDate   = b.guide_agency_checked ? ` (${fmtDate(b.guide_agency_checked)})` : '';
-  const notes         = b.guide_notes || '';
-  const notesId       = 'notes-' + id.replace(/\W/g,'');
-
-  const agencyRow = `<label style="display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer;margin-top:5px;color:var(--muted)">
-    <input type="checkbox" ${agencyChecked?'checked':''} onchange="patchBooking('${esc(id)}',{agency_checked:this.checked})">
-    <span>Agency asked${agencyChecked?checkedDate:''}</span>
-  </label>`;
-
-  const notesRow = `<div style="margin-top:5px">
-    <textarea id="${notesId}" rows="2"
-      style="width:100%;font-size:11px;padding:5px 7px;border:1px solid var(--border);border-radius:4px;resize:vertical;font-family:inherit;color:var(--muted)"
-      placeholder="Guide notes…"
-      onblur="patchBooking('${esc(id)}',{notes:this.value})">${esc(notes)}</textarea>
-  </div>`;
-
-  if (!b.guide_requested) return `<div style="color:var(--muted);font-size:12px">—</div>`;
-
-  const gs    = b.guide_status;
-  const pax   = b.guide_size ? ` · ${b.guide_size} pax` : '';
   const price = `$${(currentSiteConfig.guideCents/100).toFixed(0)}`;
 
-  let statusHtml;
+  // compact agency + notes always shown when guide was requested
+  const metaRow = (show) => !show ? '' :
+    `<div style="display:flex;align-items:center;gap:6px;margin-top:5px">
+      <label style="display:flex;align-items:center;gap:4px;font-size:11px;cursor:pointer;color:var(--muted);white-space:nowrap;flex-shrink:0">
+        <input type="checkbox" ${agencyChecked?'checked':''} onchange="patchBooking('${esc(id)}',{agency_checked:this.checked})">
+        Agency
+      </label>
+      <input type="text" value="${esc(notes)}"
+        style="flex:1;min-width:60px;max-width:140px;font-size:11px;padding:2px 5px;border:1px solid var(--border);border-radius:3px;color:#555"
+        placeholder="Notes…"
+        onblur="patchBooking('${esc(id)}',{notes:this.value})">
+    </div>`;
+
+  if (!b.guide_requested) return `<span style="color:var(--muted);font-size:12px">—</span>`;
+
+  const gs  = b.guide_status;
+  const pax = b.guide_size ? `${b.guide_size} pax` : '';
+
   if (gs === 'paid') {
-    statusHtml = `<span class="badge badge-green">Guide paid</span>
-      <span style="font-size:11px;color:var(--muted);display:block;margin-top:2px">${fmt(b.guide_amount_cents,'usd')} · ${fmtDate(b.guide_paid_at)}</span>`;
-  } else if (gs === 'link_sent') {
-    statusHtml = `<span class="badge badge-blue">Link sent</span>
-      <span style="font-size:11px;color:var(--muted);display:block;margin-top:2px">Sent ${fmtDate(b.guide_link_sent_at)}${pax}</span>
-      <button class="btn-guide btn-guide-send" style="margin-top:4px" onclick="sendGuide('${esc(id)}',this)">Resend ${price}</button>`;
-  } else {
-    statusHtml = `<span class="badge badge-yellow">Requested${pax}</span>
-      <button class="btn-guide btn-guide-send" style="margin-top:4px" onclick="sendGuide('${esc(id)}',this)">Send ${price} link</button>`;
+    return `<div>
+      <div style="display:flex;align-items:center;gap:5px;flex-wrap:wrap">
+        <span class="badge badge-green">Paid</span>
+        <span style="font-size:11px;color:var(--muted)">${fmt(b.guide_amount_cents,'usd')} · ${fmtDate(b.guide_paid_at)}</span>
+      </div>
+      ${metaRow(true)}
+    </div>`;
   }
 
-  return `<div style="display:flex;flex-direction:column;gap:0">${statusHtml}${agencyRow}${notesRow}</div>`;
+  if (gs === 'link_sent') {
+    const sentMs    = b.guide_link_sent_at ? new Date(b.guide_link_sent_at).getTime() : 0;
+    const expiresMs = sentMs + 23 * 3600 * 1000;
+    const remaining = expiresMs - Date.now();
+    const expired   = remaining <= 0;
+    const badge     = expired ? '<span class="badge badge-red">Expired</span>' : '<span class="badge badge-blue">Sent</span>';
+    const timeLabel = expired
+      ? `<span style="font-size:11px;color:var(--muted)">${fmtDateTime(b.guide_link_sent_at)}</span>`
+      : `<span style="font-size:11px;color:var(--muted)">${fmtDateTime(b.guide_link_sent_at)}</span>
+         <span style="font-size:11px;color:var(--yellow)">${fmtRemaining(remaining)}</span>`;
+    const paxLabel = pax ? `<span style="font-size:11px;color:var(--muted)">${pax}</span>` : '';
+    return `<div>
+      <div style="display:flex;align-items:center;gap:5px;flex-wrap:wrap">
+        ${badge}${timeLabel}${paxLabel}
+        <button class="btn-guide btn-guide-send" style="padding:2px 8px;font-size:11px" onclick="sendGuide('${esc(id)}',this)">Resend</button>
+      </div>
+      ${metaRow(true)}
+    </div>`;
+  }
+
+  // requested, not yet sent
+  return `<div>
+    <div style="display:flex;align-items:center;gap:5px;flex-wrap:wrap">
+      <span class="badge badge-yellow">Requested</span>
+      ${pax ? `<span style="font-size:11px;color:var(--muted)">${pax}</span>` : ''}
+      <button class="btn-guide btn-guide-send" style="padding:2px 8px;font-size:11px" onclick="sendGuide('${esc(id)}',this)">Send ${price}</button>
+    </div>
+    ${metaRow(true)}
+  </div>`;
 }
 
-function togglePP(id) {
-  const el = document.getElementById(id);
-  const btn = el.previousElementSibling;
-  const show = el.style.display === 'none';
-  el.style.display = show ? 'block' : 'none';
-  btn.textContent = show ? 'Hide' : 'Show';
-}
 
 let toastTimer;
 function toast(html, isErr) {
@@ -402,6 +422,45 @@ async function sendGuide(invoiceId, btn) {
       : `<strong style="color:var(--red)">Email failed</strong> (${esc(r.emailError||'?')}). Manual link:<br><a href="${esc(r.url)}" target="_blank">${esc(r.url)}</a>`;
     toast(`Guide link created for ${esc(invoiceId)}.<br>${note}`, !r.emailed);
     await load();
+  } catch(e) {
+    toast('Error: ' + esc(e.message), true);
+    btn.disabled = false;
+    btn.textContent = orig;
+  }
+}
+
+function guideInfoHtml(b) {
+  const id   = b.invoice_id;
+  const sent = b.guide_info_sent_at;
+  if (sent) {
+    return `<div style="display:flex;flex-direction:column;gap:4px">
+      <div style="display:flex;align-items:center;gap:5px;flex-wrap:wrap">
+        <span class="badge badge-gray">Sent</span>
+        <span style="font-size:11px;color:var(--muted)">${fmtDate(sent)}</span>
+      </div>
+      <button class="btn-guide btn-guide-send" style="padding:2px 8px;font-size:11px" onclick="sendGuideInfo('${esc(id)}',this)">Resend</button>
+    </div>`;
+  }
+  return `<button class="btn-guide btn-guide-send" style="padding:2px 8px;font-size:11px" onclick="sendGuideInfo('${esc(id)}',this)">Send info</button>`;
+}
+
+async function sendGuideInfo(invoiceId, btn) {
+  btn.disabled = true;
+  const orig = btn.textContent;
+  btn.textContent = 'Sending…';
+  try {
+    const r = await fetch('/api/guide-info', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ invoice: invoiceId, site: currentSite }),
+    }).then(x => x.json());
+    if (!r.ok) throw new Error(r.error || 'failed');
+    const note = r.emailed
+      ? `Info email sent to <strong>${esc(r.email)}</strong>.`
+      : `<strong style="color:var(--red)">Email failed</strong> (${esc(r.emailError||'?')})`;
+    toast(note, !r.emailed);
+    if (r.emailed) await load();
+    else { btn.disabled = false; btn.textContent = orig; }
   } catch(e) {
     toast('Error: ' + esc(e.message), true);
     btn.disabled = false;

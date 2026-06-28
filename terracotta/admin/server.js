@@ -121,6 +121,7 @@ async function ensureAdminColumns(site) {
   const db = sql(site);
   await db`ALTER TABLE bookings ADD COLUMN IF NOT EXISTS guide_agency_checked TIMESTAMPTZ`;
   await db`ALTER TABLE bookings ADD COLUMN IF NOT EXISTS guide_notes TEXT`;
+  await db`ALTER TABLE bookings ADD COLUMN IF NOT EXISTS guide_info_sent_at TIMESTAMPTZ`;
 }
 
 // ── Data ──────────────────────────────────────────────────────────────────────
@@ -132,7 +133,7 @@ async function listBookings(site, withStripe) {
            stripe_session_id, created_at, paid_at,
            guide_requested, guide_size, guide_status, guide_amount_cents,
            guide_session_id, guide_link_sent_at, guide_paid_at,
-           guide_agency_checked, guide_notes
+           guide_agency_checked, guide_notes, guide_info_sent_at
     FROM bookings ORDER BY created_at DESC LIMIT 200`;
 
   if (withStripe) {
@@ -262,6 +263,63 @@ const server = http.createServer(async (req, res) => {
       if (!body.invoice) return json(res, 400, { ok: false, error: 'invoice required' });
       const site = getSite(body.site || DEFAULT);
       return json(res, 200, { ok: true, ...(await sendGuideLink(site, body.invoice)) });
+    }
+
+    if (req.method === 'POST' && u.pathname === '/api/guide-info') {
+      const body = await readBody(req);
+      if (!body.invoice) return json(res, 400, { ok: false, error: 'invoice required' });
+      const site = getSite(body.site || DEFAULT);
+      const db   = sql(site);
+      const rows = await db`SELECT invoice_id, email, visit_date, time_slot FROM bookings WHERE invoice_id = ${body.invoice}`;
+      const b = rows[0];
+      if (!b) return json(res, 404, { ok: false, error: 'booking not found' });
+      const visitDate = isoDate(b.visit_date);
+      const slot = b.time_slot ? ` at ${b.time_slot}` : '';
+      const FROM = `${site.name} <bookings@${site.emailDomain}>`;
+      const html = `<div style="font-family:Arial,sans-serif;max-width:560px;margin:0 auto">
+<div style="background:${site.color};color:#fff;padding:24px;text-align:center">
+  <h1 style="margin:0;font-size:20px">Your Visit Guide</h1>
+  <p style="margin:8px 0 0;opacity:.85;font-size:13px">${esc(site.name)} · ${esc(visitDate)}${esc(slot)}</p>
+</div>
+<div style="padding:24px;background:#f8f8f8">
+  <p style="font-size:14px;color:#555;line-height:1.7">Here's everything you need to know before your visit to the Terracotta Warriors Museum.</p>
+  <div style="background:#fff;border:1px solid #eee;border-radius:4px;padding:20px;margin:16px 0">
+    <h3 style="margin:0 0 12px;font-size:14px;color:#333">Getting there from Xi'an</h3>
+    <ul style="font-size:13px;color:#555;line-height:1.9;margin:0;padding-left:18px">
+      <li><strong>Tourist Bus 5 (306):</strong> departs Xi'an Railway Station East Square, ~1 hour, ¥7</li>
+      <li><strong>Metro + bus:</strong> Line 9 to Huaqingchi, then Bus 914/915, ~1.5 hours total</li>
+      <li><strong>Taxi / ride-hail:</strong> ¥80–100 from city centre, ~40 minutes</li>
+    </ul>
+  </div>
+  <div style="background:#fff;border:1px solid #eee;border-radius:4px;padding:20px;margin:16px 0">
+    <h3 style="margin:0 0 12px;font-size:14px;color:#333">On the day</h3>
+    <ul style="font-size:13px;color:#555;line-height:1.9;margin:0;padding-left:18px">
+      <li>Arrive <strong>20 minutes early</strong> — show your QR code at the ticket gate</li>
+      <li>Bring your <strong>original passport</strong> — name must match the booking exactly</li>
+      <li>Large bags must be left in lockers near the entrance (¥10 deposit)</li>
+      <li>Photography is allowed; no tripods or flash inside the pits</li>
+      <li>Wear comfortable shoes — the site involves considerable walking</li>
+    </ul>
+  </div>
+  <div style="text-align:center;margin:20px 0">
+    <a href="${site.siteUrl}/guide.html" style="display:inline-block;background:${site.color};color:#fff;text-decoration:none;padding:12px 28px;border-radius:4px;font-size:14px;font-weight:600">Full Visitor Guide →</a>
+  </div>
+  <p style="font-size:12px;color:#999">Booking reference: ${esc(body.invoice)}<br>
+  Questions? Email <a href="mailto:${site.supportEmail}" style="color:${site.color}">${site.supportEmail}</a></p>
+</div></div>`;
+      let emailed = false, emailError = null;
+      try {
+        const { error } = await resend(site).emails.send({
+          from: FROM, to: b.email,
+          subject: `Your Terracotta Warriors visit — practical guide (${body.invoice})`,
+          html,
+        });
+        if (error) emailError = error.message || String(error); else emailed = true;
+      } catch (e) { emailError = e.message || String(e); }
+      if (emailed) {
+        await db`UPDATE bookings SET guide_info_sent_at = now() WHERE invoice_id = ${body.invoice}`;
+      }
+      return json(res, 200, { ok: true, emailed, emailError, email: b.email });
     }
 
     if (req.method === 'PATCH' && u.pathname === '/api/booking') {
