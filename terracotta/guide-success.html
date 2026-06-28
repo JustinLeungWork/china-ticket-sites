@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Private Guide Confirmed — Terracotta Warriors</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+<style>
+  :root { --primary:#6B3200; --accent:#C8960C; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'DM Sans',sans-serif; background:#f5f5f5; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px; }
+  .card { background:#fff; border-radius:8px; max-width:520px; width:100%; padding:48px 40px; text-align:center; box-shadow:0 2px 16px rgba(0,0,0,.08); }
+  .icon { width:64px; height:64px; background:var(--primary); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 24px; }
+  .icon svg { width:32px; height:32px; fill:none; stroke:#fff; stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; }
+  h1 { font-family:'Playfair Display',serif; color:var(--primary); font-size:26px; margin-bottom:12px; }
+  p { color:#555; line-height:1.7; font-size:15px; margin-bottom:16px; }
+  a.btn { display:inline-block; margin-top:8px; background:var(--primary); color:#fff; text-decoration:none; padding:13px 28px; border-radius:4px; font-size:14px; font-weight:500; }
+  .ref { font-size:12px; color:#bbb; margin-top:20px; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+  <h1>Private Guide Confirmed</h1>
+  <p>Your guide fee has been received and your private English-speaking guide is confirmed. We'll email your guide's name, the meeting point and the start time before your visit — nothing more you need to do right now.</p>
+  <p style="font-size:13px;color:#888">Didn't get a confirmation email? Check your spam folder or contact <a href="mailto:support@terracotta-tickets.com" style="color:var(--primary)">support@terracotta-tickets.com</a></p>
+  <a class="btn" href="/">Back to site</a>
+  <p class="ref" id="ref"></p>
+</div>
+<script>
+  const inv = new URLSearchParams(location.search).get('invoice');
+  if (inv) document.getElementById('ref').textContent = 'Booking reference: ' + inv;
+</script>
+</body>
+</html>

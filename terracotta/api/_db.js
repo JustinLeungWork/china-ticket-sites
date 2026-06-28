@@ -34,6 +34,17 @@ async function ensureSchema() {
       paid_at           TIMESTAMPTZ,
       purged_at         TIMESTAMPTZ
     )`;
+  // Private-guide add-on tracking (added later; ADD COLUMN IF NOT EXISTS is
+  // idempotent so this is safe to run on every warm start).
+  //   guide_status: NULL = none · 'requested' = ticked at checkout, awaiting
+  //   availability · 'link_sent' = $150 payment link emailed · 'paid' = settled.
+  await sql`ALTER TABLE bookings ADD COLUMN IF NOT EXISTS guide_requested    BOOLEAN NOT NULL DEFAULT false`;
+  await sql`ALTER TABLE bookings ADD COLUMN IF NOT EXISTS guide_size         INTEGER`;
+  await sql`ALTER TABLE bookings ADD COLUMN IF NOT EXISTS guide_status       TEXT`;
+  await sql`ALTER TABLE bookings ADD COLUMN IF NOT EXISTS guide_amount_cents INTEGER`;
+  await sql`ALTER TABLE bookings ADD COLUMN IF NOT EXISTS guide_session_id   TEXT`;
+  await sql`ALTER TABLE bookings ADD COLUMN IF NOT EXISTS guide_link_sent_at TIMESTAMPTZ`;
+  await sql`ALTER TABLE bookings ADD COLUMN IF NOT EXISTS guide_paid_at      TIMESTAMPTZ`;
   schemaReady = true;
 }
 

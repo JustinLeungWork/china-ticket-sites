@@ -15,7 +15,15 @@ CREATE TABLE IF NOT EXISTS bookings (
   status            TEXT NOT NULL DEFAULT 'pending',  -- pending | paid
   created_at        TIMESTAMPTZ NOT NULL DEFAULT now(),
   paid_at           TIMESTAMPTZ,
-  purged_at         TIMESTAMPTZ
+  purged_at         TIMESTAMPTZ,
+  -- Private English guide add-on ($150 flat, request-only, billed separately).
+  guide_requested    BOOLEAN NOT NULL DEFAULT false,
+  guide_size         INTEGER,
+  guide_status       TEXT,             -- NULL | requested | link_sent | paid
+  guide_amount_cents INTEGER,
+  guide_session_id   TEXT,
+  guide_link_sent_at TIMESTAMPTZ,
+  guide_paid_at      TIMESTAMPTZ
 );
 
 -- Helps the daily purge job find rows to clear.

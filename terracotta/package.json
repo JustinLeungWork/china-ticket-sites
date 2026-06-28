@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "engines": { "node": ">=18" },
+  "scripts": {
+    "admin": "node admin/server.js"
+  },
   "dependencies": {
     "@neondatabase/serverless": "^1.0.0",
     "stripe": "^14.0.0",

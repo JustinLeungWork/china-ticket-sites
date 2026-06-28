@@ -41,13 +41,14 @@ module.exports = async (req, res) => {
   // Stripe). If the DB isn't configured yet (no DATABASE_URL) or is briefly
   // unavailable, fall back to Stripe metadata so checkout still works — this
   // self-heals the moment DATABASE_URL is set.
+  const guideReq = !!guideRequested;
   let dbStored = false;
   try {
     await ensureSchema();
     const sql = getSql();
     await sql`
-      INSERT INTO bookings (invoice_id, email, visit_date, visitor_qty, amount_cents, currency, ticket_type, passport_data, status)
-      VALUES (${invoiceId}, ${email}, ${visitDate}, ${qty}, ${amountCents}, 'usd', 'admission', ${JSON.stringify(cleanVisitors)}::jsonb, 'pending')`;
+      INSERT INTO bookings (invoice_id, email, visit_date, visitor_qty, amount_cents, currency, ticket_type, passport_data, status, guide_requested, guide_size, guide_status)
+      VALUES (${invoiceId}, ${email}, ${visitDate}, ${qty}, ${amountCents}, 'usd', 'admission', ${JSON.stringify(cleanVisitors)}::jsonb, 'pending', ${guideReq}, ${guideReq ? Math.min(qty, 10) : null}, ${guideReq ? 'requested' : null})`;
     dbStored = true;
   } catch (dbErr) {
     console.error('Booking DB unavailable — falling back to Stripe metadata:', dbErr.message);

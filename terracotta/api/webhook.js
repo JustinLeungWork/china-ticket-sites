@@ -40,6 +40,41 @@ module.exports = async (req, res) => {
   const invoiceId = m.invoiceId || session.client_reference_id;
   const esc = s => String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 
+  // ── Private-guide payment branch ───────────────────────────────────────────
+  // The $150 guide fee is a SEPARATE Stripe checkout (created from the admin
+  // dashboard) carrying metadata.type='guide'. Confirm it on its own track so we
+  // never send the admission "buy tickets" instructions for a guide payment.
+  if (m.type === 'guide') {
+    const gEmail = m.customerEmail || session.customer_details?.email || session.customer_email;
+    const gDate  = m.visitDate || '';
+    const gTotal = (session.amount_total / 100).toFixed(2);
+    const gName  = esc((gEmail || '').split('@')[0] || 'there');
+    const FROM   = `${BRAND_NAME} <bookings@${process.env.EMAIL_DOMAIN}>`;
+    try {
+      await ensureSchema();
+      const sql = getSql();
+      await sql`UPDATE bookings SET guide_status = 'paid', guide_paid_at = now(), guide_amount_cents = ${session.amount_total}, guide_session_id = ${session.id} WHERE invoice_id = ${invoiceId}`;
+    } catch (err) { console.error('Guide payment DB update failed:', err.message); }
+
+    const gOpHtml = `<div style="font-family:Arial,sans-serif;max-width:600px"><div style="background:${BRAND_COLOR};color:#fff;padding:20px 24px"><h2 style="margin:0;font-size:18px">Guide PAID — Assign a Guide</h2><p style="margin:6px 0 0;opacity:.8;font-size:13px">${BRAND_NAME} · ${esc(invoiceId)}</p></div><div style="padding:24px;background:#f9f9f9"><table style="width:100%;border-collapse:collapse;margin-bottom:20px"><tr><td style="padding:7px 10px;border:1px solid #eee;background:#fafafa;font-size:13px;width:140px">Invoice</td><td style="padding:7px 10px;border:1px solid #eee;font-size:13px"><strong>${esc(invoiceId)}</strong></td></tr><tr><td style="padding:7px 10px;border:1px solid #eee;background:#fafafa;font-size:13px">Visit date</td><td style="padding:7px 10px;border:1px solid #eee;font-size:13px"><strong>${esc(gDate)}</strong></td></tr><tr><td style="padding:7px 10px;border:1px solid #eee;background:#fafafa;font-size:13px">Customer</td><td style="padding:7px 10px;border:1px solid #eee;font-size:13px">${esc(gEmail)}</td></tr><tr><td style="padding:7px 10px;border:1px solid #eee;background:#fafafa;font-size:13px">Guide fee paid</td><td style="padding:7px 10px;border:1px solid #eee;font-size:13px"><strong>$${gTotal} USD</strong></td></tr></table><div style="background:#e8f4ea;border-left:4px solid #2e7d32;padding:14px;font-size:13px;line-height:1.6;border-radius:2px"><strong>ACTION:</strong> assign the private English guide for ${esc(gDate)} and email the customer the meeting point + time.</div></div></div>`;
+    const gCustHtml = `<div style="font-family:Arial,sans-serif;max-width:560px;margin:0 auto"><div style="background:${BRAND_COLOR};color:#fff;padding:24px;text-align:center"><h1 style="margin:0;font-size:20px">Private Guide Confirmed</h1><p style="margin:8px 0 0;opacity:.8;font-size:13px">Terracotta Warriors · ${esc(gDate)}</p></div><div style="padding:24px;background:#f8f8f8"><p style="font-size:15px;margin-bottom:8px">Hi ${gName},</p><p style="font-size:14px;color:#555;line-height:1.65;margin-bottom:20px">Your <strong>private English guide</strong> is confirmed and paid. We'll email your guide's name and the exact meeting point and time before your visit on <strong>${esc(gDate)}</strong>.</p><div style="background:#fff;border:1px solid #eee;border-radius:4px;padding:20px;margin-bottom:20px"><table style="width:100%;font-size:14px;border-collapse:collapse"><tr><td style="padding:5px 0;color:#888">Booking reference</td><td style="padding:5px 0;text-align:right"><strong>${esc(invoiceId)}</strong></td></tr><tr><td style="padding:5px 0;color:#888">Visit date</td><td style="padding:5px 0;text-align:right"><strong>${esc(gDate)}</strong></td></tr><tr style="border-top:1px solid #eee"><td style="padding:10px 0;font-weight:600">Guide fee paid</td><td style="padding:10px 0;text-align:right;font-weight:600">$${gTotal} USD</td></tr></table></div><p style="font-size:13px;color:#888">Questions? Quote ${esc(invoiceId)} and email <a href="mailto:${SUPPORT_EMAIL}" style="color:${BRAND_COLOR}">${SUPPORT_EMAIL}</a></p></div></div>`;
+
+    try {
+      const { error } = await resend.emails.send({ from: FROM, to: process.env.OPERATOR_EMAIL, subject: `🧑‍🏫 Guide PAID ${invoiceId} — ${gDate}`, html: gOpHtml });
+      if (error) console.error('Guide operator email rejected by Resend:', error);
+    } catch (err) { console.error('Guide operator email threw:', err); }
+    try {
+      const { error } = await resend.emails.send({ from: FROM, to: gEmail, subject: `Your private guide is confirmed (${invoiceId})`, html: gCustHtml });
+      if (error) console.error('Guide customer email rejected by Resend:', error);
+    } catch (err) { console.error('Guide customer email threw:', err); }
+    return res.json({ received: true });
+  }
+
+  // Ignore any session that isn't one of ours (e.g. a manual Stripe payment
+  // link): with no invoice id we can't tie it to a booking, and a generic
+  // "Booking Confirmed" would be wrong.
+  if (!invoiceId) { console.log('Webhook: ignoring session with no invoiceId', session.id); return res.json({ received: true }); }
+
   // Passport details normally live in OUR database, not in Stripe — look them up
   // by invoice id. If the DB wasn't available at checkout, they were packed into
   // Stripe metadata as a fallback (see checkout.js) — read them from there instead.

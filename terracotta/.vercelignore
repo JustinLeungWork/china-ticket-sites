@@ -1,0 +1,9 @@
+# Keep the local-only admin dashboard OUT of the public Vercel deploy.
+# It binds to localhost and uses your Stripe secret + DB string from .env —
+# it must never be reachable on the public site.
+admin/
+
+# Dev/reference files that don't belong in the deployed output.
+db/
+DB_SETUP.md
+RETENTION_POLICY.md
