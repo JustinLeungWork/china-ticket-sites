@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS bookings (
   created_at        TIMESTAMPTZ NOT NULL DEFAULT now(),
   paid_at           TIMESTAMPTZ,
   purged_at         TIMESTAMPTZ,
+  time_slot          TEXT,             -- chosen 1-hour entry window, e.g. 08:30-09:30
   -- Private English guide add-on ($150 flat, request-only, billed separately).
   guide_requested    BOOLEAN NOT NULL DEFAULT false,
   guide_size         INTEGER,

@@ -34,6 +34,8 @@ async function ensureSchema() {
       paid_at           TIMESTAMPTZ,
       purged_at         TIMESTAMPTZ
     )`;
+  // Entry time slot — the museum's 1-hour entry window the customer chose.
+  await sql`ALTER TABLE bookings ADD COLUMN IF NOT EXISTS time_slot TEXT`;
   // Private-guide add-on tracking (added later; ADD COLUMN IF NOT EXISTS is
   // idempotent so this is safe to run on every warm start).
   //   guide_status: NULL = none · 'requested' = ticked at checkout, awaiting

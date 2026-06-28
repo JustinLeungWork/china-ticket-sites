@@ -142,7 +142,7 @@ function render() {
     return `<tr>
       <td class="muted">${fmtDT(b.created_at)}</td>
       <td class="mono">${b.invoice_id}</td>
-      <td>${(b.visit_date||'').slice(0,10)}</td>
+      <td>${(b.visit_date||'').slice(0,10)}${b.time_slot ? `<div class="muted" style="font-size:11px">${b.time_slot}</div>` : ''}</td>
       <td>${b.email||'—'}${ppHtml(b)}</td>
       <td>${b.visitor_qty}</td>
       <td>${money(b.amount_cents)}</td>

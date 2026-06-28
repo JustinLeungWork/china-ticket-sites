@@ -8,12 +8,15 @@ const ATTRACTION = "Terracotta Warriors Museum, Xi'an";
 // ID and aren't available to foreign passport holders. The English private
 // guide is handled separately as a request (see /api/enquiry), not here.
 const ADMISSION = { name: 'Full-Price Admission', cents: 2600 };
+// The museum's fixed 1-hour entry windows — the customer picks one and we book it.
+const TIME_SLOTS = ['08:30-09:30','09:31-10:30','10:31-11:30','11:31-12:30','12:31-13:30','13:31-14:30','14:31-15:30','15:31-17:00'];
+const MAX_QTY = 10;  // tickets per order
 // ─────────────────────────────────────────────────────────────────────────
 
 module.exports = async (req, res) => {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const { visitDate, visitorQty, email, visitors, guideRequested } = req.body || {};
+  const { visitDate, visitorQty, email, visitors, guideRequested, timeSlot } = req.body || {};
 
   if (!visitDate || !email || !Array.isArray(visitors) || visitors.length === 0)
     return res.status(400).json({ error: 'Missing required fields' });
@@ -26,7 +29,8 @@ module.exports = async (req, res) => {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(visitDate) || visitDate < minDate || visitDate > MAX_DATE)
     return res.status(400).json({ error: 'Invalid visit date' });
 
-  const qty = Math.max(1, parseInt(visitorQty) || visitors.length);
+  const qty = Math.min(MAX_QTY, Math.max(1, parseInt(visitorQty) || visitors.length));  // cap at 10/order
+  const slot = TIME_SLOTS.includes(timeSlot) ? timeSlot : null;
   const amountCents = ADMISSION.cents * qty;
   const invoiceId = newInvoiceId();
 
@@ -47,14 +51,14 @@ module.exports = async (req, res) => {
     await ensureSchema();
     const sql = getSql();
     await sql`
-      INSERT INTO bookings (invoice_id, email, visit_date, visitor_qty, amount_cents, currency, ticket_type, passport_data, status, guide_requested, guide_size, guide_status)
-      VALUES (${invoiceId}, ${email}, ${visitDate}, ${qty}, ${amountCents}, 'usd', 'admission', ${JSON.stringify(cleanVisitors)}::jsonb, 'pending', ${guideReq}, ${guideReq ? Math.min(qty, 10) : null}, ${guideReq ? 'requested' : null})`;
+      INSERT INTO bookings (invoice_id, email, visit_date, time_slot, visitor_qty, amount_cents, currency, ticket_type, passport_data, status, guide_requested, guide_size, guide_status)
+      VALUES (${invoiceId}, ${email}, ${visitDate}, ${slot}, ${qty}, ${amountCents}, 'usd', 'admission', ${JSON.stringify(cleanVisitors)}::jsonb, 'pending', ${guideReq}, ${guideReq ? Math.min(qty, 10) : null}, ${guideReq ? 'requested' : null})`;
     dbStored = true;
   } catch (dbErr) {
     console.error('Booking DB unavailable — falling back to Stripe metadata:', dbErr.message);
   }
 
-  const metadata = { invoiceId, attraction: ATTRACTION, ticketName: ADMISSION.name, visitDate, visitorQty: String(qty), customerEmail: email, guide: guideRequested ? 'yes' : 'no' };
+  const metadata = { invoiceId, attraction: ATTRACTION, ticketName: ADMISSION.name, visitDate, timeSlot: slot || '', visitorQty: String(qty), customerEmail: email, guide: guideRequested ? 'yes' : 'no' };
   if (!dbStored) {
     // Fallback only: pack passports into metadata so the operator still gets them.
     cleanVisitors.forEach((v, i) => { metadata[`v${i}`] = JSON.stringify({ n: v.name, p: v.passportNumber, dob: v.dateOfBirth }); });
@@ -67,7 +71,7 @@ module.exports = async (req, res) => {
       line_items: [{
         price_data: {
           currency: 'usd',
-          product_data: { name: ADMISSION.name, description: `${ATTRACTION} · ${visitDate}` },
+          product_data: { name: ADMISSION.name, description: `${ATTRACTION} · ${visitDate}${slot ? ' · ' + slot : ''}` },
           unit_amount: ADMISSION.cents,
         },
         quantity: qty,

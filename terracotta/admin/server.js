@@ -84,7 +84,7 @@ async function listBookings(withStripe) {
   await ensureSchema();           // create table + guide columns if missing
   const sql = sqlClient();
   const rows = await sql`
-    SELECT invoice_id, email, visit_date, visitor_qty, amount_cents, currency, status,
+    SELECT invoice_id, email, visit_date, time_slot, visitor_qty, amount_cents, currency, status,
            passport_data, stripe_session_id, created_at, paid_at,
            guide_requested, guide_size, guide_status, guide_amount_cents,
            guide_session_id, guide_link_sent_at, guide_paid_at

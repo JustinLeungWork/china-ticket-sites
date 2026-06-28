@@ -408,9 +408,22 @@
             <div class="date-hint" id="date-hint">チケットは約7日前から発売されます — 予約可能な日程からお選びください。</div>
             <input type="hidden" id="visit-date">
           </div>
+          <style>
+            .slots { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:4px; }
+            .slot { padding:11px 8px; border:1px solid #e0d8cc; border-radius:8px; background:#fff; cursor:pointer; font:inherit; font-size:14.5px; color:#2a2118; text-align:center; transition:border-color .15s, background .15s; }
+            .slot:hover { border-color:#6B3200; }
+            .slot.selected { background:#6B3200; color:#fff; border-color:#6B3200; font-weight:600; }
+          </style>
+          <div class="form-group">
+            <label>入場時間帯</label>
+            <div class="slots" id="timeslots"></div>
+            <div class="date-hint">ご希望の1時間の入場時間帯をお選びください。その時間内であればいつでも入場できます。</div>
+            <input type="hidden" id="time-slot">
+          </div>
           <div class="form-group">
             <label for="visitor-qty">訪問者の人数</label>
             <input type="number" id="visitor-qty" value="2" min="1" max="10">
+            <div class="date-hint">1回のご注文につき最大10枚まで。</div>
           </div>
           <div class="summary-box" id="order-summary">
             <div class="sum-row"><span id="sum-name" style="color:var(--text)"></span></div>
@@ -714,7 +727,8 @@
     const box = document.getElementById('order-summary');
     if (!date || visitors < 1) { box.style.display = 'none'; return; }
     const total = visitors * ADMISSION.price;
-    document.getElementById('sum-name').textContent = ADMISSION.name + ' · ' + fmtDate(date);
+    const slot = document.getElementById('time-slot').value;
+    document.getElementById('sum-name').textContent = ADMISSION.name + ' · ' + fmtDate(date) + (slot ? ' · ' + slot : '');
     document.getElementById('sum-visitors').textContent = visitors;
     document.getElementById('sum-at').textContent = total.toFixed(2);
     document.getElementById('sum-total').textContent = total.toFixed(2);
@@ -763,13 +777,30 @@
     }
   }
   buildDateStrip('date-strip', 'visit-date', updateSummary);
+
+  // Fixed 1-hour museum entry windows. Customer picks one; we book that slot.
+  const TIME_SLOTS = ['08:30-09:30','09:31-10:30','10:31-11:30','11:31-12:30','12:31-13:30','13:31-14:30','14:31-15:30','15:31-17:00'];
+  function buildTimeSlots(containerId, hiddenId, onPick) {
+    const wrap = document.getElementById(containerId);
+    const hidden = document.getElementById(hiddenId);
+    if (!wrap || !hidden) return;
+    wrap.innerHTML = TIME_SLOTS.map(s => `<button type="button" class="slot" data-slot="${s}">${s}</button>`).join('');
+    wrap.querySelectorAll('.slot').forEach(b => b.addEventListener('click', () => {
+      wrap.querySelectorAll('.slot').forEach(x => x.classList.remove('selected'));
+      b.classList.add('selected'); hidden.value = b.dataset.slot; if (onPick) onPick();
+    }));
+  }
+  buildTimeSlots('timeslots', 'time-slot', updateSummary);
   buildDateStrip('guide-date-strip', 'guide-date');
 
   function goToPassport() {
     const date = document.getElementById('visit-date').value;
+    const slot = document.getElementById('time-slot').value;
     const visitors = parseInt(document.getElementById('visitor-qty').value) || 0;
     if (!date) { alert('訪問日を選択してください。'); return; }
+    if (!slot) { alert('入場時間帯を選択してください。'); return; }
     if (visitors < 1) { alert('訪問者を1名以上入力してください。'); return; }
+    if (visitors > 10) { alert('1回のご注文につき最大10枚までです。'); return; }
     const today = new Date().toISOString().split('T')[0];
     const forms = document.getElementById('pp-forms');
     forms.innerHTML = '';
@@ -777,7 +808,7 @@
       forms.innerHTML += `<div class="visitor-block"><div class="visitor-title">訪問者 ${i + 1}</div><div class="pp-grid"><div class="form-group span2"><label>氏名（パスポート記載のとおり）</label><input type="text" class="pp-name" placeholder="例：TANAKA YUKI" autocomplete="off" required></div><div class="form-group span2"><label>パスポート番号</label><input type="text" class="pp-num" placeholder="例：TK1234567" required></div><div class="form-group span2"><label>生年月日</label><input type="date" class="pp-dob" max="${today}" required></div></div></div>`;
     }
     const total = visitors * ADMISSION.price;
-    document.getElementById('pp-summary').innerHTML = `<div class="sum-row"><span style="color:var(--text)">${ADMISSION.name} · ${fmtDate(date)}</span></div><div class="sum-row"><span>入場券 × ${visitors}</span><span>$${total.toFixed(2)}</span></div><div class="sum-row total"><span>合計</span><span>$${total.toFixed(2)} USD</span></div>`;
+    document.getElementById('pp-summary').innerHTML = `<div class="sum-row"><span style="color:var(--text)">${ADMISSION.name} · ${fmtDate(date)} · ${slot}</span></div><div class="sum-row"><span>入場券 × ${visitors}</span><span>$${total.toFixed(2)}</span></div><div class="sum-row total"><span>合計</span><span>$${total.toFixed(2)} USD</span></div>`;
     document.getElementById('step-select').style.display = 'none';
     const pp = document.getElementById('passport-section');
     pp.style.display = 'block';
@@ -797,6 +828,7 @@
   async function submitBooking() {
     const btn = document.getElementById('btn-pay');
     const date = document.getElementById('visit-date').value;
+    const timeSlot = document.getElementById('time-slot').value;
     const email = document.getElementById('cust-email').value.trim();
     const names = [...document.querySelectorAll('.pp-name')];
     const nums  = [...document.querySelectorAll('.pp-num')];
@@ -812,7 +844,7 @@
     if (!document.getElementById('consent-box').checked) { alert('続行するには利用規約およびプライバシーポリシーに同意してください。'); return; }
     btn.disabled = true; btn.textContent = 'お支払いページに移動中…';
     try {
-      const res = await fetch('/api/checkout', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ticketType: 'admission', visitDate: date, visitorQty: visitorList.length, email, visitors: visitorList }) });
+      const res = await fetch('/api/checkout', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ticketType: 'admission', visitDate: date, timeSlot, visitorQty: visitorList.length, email, visitors: visitorList }) });
       const data = await res.json();
       if (data.url) { window.location.href = data.url; } else { throw new Error(data.error || 'Unknown error'); }
     } catch (e) {
