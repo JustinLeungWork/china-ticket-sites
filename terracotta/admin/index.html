@@ -303,7 +303,7 @@ function rowHtml(b) {
     try {
       const parsed = JSON.parse(b.passport_data);
       if (Array.isArray(parsed))
-        display = parsed.map((p,i)=>`[${i+1}] ${p.first_name||''} ${p.last_name||''} · ${p.passport_number||'?'}`).join('\n');
+        display = parsed.map((p,i)=>`[${i+1}] ${p.name||((p.first_name||'')+' '+(p.last_name||'')).trim()||'?'} · ${p.passportNumber||p.passport_number||'?'} · DOB ${p.dateOfBirth||'?'}`).join('\n');
       else display = JSON.stringify(parsed, null, 2);
     } catch { display = b.passport_data; }
     pp = `<button class="btn-pp" onclick="togglePP('${ppId}')">Show</button>
@@ -326,16 +326,29 @@ function rowHtml(b) {
 }
 
 function guideHtml(b) {
-  if (!b.guide_requested) return '<span class="btn-guide btn-guide-na">—</span>';
+  if (!b.guide_requested) return '<span style="color:var(--muted);font-size:12px">—</span>';
   const gs = b.guide_status;
-  if (gs === 'paid') return `<span class="btn-guide btn-guide-paid">Paid ${fmt(b.guide_amount_cents,'usd')}</span>`;
+  const pax = b.guide_size ? `· ${b.guide_size} pax` : '';
   const price = `$${(currentSiteConfig.guideCents/100).toFixed(0)}`;
-  if (gs === 'link_sent') {
-    const d = b.guide_link_sent_at ? ` (${fmtDate(b.guide_link_sent_at)})` : '';
-    return `<span class="badge badge-blue">Sent${d}</span><br>
-      <button class="btn-guide btn-guide-send" style="margin-top:6px" onclick="sendGuide('${esc(b.invoice_id)}',this)">Resend</button>`;
+
+  if (gs === 'paid') {
+    return `<div style="display:flex;flex-direction:column;gap:3px">
+      <span class="badge badge-green">Guide paid</span>
+      <span style="font-size:11px;color:var(--muted)">${fmt(b.guide_amount_cents,'usd')} · ${fmtDate(b.guide_paid_at)}</span>
+    </div>`;
   }
-  return `<button class="btn-guide btn-guide-send" onclick="sendGuide('${esc(b.invoice_id)}',this)">Send ${price} link</button>`;
+  if (gs === 'link_sent') {
+    return `<div style="display:flex;flex-direction:column;gap:4px">
+      <span class="badge badge-blue">Link sent</span>
+      <span style="font-size:11px;color:var(--muted)">Sent ${fmtDate(b.guide_link_sent_at)} ${pax}</span>
+      <button class="btn-guide btn-guide-send" style="margin-top:2px" onclick="sendGuide('${esc(b.invoice_id)}',this)">Resend ${price}</button>
+    </div>`;
+  }
+  // status = 'requested' — awaiting link
+  return `<div style="display:flex;flex-direction:column;gap:4px">
+    <span class="badge badge-yellow">Requested ${pax}</span>
+    <button class="btn-guide btn-guide-send" style="margin-top:2px" onclick="sendGuide('${esc(b.invoice_id)}',this)">Send ${price} link</button>
+  </div>`;
 }
 
 function togglePP(id) {
