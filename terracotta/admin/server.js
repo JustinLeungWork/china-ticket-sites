@@ -39,7 +39,7 @@ const path = require('path');
       const key = s.slice(0, eq).trim();
       let val = s.slice(eq + 1).trim();
       if ((val.startsWith('"') && val.endsWith('"')) || (val.startsWith("'") && val.endsWith("'"))) val = val.slice(1, -1);
-      if (!(key in process.env)) process.env[key] = val;
+      process.env[key] = val;
     }
   }
 })();
