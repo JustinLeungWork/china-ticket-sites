@@ -59,6 +59,7 @@ function buildSiteConfig(siteId) {
     supportEmail:  get('SUPPORT_EMAIL', ''),
     operatorEmail: get('OPERATOR_EMAIL',''),
     guideCents:    parseInt(get('GUIDE_CENTS', '15000'), 10),
+    tripAdvisorUrl: get('TRIPADVISOR_URL', ''),
     dbUrl:         process.env[P + 'DATABASE_URL'] || process.env['DATABASE_URL'] || '',
     stripeKey:     process.env[P + 'STRIPE_SECRET_KEY'] || process.env['STRIPE_SECRET_KEY'] || '',
     resendKey:     process.env[P + 'RESEND_API_KEY'] || process.env['RESEND_API_KEY'] || '',

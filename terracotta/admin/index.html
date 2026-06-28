@@ -43,6 +43,14 @@
   .dot-warn { background: var(--yellow); }
   .dot-err { background: var(--red); }
 
+  /* ── Tools bar ── */
+  .tools-bar { padding: 6px 24px; background: #f8f9ff; border-bottom: 1px solid var(--border); display: flex; gap: 8px; flex-wrap: wrap; align-items: center; font-size: 11px; }
+  .tools-label { color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: .05em; margin-right: 2px; white-space: nowrap; }
+  .tool-link { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 12px; background: #fff; border: 1px solid var(--border); color: var(--blue); text-decoration: none; font-size: 11px; font-weight: 500; white-space: nowrap; transition: background .15s, border-color .15s; }
+  .tool-link:hover { background: #e8f0fe; border-color: #aac4f8; }
+  .tool-link.green { color: var(--green); }
+  .tool-link.green:hover { background: #e6f4ea; border-color: #a8d5b5; }
+
   /* ── Stats ── */
   .stats { display: grid; grid-template-columns: repeat(auto-fit,minmax(140px,1fr)); gap: 12px; padding: 20px 24px 0; }
   .stat { background: #fff; border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow); }
@@ -117,6 +125,7 @@
 </div>
 
 <div class="env-bar" id="envBar">Loading…</div>
+<div class="tools-bar" id="toolsBar"></div>
 
 <div class="stats" id="stats"></div>
 
@@ -221,6 +230,7 @@ async function load() {
   currentSiteConfig = data.site || currentSiteConfig;
   setBrandColor(currentSiteConfig.color || '#6B3200');
   renderEnv(data.env || {});
+  renderTools();
   allBookings = data.bookings || [];
   renderStats();
   renderTable();
@@ -230,6 +240,21 @@ function pill(ok, okLabel, errLabel, dotClass) {
   const d = dotClass || (ok ? 'dot-ok' : 'dot-err');
   return `<span class="env-pill"><span class="dot ${d}"></span>${esc(ok ? okLabel : errLabel)}</span>`;
 }
+function renderTools() {
+  const url = (currentSiteConfig.siteUrl || '').replace(/\/$/, '');
+  const enc = encodeURIComponent;
+  const gsc  = url ? `https://search.google.com/search-console?resource_id=${enc(url + '/')}` : 'https://search.google.com/search-console';
+  const bing = url ? `https://www.bing.com/webmasters/sitemaps?siteUrl=${enc(url + '/')}` : 'https://www.bing.com/webmasters/home';
+  const ta   = currentSiteConfig.tripAdvisorUrl || '';
+  document.getElementById('toolsBar').innerHTML = `
+    <span class="tools-label">SEO</span>
+    <a class="tool-link" href="${esc(gsc)}" target="_blank" rel="noopener">📊 Google Search Console</a>
+    <a class="tool-link" href="${esc(bing)}" target="_blank" rel="noopener">🔍 Bing Webmaster</a>
+    ${ta ? `<a class="tool-link green" href="${esc(ta)}" target="_blank" rel="noopener">⭐ TripAdvisor</a>` : ''}
+    ${url ? `<a class="tool-link" href="${esc(url)}" target="_blank" rel="noopener">🌐 Live site</a>` : ''}
+  `;
+}
+
 function renderEnv(env) {
   const stripeLabel = env.stripe === 'live' ? 'Stripe live' : env.stripe === 'test' ? 'Stripe test' : 'Stripe MISSING';
   const stripeDot   = env.stripe === 'live' ? 'dot-ok' : env.stripe === 'test' ? 'dot-warn' : 'dot-err';
