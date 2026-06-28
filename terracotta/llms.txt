@@ -1,0 +1,57 @@
+# Terracotta Tickets
+
+> Independent English-language concierge that books Terracotta Warriors museum tickets for international visitors — no WeChat Pay, Alipay, or Chinese phone number required.
+
+## What we do
+
+The official Terracotta Warriors booking site (bmy.com.cn) requires SMS verification via a Chinese phone number and payment through Alipay or WeChat Pay. International visitors without Chinese payment methods cannot book directly. Terracotta Tickets holds the necessary accounts and submits bookings through China's real-name reservation system on behalf of customers, delivering confirmed QR codes by email within 24 hours.
+
+- Customers pay in USD by Visa, Mastercard, or Apple Pay via Stripe
+- One QR code is issued per passport — groups receive one code per person
+- Tickets are official museum tickets, same as those issued to Chinese visitors
+- Service fee is transparent; museum admission is ¥120 CNY (peak) / ¥90 CNY (off-peak)
+- Founded by Justin Leung, originally from Hong Kong, based in Singapore
+
+## Key facts about the museum
+
+- Full name: Emperor Qinshihuang's Mausoleum Site Museum (秦始皇帝陵博物院)
+- Chinese name: 兵马俑 (Bīngmǎyǒng)
+- Location: Lintong District, Xi'an, Shaanxi Province, China
+- UNESCO World Heritage Site (designated 1987)
+- Over 8,000 life-size terracotta soldiers, horses, and chariots discovered since 1974
+- Maximum daily visitors: 65,000 (frequently sells out on weekends and Chinese public holidays)
+- Booking window: up to 7 days in advance via bmy.com.cn
+- Entry: divided into 8 one-hour time slots from 08:30 to 17:00
+- Passport required at entry — name on ticket must match passport exactly
+- Getting there from Xi'an: Tourist Bus Line 5 (306) from Xi'an Railway Station East Square (~1 hour, ¥7)
+
+## Key pages
+
+- [Book tickets](https://terracotta-tickets.com/): Ticket booking form, pricing, FAQ
+- [Visitor Guide](https://terracotta-tickets.com/guide.html): How to get there, what to bring, entry tips, prohibited items
+- [About](https://terracotta-tickets.com/about.html): Why this service exists, founder background
+- [Korean](https://terracotta-tickets.com/ko/): 병마용 티켓 예약 (Korean-language booking page)
+- [Japanese](https://terracotta-tickets.com/ja/): 兵馬俑チケット予約 (Japanese-language booking page)
+- [Indonesian](https://terracotta-tickets.com/id/): Pemesanan tiket Terracotta Warriors (Indonesian)
+- [Thai](https://terracotta-tickets.com/th/): จองตั๋วทหารดินเผา (Thai)
+
+## Common questions answered
+
+**Can foreigners buy Terracotta Warriors tickets without WeChat Pay?**
+Yes — through Terracotta Tickets. The official site requires WeChat Pay or Alipay and a Chinese phone number for SMS verification. We handle the Chinese-side booking; you pay in USD with any standard card.
+
+**How far in advance do tickets need to be booked?**
+The museum releases tickets 7 days in advance. Weekends and Chinese public holidays sell out quickly. We recommend booking 3–4 days ahead for weekdays, 6–7 days for weekends.
+
+**What happens if tickets sell out?**
+We notify you immediately and issue a full refund. We'll also check nearby dates and advise on availability.
+
+**Is a Chinese phone number required?**
+For the official booking system, yes. We have the required accounts — customers do not need one.
+
+**What is the Terracotta Warriors ticket price?**
+The museum charges ¥120 CNY (~$17 USD) during peak season and ¥90 CNY off-peak. Our service fee covers the booking process and is disclosed at checkout.
+
+## Contact
+
+support@terracotta-tickets.com
