@@ -116,6 +116,13 @@ function envStatus(site) {
   };
 }
 
+// ── Admin-only schema additions (idempotent) ──────────────────────────────────
+async function ensureAdminColumns(site) {
+  const db = sql(site);
+  await db`ALTER TABLE bookings ADD COLUMN IF NOT EXISTS guide_agency_checked TIMESTAMPTZ`;
+  await db`ALTER TABLE bookings ADD COLUMN IF NOT EXISTS guide_notes TEXT`;
+}
+
 // ── Data ──────────────────────────────────────────────────────────────────────
 async function listBookings(site, withStripe) {
   const db = sql(site);
@@ -124,7 +131,8 @@ async function listBookings(site, withStripe) {
            amount_cents, currency, status, passport_data,
            stripe_session_id, created_at, paid_at,
            guide_requested, guide_size, guide_status, guide_amount_cents,
-           guide_session_id, guide_link_sent_at, guide_paid_at
+           guide_session_id, guide_link_sent_at, guide_paid_at,
+           guide_agency_checked, guide_notes
     FROM bookings ORDER BY created_at DESC LIMIT 200`;
 
   if (withStripe) {
@@ -256,6 +264,21 @@ const server = http.createServer(async (req, res) => {
       return json(res, 200, { ok: true, ...(await sendGuideLink(site, body.invoice)) });
     }
 
+    if (req.method === 'PATCH' && u.pathname === '/api/booking') {
+      const body = await readBody(req);
+      if (!body.invoice) return json(res, 400, { ok: false, error: 'invoice required' });
+      const site = getSite(body.site || DEFAULT);
+      const db = sql(site);
+      if ('agency_checked' in body) {
+        const ts = body.agency_checked ? new Date() : null;
+        await db`UPDATE bookings SET guide_agency_checked = ${ts} WHERE invoice_id = ${body.invoice}`;
+      }
+      if ('notes' in body) {
+        await db`UPDATE bookings SET guide_notes = ${body.notes || null} WHERE invoice_id = ${body.invoice}`;
+      }
+      return json(res, 200, { ok: true });
+    }
+
     json(res, 404, { ok: false, error: 'not found' });
   } catch (err) {
     console.error('Admin error:', err.message);
@@ -269,6 +292,7 @@ server.listen(PORT, '127.0.0.1', () => {
   for (const id of SITE_IDS) {
     const e = envStatus(SITES[id]);
     console.log(`  [${id}]  DB:${e.db?'ok':'MISSING'}  Stripe:${e.stripe||'MISSING'}  Resend:${e.resend?'ok':'MISSING'}  from:bookings@${e.from||'??'}`);
+    if (e.db) ensureAdminColumns(SITES[id]).catch(err => console.warn(`  [${id}] column migration warning:`, err.message));
   }
   console.log('');
 });

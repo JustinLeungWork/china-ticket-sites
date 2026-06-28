@@ -301,11 +301,12 @@ function rowHtml(b) {
   if (b.passport_data) {
     let display;
     try {
-      const parsed = JSON.parse(b.passport_data);
+      // Neon returns JSONB already parsed; only JSON.parse if it's still a string
+      const parsed = (typeof b.passport_data === 'string') ? JSON.parse(b.passport_data) : b.passport_data;
       if (Array.isArray(parsed))
         display = parsed.map((p,i)=>`[${i+1}] ${p.name||((p.first_name||'')+' '+(p.last_name||'')).trim()||'?'} · ${p.passportNumber||p.passport_number||'?'} · DOB ${p.dateOfBirth||'?'}`).join('\n');
       else display = JSON.stringify(parsed, null, 2);
-    } catch { display = b.passport_data; }
+    } catch { display = String(b.passport_data); }
     pp = `<button class="btn-pp" onclick="togglePP('${ppId}')">Show</button>
           <div class="pp-data" id="${ppId}" style="display:none">${esc(display)}</div>`;
   }
@@ -326,29 +327,44 @@ function rowHtml(b) {
 }
 
 function guideHtml(b) {
-  if (!b.guide_requested) return '<span style="color:var(--muted);font-size:12px">—</span>';
-  const gs = b.guide_status;
-  const pax = b.guide_size ? `· ${b.guide_size} pax` : '';
+  const id = b.invoice_id;
+  const agencyChecked = !!b.guide_agency_checked;
+  const checkedDate   = b.guide_agency_checked ? ` (${fmtDate(b.guide_agency_checked)})` : '';
+  const notes         = b.guide_notes || '';
+  const notesId       = 'notes-' + id.replace(/\W/g,'');
+
+  const agencyRow = `<label style="display:flex;align-items:center;gap:6px;font-size:12px;cursor:pointer;margin-top:5px;color:var(--muted)">
+    <input type="checkbox" ${agencyChecked?'checked':''} onchange="patchBooking('${esc(id)}',{agency_checked:this.checked})">
+    <span>Agency asked${agencyChecked?checkedDate:''}</span>
+  </label>`;
+
+  const notesRow = `<div style="margin-top:5px">
+    <textarea id="${notesId}" rows="2"
+      style="width:100%;font-size:11px;padding:5px 7px;border:1px solid var(--border);border-radius:4px;resize:vertical;font-family:inherit;color:var(--muted)"
+      placeholder="Guide notes…"
+      onblur="patchBooking('${esc(id)}',{notes:this.value})">${esc(notes)}</textarea>
+  </div>`;
+
+  if (!b.guide_requested) return `<div style="color:var(--muted);font-size:12px">—</div>`;
+
+  const gs    = b.guide_status;
+  const pax   = b.guide_size ? ` · ${b.guide_size} pax` : '';
   const price = `$${(currentSiteConfig.guideCents/100).toFixed(0)}`;
 
+  let statusHtml;
   if (gs === 'paid') {
-    return `<div style="display:flex;flex-direction:column;gap:3px">
-      <span class="badge badge-green">Guide paid</span>
-      <span style="font-size:11px;color:var(--muted)">${fmt(b.guide_amount_cents,'usd')} · ${fmtDate(b.guide_paid_at)}</span>
-    </div>`;
+    statusHtml = `<span class="badge badge-green">Guide paid</span>
+      <span style="font-size:11px;color:var(--muted);display:block;margin-top:2px">${fmt(b.guide_amount_cents,'usd')} · ${fmtDate(b.guide_paid_at)}</span>`;
+  } else if (gs === 'link_sent') {
+    statusHtml = `<span class="badge badge-blue">Link sent</span>
+      <span style="font-size:11px;color:var(--muted);display:block;margin-top:2px">Sent ${fmtDate(b.guide_link_sent_at)}${pax}</span>
+      <button class="btn-guide btn-guide-send" style="margin-top:4px" onclick="sendGuide('${esc(id)}',this)">Resend ${price}</button>`;
+  } else {
+    statusHtml = `<span class="badge badge-yellow">Requested${pax}</span>
+      <button class="btn-guide btn-guide-send" style="margin-top:4px" onclick="sendGuide('${esc(id)}',this)">Send ${price} link</button>`;
   }
-  if (gs === 'link_sent') {
-    return `<div style="display:flex;flex-direction:column;gap:4px">
-      <span class="badge badge-blue">Link sent</span>
-      <span style="font-size:11px;color:var(--muted)">Sent ${fmtDate(b.guide_link_sent_at)} ${pax}</span>
-      <button class="btn-guide btn-guide-send" style="margin-top:2px" onclick="sendGuide('${esc(b.invoice_id)}',this)">Resend ${price}</button>
-    </div>`;
-  }
-  // status = 'requested' — awaiting link
-  return `<div style="display:flex;flex-direction:column;gap:4px">
-    <span class="badge badge-yellow">Requested ${pax}</span>
-    <button class="btn-guide btn-guide-send" style="margin-top:2px" onclick="sendGuide('${esc(b.invoice_id)}',this)">Send ${price} link</button>
-  </div>`;
+
+  return `<div style="display:flex;flex-direction:column;gap:0">${statusHtml}${agencyRow}${notesRow}</div>`;
 }
 
 function togglePP(id) {
@@ -390,6 +406,25 @@ async function sendGuide(invoiceId, btn) {
     toast('Error: ' + esc(e.message), true);
     btn.disabled = false;
     btn.textContent = orig;
+  }
+}
+
+async function patchBooking(invoiceId, patch) {
+  try {
+    const r = await fetch('/api/booking', {
+      method: 'PATCH',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ invoice: invoiceId, site: currentSite, ...patch }),
+    }).then(x => x.json());
+    if (!r.ok) toast('Save failed: ' + esc(r.error || 'unknown'), true);
+    // Update local state so re-render reflects change without a full reload
+    const b = allBookings.find(x => x.invoice_id === invoiceId);
+    if (b) {
+      if ('agency_checked' in patch) b.guide_agency_checked = patch.agency_checked ? new Date().toISOString() : null;
+      if ('notes' in patch) b.guide_notes = patch.notes;
+    }
+  } catch(e) {
+    toast('Save failed: ' + esc(e.message), true);
   }
 }
 
