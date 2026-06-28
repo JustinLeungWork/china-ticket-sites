@@ -128,6 +128,19 @@
     .ticket-face { font-size: 12px; color: var(--muted); }
     .ticket-fee { font-size: 11.5px; color: var(--muted); margin-top: 5px; }
 
+    /* Compact option cards (beside the booking form) */
+    .opt-cards { display: flex; flex-direction: column; gap: 12px; margin-bottom: 22px; }
+    .ticket-card--row { display: grid; grid-template-columns: 110px 1fr; }
+    .ticket-card--row:hover { transform: none; box-shadow: var(--shadow-sm); }
+    .ticket-card--row .ticket-img { height: auto; }
+    .ticket-card--row:hover .ticket-img img { transform: none; }
+    .ticket-card--row .ticket-body { padding: 14px 16px; }
+    .ticket-card--row .ticket-name { font-size: 16px; margin-bottom: 5px; }
+    .ticket-card--row .ticket-includes { font-size: 12px; margin-bottom: 8px; line-height: 1.5; }
+    .ticket-card--row .ticket-price { font-size: 20px; }
+    .ticket-card--row .ticket-badge { margin-bottom: 6px; padding: 2px 8px; font-size: 10px; }
+    @media (max-width: 420px) { .ticket-card--row { grid-template-columns: 84px 1fr; } }
+
     .booking-section { background: var(--surface); padding: var(--section-y) var(--section-x); }
     .booking-grid { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 420px; gap: clamp(40px, 5vw, 64px); align-items: start; }
     .booking-intro h2 { font-size: clamp(24px, 2.8vw, 32px); margin-bottom: 14px; letter-spacing: -0.01em; }
@@ -336,54 +349,37 @@
   </div>
 </section>
 
-<section class="tickets-section" id="tickets">
-  <div class="section-header">
-    <div class="section-label">Your visit options</div>
-    <h2>Ticket Packages</h2>
-  </div>
-  <div class="tickets-grid tickets-grid--two">
-    <div class="ticket-card" data-scroll="book">
-      <div class="ticket-img">
-        <img src="/images/pexels-202387659-28844770.jpg" alt="Terracotta Warriors Pit 1" loading="lazy">
-      </div>
-      <div class="ticket-body">
-        <div class="ticket-name">Full-Price Admission</div>
-        <div class="ticket-includes">Entry to all 3 excavation pits · Lishan Garden mausoleum park · Bronze Chariots exhibition · Free shuttle between sites. One ticket per visitor.</div>
-        <div class="ticket-pricing"><span class="ticket-price">$25.99</span><span class="ticket-face">per visitor · ¥120 face value</span></div>
-        <div class="ticket-fee">Every visitor, including children, needs a full-price ticket — no child discount for foreign passports.</div>
-        <span class="ticket-cta">Book admission →</span>
-      </div>
-    </div>
-    <div class="ticket-card" data-scroll="book">
-      <div class="ticket-img">
-        <img src="/images/pexels-nguy-n-du-1595594339-38237298.jpg" alt="Private English guide at the Terracotta Warriors" loading="lazy">
-      </div>
-      <div class="ticket-body">
-        <span class="ticket-badge">Optional add-on</span>
-        <div class="ticket-name">Private English Guide</div>
-        <div class="ticket-includes">Licensed, museum-accredited English-speaking guide for your group · ~2.5 hours across the three pits · Up to 10 people. Just tick the box when you book.</div>
-        <div class="ticket-pricing"><span class="ticket-price">$150</span><span class="ticket-face">flat · 1–10 people, any group size</span></div>
-        <div class="ticket-fee">Availability is limited — we confirm your date before charging the guide fee.</div>
-        <span class="ticket-cta">Add at checkout →</span>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section class="booking-section" id="book">
   <div class="booking-grid">
     <div class="booking-intro">
-      <div class="section-label">Reserve your visit</div>
+      <div class="section-label">Your visit options</div>
       <h2>Book Your Tickets</h2>
-      <p>The Terracotta Warriors museum operates a strict real-name booking system — every ticket is tied to a specific passport. We purchase your tickets through the official system so you can walk straight to the gate.</p>
+      <div class="opt-cards">
+        <div class="ticket-card ticket-card--row">
+          <div class="ticket-img"><img src="/images/pexels-202387659-28844770.jpg" alt="Terracotta Warriors Pit 1" loading="lazy"></div>
+          <div class="ticket-body">
+            <div class="ticket-name">Full-Price Admission</div>
+            <div class="ticket-includes">All 3 excavation pits · Lishan Garden park · Bronze Chariots · free shuttle. One ticket per visitor.</div>
+            <div class="ticket-pricing"><span class="ticket-price">$25.99</span><span class="ticket-face">per visitor · ¥120 face value</span></div>
+          </div>
+        </div>
+        <div class="ticket-card ticket-card--row">
+          <div class="ticket-img"><img src="/images/pexels-nguy-n-du-1595594339-38237298.jpg" alt="Private English guide at the Terracotta Warriors" loading="lazy"></div>
+          <div class="ticket-body">
+            <span class="ticket-badge">Optional add-on</span>
+            <div class="ticket-name">Private English Guide</div>
+            <div class="ticket-includes">Licensed English-speaking guide · ~2.5 hrs · up to 10 people. Tick the box in the form to add it.</div>
+            <div class="ticket-pricing"><span class="ticket-price">$150</span><span class="ticket-face">flat · any group size</span></div>
+          </div>
+        </div>
+      </div>
       <div class="booking-notes">
         <h4>Before you book</h4>
         <ul>
-          <li>Bring your <strong>original passport</strong> to the entrance — name must match your ticket exactly</li>
-          <li>The museum allows only <strong>one ticket per passport per day</strong></li>
-          <li>Tickets are released up to 7 days ahead — plan accordingly for peak dates</li>
-          <li>Children also need a <strong>full-price ticket</strong> — the museum's child discount isn't available to foreign passports</li>
-          <li>The museum is open daily; last entry is 2 hours before closing</li>
+          <li>Bring your <strong>original passport</strong> — name must match your ticket exactly</li>
+          <li><strong>One ticket per passport per day</strong></li>
+          <li>Children also need a <strong>full-price ticket</strong> — no child discount for foreign passports</li>
+          <li>Open daily; last entry 2 hours before closing</li>
         </ul>
       </div>
     </div>
@@ -391,10 +387,6 @@
       <div class="form-head"><h3>Book Terracotta Warriors Tickets</h3></div>
       <div class="form-body">
         <div id="step-select">
-          <div class="plan-banner">
-            <span class="pb-name">Full-Price Admission</span>
-            <span class="pb-price">$25.99 <span>/ visitor</span></span>
-          </div>
           <input type="hidden" id="ticket-type" value="admission">
           <p class="kids-note">Every visitor — including children — needs a full-price ticket. The museum's discounted child / student / senior tickets require Chinese ID and aren't available to foreign passport holders.</p>
           <div class="form-group">
