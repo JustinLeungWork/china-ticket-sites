@@ -774,8 +774,7 @@
     const forms = document.getElementById('pp-forms');
     forms.innerHTML = '';
     for (let i = 0; i < visitors; i++) {
-      // TODO: Populate nationality as a dropdown from official booking site bmy.albatrip.cn — currently free-text
-      forms.innerHTML += `<div class="visitor-block"><div class="visitor-title">Pengunjung ${i + 1}</div><div class="pp-grid"><div class="form-group span2"><label>Nama lengkap (sesuai paspor)</label><input type="text" class="pp-name" placeholder="mis. BUDI SANTOSO" autocomplete="off" required></div><div class="form-group"><label>Nomor paspor</label><input type="text" class="pp-num" placeholder="mis. A1234567" required></div><div class="form-group"><label>Kewarganegaraan</label><input type="text" class="pp-nat" placeholder="mis. Indonesia" required></div><div class="form-group span2"><label>Tanggal lahir</label><input type="date" class="pp-dob" max="${today}" required></div></div></div>`;
+      forms.innerHTML += `<div class="visitor-block"><div class="visitor-title">Pengunjung ${i + 1}</div><div class="pp-grid"><div class="form-group span2"><label>Nama lengkap (sesuai paspor)</label><input type="text" class="pp-name" placeholder="mis. BUDI SANTOSO" autocomplete="off" required></div><div class="form-group span2"><label>Nomor paspor</label><input type="text" class="pp-num" placeholder="mis. A1234567" required></div><div class="form-group span2"><label>Tanggal lahir</label><input type="date" class="pp-dob" max="${today}" required></div></div></div>`;
     }
     const total = visitors * ADMISSION.price;
     document.getElementById('pp-summary').innerHTML = `<div class="sum-row"><span style="color:var(--text)">${ADMISSION.name} · ${fmtDate(date)}</span></div><div class="sum-row"><span>Tiket Masuk × ${visitors}</span><span>$${total.toFixed(2)}</span></div><div class="sum-row total"><span>Total</span><span>$${total.toFixed(2)} USD</span></div>`;
@@ -801,14 +800,13 @@
     const email = document.getElementById('cust-email').value.trim();
     const names = [...document.querySelectorAll('.pp-name')];
     const nums  = [...document.querySelectorAll('.pp-num')];
-    const nats  = [...document.querySelectorAll('.pp-nat')];
     const dobs  = [...document.querySelectorAll('.pp-dob')];
     const today = new Date().toISOString().split('T')[0];
     const visitorList = [];
     for (let i = 0; i < names.length; i++) {
-      if (!names[i].value || !nums[i].value || !nats[i].value || !dobs[i].value) { alert('Mohon lengkapi semua data paspor.'); return; }
+      if (!names[i].value || !nums[i].value || !dobs[i].value) { alert('Mohon lengkapi semua data paspor.'); return; }
       if (dobs[i].value > today) { alert('Tanggal lahir tidak boleh di masa depan. Mohon periksa pengunjung ' + (i + 1) + '.'); return; }
-      visitorList.push({ name: names[i].value.trim().toUpperCase(), passportNumber: nums[i].value.trim().toUpperCase(), nationality: nats[i].value.trim(), dateOfBirth: dobs[i].value });
+      visitorList.push({ name: names[i].value.trim().toUpperCase(), passportNumber: nums[i].value.trim().toUpperCase(), dateOfBirth: dobs[i].value });
     }
     if (!email || !email.includes('@')) { alert('Masukkan alamat email yang valid.'); return; }
     if (!document.getElementById('consent-box').checked) { alert('Untuk melanjutkan, harap setujui Syarat Layanan dan Kebijakan Privasi.'); return; }

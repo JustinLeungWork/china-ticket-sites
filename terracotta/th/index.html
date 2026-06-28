@@ -774,8 +774,7 @@
     const forms = document.getElementById('pp-forms');
     forms.innerHTML = '';
     for (let i = 0; i < visitors; i++) {
-      // TODO: Populate nationality as a dropdown from official booking site bmy.albatrip.cn — currently free-text
-      forms.innerHTML += `<div class="visitor-block"><div class="visitor-title">ผู้เยี่ยมชม ${i + 1}</div><div class="pp-grid"><div class="form-group span2"><label>ชื่อ-นามสกุล (ตามหนังสือเดินทาง)</label><input type="text" class="pp-name" placeholder="เช่น SOMCHAI JAIDEE" autocomplete="off" required></div><div class="form-group"><label>หมายเลขหนังสือเดินทาง</label><input type="text" class="pp-num" placeholder="เช่น AA1234567" required></div><div class="form-group"><label>สัญชาติ</label><input type="text" class="pp-nat" placeholder="เช่น ไทย" required></div><div class="form-group span2"><label>วันเกิด</label><input type="date" class="pp-dob" max="${today}" required></div></div></div>`;
+      forms.innerHTML += `<div class="visitor-block"><div class="visitor-title">ผู้เยี่ยมชม ${i + 1}</div><div class="pp-grid"><div class="form-group span2"><label>ชื่อ-นามสกุล (ตามหนังสือเดินทาง)</label><input type="text" class="pp-name" placeholder="เช่น SOMCHAI JAIDEE" autocomplete="off" required></div><div class="form-group span2"><label>หมายเลขหนังสือเดินทาง</label><input type="text" class="pp-num" placeholder="เช่น AA1234567" required></div><div class="form-group span2"><label>วันเกิด</label><input type="date" class="pp-dob" max="${today}" required></div></div></div>`;
     }
     const total = visitors * ADMISSION.price;
     document.getElementById('pp-summary').innerHTML = `<div class="sum-row"><span style="color:var(--text)">${ADMISSION.name} · ${fmtDate(date)}</span></div><div class="sum-row"><span>บัตรเข้าชม × ${visitors}</span><span>$${total.toFixed(2)}</span></div><div class="sum-row total"><span>รวมทั้งหมด</span><span>$${total.toFixed(2)} USD</span></div>`;
@@ -801,14 +800,13 @@
     const email = document.getElementById('cust-email').value.trim();
     const names = [...document.querySelectorAll('.pp-name')];
     const nums  = [...document.querySelectorAll('.pp-num')];
-    const nats  = [...document.querySelectorAll('.pp-nat')];
     const dobs  = [...document.querySelectorAll('.pp-dob')];
     const today = new Date().toISOString().split('T')[0];
     const visitorList = [];
     for (let i = 0; i < names.length; i++) {
-      if (!names[i].value || !nums[i].value || !nats[i].value || !dobs[i].value) { alert('กรุณากรอกข้อมูลหนังสือเดินทางให้ครบถ้วน'); return; }
+      if (!names[i].value || !nums[i].value || !dobs[i].value) { alert('กรุณากรอกข้อมูลหนังสือเดินทางให้ครบถ้วน'); return; }
       if (dobs[i].value > today) { alert('วันเกิดต้องไม่เป็นวันในอนาคต กรุณาตรวจสอบผู้เยี่ยมชมคนที่ ' + (i + 1)); return; }
-      visitorList.push({ name: names[i].value.trim().toUpperCase(), passportNumber: nums[i].value.trim().toUpperCase(), nationality: nats[i].value.trim(), dateOfBirth: dobs[i].value });
+      visitorList.push({ name: names[i].value.trim().toUpperCase(), passportNumber: nums[i].value.trim().toUpperCase(), dateOfBirth: dobs[i].value });
     }
     if (!email || !email.includes('@')) { alert('กรุณากรอกอีเมลที่ถูกต้อง'); return; }
     if (!document.getElementById('consent-box').checked) { alert('กรุณายอมรับข้อกำหนดการใช้บริการและนโยบายความเป็นส่วนตัวเพื่อดำเนินการต่อ'); return; }

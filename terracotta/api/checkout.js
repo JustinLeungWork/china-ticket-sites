@@ -34,7 +34,6 @@ module.exports = async (req, res) => {
   const cleanVisitors = visitors.map(v => ({
     name: String(v.name || '').trim(),
     passportNumber: String(v.passportNumber || '').trim(),
-    nationality: String(v.nationality || '').trim(),
     dateOfBirth: String(v.dateOfBirth || '').trim(),
   }));
 
@@ -57,7 +56,7 @@ module.exports = async (req, res) => {
   const metadata = { invoiceId, attraction: ATTRACTION, ticketName: ADMISSION.name, visitDate, visitorQty: String(qty), customerEmail: email, guide: guideRequested ? 'yes' : 'no' };
   if (!dbStored) {
     // Fallback only: pack passports into metadata so the operator still gets them.
-    cleanVisitors.forEach((v, i) => { metadata[`v${i}`] = JSON.stringify({ n: v.name, p: v.passportNumber, nat: v.nationality, dob: v.dateOfBirth }); });
+    cleanVisitors.forEach((v, i) => { metadata[`v${i}`] = JSON.stringify({ n: v.name, p: v.passportNumber, dob: v.dateOfBirth }); });
   }
 
   try {

@@ -774,8 +774,7 @@
     const forms = document.getElementById('pp-forms');
     forms.innerHTML = '';
     for (let i = 0; i < visitors; i++) {
-      // TODO: Populate nationality as a dropdown from official booking site bmy.albatrip.cn — currently free-text
-      forms.innerHTML += `<div class="visitor-block"><div class="visitor-title">訪問者 ${i + 1}</div><div class="pp-grid"><div class="form-group span2"><label>氏名（パスポート記載のとおり）</label><input type="text" class="pp-name" placeholder="例：TANAKA YUKI" autocomplete="off" required></div><div class="form-group"><label>パスポート番号</label><input type="text" class="pp-num" placeholder="例：TK1234567" required></div><div class="form-group"><label>国籍</label><input type="text" class="pp-nat" placeholder="例：日本" required></div><div class="form-group span2"><label>生年月日</label><input type="date" class="pp-dob" max="${today}" required></div></div></div>`;
+      forms.innerHTML += `<div class="visitor-block"><div class="visitor-title">訪問者 ${i + 1}</div><div class="pp-grid"><div class="form-group span2"><label>氏名（パスポート記載のとおり）</label><input type="text" class="pp-name" placeholder="例：TANAKA YUKI" autocomplete="off" required></div><div class="form-group span2"><label>パスポート番号</label><input type="text" class="pp-num" placeholder="例：TK1234567" required></div><div class="form-group span2"><label>生年月日</label><input type="date" class="pp-dob" max="${today}" required></div></div></div>`;
     }
     const total = visitors * ADMISSION.price;
     document.getElementById('pp-summary').innerHTML = `<div class="sum-row"><span style="color:var(--text)">${ADMISSION.name} · ${fmtDate(date)}</span></div><div class="sum-row"><span>入場券 × ${visitors}</span><span>$${total.toFixed(2)}</span></div><div class="sum-row total"><span>合計</span><span>$${total.toFixed(2)} USD</span></div>`;
@@ -801,14 +800,13 @@
     const email = document.getElementById('cust-email').value.trim();
     const names = [...document.querySelectorAll('.pp-name')];
     const nums  = [...document.querySelectorAll('.pp-num')];
-    const nats  = [...document.querySelectorAll('.pp-nat')];
     const dobs  = [...document.querySelectorAll('.pp-dob')];
     const today = new Date().toISOString().split('T')[0];
     const visitorList = [];
     for (let i = 0; i < names.length; i++) {
-      if (!names[i].value || !nums[i].value || !nats[i].value || !dobs[i].value) { alert('すべてのパスポート情報を入力してください。'); return; }
+      if (!names[i].value || !nums[i].value || !dobs[i].value) { alert('すべてのパスポート情報を入力してください。'); return; }
       if (dobs[i].value > today) { alert('生年月日に未来の日付は指定できません。訪問者' + (i + 1) + 'をご確認ください。'); return; }
-      visitorList.push({ name: names[i].value.trim().toUpperCase(), passportNumber: nums[i].value.trim().toUpperCase(), nationality: nats[i].value.trim(), dateOfBirth: dobs[i].value });
+      visitorList.push({ name: names[i].value.trim().toUpperCase(), passportNumber: nums[i].value.trim().toUpperCase(), dateOfBirth: dobs[i].value });
     }
     if (!email || !email.includes('@')) { alert('有効なメールアドレスを入力してください。'); return; }
     if (!document.getElementById('consent-box').checked) { alert('続行するには利用規約およびプライバシーポリシーに同意してください。'); return; }

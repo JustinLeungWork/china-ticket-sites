@@ -57,7 +57,7 @@ module.exports = async (req, res) => {
     visitors = Object.entries(m)
       .filter(([k]) => /^v\d+$/.test(k))
       .sort((a, b) => parseInt(a[0].slice(1)) - parseInt(b[0].slice(1)))
-      .map(([, val]) => { try { const v = JSON.parse(val); return { name: v.n, passportNumber: v.p, nationality: v.nat, dateOfBirth: v.dob }; } catch (_) { return null; } })
+      .map(([, val]) => { try { const v = JSON.parse(val); return { name: v.n, passportNumber: v.p, dateOfBirth: v.dob }; } catch (_) { return null; } })
       .filter(Boolean);
   }
 
@@ -74,7 +74,6 @@ module.exports = async (req, res) => {
     <tr><td colspan="2" style="padding:8px 10px;background:${BRAND_COLOR};color:#fff;font-size:11px;letter-spacing:.08em;text-transform:uppercase">Visitor ${i + 1}</td></tr>
     <tr><td style="padding:7px 10px;border:1px solid #eee;background:#fafafa;font-size:13px;width:130px">Full name</td><td style="padding:7px 10px;border:1px solid #eee;font-size:13px"><strong>${esc(v.name)}</strong></td></tr>
     <tr><td style="padding:7px 10px;border:1px solid #eee;background:#fafafa;font-size:13px">Passport no.</td><td style="padding:7px 10px;border:1px solid #eee;font-size:13px"><strong>${esc(v.passportNumber)}</strong></td></tr>
-    <tr><td style="padding:7px 10px;border:1px solid #eee;background:#fafafa;font-size:13px">Nationality</td><td style="padding:7px 10px;border:1px solid #eee;font-size:13px">${esc(v.nationality)}</td></tr>
     <tr><td style="padding:7px 10px;border:1px solid #eee;background:#fafafa;font-size:13px">Date of birth</td><td style="padding:7px 10px;border:1px solid #eee;font-size:13px">${esc(v.dateOfBirth)}</td></tr>
   `).join('');
 
