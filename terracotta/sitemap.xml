@@ -1,47 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://terracotta-tickets.com/</loc>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en"      href="https://terracotta-tickets.com/"/>
+    <xhtml:link rel="alternate" hreflang="ko"      href="https://terracotta-tickets.com/ko/"/>
+    <xhtml:link rel="alternate" hreflang="ja"      href="https://terracotta-tickets.com/ja/"/>
+    <xhtml:link rel="alternate" hreflang="id"      href="https://terracotta-tickets.com/id/"/>
+    <xhtml:link rel="alternate" hreflang="th"      href="https://terracotta-tickets.com/th/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://terracotta-tickets.com/"/>
   </url>
   <url>
     <loc>https://terracotta-tickets.com/guide.html</loc>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://terracotta-tickets.com/ko/</loc>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ko"      href="https://terracotta-tickets.com/ko/"/>
+    <xhtml:link rel="alternate" hreflang="en"      href="https://terracotta-tickets.com/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://terracotta-tickets.com/"/>
   </url>
   <url>
     <loc>https://terracotta-tickets.com/ja/</loc>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ja"      href="https://terracotta-tickets.com/ja/"/>
+    <xhtml:link rel="alternate" hreflang="en"      href="https://terracotta-tickets.com/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://terracotta-tickets.com/"/>
   </url>
   <url>
     <loc>https://terracotta-tickets.com/id/</loc>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="id"      href="https://terracotta-tickets.com/id/"/>
+    <xhtml:link rel="alternate" hreflang="en"      href="https://terracotta-tickets.com/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://terracotta-tickets.com/"/>
   </url>
   <url>
     <loc>https://terracotta-tickets.com/th/</loc>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="th"      href="https://terracotta-tickets.com/th/"/>
+    <xhtml:link rel="alternate" hreflang="en"      href="https://terracotta-tickets.com/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://terracotta-tickets.com/"/>
   </url>
   <url>
     <loc>https://terracotta-tickets.com/privacy.html</loc>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://terracotta-tickets.com/refunds.html</loc>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://terracotta-tickets.com/terms.html</loc>
+    <lastmod>2026-06-29</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
