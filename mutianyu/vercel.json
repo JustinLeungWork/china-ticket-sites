@@ -1,10 +1,13 @@
 {
   "functions": {
     "api/checkout.js": { "memory": 256 },
-    "api/webhook.js":  { "memory": 256 }
+    "api/webhook.js":  { "memory": 256 },
+    "api/purge.js":    { "memory": 256 }
   },
-  "routes": [
-    { "src": "/api/checkout", "dest": "/api/checkout.js" },
-    { "src": "/api/webhook",  "dest": "/api/webhook.js"  }
+  "crons": [
+    {
+      "path": "/api/purge",
+      "schedule": "0 2 * * *"
+    }
   ]
 }

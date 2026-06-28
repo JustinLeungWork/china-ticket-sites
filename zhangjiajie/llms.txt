@@ -1,0 +1,61 @@
+# Zhangjiajie Forest Park Tickets
+
+> Independent English-language concierge that books Zhangjiajie National Forest Park (Wulingyuan) tickets for international visitors — no WeChat Pay, Alipay, or Chinese phone number required.
+
+## What we do
+
+China's official Wulingyuan ticketing system requires SMS verification via a Chinese phone number and payment through Alipay or WeChat Pay. International visitors without Chinese payment methods cannot book directly. Zhangjiajie Forest Park Tickets holds the necessary accounts and submits bookings through China's real-name reservation system on behalf of customers, delivering confirmed QR codes by email within 24 hours.
+
+- Customers pay in USD by Visa, Mastercard, or Apple Pay via Stripe
+- Tickets are 4-day park passes valid from the first entry date chosen
+- One QR code is issued per passport — groups receive one code per person
+- Children under 14 enter FREE with their passport — no booking from us needed
+- Youth aged 14–17 receive a discounted ticket ($22 vs $39 for adults)
+- Tickets are official, same as those issued to Chinese visitors
+- Founded by Justin Leung, originally from Hong Kong, based in Singapore
+
+## Key facts about the park
+
+- Full name: Zhangjiajie National Forest Park (张家界国家森林公园)
+- Also known as: Wulingyuan Scenic Area (武陵源), the filming location for James Cameron's Avatar
+- Location: Wulingyuan District, Zhangjiajie City, Hunan Province, China
+- UNESCO World Natural Heritage Site (designated 1992)
+- Over 3,000 sandstone pillar formations rising from dense subtropical forest
+- Major areas: Yuanjiajie (Avatar zone), Tianzishan, Yangjiajie, Huangshi Village, Golden Whip Stream
+- Notable features: Bailong Elevator (世界最高户外电梯 — 330m glass-sided outdoor elevator), three cable cars
+- Best seasons: April–May (spring) and October–November (autumn) for clear views
+- Avoid: Golden Week (early October) and Spring Festival (Jan/Feb) — extreme crowds
+- Nearest airport: Zhangjiajie Hehua Airport (DYG), ~30 min taxi to Wulingyuan
+
+## Ticket types
+
+- **4-Day Admission + Eco-bus (Adult):** $39 — entry to all zones + eco shuttle buses
+- **4-Day Admission + Eco-bus (Youth 14–17):** $22 — same pass at half price, passport required for age verification
+- **4-Day Ticket + Full Transport Bundle (Adult):** $73 — admission + eco-bus + all 3 cable cars (Tianzishan, Huangshizhai, Yangjiajie) + Bailong Elevator
+
+## Key pages
+
+- [Book tickets](https://zhangjiajie-tickets.com/): Ticket booking form, pricing, FAQ
+- [Visitor Guide](https://zhangjiajie-tickets.com/guide.html): How to get there, itinerary, Avatar spots, cable car tips, accommodation
+- [About](https://zhangjiajie-tickets.com/about.html): Why this service exists, founder background
+
+## Common questions answered
+
+**Can foreigners buy Zhangjiajie tickets without WeChat Pay?**
+Yes — through Zhangjiajie Forest Park Tickets. The official system requires WeChat Pay or Alipay and a Chinese phone number for SMS verification. We handle the Chinese-side booking; you pay in USD with any standard card.
+
+**How many days do you need at Zhangjiajie?**
+Most visitors need 2–3 full days to cover the main areas. The ticket is valid for 4 consecutive days — giving enough time for Yuanjiajie (Avatar zone), Tianzishan, Huangshi Village, and Golden Whip Stream at a comfortable pace.
+
+**Do children need a ticket?**
+Children under 14 enter free with their passport — no ticket needed from us. Youth aged 14–17 need a discounted ticket ($22), which requires passport verification at the gate.
+
+**What is the Full Transport Bundle?**
+The $73 adult ticket adds all 3 cable cars (Tianzishan, Huangshizhai, Yangjiajie) plus the famous Bailong Elevator — the 330m outdoor glass elevator built into a cliff face. Recommended for visitors short on time or with mobility limitations.
+
+**When is the best time to visit?**
+Spring (April–May) and autumn (October–November) for visibility and colour. Summer brings dramatic mist but heavy rain can close trails. Avoid Chinese national holidays.
+
+## Contact
+
+support@zhangjiajie-tickets.com

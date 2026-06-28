@@ -1,10 +1,13 @@
 {
-  "name": "mutianyu-tickets",
+  "name": "mutianyu-wall-tickets",
   "version": "1.0.0",
-  "private": true,
-  "engines": { "node": ">=18" },
+  "description": "Mutianyu Great Wall ticket booking site — English-language procurement service for international visitors",
+  "scripts": {
+    "admin": "node admin/server.js"
+  },
   "dependencies": {
-    "stripe": "^14.0.0",
-    "resend": "^3.0.0"
+    "@neondatabase/serverless": "^0.10.4",
+    "resend": "^4.0.0",
+    "stripe": "^17.0.0"
   }
 }

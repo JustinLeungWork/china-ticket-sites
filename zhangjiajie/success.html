@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex, nofollow">
-<title>Booking Confirmed — Zhangjiajie National Forest Park</title>
+<title>Booking Confirmed — Zhangjiajie Forest Park Tickets</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
 <style>
-  :root { --primary:#2A4A1E; --accent:#D4A843; }
+  :root { --primary:#1E3D2F; --accent:#C8A962; }
   * { box-sizing:border-box; margin:0; padding:0; }
   body { font-family:'DM Sans',sans-serif; background:#f5f5f5; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px; }
   .card { background:#fff; border-radius:8px; max-width:520px; width:100%; padding:48px 40px; text-align:center; box-shadow:0 2px 16px rgba(0,0,0,.08); }
@@ -23,7 +23,9 @@
   .num { background:var(--primary); color:#fff; border-radius:50%; width:22px; height:22px; min-width:22px; display:flex; align-items:center; justify-content:center; font-size:11px; font-weight:600; margin-top:1px; }
   a.btn { display:inline-block; margin-top:8px; background:var(--primary); color:#fff; text-decoration:none; padding:13px 28px; border-radius:4px; font-size:14px; font-weight:500; }
   .ref { font-size:12px; color:#bbb; margin-top:20px; }
+  .validity-note { background:#f0f7f3; border-left:3px solid var(--primary); padding:13px 15px; border-radius:4px; font-size:13px; color:#444; line-height:1.6; margin-bottom:20px; text-align:left; }
 </style>
+  <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 <div class="card">
@@ -31,23 +33,36 @@
     <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
   </div>
   <h1>Booking Confirmed</h1>
-  <p>We've received your payment and are purchasing your Zhangjiajie park pass now. You'll receive your QR code by email within <strong>4 hours</strong>.</p>
+  <p>We've received your payment and your booking is confirmed. You'll receive your QR code(s) by email within <strong>24 hours</strong> — keep an eye on your inbox.</p>
+
+  <div class="validity-note">
+    <strong>Your ticket is valid for 4 consecutive days</strong> beginning your chosen start date. Bring your original passport each time you enter the park — name must match exactly.
+  </div>
 
   <div class="steps">
     <h3>What happens next</h3>
-    <div class="step"><div class="num">1</div><span>We purchase your 4-day pass on the official system using your passport details.</span></div>
-    <div class="step"><div class="num">2</div><span>We email you a QR code — usually within 4 hours, always before your first entry date.</span></div>
-    <div class="step"><div class="num">3</div><span>Show the QR code at the park entrance. Bring your original passport — valid for 4 consecutive days.</span></div>
+    <div class="step"><div class="num">1</div><span>We purchase your 4-day pass on the official Wulingyuan system using your passport details.</span></div>
+    <div class="step"><div class="num">2</div><span>We'll email your QR code within 24 hours, always before your first entry date.</span></div>
+    <div class="step"><div class="num">3</div><span>Show the QR code at the park entrance each day. Bring your original passport — the name must match exactly.</span></div>
+    <div class="step"><div class="num">4</div><span>Children under 14 enter free with their passport — no ticket needed from us, just present the passport at the gate.</span></div>
   </div>
 
-  <p style="font-size:13px;color:#888">Didn't get a confirmation email? Check your spam folder or contact <a href="mailto:hello@zhangjiajie-tickets.com" style="color:var(--primary)">hello@zhangjiajie-tickets.com</a></p>
+  <a href="/guide.html" style="display:block;text-decoration:none;background:#f0f7f3;border:1px solid #c0d8cb;border-radius:6px;padding:18px 20px;margin:8px 0 20px;text-align:left">
+    <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:5px">Before your visit</div>
+    <div style="font-weight:600;color:var(--primary);font-size:15px;margin-bottom:3px">Read the Visitor Guide →</div>
+    <div style="font-size:13px;color:#666">Getting there · recommended itinerary · cable car tips · what to bring</div>
+  </a>
+
+  <p style="font-size:13px;color:#888">Questions? Contact <a href="mailto:support@zhangjiajie-tickets.com" style="color:var(--primary)">support@zhangjiajie-tickets.com</a></p>
   <a class="btn" href="/">Back to site</a>
   <p class="ref" id="ref"></p>
 </div>
 <script>
   const p = new URLSearchParams(location.search);
+  const invoice = p.get('invoice');
   const sid = p.get('session_id');
-  if (sid) document.getElementById('ref').textContent = 'Reference: ' + sid.slice(-12).toUpperCase();
+  if (invoice) document.getElementById('ref').textContent = 'Booking reference: ' + invoice;
+  else if (sid) document.getElementById('ref').textContent = 'Reference: ' + sid.slice(-12).toUpperCase();
 </script>
 </body>
 </html>

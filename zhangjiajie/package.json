@@ -1,10 +1,12 @@
 {
-  "name": "zhangjiajie-tickets",
+  "name": "zhangjiajie-forest-park-tickets",
   "version": "1.0.0",
   "private": true,
   "engines": { "node": ">=18" },
   "dependencies": {
-    "stripe": "^14.0.0",
-    "resend": "^3.0.0"
-  }
+    "@neondatabase/serverless": "^0.10.4",
+    "resend": "^3.0.0",
+    "stripe": "^14.0.0"
+  },
+  "devDependencies": {}
 }
