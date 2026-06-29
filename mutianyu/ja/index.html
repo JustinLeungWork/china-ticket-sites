@@ -305,6 +305,16 @@
     }
       .currency-tag { font-size: 13px; font-weight: 400; color: var(--muted); margin-left: 2px; }
     .local-price-hint { font-size: 13px; font-weight: 400; color: var(--muted); margin-left: 4px; }
+  
+    /* How-to-book section */
+    .htb-section { padding: var(--section-y, clamp(48px,6vw,72px)) var(--section-x, clamp(20px,5vw,48px)); }
+    .htb-inner { max-width: 780px; margin: 0 auto; }
+    .htb-body > p { font-size: 15.5px; color: var(--muted, #666); line-height: 1.8; margin-bottom: 20px; }
+    .htb-steps { padding-left: 0; list-style: none; counter-reset: htb; margin: 28px 0; }
+    .htb-steps > li { counter-increment: htb; display: flex; gap: 16px; margin-bottom: 22px; align-items: flex-start; font-size: 15px; color: var(--muted, #666); line-height: 1.75; }
+    .htb-steps > li::before { content: counter(htb); min-width: 28px; height: 28px; background: var(--accent, #8B4513); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+    .htb-steps > li strong { color: var(--text, #1a1a1a); }
+    .htb-note { font-size: 14px; color: var(--muted, #666); background: var(--surface, #f7f5f0); border-left: 3px solid var(--accent, #8B4513); padding: 14px 18px; border-radius: 0 4px 4px 0; line-height: 1.7; margin-top: 4px; }
   </style>
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"実際に何を受け取りますか？","acceptedAnswer":{"@type":"Answer","text":"お支払いから24時間以内に、訪問者ごとのQRコードが記載された確認メールが届きます。ゲートでスマートフォンの画面を提示してください。スタッフがパスポートも確認しますので、必ずお持ちください。"}},{"@type":"Question","name":"なぜ直接購入できないのですか？","acceptedAnswer":{"@type":"Answer","text":"中国の公式システム（mutianyu.com）では中国の電話番号と中国の決済アプリが必要です。ほとんどの外国のカードや決済アプリは使用できません。当サービスでは必要な中国のアカウントを保有し、お客様に代わって予約します。"}},{"@type":"Question","name":"チケットのランクの違いは何ですか？","acceptedAnswer":{"@type":"Answer","text":"入場券のみ：石段を自力で上り下りします（傾斜が急な箇所があります）。入場券＋シャトル：エコバスで城壁入口まで移動でき、長い坂道を歩かずに済みます。フルエクスペリエンス：ロープウェイのゴンドラで直接城壁の上まで行けます — 最も楽なオプションで、ご家族やゆったり観光したい方に最適です。"}},{"@type":"Question","name":"慕田峪は北京の中心部からどのくらい離れていますか？","acceptedAnswer":{"@type":"Answer","text":"約70〜80km、車やタクシーで約1.5〜2時間です。交通渋滞と混雑を避けるため、早めの出発をお勧めします。"}},{"@type":"Question","name":"事前予約は必要ですか？","acceptedAnswer":{"@type":"Answer","text":"はい — 中国のシステムでの処理に少なくとも2日必要です。当日・翌日の予約は受け付けておりません。"}}]}
@@ -537,6 +547,25 @@
   </div>
 </section>
 
+<section class="htb-section">
+  <div class="htb-inner">
+    <div class="section-header" style="text-align:center;margin-bottom:clamp(32px,4vw,48px)">
+      <p class="section-label">予約ガイド</p>
+      <h2>WeChat PayやアリペイなしでWeChat Pay慕田峪万里の長城のチケットを購入する方法</h2>
+    </div>
+    <div class="htb-body">
+      <p>中国の公式慕田峪チケットサイト（<strong>mutianyu.com</strong>）ではアリペイまたはWeChat Payが必要で、いずれも中国の銀行口座に紐づいています。海外のカードをお持ちの外国人旅行者は購入を完了できません。代わりに当サービスをご利用ください：</p>
+      <ol class="htb-steps">
+        <li><strong>日程を選択してください。</strong> 一部の観光地とは異なり、慕田峪には固定された時間枠はなく、営業時間（07:30〜18:00）内であればいつでも入場できます。中国のシステムで予約を処理するために、少なくとも2日前のお申し込みが必要です。</li>
+        <li><strong>全訪問者のパスポート情報を提出してください。</strong> 中国の実名制により、各チケットは1つのパスポートに紐づけられます。グループ内の各参加者の氏名、パスポート番号、生年月日をご提供ください。</li>
+        <li><strong>USDでカード払いをしてください。</strong> Visa、Mastercard、Apple Payがご利用いただけます。パスポートデータは安全に保存され、訪問日後に自動的に削除されます。</li>
+        <li><strong>当社が中国のシステムに代わって申請します。</strong> 24時間以内に各訪問者の情報を中国の公式チケットシステムに入力し、パスポートに紐づいた入場QRコードを取得します。</li>
+        <li><strong>ゲートでQRコードとパスポートをご提示ください。</strong> スタッフが入場口でQRコード（スマートフォン上）と実際のパスポートの両方を確認します。印刷したチケットは不要です。</li>
+      </ol>
+      <p class="htb-note">慕田峪は北京中心部から北東へ約70〜80kmの距離にあり、移動には1.5〜2時間かかります。混雑のピークを避けるため、08:00前に出発することをお勧めします。長城は10:00〜14:00の間が最も混雑します。</p>
+    </div>
+  </div>
+</section>
 <section class="faq-section">
   <div class="faq-inner">
     <div class="section-header">

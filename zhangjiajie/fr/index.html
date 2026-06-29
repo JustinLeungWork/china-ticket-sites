@@ -269,7 +269,17 @@ footer{background:var(--primary-dark);color:rgba(255,255,255,.55);padding:40px c
 .lang-select:hover { border-color: rgba(255,255,255,0.6); }
 .lang-select option { background: #1a1a1a; color: #fff; }
 .lang-select:focus { outline: none; }
-</style>
+
+    /* How-to-book section */
+    .htb-section { padding: var(--section-y, clamp(48px,6vw,72px)) var(--section-x, clamp(20px,5vw,48px)); }
+    .htb-inner { max-width: 780px; margin: 0 auto; }
+    .htb-body > p { font-size: 15.5px; color: var(--muted, #666); line-height: 1.8; margin-bottom: 20px; }
+    .htb-steps { padding-left: 0; list-style: none; counter-reset: htb; margin: 28px 0; }
+    .htb-steps > li { counter-increment: htb; display: flex; gap: 16px; margin-bottom: 22px; align-items: flex-start; font-size: 15px; color: var(--muted, #666); line-height: 1.75; }
+    .htb-steps > li::before { content: counter(htb); min-width: 28px; height: 28px; background: var(--accent, #8B4513); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+    .htb-steps > li strong { color: var(--text, #1a1a1a); }
+    .htb-note { font-size: 14px; color: var(--muted, #666); background: var(--surface, #f7f5f0); border-left: 3px solid var(--accent, #8B4513); padding: 14px 18px; border-radius: 0 4px 4px 0; line-height: 1.7; margin-top: 4px; }
+  </style>
   <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
@@ -551,6 +561,25 @@ footer{background:var(--primary-dark);color:rgba(255,255,255,.55);padding:40px c
 </section>
 
 <!-- ── FAQ ── -->
+<section class="htb-section">
+  <div class="htb-inner">
+    <div class="section-header" style="text-align:center;margin-bottom:clamp(32px,4vw,48px)">
+      <p class="section-label">Guide de réservation</p>
+      <h2>Comment acheter des billets pour le parc de Zhangjiajie sans WeChat ou Alipay</h2>
+    </div>
+    <div class="htb-body">
+      <p>Le système de réservation officiel de Wulingyuan exige Alipay ou WeChat Pay — tous deux liés à des comptes bancaires chinois. Les visiteurs étrangers possédant une Visa ou Mastercard étrangère ne peuvent pas effectuer l'achat directement. Voici comment fonctionne notre service à la place :</p>
+      <ol class="htb-steps">
+        <li><strong>Choisissez votre date de première entrée.</strong> Votre billet couvre 4 jours consécutifs à partir de cette date. Vous pouvez entrer et sortir librement du parc pendant ces 4 jours en utilisant le même QR code et votre passeport.</li>
+        <li><strong>Fournissez les informations de passeport pour chaque visiteur adulte et jeune.</strong> Le système de vérification d'identité chinois associe chaque billet à un passeport. Les enfants de moins de 14 ans entrent gratuitement — aucun billet n'est nécessaire, mais apportez leur passeport pour la vérification à l'entrée.</li>
+        <li><strong>Payez par carte en USD.</strong> Visa, Mastercard et Apple Pay sont acceptés. Vos données de passeport sont conservées en toute sécurité et supprimées 5 jours après votre visite.</li>
+        <li><strong>Nous soumettons votre demande au système chinois en votre nom.</strong> Dans les 24 heures, nous saisissons les coordonnées de chaque visiteur dans le système de réservation officiel de Wulingyuan et obtenons les QR codes liés à vos passeports.</li>
+        <li><strong>Présentez votre QR code et votre passeport à l'entrée du parc.</strong> Le personnel vérifie les deux à l'entrée — aucun billet imprimé n'est nécessaire. Important : séjournez à Wulingyuan (武陵源), et non dans la ville de Zhangjiajie — elles sont à 35 km l'une de l'autre.</li>
+      </ol>
+      <p class="htb-note">L'aéroport de Zhangjiajie Hehua (DYG) se trouve à 30 minutes du parc en taxi. Si vous arrivez en train, comptez 35 km en taxi depuis la gare ferroviaire de Zhangjiajie jusqu'à Wulingyuan. Réservez votre hébergement à Wulingyuan, et non dans la ville de Zhangjiajie.</p>
+    </div>
+  </div>
+</section>
 <section class="faq-section">
   <h2>Questions fréquemment posées</h2>
   <div class="faq-list">

@@ -382,6 +382,16 @@
     #passport-section.fullscreen .back-link { display: none; }
       .currency-tag { font-size: 13px; font-weight: 400; color: var(--muted); margin-left: 2px; }
     .local-price-hint { font-size: 13px; font-weight: 400; color: var(--muted); margin-left: 4px; }
+  
+    /* How-to-book section */
+    .htb-section { padding: var(--section-y, clamp(48px,6vw,72px)) var(--section-x, clamp(20px,5vw,48px)); }
+    .htb-inner { max-width: 780px; margin: 0 auto; }
+    .htb-body > p { font-size: 15.5px; color: var(--muted, #666); line-height: 1.8; margin-bottom: 20px; }
+    .htb-steps { padding-left: 0; list-style: none; counter-reset: htb; margin: 28px 0; }
+    .htb-steps > li { counter-increment: htb; display: flex; gap: 16px; margin-bottom: 22px; align-items: flex-start; font-size: 15px; color: var(--muted, #666); line-height: 1.75; }
+    .htb-steps > li::before { content: counter(htb); min-width: 28px; height: 28px; background: var(--accent, #8B4513); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+    .htb-steps > li strong { color: var(--text, #1a1a1a); }
+    .htb-note { font-size: 14px; color: var(--muted, #666); background: var(--surface, #f7f5f0); border-left: 3px solid var(--accent, #8B4513); padding: 14px 18px; border-radius: 0 4px 4px 0; line-height: 1.7; margin-top: 4px; }
   </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Por qué no puedo reservar en la web oficial del museo?","acceptedAnswer":{"@type":"Answer","text":"El sistema de reservas oficial (bmy.com.cn) requiere un número de teléfono chino para la verificación por SMS y aplicaciones de pago chinas. Los visitantes internacionales sin SIM china ni método de pago chino no pueden completar el proceso. Nosotros disponemos de las cuentas necesarias para reservar en tu nombre — tú nos pagas con cualquier tarjeta estándar."}},{"@type":"Question","name":"El museo solo permite una entrada por pasaporte — ¿cómo funciona para grupos?","acceptedAnswer":{"@type":"Answer","text":"Cada entrada está vinculada a un número de pasaporte. Para un grupo de cuatro personas, enviamos cuatro números de pasaporte distintos y recibimos cuatro códigos QR separados — uno por persona. Por eso recopilamos los datos completos de cada visitante, no solo del titular de la reserva."}},{"@type":"Question","name":"¿Con cuánta antelación debo reservar?","acceptedAnswer":{"@type":"Answer","text":"Las entradas se ponen a la venta con 7 días de antelación. El museo se agota los fines de semana, durante los festivos chinos y en periodos escolares. Recomendamos reservar con al menos 3-4 días de antelación para días laborables y 6-7 días para visitas de fin de semana. La disponibilidad el mismo día o al día siguiente es muy escasa en temporada alta."}},{"@type":"Question","name":"¿Qué pasa si las entradas están agotadas?","acceptedAnswer":{"@type":"Answer","text":"Si el museo está completamente reservado para la fecha elegida, te lo comunicaremos de inmediato y emitiremos un reembolso completo. También consultaremos las fechas próximas y te informaremos de la disponibilidad para que puedas reservar de nuevo sin coste adicional."}},{"@type":"Question","name":"¿Puedo cancelar o cambiar mi reserva?","acceptedAnswer":{"@type":"Answer","text":"Las cancelaciones realizadas con 48 horas o más de antelación a la fecha de visita reciben un reembolso completo. Con menos de 48 horas, la entrada no es reembolsable. Para cambios de fecha, contáctanos al menos 72 horas antes — intentaremos reprogramar según disponibilidad."}},{"@type":"Question","name":"¿Vale la pena contratar un guía privado en inglés?","acceptedAnswer":{"@type":"Answer","text":"Para la mayoría de los visitantes, sí. El impacto visual del Foso 1 es inmediato, pero las historias detrás del yacimiento — cómo se fabricaron los guerreros, por qué fueron enterrados, qué nos dicen sobre la dinastía Qin — necesitan contexto para cobrar sentido. Nuestros guías están acreditados por el museo y tu grupo de hasta 10 personas los tiene en exclusiva, sin necesidad de esforzarse por escuchar entre otras 40 personas. El precio es de $150 fijo para todo el grupo, reservado bajo petición — envía una solicitud y confirmaremos disponibilidad antes de que pagues nada."}},{"@type":"Question","name":"¿Qué incluye exactamente mi entrada?","acceptedAnswer":{"@type":"Answer","text":"Una entrada cubre tanto el Museo de los Guerreros de Terracota (Fosos 1, 2 y 3, más la Sala de Carrozas de Bronce) como el parque del mausoleo Lishan Garden — una lanzadera gratuita circula entre ambos. La entrada es válida durante todo el día y se verifica tres veces en el recinto. Calcula aproximadamente 1,5 horas por cada lugar; entre 3 y 4 horas para ambos a un ritmo tranquilo."}},{"@type":"Question","name":"¿Puedo elegir mi franja horaria de entrada?","acceptedAnswer":{"@type":"Answer","text":"Sí — el museo divide el día en ocho ventanas de entrada de una hora, desde las 08:30 hasta las 17:00. Te pediremos tu franja preferida en el momento de la reserva. Las franjas matutinas (08:30-10:30) son las menos concurridas; el tramo de 10:31 a 12:30 suele ser el más ocupado. Llega al menos 30 minutos antes de tu franja para pasar el control de seguridad."}},{"@type":"Question","name":"¿Qué objetos no están permitidos en el museo?","acceptedAnswer":{"@type":"Answer","text":"El museo prohíbe: objetos inflamables o explosivos, armas blancas o porras, drones y cometas, mascotas, altavoces y equipos de cámara de vídeo, pistolas de agua, hoverboards, patinetes y bicicletas. Los objetos de uso habitual — bolsos, cámaras (sin trípode ni flash), comida, agua — están permitidos. Hay consigna gratuita disponible en el lado este de la taquilla si la necesitas."}}]}
@@ -591,6 +601,25 @@
   </div>
 </section>
 
+<section class="htb-section">
+  <div class="htb-inner">
+    <div class="section-header" style="text-align:center;margin-bottom:clamp(32px,4vw,48px)">
+      <p class="section-label">Guía de reserva</p>
+      <h2>Cómo comprar entradas para los Guerreros de Terracota sin WeChat o Alipay</h2>
+    </div>
+    <div class="htb-body">
+      <p>El sitio oficial de reservas de China (<strong>bmy.com.cn</strong>) requiere Alipay o WeChat Pay — ambos vinculados a cuentas bancarias chinas. Los visitantes internacionales con Visa o Mastercard extranjera no pueden completar la compra directamente. Así es como funciona nuestro servicio:</p>
+      <ol class="htb-steps">
+        <li><strong>Elige tu fecha y horario de entrada.</strong> El museo ofrece 8 ventanas de entrada de una hora cada día, de 08:30 a 17:00. Las entradas se abren con 7 días de antelación. Los horarios de fin de semana y festivos se agotan rápidamente — reserva con 4–7 días de anticipación para estar seguro.</li>
+        <li><strong>Proporciona los datos del pasaporte de cada visitante.</strong> El sistema chino de nombre real (<em>实名制</em>) vincula cada entrada a un número de pasaporte. Debes indicar el nombre, número de pasaporte y fecha de nacimiento de cada persona en tu grupo — la misma información que pediría el sitio oficial.</li>
+        <li><strong>Paga con tarjeta en USD.</strong> Se aceptan Visa, Mastercard y Apple Pay. Tus datos de pasaporte se almacenan de forma segura y se eliminan automáticamente después de la fecha de tu visita.</li>
+        <li><strong>Nosotros gestionamos el trámite en el sistema chino en tu nombre.</strong> En un plazo de 24 horas, introducimos los datos de cada visitante en bmy.com.cn y obtenemos los códigos QR de entrada oficiales vinculados a vuestros pasaportes.</li>
+        <li><strong>Tu pasaporte es tu entrada en la puerta.</strong> El personal de seguridad escanea tu pasaporte físico en los torniquetes — no se necesita entrada impresa ni código QR aparte. Llega 30 minutos antes de tu horario de entrada para pasar el control de seguridad sin prisas.</li>
+      </ol>
+      <p class="htb-note">El museo aplica un límite diario de 65,000 visitantes. Las entradas en taquilla están disponibles ocasionalmente en mañanas tranquilas de días laborables en invierno, pero no están garantizadas. Se recomienda encarecidamente reservar con antelación de abril a octubre y durante cualquier festivo oficial chino.</p>
+    </div>
+  </div>
+</section>
 <section class="faq-section">
   <div class="faq-inner">
     <div class="section-header">

@@ -269,6 +269,16 @@ footer{background:var(--primary-dark);color:rgba(255,255,255,.55);padding:40px c
 .ov-passport-note{background:rgba(200,169,98,.12);border:1px solid rgba(200,169,98,.25);border-radius:var(--r-sm);padding:12px 16px;font-size:13px;color:rgba(255,255,255,.75);margin-bottom:20px;line-height:1.6}
     .currency-tag { font-size: 13px; font-weight: 400; color: var(--muted); margin-left: 2px; }
     .local-price-hint { font-size: 13px; font-weight: 400; color: var(--muted); margin-left: 4px; }
+  
+    /* How-to-book section */
+    .htb-section { padding: var(--section-y, clamp(48px,6vw,72px)) var(--section-x, clamp(20px,5vw,48px)); }
+    .htb-inner { max-width: 780px; margin: 0 auto; }
+    .htb-body > p { font-size: 15.5px; color: var(--muted, #666); line-height: 1.8; margin-bottom: 20px; }
+    .htb-steps { padding-left: 0; list-style: none; counter-reset: htb; margin: 28px 0; }
+    .htb-steps > li { counter-increment: htb; display: flex; gap: 16px; margin-bottom: 22px; align-items: flex-start; font-size: 15px; color: var(--muted, #666); line-height: 1.75; }
+    .htb-steps > li::before { content: counter(htb); min-width: 28px; height: 28px; background: var(--accent, #8B4513); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+    .htb-steps > li strong { color: var(--text, #1a1a1a); }
+    .htb-note { font-size: 14px; color: var(--muted, #666); background: var(--surface, #f7f5f0); border-left: 3px solid var(--accent, #8B4513); padding: 14px 18px; border-radius: 0 4px 4px 0; line-height: 1.7; margin-top: 4px; }
   </style>
   <script defer src="/_vercel/insights/script.js"></script>
 </head>
@@ -551,6 +561,25 @@ footer{background:var(--primary-dark);color:rgba(255,255,255,.55);padding:40px c
 </section>
 
 <!-- ── FAQ ── -->
+<section class="htb-section">
+  <div class="htb-inner">
+    <div class="section-header" style="text-align:center;margin-bottom:clamp(32px,4vw,48px)">
+      <p class="section-label">予約ガイド</p>
+      <h2>WeChat PayやアリペイなしでWeChat Pay張家界公園のチケットを購入する方法</h2>
+    </div>
+    <div class="htb-body">
+      <p>武陵源（<em>武陵源</em>）の公式予約システムではアリペイまたはWeChat Payが必要で、いずれも中国の銀行口座に紐づいています。海外のVisaやMastercardをお持ちの外国人旅行者は直接購入を完了できません。代わりに当サービスをご利用ください：</p>
+      <ol class="htb-steps">
+        <li><strong>最初の入場日を選択してください。</strong> チケットはその日から連続4日間有効です。同じQRコードとパスポートを使って、4日間を通じて公園への出入りが自由に行えます。</li>
+        <li><strong>全ての大人・青少年訪問者のパスポート情報を提出してください。</strong> 中国の実名制により、各チケットは1つのパスポートに紐づけられます。14歳未満のお子様は無料入場できます。チケットは不要ですが、ゲートでの確認のためパスポートをご持参ください。</li>
+        <li><strong>USDでカード払いをしてください。</strong> Visa、Mastercard、Apple Payがご利用いただけます。パスポートデータは安全に保存され、訪問日から5日後に自動的に削除されます。</li>
+        <li><strong>当社が中国のシステムに代わって申請します。</strong> 24時間以内に各訪問者の情報を武陵源の公式予約システムに入力し、パスポートに紐づいたQRコードを取得します。</li>
+        <li><strong>公園ゲートでQRコードとパスポートをご提示ください。</strong> スタッフが入場口で両方を確認します。印刷したチケットは不要です。重要：張家界市ではなく武陵源（武陵源）にご滞在ください。両者は35km離れています。</li>
+      </ol>
+      <p class="htb-note">張家界荷花空港（DYG）から公園までタクシーで約30分です。電車でお越しの場合は、張家界駅からタクシーで武陵源まで35kmの移動となります。宿泊は張家界市ではなく武陵源でご予約ください。</p>
+    </div>
+  </div>
+</section>
 <section class="faq-section">
   <h2>よくある質問</h2>
   <div class="faq-list">

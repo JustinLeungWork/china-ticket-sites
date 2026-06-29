@@ -269,6 +269,16 @@ footer{background:var(--primary-dark);color:rgba(255,255,255,.55);padding:40px c
 .ov-passport-note{background:rgba(200,169,98,.12);border:1px solid rgba(200,169,98,.25);border-radius:var(--r-sm);padding:12px 16px;font-size:13px;color:rgba(255,255,255,.75);margin-bottom:20px;line-height:1.6}
     .currency-tag { font-size: 13px; font-weight: 400; color: var(--muted); margin-left: 2px; }
     .local-price-hint { font-size: 13px; font-weight: 400; color: var(--muted); margin-left: 4px; }
+  
+    /* How-to-book section */
+    .htb-section { padding: var(--section-y, clamp(48px,6vw,72px)) var(--section-x, clamp(20px,5vw,48px)); }
+    .htb-inner { max-width: 780px; margin: 0 auto; }
+    .htb-body > p { font-size: 15.5px; color: var(--muted, #666); line-height: 1.8; margin-bottom: 20px; }
+    .htb-steps { padding-left: 0; list-style: none; counter-reset: htb; margin: 28px 0; }
+    .htb-steps > li { counter-increment: htb; display: flex; gap: 16px; margin-bottom: 22px; align-items: flex-start; font-size: 15px; color: var(--muted, #666); line-height: 1.75; }
+    .htb-steps > li::before { content: counter(htb); min-width: 28px; height: 28px; background: var(--accent, #8B4513); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+    .htb-steps > li strong { color: var(--text, #1a1a1a); }
+    .htb-note { font-size: 14px; color: var(--muted, #666); background: var(--surface, #f7f5f0); border-left: 3px solid var(--accent, #8B4513); padding: 14px 18px; border-radius: 0 4px 4px 0; line-height: 1.7; margin-top: 4px; }
   </style>
   <script defer src="/_vercel/insights/script.js"></script>
 </head>
@@ -551,6 +561,25 @@ footer{background:var(--primary-dark);color:rgba(255,255,255,.55);padding:40px c
 </section>
 
 <!-- ── FAQ ── -->
+<section class="htb-section">
+  <div class="htb-inner">
+    <div class="section-header" style="text-align:center;margin-bottom:clamp(32px,4vw,48px)">
+      <p class="section-label">예매 안내</p>
+      <h2>알리페이 또는 위챗페이 없이 장가계 공원 입장권 구매하는 방법</h2>
+    </div>
+    <div class="htb-body">
+      <p>공식 武陵源(우링위안) 예약 시스템은 알리페이 또는 위챗페이만 지원하며, 두 결제 수단 모두 중국 은행 계좌가 필요합니다. 해외 Visa 또는 Mastercard를 사용하는 외국인 방문객은 직접 결제를 완료할 수 없습니다. 저희 서비스를 이용하는 방법은 다음과 같습니다:</p>
+      <ol class="htb-steps">
+        <li><strong>첫 번째 입장 날짜를 선택하세요.</strong> 티켓은 해당 날짜부터 연속 4일간 유효합니다. 동일한 QR 코드와 여권으로 4일 동안 공원을 자유롭게 출입할 수 있습니다.</li>
+        <li><strong>모든 성인 및 청소년 방문객의 여권 정보를 제출하세요.</strong> 중국의 실명제에 따라 각 티켓은 여권 하나에 연동됩니다. 14세 미만 어린이는 무료 입장이 가능하며, 별도 티켓 없이 입구에서 여권만 지참하면 됩니다.</li>
+        <li><strong>USD로 카드 결제하세요.</strong> Visa, Mastercard, Apple Pay를 사용하실 수 있습니다. 여권 정보는 안전하게 보관되며 방문일로부터 5일 후 자동으로 삭제됩니다.</li>
+        <li><strong>저희가 대신 중국 시스템에 신청합니다.</strong> 24시간 이내에 각 방문객의 정보를 공식 우링위안 예약 시스템에 입력하고, 여권에 연동된 QR 코드를 발급받습니다.</li>
+        <li><strong>공원 입구에서 QR 코드와 여권을 제시하세요.</strong> 직원이 입구에서 두 가지를 모두 확인합니다. 티켓을 별도로 출력하실 필요가 없습니다. 중요: 장가계 시내가 아닌 武陵源(武陵源)에 숙소를 잡으세요. 두 곳은 35km 떨어져 있습니다.</li>
+      </ol>
+      <p class="htb-note">장가계 허화공항(DYG)에서 공원까지 택시로 약 30분 소요됩니다. 기차로 오시는 경우 장가계역에서 택시로 우링위안까지 35km 이동하시면 됩니다. 장가계 시내가 아닌 우링위안에 숙소를 예약하세요.</p>
+    </div>
+  </div>
+</section>
 <section class="faq-section">
   <h2>자주 묻는 질문</h2>
   <div class="faq-list">

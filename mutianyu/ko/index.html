@@ -305,6 +305,16 @@
     }
       .currency-tag { font-size: 13px; font-weight: 400; color: var(--muted); margin-left: 2px; }
     .local-price-hint { font-size: 13px; font-weight: 400; color: var(--muted); margin-left: 4px; }
+  
+    /* How-to-book section */
+    .htb-section { padding: var(--section-y, clamp(48px,6vw,72px)) var(--section-x, clamp(20px,5vw,48px)); }
+    .htb-inner { max-width: 780px; margin: 0 auto; }
+    .htb-body > p { font-size: 15.5px; color: var(--muted, #666); line-height: 1.8; margin-bottom: 20px; }
+    .htb-steps { padding-left: 0; list-style: none; counter-reset: htb; margin: 28px 0; }
+    .htb-steps > li { counter-increment: htb; display: flex; gap: 16px; margin-bottom: 22px; align-items: flex-start; font-size: 15px; color: var(--muted, #666); line-height: 1.75; }
+    .htb-steps > li::before { content: counter(htb); min-width: 28px; height: 28px; background: var(--accent, #8B4513); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+    .htb-steps > li strong { color: var(--text, #1a1a1a); }
+    .htb-note { font-size: 14px; color: var(--muted, #666); background: var(--surface, #f7f5f0); border-left: 3px solid var(--accent, #8B4513); padding: 14px 18px; border-radius: 0 4px 4px 0; line-height: 1.7; margin-top: 4px; }
   </style>
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"실제로 무엇을 받게 되나요?","acceptedAnswer":{"@type":"Answer","text":"결제 후 24시간 이내에 방문객 1인당 QR 코드가 포함된 확인 이메일을 받으실 수 있습니다. 입장 게이트에서 휴대폰으로 QR 코드를 제시하시면 됩니다. 직원이 여권도 확인하니 항상 소지하세요."}},{"@type":"Question","name":"공식 웹사이트에서 직접 구매할 수 없는 이유가 무엇인가요?","acceptedAnswer":{"@type":"Answer","text":"중국 공식 시스템(mutianyu.com)은 중국 전화번호와 중국 결제 앱이 필요합니다. 대부분의 외국 카드와 결제 앱은 작동하지 않습니다. 저희는 필요한 중국 계정을 보유하고 있어 대신 예약해 드립니다."}},{"@type":"Question","name":"티켓 종류 간의 차이점은 무엇인가요?","acceptedAnswer":{"@type":"Answer","text":"입장권만: 계단을 직접 오르내립니다(일부 구간이 가파름). 입장권 + 셔틀버스: 에코버스가 성벽 입구까지 데려다 줘 긴 오르막 걷기를 줄여줍니다. 완전 체험: 케이블카가 성벽 정상으로 직접 데려다 줍니다 — 가족이나 여유롭게 즐기고 싶은 분들에게 최적입니다."}},{"@type":"Question","name":"무탄위는 베이징 중심부에서 얼마나 멀리 있나요?","acceptedAnswer":{"@type":"Answer","text":"북동쪽으로 약 70~80km 거리로, 자동차나 택시로 약 1.5~2시간 소요됩니다. 교통 체증과 혼잡을 피하려면 일찍 출발하시길 권장합니다."}},{"@type":"Question","name":"사전에 예약해야 하나요?","acceptedAnswer":{"@type":"Answer","text":"네 — 중국 시스템에서 예약을 처리하려면 최소 2일이 필요합니다. 당일 및 익일 예약은 불가능합니다."}}]}
@@ -537,6 +547,25 @@
   </div>
 </section>
 
+<section class="htb-section">
+  <div class="htb-inner">
+    <div class="section-header" style="text-align:center;margin-bottom:clamp(32px,4vw,48px)">
+      <p class="section-label">예매 안내</p>
+      <h2>알리페이 또는 위챗페이 없이 무티안위 만리장성 입장권 구매하는 방법</h2>
+    </div>
+    <div class="htb-body">
+      <p>중국 공식 무티안위 티켓 사이트(<strong>mutianyu.com</strong>)는 알리페이 또는 위챗페이만 지원하며, 두 결제 수단 모두 중국 은행 계좌가 필요합니다. 해외 카드를 사용하는 외국인 방문객은 결제를 완료할 수 없습니다. 저희 서비스를 이용하는 방법은 다음과 같습니다:</p>
+      <ol class="htb-steps">
+        <li><strong>방문 날짜를 선택하세요.</strong> 일부 관광지와 달리 무티안위는 시간대별 입장 제한이 없습니다. 운영 시간(07:30–18:00) 중 언제든지 입장하실 수 있습니다. 중국 시스템에서 예매를 처리하려면 최소 2일 전에 신청해 주셔야 합니다.</li>
+        <li><strong>모든 방문객의 여권 정보를 제출하세요.</strong> 중국의 실명제에 따라 각 티켓은 여권 하나에 연동됩니다. 일행 각 개인의 이름, 여권 번호, 생년월일을 제공해 주시면 됩니다.</li>
+        <li><strong>USD로 카드 결제하세요.</strong> Visa, Mastercard, Apple Pay를 사용하실 수 있습니다. 여권 정보는 안전하게 보관되며 방문일 이후 자동으로 삭제됩니다.</li>
+        <li><strong>저희가 대신 중국 시스템에 신청합니다.</strong> 24시간 이내에 각 방문객의 정보를 중국 공식 티켓 시스템에 입력하고, 여권에 연동된 입장 QR 코드를 발급받습니다.</li>
+        <li><strong>입장 시 QR 코드와 여권을 제시하세요.</strong> 직원이 입구에서 QR 코드(휴대폰 화면)와 실물 여권을 함께 확인합니다. 티켓을 별도로 출력하실 필요가 없습니다.</li>
+      </ol>
+      <p class="htb-note">무티안위는 베이징 도심에서 북동쪽으로 약 70~80km 떨어져 있으며, 이동 시간은 1.5~2시간 정도 소요됩니다. 혼잡한 시간대를 피하려면 08:00 이전에 출발하세요. 장성이 가장 붐비는 시간대는 10:00~14:00입니다.</p>
+    </div>
+  </div>
+</section>
 <section class="faq-section">
   <div class="faq-inner">
     <div class="section-header">

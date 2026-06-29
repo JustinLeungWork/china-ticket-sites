@@ -269,6 +269,16 @@ footer{background:var(--primary-dark);color:rgba(255,255,255,.55);padding:40px c
 .ov-passport-note{background:rgba(200,169,98,.12);border:1px solid rgba(200,169,98,.25);border-radius:var(--r-sm);padding:12px 16px;font-size:13px;color:rgba(255,255,255,.75);margin-bottom:20px;line-height:1.6}
     .currency-tag { font-size: 13px; font-weight: 400; color: var(--muted); margin-left: 2px; }
     .local-price-hint { font-size: 13px; font-weight: 400; color: var(--muted); margin-left: 4px; }
+  
+    /* How-to-book section */
+    .htb-section { padding: var(--section-y, clamp(48px,6vw,72px)) var(--section-x, clamp(20px,5vw,48px)); }
+    .htb-inner { max-width: 780px; margin: 0 auto; }
+    .htb-body > p { font-size: 15.5px; color: var(--muted, #666); line-height: 1.8; margin-bottom: 20px; }
+    .htb-steps { padding-left: 0; list-style: none; counter-reset: htb; margin: 28px 0; }
+    .htb-steps > li { counter-increment: htb; display: flex; gap: 16px; margin-bottom: 22px; align-items: flex-start; font-size: 15px; color: var(--muted, #666); line-height: 1.75; }
+    .htb-steps > li::before { content: counter(htb); min-width: 28px; height: 28px; background: var(--accent, #8B4513); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+    .htb-steps > li strong { color: var(--text, #1a1a1a); }
+    .htb-note { font-size: 14px; color: var(--muted, #666); background: var(--surface, #f7f5f0); border-left: 3px solid var(--accent, #8B4513); padding: 14px 18px; border-radius: 0 4px 4px 0; line-height: 1.7; margin-top: 4px; }
   </style>
   <script defer src="/_vercel/insights/script.js"></script>
 </head>
@@ -551,6 +561,25 @@ footer{background:var(--primary-dark);color:rgba(255,255,255,.55);padding:40px c
 </section>
 
 <!-- ── FAQ ── -->
+<section class="htb-section">
+  <div class="htb-inner">
+    <div class="section-header" style="text-align:center;margin-bottom:clamp(32px,4vw,48px)">
+      <p class="section-label">คู่มือการจอง</p>
+      <h2>วิธีซื้อบัตรเข้าอุทยานจางเจียเจี้ยโดยไม่ต้องใช้ WeChat หรือ Alipay</h2>
+    </div>
+    <div class="htb-body">
+      <p>ระบบจองของอุทยานอู่หลิงหยวนอย่างเป็นทางการรองรับเฉพาะ Alipay และ WeChat Pay ซึ่งผูกกับบัญชีธนาคารจีน นักท่องเที่ยวต่างชาติที่ถือบัตร Visa หรือ Mastercard จากต่างประเทศไม่สามารถชำระเงินได้โดยตรง บริการของเราช่วยแก้ปัญหานี้ได้ดังนี้:</p>
+      <ol class="htb-steps">
+        <li><strong>เลือกวันที่เข้าชมวันแรก</strong> บัตรของคุณครอบคลุม 4 วันติดต่อกันนับจากวันนั้น คุณสามารถเข้าออกอุทยานได้อย่างอิสระตลอด 4 วัน โดยใช้ QR code เดิมและหนังสือเดินทาง</li>
+        <li><strong>ส่งข้อมูลหนังสือเดินทางของผู้เข้าชมทุกคนทั้งผู้ใหญ่และเยาวชน</strong> ระบบแสดงตัวตนจริงของจีนเชื่อมบัตรแต่ละใบกับหนังสือเดินทางหนึ่งเล่ม เด็กอายุต่ำกว่า 14 ปีเข้าชมฟรี ไม่ต้องซื้อบัตร แต่ต้องนำหนังสือเดินทางมาแสดงที่ประตูด้วย</li>
+        <li><strong>ชำระเงินด้วยบัตรในสกุล USD</strong> รองรับ Visa, Mastercard และ Apple Pay ข้อมูลหนังสือเดินทางของคุณถูกเก็บอย่างปลอดภัยและจะถูกลบภายใน 5 วันหลังจากวันที่เข้าชม</li>
+        <li><strong>เราดำเนินการส่งข้อมูลเข้าสู่ระบบจีนแทนคุณ</strong> ภายใน 24 ชั่วโมง เราจะกรอกข้อมูลของผู้เข้าชมแต่ละคนเข้าสู่ระบบจองอู่หลิงหยวนอย่างเป็นทางการ และรับ QR code ที่ผูกกับหนังสือเดินทางของคุณ</li>
+        <li><strong>แสดง QR code และหนังสือเดินทางที่ประตูอุทยาน</strong> เจ้าหน้าที่จะตรวจสอบทั้งสองอย่างที่ทางเข้า โดยไม่ต้องพิมพ์บัตร สำคัญ: พักที่อู่หลิงหยวน (武陵源) ไม่ใช่ในเมืองจางเจียเจี้ย เพราะทั้งสองแห่งอยู่ห่างกัน 35 กิโลเมตร</li>
+      </ol>
+      <p class="htb-note">สนามบินจางเจียเจี้ยเหอฮัว (DYG) อยู่ห่างจากอุทยานประมาณ 30 นาทีโดยแท็กซี่ หากเดินทางโดยรถไฟ ให้นั่งแท็กซี่จากสถานีรถไฟจางเจียเจี้ยไปยังอู่หลิงหยวน ระยะทาง 35 กิโลเมตร ควรจองที่พักในอู่หลิงหยวน ไม่ใช่ในเมืองจางเจียเจี้ย</p>
+    </div>
+  </div>
+</section>
 <section class="faq-section">
   <h2>คำถามที่พบบ่อย</h2>
   <div class="faq-list">

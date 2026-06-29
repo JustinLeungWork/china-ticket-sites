@@ -269,7 +269,17 @@ footer{background:var(--primary-dark);color:rgba(255,255,255,.55);padding:40px c
 .lang-select:hover { border-color: rgba(255,255,255,0.6); }
 .lang-select option { background: #1a1a1a; color: #fff; }
 .lang-select:focus { outline: none; }
-</style>
+
+    /* How-to-book section */
+    .htb-section { padding: var(--section-y, clamp(48px,6vw,72px)) var(--section-x, clamp(20px,5vw,48px)); }
+    .htb-inner { max-width: 780px; margin: 0 auto; }
+    .htb-body > p { font-size: 15.5px; color: var(--muted, #666); line-height: 1.8; margin-bottom: 20px; }
+    .htb-steps { padding-left: 0; list-style: none; counter-reset: htb; margin: 28px 0; }
+    .htb-steps > li { counter-increment: htb; display: flex; gap: 16px; margin-bottom: 22px; align-items: flex-start; font-size: 15px; color: var(--muted, #666); line-height: 1.75; }
+    .htb-steps > li::before { content: counter(htb); min-width: 28px; height: 28px; background: var(--accent, #8B4513); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+    .htb-steps > li strong { color: var(--text, #1a1a1a); }
+    .htb-note { font-size: 14px; color: var(--muted, #666); background: var(--surface, #f7f5f0); border-left: 3px solid var(--accent, #8B4513); padding: 14px 18px; border-radius: 0 4px 4px 0; line-height: 1.7; margin-top: 4px; }
+  </style>
   <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
@@ -551,6 +561,25 @@ footer{background:var(--primary-dark);color:rgba(255,255,255,.55);padding:40px c
 </section>
 
 <!-- ── FAQ ── -->
+<section class="htb-section">
+  <div class="htb-inner">
+    <div class="section-header" style="text-align:center;margin-bottom:clamp(32px,4vw,48px)">
+      <p class="section-label">Guia de reserva</p>
+      <h2>Como Comprar Ingressos para o Parque de Zhangjiajie Sem WeChat ou Alipay</h2>
+    </div>
+    <div class="htb-body">
+      <p>O sistema oficial de reservas de Wulingyuan exige Alipay ou WeChat Pay — ambos vinculados a contas bancárias chinesas. Visitantes internacionais com Visa ou Mastercard estrangeiros não conseguem concluir a compra diretamente. Veja como nosso serviço funciona:</p>
+      <ol class="htb-steps">
+        <li><strong>Escolha a data da sua primeira entrada.</strong> Seu ingresso cobre 4 dias consecutivos a partir dessa data. Você pode entrar e sair do parque livremente durante os 4 dias usando o mesmo QR code e seu passaporte.</li>
+        <li><strong>Envie os dados do passaporte de cada adulto e jovem visitante.</strong> O sistema de nome real da China vincula cada ingresso a um passaporte. Crianças menores de 14 anos entram gratuitamente — não é necessário ingresso, mas traga o passaporte delas para verificação na entrada.</li>
+        <li><strong>Pague com cartão em USD.</strong> Aceitamos Visa, Mastercard e Apple Pay. Seus dados de passaporte são armazenados com segurança e excluídos 5 dias após a visita.</li>
+        <li><strong>Enviamos ao sistema chinês em seu nome.</strong> Em até 24 horas, inserimos os dados de cada visitante no sistema oficial de reservas de Wulingyuan e obtemos os QR codes vinculados aos seus passaportes.</li>
+        <li><strong>Apresente seu QR code e passaporte na entrada do parque.</strong> A equipe verifica ambos na entrada — não é necessário ingresso impresso. Importante: fique em Wulingyuan (武陵源), não na cidade de Zhangjiajie — elas ficam a 35 km de distância.</li>
+      </ol>
+      <p class="htb-note">O Aeroporto Hehua de Zhangjiajie (DYG) fica a 30 minutos do parque de táxi. Se vier de trem, pegue um táxi por 35 km a partir da Estação Ferroviária de Zhangjiajie até Wulingyuan. Reserve hospedagem em Wulingyuan, não na cidade de Zhangjiajie.</p>
+    </div>
+  </div>
+</section>
 <section class="faq-section">
   <h2>Perguntas frequentes</h2>
   <div class="faq-list">

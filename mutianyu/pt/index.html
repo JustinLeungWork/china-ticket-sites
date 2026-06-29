@@ -305,6 +305,16 @@
     .lang-select:hover { border-color: rgba(255,255,255,0.6); }
     .lang-select option { background: #1a1a1a; color: #fff; }
     .lang-select:focus { outline: none; }
+  
+    /* How-to-book section */
+    .htb-section { padding: var(--section-y, clamp(48px,6vw,72px)) var(--section-x, clamp(20px,5vw,48px)); }
+    .htb-inner { max-width: 780px; margin: 0 auto; }
+    .htb-body > p { font-size: 15.5px; color: var(--muted, #666); line-height: 1.8; margin-bottom: 20px; }
+    .htb-steps { padding-left: 0; list-style: none; counter-reset: htb; margin: 28px 0; }
+    .htb-steps > li { counter-increment: htb; display: flex; gap: 16px; margin-bottom: 22px; align-items: flex-start; font-size: 15px; color: var(--muted, #666); line-height: 1.75; }
+    .htb-steps > li::before { content: counter(htb); min-width: 28px; height: 28px; background: var(--accent, #8B4513); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+    .htb-steps > li strong { color: var(--text, #1a1a1a); }
+    .htb-note { font-size: 14px; color: var(--muted, #666); background: var(--surface, #f7f5f0); border-left: 3px solid var(--accent, #8B4513); padding: 14px 18px; border-radius: 0 4px 4px 0; line-height: 1.7; margin-top: 4px; }
   </style>
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"O que recebo após a reserva?","acceptedAnswer":{"@type":"Answer","text":"Em até 24 horas após o pagamento, você receberá um e-mail de confirmação com um QR code para cada visitante. Mostre-o no celular na entrada. Os funcionários também verificarão seu passaporte, então mantenha-o à mão."}},{"@type":"Question","name":"Por que não posso comprar diretamente?","acceptedAnswer":{"@type":"Answer","text":"O sistema oficial da China (mutianyu.com) exige número de telefone chinês e aplicativos de pagamento chineses. A maioria dos cartões e aplicativos de pagamento estrangeiros não funciona. Nós mantemos as contas chinesas necessárias e fazemos a reserva em seu nome."}},{"@type":"Question","name":"Qual é a diferença entre os tipos de ingresso?","acceptedAnswer":{"@type":"Answer","text":"Apenas entrada: suba os degraus por conta própria (íngreme em alguns trechos). Entrada + shuttle: o ônibus ecológico leva você até a base da muralha, economizando uma longa caminhada. Experiência completa: o teleférico leva você diretamente ao topo da muralha — a opção mais fácil, ótima para famílias ou quem deseja uma visita tranquila."}},{"@type":"Question","name":"Qual a distância de Mutianyu ao centro de Pequim?","acceptedAnswer":{"@type":"Answer","text":"Cerca de 70–80 km, aproximadamente 1,5 a 2 horas de carro ou táxi. Recomendamos sair cedo para evitar o trânsito e as multidões."}},{"@type":"Question","name":"Preciso reservar com antecedência?","acceptedAnswer":{"@type":"Answer","text":"Sim — precisamos de pelo menos 2 dias para processar sua reserva no sistema chinês. Reservas para o mesmo dia ou para o dia seguinte não são possíveis."}}]}
@@ -537,6 +547,25 @@
   </div>
 </section>
 
+<section class="htb-section">
+  <div class="htb-inner">
+    <div class="section-header" style="text-align:center;margin-bottom:clamp(32px,4vw,48px)">
+      <p class="section-label">Guia de reserva</p>
+      <h2>Como Comprar Ingressos para a Grande Muralha em Mutianyu Sem WeChat ou Alipay</h2>
+    </div>
+    <div class="htb-body">
+      <p>O site oficial de ingressos de Mutianyu na China (<strong>mutianyu.com</strong>) exige Alipay ou WeChat Pay — ambos vinculados a contas bancárias chinesas. Visitantes internacionais com cartões estrangeiros não conseguem concluir a compra. Veja como nosso serviço funciona:</p>
+      <ol class="htb-steps">
+        <li><strong>Escolha sua data.</strong> Diferente de algumas atrações, Mutianyu não tem horários fixos de entrada — você pode chegar a qualquer momento durante o horário de funcionamento (07:30–18:00). Precisamos de pelo menos 2 dias de antecedência para processar sua reserva no sistema chinês.</li>
+        <li><strong>Envie os dados do passaporte de cada visitante.</strong> O sistema de nome real da China vincula cada ingresso a um passaporte. Você fornece nome, número do passaporte e data de nascimento de cada pessoa do grupo.</li>
+        <li><strong>Pague com cartão em USD.</strong> Aceitamos Visa, Mastercard e Apple Pay. Seus dados de passaporte são armazenados com segurança e excluídos automaticamente após a data da visita.</li>
+        <li><strong>Enviamos ao sistema chinês em seu nome.</strong> Em até 24 horas, inserimos os dados de cada visitante no sistema oficial de ingressos da China e obtemos os QR codes de entrada vinculados aos seus passaportes.</li>
+        <li><strong>Apresente seu QR code e passaporte na entrada.</strong> A equipe verifica tanto o seu QR code (no celular) quanto o seu passaporte físico na entrada — não é necessário ingresso impresso.</li>
+      </ol>
+      <p class="htb-note">Mutianyu fica a cerca de 70–80 km a nordeste do centro de Pequim — reserve 1,5 a 2 horas de viagem. Saia antes das 08:00 para evitar o pico de visitantes. A muralha fica mais movimentada entre 10:00 e 14:00.</p>
+    </div>
+  </div>
+</section>
 <section class="faq-section">
   <div class="faq-inner">
     <div class="section-header">

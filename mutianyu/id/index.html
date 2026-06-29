@@ -305,6 +305,16 @@
     }
       .currency-tag { font-size: 13px; font-weight: 400; color: var(--muted); margin-left: 2px; }
     .local-price-hint { font-size: 13px; font-weight: 400; color: var(--muted); margin-left: 4px; }
+  
+    /* How-to-book section */
+    .htb-section { padding: var(--section-y, clamp(48px,6vw,72px)) var(--section-x, clamp(20px,5vw,48px)); }
+    .htb-inner { max-width: 780px; margin: 0 auto; }
+    .htb-body > p { font-size: 15.5px; color: var(--muted, #666); line-height: 1.8; margin-bottom: 20px; }
+    .htb-steps { padding-left: 0; list-style: none; counter-reset: htb; margin: 28px 0; }
+    .htb-steps > li { counter-increment: htb; display: flex; gap: 16px; margin-bottom: 22px; align-items: flex-start; font-size: 15px; color: var(--muted, #666); line-height: 1.75; }
+    .htb-steps > li::before { content: counter(htb); min-width: 28px; height: 28px; background: var(--accent, #8B4513); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+    .htb-steps > li strong { color: var(--text, #1a1a1a); }
+    .htb-note { font-size: 14px; color: var(--muted, #666); background: var(--surface, #f7f5f0); border-left: 3px solid var(--accent, #8B4513); padding: 14px 18px; border-radius: 0 4px 4px 0; line-height: 1.7; margin-top: 4px; }
   </style>
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Apa yang sebenarnya saya terima?","acceptedAnswer":{"@type":"Answer","text":"Dalam 24 jam setelah pembayaran, Anda akan menerima email konfirmasi dengan kode QR untuk setiap pengunjung. Tunjukkan di ponsel Anda di gerbang. Petugas juga akan memeriksa paspor Anda, jadi simpan di tempat yang mudah dijangkau."}},{"@type":"Question","name":"Mengapa saya tidak bisa membeli langsung?","acceptedAnswer":{"@type":"Answer","text":"Sistem resmi China (mutianyu.com) memerlukan nomor telepon China dan aplikasi pembayaran China. Sebagian besar kartu dan aplikasi pembayaran asing tidak berfungsi. Kami memiliki akun China yang diperlukan dan melakukan pemesanan atas nama Anda."}},{"@type":"Question","name":"Apa perbedaan antara tingkatan tiket?","acceptedAnswer":{"@type":"Answer","text":"Hanya masuk: naiki tangga sendiri (curam di beberapa tempat). Masuk + shuttle: bus eco membawa Anda ke kaki tembok, menghemat perjalanan jalan kaki yang panjang. Pengalaman lengkap: cable car membawa Anda langsung ke atas tembok — pilihan termudah, bagus untuk keluarga atau mereka yang ingin kunjungan santai."}},{"@type":"Question","name":"Seberapa jauh Mutianyu dari pusat kota Beijing?","acceptedAnswer":{"@type":"Answer","text":"Sekitar 70–80km, kira-kira 1,5–2 jam dengan mobil atau taksi. Kami menyarankan berangkat lebih awal untuk menghindari kemacetan dan kerumunan."}},{"@type":"Question","name":"Apakah saya perlu memesan terlebih dahulu?","acceptedAnswer":{"@type":"Answer","text":"Ya — kami membutuhkan setidaknya 2 hari untuk memproses pemesanan Anda di sistem China. Pemesanan di hari yang sama dan keesokan harinya tidak memungkinkan."}}]}
@@ -537,6 +547,25 @@
   </div>
 </section>
 
+<section class="htb-section">
+  <div class="htb-inner">
+    <div class="section-header" style="text-align:center;margin-bottom:clamp(32px,4vw,48px)">
+      <p class="section-label">Panduan pemesanan</p>
+      <h2>Cara Membeli Tiket Tembok Besar Mutianyu Tanpa WeChat atau Alipay</h2>
+    </div>
+    <div class="htb-body">
+      <p>Situs tiket resmi Mutianyu China (<strong>mutianyu.com</strong>) mengharuskan pembayaran melalui Alipay atau WeChat Pay — keduanya terhubung ke rekening bank China. Pengunjung internasional dengan kartu luar negeri tidak dapat menyelesaikan pembelian. Begini cara layanan kami bekerja:</p>
+      <ol class="htb-steps">
+        <li><strong>Pilih tanggal Anda.</strong> Berbeda dengan beberapa objek wisata, Mutianyu tidak memiliki sesi masuk per jam yang tetap — Anda tiba kapan saja selama jam buka (07:30–18:00). Kami membutuhkan pemberitahuan minimal 2 hari untuk memproses pemesanan Anda di sistem China.</li>
+        <li><strong>Kirimkan data paspor untuk setiap pengunjung.</strong> Sistem nama nyata China menghubungkan setiap tiket dengan satu paspor. Anda menyediakan nama, nomor paspor, dan tanggal lahir untuk setiap orang dalam kelompok Anda.</li>
+        <li><strong>Bayar dengan kartu dalam USD.</strong> Visa, Mastercard, dan Apple Pay diterima. Data paspor Anda disimpan dengan aman dan dihapus otomatis setelah tanggal kunjungan Anda.</li>
+        <li><strong>Kami mengirimkan ke sistem China atas nama Anda.</strong> Dalam 24 jam kami memasukkan data setiap pengunjung ke sistem tiket resmi China dan mendapatkan kode QR masuk yang terhubung ke paspor Anda.</li>
+        <li><strong>Tunjukkan kode QR dan paspor Anda di pintu masuk.</strong> Petugas memeriksa kode QR (di ponsel Anda) dan paspor fisik Anda di pintu masuk — tidak diperlukan tiket cetak.</li>
+      </ol>
+      <p class="htb-note">Mutianyu berjarak sekitar 70–80 km di timur laut pusat Beijing — perkirakan waktu perjalanan 1,5–2 jam. Berangkat sebelum 08:00 untuk menghindari keramaian puncak. Tembok paling ramai antara pukul 10:00 dan 14:00.</p>
+    </div>
+  </div>
+</section>
 <section class="faq-section">
   <div class="faq-inner">
     <div class="section-header">

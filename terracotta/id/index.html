@@ -382,6 +382,16 @@
     #passport-section.fullscreen .back-link { display: none; }
       .currency-tag { font-size: 13px; font-weight: 400; color: var(--muted); margin-left: 2px; }
     .local-price-hint { font-size: 13px; font-weight: 400; color: var(--muted); margin-left: 4px; }
+  
+    /* How-to-book section */
+    .htb-section { padding: var(--section-y, clamp(48px,6vw,72px)) var(--section-x, clamp(20px,5vw,48px)); }
+    .htb-inner { max-width: 780px; margin: 0 auto; }
+    .htb-body > p { font-size: 15.5px; color: var(--muted, #666); line-height: 1.8; margin-bottom: 20px; }
+    .htb-steps { padding-left: 0; list-style: none; counter-reset: htb; margin: 28px 0; }
+    .htb-steps > li { counter-increment: htb; display: flex; gap: 16px; margin-bottom: 22px; align-items: flex-start; font-size: 15px; color: var(--muted, #666); line-height: 1.75; }
+    .htb-steps > li::before { content: counter(htb); min-width: 28px; height: 28px; background: var(--accent, #8B4513); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+    .htb-steps > li strong { color: var(--text, #1a1a1a); }
+    .htb-note { font-size: 14px; color: var(--muted, #666); background: var(--surface, #f7f5f0); border-left: 3px solid var(--accent, #8B4513); padding: 14px 18px; border-radius: 0 4px 4px 0; line-height: 1.7; margin-top: 4px; }
   </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Mengapa saya tidak bisa memesan di situs resmi museum?","acceptedAnswer":{"@type":"Answer","text":"Sistem pemesanan resmi (bmy.com.cn) memerlukan nomor telepon China untuk verifikasi SMS dan aplikasi pembayaran China. Wisatawan internasional tanpa SIM China atau metode pembayaran China tidak dapat menyelesaikan prosesnya. Kami memiliki akun yang diperlukan untuk memesan atas nama Anda — Anda membayar kami dengan kartu biasa mana pun."}},{"@type":"Question","name":"Museum hanya mengizinkan satu tiket per paspor — bagaimana untuk rombongan?","acceptedAnswer":{"@type":"Answer","text":"Setiap tiket terhubung dengan satu nomor paspor. Untuk rombongan empat orang, kami mengirimkan empat nomor paspor yang berbeda dan menerima empat kode QR terpisah — satu per orang. Itulah mengapa kami mengumpulkan data lengkap setiap pengunjung, bukan hanya pemesan utama."}},{"@type":"Question","name":"Berapa jauh hari sebelumnya sebaiknya saya memesan?","acceptedAnswer":{"@type":"Answer","text":"Tiket dijual 7 hari sebelumnya. Museum kehabisan tiket pada akhir pekan, hari libur umum China, dan selama liburan sekolah. Kami merekomendasikan pemesanan minimal 3–4 hari sebelumnya untuk hari kerja dan 6–7 hari untuk kunjungan akhir pekan. Ketersediaan pada hari yang sama atau keesokan harinya sangat jarang pada musim puncak."}},{"@type":"Question","name":"Bagaimana jika tiket habis?","acceptedAnswer":{"@type":"Answer","text":"Jika museum sudah penuh terpesan untuk tanggal yang Anda pilih, kami akan segera memberitahu Anda dan mengembalikan dana penuh. Kami juga akan memeriksa tanggal-tanggal di sekitarnya dan memberi tahu ketersediaan sehingga Anda bisa memesan ulang tanpa membayar lagi."}},{"@type":"Question","name":"Bisakah saya membatalkan atau mengubah pemesanan?","acceptedAnswer":{"@type":"Answer","text":"Pembatalan yang dilakukan 48 jam atau lebih sebelum tanggal kunjungan mendapat pengembalian dana penuh. Dalam kurun 48 jam, tiket tidak dapat dikembalikan. Untuk perubahan tanggal, hubungi kami minimal 72 jam sebelumnya — kami akan berusaha menjadwal ulang tergantung ketersediaan."}},{"@type":"Question","name":"Apakah pemandu pribadi berbahasa Inggris sepadan harganya?","acceptedAnswer":{"@type":"Answer","text":"Ya, bagi sebagian besar pengunjung. Dampak visual Lubang 1 sudah langsung terasa, namun kisah di balik situs ini — bagaimana prajurit dibuat, mengapa mereka dikubur, apa yang mereka ceritakan tentang Dinasti Qin — membutuhkan konteks agar bisa benar-benar dinikmati. Pemandu kami terakreditasi oleh museum dan rombongan Anda hingga 10 orang memilikinya secara eksklusif, sehingga Anda tidak perlu berjuang mendengar di antara 40 orang lainnya. Harganya tetap $150 untuk seluruh rombongan, dipesan berdasarkan permintaan — ajukan permintaan dan kami akan konfirmasi ketersediaan sebelum Anda membayar apa pun."}},{"@type":"Question","name":"Apa saja yang sebenarnya termasuk dalam tiket saya?","acceptedAnswer":{"@type":"Answer","text":"Satu tiket mencakup Museum Prajurit Terakota (Lubang 1, 2, dan 3, ditambah Aula Kereta Perunggu) dan taman mausoleum Lishan Garden — bus antar-jemput gratis berjalan di antara keduanya. Tiket berlaku sepanjang hari dan diperiksa tiga kali di seluruh area. Sediakan sekitar 1,5 jam per lokasi; 3–4 jam untuk keduanya dengan santai."}},{"@type":"Question","name":"Bisakah saya memilih slot waktu masuk?","acceptedAnswer":{"@type":"Answer","text":"Bisa — museum membagi hari menjadi delapan jendela masuk satu jam dari pukul 08:30 hingga 17:00. Kami akan menanyakan slot pilihan Anda saat pembayaran dan memesan sesuai itu. Slot pagi (08:30–10:30) paling tidak ramai; rentang 10:31–12:30 cenderung paling sibuk. Datanglah setidaknya 30 menit sebelum slot Anda untuk melewati antrean keamanan."}},{"@type":"Question","name":"Barang apa saja yang tidak diperbolehkan di museum?","acceptedAnswer":{"@type":"Answer","text":"Museum melarang: barang mudah terbakar atau meledak, segala senjata tajam atau pentungan, drone dan layang-layang, hewan peliharaan, pengeras suara dan perlengkapan kamera video, pistol air, hoverboard, skateboard, dan sepeda. Barang bawaan standar — tas, kamera (tanpa tripod atau flash), makanan, air — semuanya boleh. Penitipan bagasi gratis tersedia di sisi timur aula tiket jika diperlukan."}}]}
@@ -591,6 +601,25 @@
   </div>
 </section>
 
+<section class="htb-section">
+  <div class="htb-inner">
+    <div class="section-header" style="text-align:center;margin-bottom:clamp(32px,4vw,48px)">
+      <p class="section-label">Panduan pemesanan</p>
+      <h2>Cara Membeli Tiket Prajurit Terakota Tanpa WeChat atau Alipay</h2>
+    </div>
+    <div class="htb-body">
+      <p>Situs pemesanan resmi China (<strong>bmy.com.cn</strong>) mengharuskan pembayaran melalui Alipay atau WeChat Pay — keduanya terhubung ke rekening bank China. Pengunjung internasional yang menggunakan kartu Visa atau Mastercard luar negeri tidak dapat menyelesaikan pembelian secara langsung. Begini cara layanan kami bekerja:</p>
+      <ol class="htb-steps">
+        <li><strong>Pilih tanggal dan sesi masuk Anda.</strong> Museum menyediakan 8 jendela masuk satu jam setiap hari dari 08:30 hingga 17:00. Tiket dibuka 7 hari sebelumnya. Sesi akhir pekan dan hari libur umum cepat habis — pesan 4–7 hari sebelumnya untuk keamanan.</li>
+        <li><strong>Kirimkan data paspor untuk setiap pengunjung.</strong> Sistem nama nyata China (<em>实名制</em>) menghubungkan setiap tiket dengan satu nomor paspor. Anda menyediakan nama, nomor paspor, dan tanggal lahir untuk setiap orang dalam kelompok Anda — informasi yang sama yang akan diminta oleh situs resmi.</li>
+        <li><strong>Bayar dengan kartu dalam USD.</strong> Visa, Mastercard, dan Apple Pay diterima. Data paspor Anda disimpan dengan aman dan dihapus otomatis setelah tanggal kunjungan Anda.</li>
+        <li><strong>Kami mengirimkan ke sistem China atas nama Anda.</strong> Dalam 24 jam kami memasukkan data setiap pengunjung ke bmy.com.cn dan mendapatkan kode QR masuk resmi yang terhubung ke paspor Anda.</li>
+        <li><strong>Paspor Anda adalah tiket Anda di pintu masuk.</strong> Petugas keamanan memindai paspor fisik Anda di turnstile — tidak diperlukan tiket cetak atau kode QR terpisah. Tiba 30 menit sebelum sesi masuk Anda untuk melewati antrean keamanan.</li>
+      </ol>
+      <p class="htb-note">Museum memberlakukan batas harian 65,000 pengunjung. Tiket langsung di pintu masuk kadang tersedia pada pagi hari kerja yang sepi di musim dingin, namun tidak dapat dijamin. Pemesanan lebih awal sangat disarankan dari April hingga Oktober dan selama hari libur umum China.</p>
+    </div>
+  </div>
+</section>
 <section class="faq-section">
   <div class="faq-inner">
     <div class="section-header">

@@ -382,6 +382,16 @@
     #passport-section.fullscreen .back-link { display: none; }
       .currency-tag { font-size: 13px; font-weight: 400; color: var(--muted); margin-left: 2px; }
     .local-price-hint { font-size: 13px; font-weight: 400; color: var(--muted); margin-left: 4px; }
+  
+    /* How-to-book section */
+    .htb-section { padding: var(--section-y, clamp(48px,6vw,72px)) var(--section-x, clamp(20px,5vw,48px)); }
+    .htb-inner { max-width: 780px; margin: 0 auto; }
+    .htb-body > p { font-size: 15.5px; color: var(--muted, #666); line-height: 1.8; margin-bottom: 20px; }
+    .htb-steps { padding-left: 0; list-style: none; counter-reset: htb; margin: 28px 0; }
+    .htb-steps > li { counter-increment: htb; display: flex; gap: 16px; margin-bottom: 22px; align-items: flex-start; font-size: 15px; color: var(--muted, #666); line-height: 1.75; }
+    .htb-steps > li::before { content: counter(htb); min-width: 28px; height: 28px; background: var(--accent, #8B4513); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+    .htb-steps > li strong { color: var(--text, #1a1a1a); }
+    .htb-note { font-size: 14px; color: var(--muted, #666); background: var(--surface, #f7f5f0); border-left: 3px solid var(--accent, #8B4513); padding: 14px 18px; border-radius: 0 4px 4px 0; line-height: 1.7; margin-top: 4px; }
   </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"実際に何を受け取れますか？また入場ゲートで何を提示しますか？","acceptedAnswer":{"@type":"Answer","text":"お支払いから24時間以内に、訪問者ごとのQRコードが記載された確認メールが届きます。当日は以下の手順です：スマートフォンで確認メールを開いてください（印刷不要）。兵馬俑博物館の正面入口へお越しください。ゲートでQRコードをスキャンしてください。スタッフがパスポートも確認しますので、手元に用意してください。各訪問者のQRコードはパスポート番号に紐付けられています。氏名は完全に一致していなければなりません。"}},{"@type":"Question","name":"公式博物館サイトで予約できないのはなぜですか？","acceptedAnswer":{"@type":"Answer","text":"公式予約システム（bmy.com.cn）は中国の電話番号によるSMS認証と中国の決済アプリが必要です。中国のSIMカードや決済手段をお持ちでない海外からの訪問者は、このプロセスを完了できません。私たちは必要なアカウントを保有し、お客様に代わって予約します — 通常のカードでお支払いいただけます。"}},{"@type":"Question","name":"博物館は1パスポートにつき1枚しかチケットを購入できないと聞きましたが、グループの場合はどうなりますか？","acceptedAnswer":{"@type":"Answer","text":"各チケットは1つのパスポート番号に紐付けられます。4名のグループの場合、4つのパスポート番号を別々に登録し、1人1枚ずつQRコードをお送りします。そのため、代表者だけでなくすべての訪問者の情報をお伺いしています。"}},{"@type":"Question","name":"どのくらい前に予約すればよいですか？","acceptedAnswer":{"@type":"Answer","text":"チケットは7日前から発売されます。週末、中国の祝日、学校の休み期間は完売します。平日は3〜4日前、週末は6〜7日前のご予約をお勧めします。繁忙期に当日や翌日の空きがあることはまれです。"}},{"@type":"Question","name":"チケットが完売だった場合は？","acceptedAnswer":{"@type":"Answer","text":"ご希望の日程が満席の場合はすぐにご連絡し、全額返金いたします。前後の空き日程もご確認してお知らせしますので、追加料金なしで再予約いただけます。"}},{"@type":"Question","name":"キャンセルや日程変更はできますか？","acceptedAnswer":{"@type":"Answer","text":"訪問日の48時間以上前のキャンセルは全額返金対象です。48時間以内はキャンセル不可となります。日程変更は少なくとも72時間前にご連絡いただければ、空き状況次第で対応いたします。"}},{"@type":"Question","name":"プライベート英語ガイドは価値がありますか？","acceptedAnswer":{"@type":"Answer","text":"ほとんどの方にとって、はい価値があります。1号坑の視覚的なインパクトは圧倒的ですが、兵馬俑がどのように作られたか、なぜ埋められたか、秦王朝について何を語っているか — こうした背景知識があってこそ体験が深まります。ガイドは博物館認定の資格を持ち、最大10名のグループを貸し切りでご案内するので、40人もの観光客の中で聞き取ろうとするストレスはありません。グループ全員で均一料金$150、リクエスト制です — リクエストをお送りいただければ、お支払い前に空き状況を確認します。"}},{"@type":"Question","name":"チケットには実際に何が含まれていますか？","acceptedAnswer":{"@type":"Answer","text":"1枚のチケットで兵馬俑博物館（1・2・3号坑および銅車馬館）と麗山園の皇帝陵公園の両方に入場できます — 両施設の間は無料シャトルバスが運行しています。チケットは終日有効で、園内で3回確認されます。各施設で1.5時間ほど、ゆっくり見学する場合は両方で3〜4時間を見込んでください。"}},{"@type":"Question","name":"入場時間枠を選べますか？","acceptedAnswer":{"@type":"Answer","text":"はい — 博物館は1日を08:30から17:00までの8つの1時間入場枠に分けています。お支払い時にご希望の枠をお伺いし、それに沿って予約します。午前の枠（08:30〜10:30）が最も空いており、10:31〜12:30の時間帯が最も混雑する傾向があります。セキュリティの列を通過するため、時間枠の少なくとも30分前にお越しください。"}},{"@type":"Question","name":"博物館に持ち込めない物は何ですか？","acceptedAnswer":{"@type":"Answer","text":"博物館では次の物の持ち込みが禁止されています：可燃物や爆発物、あらゆる刃物や棍棒、ドローンや凧、ペット、拡声器やビデオカメラ撮影機材、水鉄砲、ホバーボード、スケートボード、自転車。通常の手荷物 — かばん、カメラ（三脚・フラッシュは不可）、食べ物、水 — はすべて問題ありません。必要に応じて、チケットホールの東側で無料の手荷物預かりをご利用いただけます。"}}]}
@@ -591,6 +601,25 @@
   </div>
 </section>
 
+<section class="htb-section">
+  <div class="htb-inner">
+    <div class="section-header" style="text-align:center;margin-bottom:clamp(32px,4vw,48px)">
+      <p class="section-label">予約ガイド</p>
+      <h2>WeChat PayやアリペイなしでWeChat Pay兵馬俑のチケットを購入する方法</h2>
+    </div>
+    <div class="htb-body">
+      <p>中国の公式予約サイト（<strong>bmy.com.cn</strong>）ではアリペイまたはWeChat Payが必要で、いずれも中国の銀行口座に紐づいています。海外のVisaやMastercardをお持ちの外国人旅行者は直接購入を完了できません。代わりに当サービスをご利用ください：</p>
+      <ol class="htb-steps">
+        <li><strong>日程と入場時間帯を選択してください。</strong> 博物館は毎日08:30から17:00まで8つの1時間ごとの入場枠を設けています。チケットは7日前から購入できます。週末や祝日の枠はすぐに売り切れるため、4〜7日前の予約をお勧めします。</li>
+        <li><strong>全訪問者のパスポート情報を提出してください。</strong> 中国の実名制（<em>実名制</em>）により、各チケットは1つのパスポート番号に紐づけられます。グループ内の各参加者の氏名、パスポート番号、生年月日をご提供ください。公式サイトでも同様の情報が求められます。</li>
+        <li><strong>USDでカード払いをしてください。</strong> Visa、Mastercard、Apple Payがご利用いただけます。パスポートデータは安全に保存され、訪問日後に自動的に削除されます。</li>
+        <li><strong>当社が中国のシステムに代わって申請します。</strong> 24時間以内に各訪問者の情報をbmy.com.cnに入力し、パスポートに紐づいた公式入場QRコードを取得します。</li>
+        <li><strong>ゲートではパスポートがチケット代わりになります。</strong> 警備員が入場ゲートで実際のパスポートをスキャンします。印刷したチケットや別途QRコードは不要です。セキュリティの列を通過するために、入場時間の30分前にお越しください。</li>
+      </ol>
+      <p class="htb-note">博物館は1日あたり65,000人の入場制限を設けています。冬の平日の朝など閑散期には当日券が販売される場合もありますが、保証はできません。4月から10月および中国の祝日期間中は事前予約を強くお勧めします。</p>
+    </div>
+  </div>
+</section>
 <section class="faq-section">
   <div class="faq-inner">
     <div class="section-header">
