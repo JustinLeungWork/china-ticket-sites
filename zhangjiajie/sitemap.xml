@@ -6,7 +6,67 @@
     <lastmod>2026-06-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <xhtml:link rel="alternate" hreflang="en"        href="https://zhangjiajie-tickets.com/"/>
+    <xhtml:link rel="alternate" hreflang="en"      href="https://zhangjiajie-tickets.com/"/>
+    <xhtml:link rel="alternate" hreflang="ko"      href="https://zhangjiajie-tickets.com/ko/"/>
+    <xhtml:link rel="alternate" hreflang="ja"      href="https://zhangjiajie-tickets.com/ja/"/>
+    <xhtml:link rel="alternate" hreflang="id"      href="https://zhangjiajie-tickets.com/id/"/>
+    <xhtml:link rel="alternate" hreflang="th"      href="https://zhangjiajie-tickets.com/th/"/>
+    <xhtml:link rel="alternate" hreflang="fr"      href="https://zhangjiajie-tickets.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="pt"      href="https://zhangjiajie-tickets.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://zhangjiajie-tickets.com/"/>
+  </url>
+  <url>
+    <loc>https://zhangjiajie-tickets.com/ko/</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ko"      href="https://zhangjiajie-tickets.com/ko/"/>
+    <xhtml:link rel="alternate" hreflang="en"      href="https://zhangjiajie-tickets.com/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://zhangjiajie-tickets.com/"/>
+  </url>
+  <url>
+    <loc>https://zhangjiajie-tickets.com/ja/</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ja"      href="https://zhangjiajie-tickets.com/ja/"/>
+    <xhtml:link rel="alternate" hreflang="en"      href="https://zhangjiajie-tickets.com/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://zhangjiajie-tickets.com/"/>
+  </url>
+  <url>
+    <loc>https://zhangjiajie-tickets.com/id/</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="id"      href="https://zhangjiajie-tickets.com/id/"/>
+    <xhtml:link rel="alternate" hreflang="en"      href="https://zhangjiajie-tickets.com/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://zhangjiajie-tickets.com/"/>
+  </url>
+  <url>
+    <loc>https://zhangjiajie-tickets.com/th/</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="th"      href="https://zhangjiajie-tickets.com/th/"/>
+    <xhtml:link rel="alternate" hreflang="en"      href="https://zhangjiajie-tickets.com/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://zhangjiajie-tickets.com/"/>
+  </url>
+  <url>
+    <loc>https://zhangjiajie-tickets.com/fr/</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="fr"      href="https://zhangjiajie-tickets.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="en"      href="https://zhangjiajie-tickets.com/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://zhangjiajie-tickets.com/"/>
+  </url>
+  <url>
+    <loc>https://zhangjiajie-tickets.com/pt/</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="pt"      href="https://zhangjiajie-tickets.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="en"      href="https://zhangjiajie-tickets.com/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://zhangjiajie-tickets.com/"/>
   </url>
   <url>

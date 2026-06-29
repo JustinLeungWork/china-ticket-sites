@@ -15,6 +15,8 @@
 <link rel="alternate" hreflang="ja" href="https://zhangjiajie-tickets.com/ja/">
 <link rel="alternate" hreflang="id" href="https://zhangjiajie-tickets.com/id/">
 <link rel="alternate" hreflang="th" href="https://zhangjiajie-tickets.com/th/">
+<link rel="alternate" hreflang="fr" href="https://zhangjiajie-tickets.com/fr/">
+<link rel="alternate" hreflang="pt" href="https://zhangjiajie-tickets.com/pt/">
 <link rel="alternate" hreflang="x-default" href="https://zhangjiajie-tickets.com/">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"TouristAttraction","name":"장자제 국가삼림공원","description":"중국 최초의 국가삼림공원. 3,000개 이상의 사암 기둥 지형이 영화 아바타의 떠다니는 할렐루야 산맥에 영감을 주었습니다. 후난성의 유네스코 세계자연유산.","url":"https://zhangjiajie-tickets.com","address":{"@type":"PostalAddress","addressLocality":"우링위안","addressRegion":"후난","addressCountry":"CN"},"offers":[{"@type":"Offer","name":"4일권 + 환경버스 (성인)","priceCurrency":"USD","price":"39","availability":"https://schema.org/InStock"},{"@type":"Offer","name":"4일권 + 전체 교통 패키지 (성인)","priceCurrency":"USD","price":"73","availability":"https://schema.org/InStock"},{"@type":"Offer","name":"4일권 + 환경버스 (청소년 14-17세)","priceCurrency":"USD","price":"22","availability":"https://schema.org/InStock"}]}
@@ -58,6 +60,10 @@ nav{position:sticky;top:0;z-index:100;background:rgba(30,61,47,.97);backdrop-fil
 .nav-links a:hover{color:#fff}
 .btn-nav{background:var(--accent);color:var(--primary-dark);border:none;padding:9px 22px;font:600 14px 'DM Sans',sans-serif;border-radius:var(--r-sm);cursor:pointer;white-space:nowrap;transition:background .2s}
 .btn-nav:hover{background:var(--accent-dark)}
+.lang-select{width:auto;background:transparent;border:1px solid rgba(255,255,255,0.3);color:var(--white);font-family:'DM Sans',sans-serif;font-size:13px;padding:6px 12px;border-radius:var(--r-sm);cursor:pointer;margin-right:14px;transition:border-color 0.18s}
+.lang-select:hover{border-color:rgba(255,255,255,0.6)}
+.lang-select option{background:#1a1a1a;color:#fff}
+.lang-select:focus{outline:none}
 @media(max-width:640px){.nav-links{display:none}}
 
 /* ── HERO ── */
@@ -275,6 +281,15 @@ footer{background:var(--primary-dark);color:rgba(255,255,255,.55);padding:40px c
     <a href="/guide.html">방문 안내</a>
     <a href="/about.html">소개</a>
   </div>
+  <select class="lang-select" onchange="location.href=this.value" aria-label="Language">
+    <option value="/">&#127468;&#127463; EN</option>
+    <option value="/ko/">&#127472;&#127479; 한국어</option>
+    <option value="/ja/">&#127471;&#127477; 日本語</option>
+    <option value="/id/">&#127470;&#127465; Indonesia</option>
+    <option value="/th/">&#127481;&#127469; ภาษาไทย</option>
+    <option value="/fr/">&#127467;&#127479; Français</option>
+    <option value="/pt/">&#127477;&#127481; Português</option>
+  </select>
   <a href="#book" class="btn-nav">지금 예약</a>
 </nav>
 
@@ -1010,6 +1025,14 @@ async function submitBooking() {
 updateQtyDisplay();
 updateTotals();
 initCal();
+</script>
+<script>
+(function(){
+  var s = document.querySelector('.lang-select');
+  if (!s) return;
+  var p = location.pathname;
+  s.value = p.startsWith('/ko') ? '/ko/' : p.startsWith('/ja') ? '/ja/' : p.startsWith('/id') ? '/id/' : p.startsWith('/th') ? '/th/' : p.startsWith('/fr') ? '/fr/' : p.startsWith('/pt') ? '/pt/' : '/';
+})();
 </script>
 <script>
 (function(){

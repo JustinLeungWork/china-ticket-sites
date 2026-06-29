@@ -128,7 +128,7 @@ These patterns apply to any service site in this network, not just tickets.
 | `.env` loading | Force-override: `process.env[key] = val` unconditionally (Windows system vars shadow site .env otherwise) |
 | Admin dashboard | Multi-site: `SITES=terracotta,mutianyu`; per-site prefixed vars (`TERRACOTTA_DATABASE_URL`) |
 | SEO/GEO schema | See SEO_GEO_PLAYBOOK.md |
-| Multilingual pages | `/ko/`, `/ja/`, `/id/`, `/th/`, `/es/` subfolders + hreflang |
+| Multilingual pages | `/ko/`, `/ja/`, `/id/`, `/th/`, `/es/`, `/fr/`, `/pt/` subfolders + hreflang |
 | Analytics | `<script defer src="/_vercel/insights/script.js"></script>` before `</head>` |
 
 ---
@@ -195,7 +195,7 @@ ADMIN_PORT=8787
 - [ ] Write Visitor Guide page (`/guide.html`)
 - [ ] Write About page (`/about.html`) — reuse founder story, update attraction details
 - [ ] Write `llms.txt` (see terracotta template)
-- [ ] Translate all 5 locales (ko, ja, id, th, es) — human review required
+- [ ] Translate all 7 locales (ko, ja, id, th, es, fr, pt) — human review required
 
 ### 4. SEO/GEO — required before launch
 Full detail in `docs/SEO_GEO_PLAYBOOK.md`. Minimum required:
@@ -321,7 +321,7 @@ npm run admin
 ├── terms.html              ← Terms of service
 ├── refunds.html            ← Refund policy
 ├── RETENTION_POLICY.md     ← Data retention documentation
-├── ko/, ja/, id/, th/      ← Translated locale subfolders
+├── ko/, ja/, id/, th/, es/, fr/, pt/  ← Translated locale subfolders
 ├── api/
 │   ├── checkout.js         ← Stripe Checkout session creation + DB insert
 │   ├── webhook.js          ← Payment confirmation + dual email send
@@ -353,3 +353,116 @@ npm run admin
 | Time slots | ❌ Site-specific | Each attraction has different opening hours |
 | Visitor guide | ❌ Site-specific | Directions, tips entirely different |
 | Locale translations | ❌ Site-specific | All content different |
+
+---
+
+## Currency conversion system
+
+All pages show a local-price hint (e.g. `~€23`) next to USD prices for visitors whose browser language matches a supported currency. The system is purely client-side — no server changes needed.
+
+### How it works
+
+1. **`data-usd` attribute** — add `data-usd="25.99"` to any price element. The JS reads this and appends the hint.
+2. **RATES table** — a hardcoded JS object mapping currency codes to symbol, rate, and browser language prefixes.
+3. **Currency detection** — `navigator.language` is lowercased and matched against each currency's `langs` array (exact match or prefix match on the base language code).
+4. **Hint injection** — a `<span class="local-price-hint">` is appended inside the matched element.
+
+### RATES table (current — update rates periodically)
+
+```javascript
+var RATES = {
+  EUR: { sym:'€',   rate:0.92,  langs:['fr','de','it','nl','pt','pl','ro','el','cs','sv','fi','da','sk','hu','bg','hr','sl','et','lv','lt'] },
+  GBP: { sym:'£',   rate:0.79,  langs:['en-gb'] },
+  AUD: { sym:'A$',  rate:1.54,  langs:['en-au'] },
+  CAD: { sym:'C$',  rate:1.37,  langs:['en-ca'] },
+  SGD: { sym:'S$',  rate:1.35,  langs:['en-sg','ms-sg'] },
+  KRW: { sym:'₩',   rate:1360,  langs:['ko'], round:100 },
+  JPY: { sym:'¥',   rate:155,   langs:['ja'], round:10 },
+  IDR: { sym:'Rp ', rate:16300, langs:['id'], round:1000 },
+  THB: { sym:'฿',   rate:35,    langs:['th'], round:1 },
+  MYR: { sym:'RM',  rate:4.7,   langs:['ms','ms-my'] },
+  HKD: { sym:'HK$', rate:7.8,   langs:['zh-hk'] },
+  TWD: { sym:'NT$', rate:32,    langs:['zh-tw'] },
+};
+```
+
+- `round` — if set, the converted value is rounded to the nearest multiple (e.g. KRW rounds to 100 won)
+- French (`fr`) and Portuguese (`pt`) both fall into the EUR group — they get euro hints automatically
+- USD visitors see no hint (USD is baseline)
+
+### CSS for the hint
+
+```css
+.local-price-hint { font-size: 0.82em; color: rgba(255,255,255,0.55); margin-left: 4px; white-space: nowrap; }
+```
+
+Add this to the site's style block. Adjust colour if the price is on a light background.
+
+### Applying to a page
+
+1. Add `data-usd="<price>"` to every price-displaying element
+2. Drop the RATES script block just before `</body>` (after all booking JS)
+3. Add the `.local-price-hint` CSS rule to the style block
+
+The script is already included in all pages in this repo. When creating a new locale page, copy it verbatim — do NOT translate or modify the RATES object.
+
+---
+
+## How to add a new locale
+
+Adding a language (e.g. German `/de/`) involves these steps across all sites where you want it:
+
+### 1. Create the translated page
+
+Copy the English `index.html` for each site and translate all visible text:
+- `<html lang="de">`, `<title>`, `<meta name="description">`, og/twitter tags
+- `<link rel="canonical">` → `https://[site]/de/`
+- All schema JSON-LD text fields (name, description, FAQ questions/answers)
+- All body HTML text (hero, booking form labels, steps, FAQ, footer)
+- JS strings: DOW/MON arrays, alert() messages, button text, visitor labels
+- Update lang-select JS path detection to include the new locale
+
+**Do NOT change:** CSS, JS logic, class names, IDs, data-* attributes, prices, RATES block.
+
+### 2. Add hreflang to ALL pages
+
+Every page on the site (English + all existing locales + the new one) must declare the new locale in its `<head>`:
+
+```html
+<link rel="alternate" hreflang="de" href="https://[site]/de/">
+```
+
+Use the batch script pattern (see `scripts/patch_hreflang.py` in scratchpad) or manually edit each file. Don't forget x-default always points to the English root.
+
+### 3. Add the locale to all lang-select dropdowns
+
+In every `index.html` (English + all existing locale pages), add the new `<option>` to the lang-select `<select>`:
+
+```html
+<option value="/de/">🇩🇪 Deutsch</option>
+```
+
+And update the lang-select path-detection JS to handle `/de`.
+
+For terracotta, also add a button to the lang-modal (`#langOverlay`).
+
+### 4. Update sitemaps
+
+In each site's `sitemap.xml`:
+- Add `<xhtml:link rel="alternate" hreflang="de" ...>` to the main URL's hreflang block
+- Add a new `<url>` entry for `/de/` with the self-referencing hreflang + en fallback
+
+### 5. Update schema availableLanguage (terracotta only)
+
+In `terracotta/index.html`, add `"German"` to the `availableLanguage` array in the Service schema.
+
+### 6. Update CLAUDE.md and PLAYBOOK.md
+
+- `.claude/CLAUDE.md`: add the new locale to the Sites table
+- `PLAYBOOK.md`: update the locale list in the patterns table and checklist
+
+### Currency notes for new locales
+
+Check the RATES table above:
+- German (`de`) → already in EUR group ✅
+- If the new language isn't in RATES, add it to the appropriate currency's `langs` array, or add a new currency entry with the correct symbol and exchange rate

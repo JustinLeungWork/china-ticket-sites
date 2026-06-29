@@ -19,6 +19,12 @@
   <meta name="twitter:image" content="https://mutianyu-tickets.com/images/hero.jpg">
   <link rel="canonical" href="https://mutianyu-tickets.com">
   <link rel="alternate" hreflang="en" href="https://mutianyu-tickets.com/">
+  <link rel="alternate" hreflang="ko" href="https://mutianyu-tickets.com/ko/">
+  <link rel="alternate" hreflang="ja" href="https://mutianyu-tickets.com/ja/">
+  <link rel="alternate" hreflang="id" href="https://mutianyu-tickets.com/id/">
+  <link rel="alternate" hreflang="th" href="https://mutianyu-tickets.com/th/">
+  <link rel="alternate" hreflang="fr" href="https://mutianyu-tickets.com/fr/">
+  <link rel="alternate" hreflang="pt" href="https://mutianyu-tickets.com/pt/">
   <link rel="alternate" hreflang="x-default" href="https://mutianyu-tickets.com/">
   <script type="application/ld+json">
   [
@@ -126,6 +132,10 @@
     .nav-logo span { color: var(--accent); }
     .btn-nav { background: var(--accent); color: var(--primary-dark); border: none; padding: 9px 24px; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 600; cursor: pointer; border-radius: var(--r-sm); transition: background 0.18s, transform 0.18s; }
     .btn-nav:hover { background: #D9BD76; transform: translateY(-1px); }
+    .lang-select { width: auto; background: transparent; border: 1px solid rgba(255,255,255,0.3); color: var(--white); font-family: 'DM Sans', sans-serif; font-size: 13px; padding: 6px 12px; border-radius: var(--r-sm); cursor: pointer; margin-right: 14px; transition: border-color 0.18s; }
+    .lang-select:hover { border-color: rgba(255,255,255,0.6); }
+    .lang-select option { background: #1a1a1a; color: #fff; }
+    .lang-select:focus { outline: none; }
 
     .hero { margin-top: 64px; min-height: 620px; background: url('/images/hero.jpg') center/cover no-repeat; position: relative; display: flex; align-items: flex-end; }
     .hero::before { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(10,18,28,0.55) 0%, rgba(10,18,28,0.3) 100%); }
@@ -308,6 +318,15 @@
 
 <nav>
   <div class="nav-logo">Mutianyu <span>Wall Tickets</span></div>
+  <select class="lang-select" onchange="location.href=this.value" aria-label="Language">
+    <option value="/">🇬🇧 EN</option>
+    <option value="/ko/">🇰🇷 한국어</option>
+    <option value="/ja/">🇯🇵 日本語</option>
+    <option value="/id/">🇮🇩 Indonesia</option>
+    <option value="/th/">🇹🇭 ภาษาไทย</option>
+    <option value="/fr/">🇫🇷 Français</option>
+    <option value="/pt/">🇵🇹 Português</option>
+  </select>
   <a href="#book" class="btn-nav">Book Now</a>
 </nav>
 
@@ -796,6 +815,14 @@
   }
 
   function toggleFaq(btn) { btn.closest('.faq-item').classList.toggle('open'); }
+</script>
+<script>
+(function(){
+  var s = document.querySelector('.lang-select');
+  if (!s) return;
+  var p = location.pathname;
+  s.value = p.startsWith('/ko') ? '/ko/' : p.startsWith('/ja') ? '/ja/' : p.startsWith('/id') ? '/id/' : p.startsWith('/th') ? '/th/' : p.startsWith('/fr') ? '/fr/' : p.startsWith('/pt') ? '/pt/' : '/';
+})();
 </script>
 <script>
 (function(){

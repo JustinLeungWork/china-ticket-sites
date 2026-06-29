@@ -11,6 +11,12 @@
 <meta property="og:url" content="https://zhangjiajie-tickets.com">
 <link rel="canonical" href="https://zhangjiajie-tickets.com">
 <link rel="alternate" hreflang="en" href="https://zhangjiajie-tickets.com/">
+<link rel="alternate" hreflang="ko" href="https://zhangjiajie-tickets.com/ko/">
+<link rel="alternate" hreflang="ja" href="https://zhangjiajie-tickets.com/ja/">
+<link rel="alternate" hreflang="id" href="https://zhangjiajie-tickets.com/id/">
+<link rel="alternate" hreflang="th" href="https://zhangjiajie-tickets.com/th/">
+<link rel="alternate" hreflang="fr" href="https://zhangjiajie-tickets.com/fr/">
+<link rel="alternate" hreflang="pt" href="https://zhangjiajie-tickets.com/pt/">
 <link rel="alternate" hreflang="x-default" href="https://zhangjiajie-tickets.com/">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"TouristAttraction","name":"Zhangjiajie National Forest Park","description":"China's first national forest park. The 3,000+ sandstone pillar formations inspired the floating Hallelujah Mountains in Avatar. UNESCO World Natural Heritage site in Hunan Province.","url":"https://zhangjiajie-tickets.com","address":{"@type":"PostalAddress","addressLocality":"Wulingyuan","addressRegion":"Hunan","addressCountry":"CN"},"offers":[{"@type":"Offer","name":"4-Day Admission + Eco-bus (Adult)","priceCurrency":"USD","price":"39","availability":"https://schema.org/InStock"},{"@type":"Offer","name":"4-Day Ticket + Full Transport Bundle (Adult)","priceCurrency":"USD","price":"73","availability":"https://schema.org/InStock"},{"@type":"Offer","name":"4-Day Admission + Eco-bus (Youth 14-17)","priceCurrency":"USD","price":"22","availability":"https://schema.org/InStock"}]}
@@ -54,6 +60,10 @@ nav{position:sticky;top:0;z-index:100;background:rgba(30,61,47,.97);backdrop-fil
 .nav-links a:hover{color:#fff}
 .btn-nav{background:var(--accent);color:var(--primary-dark);border:none;padding:9px 22px;font:600 14px 'DM Sans',sans-serif;border-radius:var(--r-sm);cursor:pointer;white-space:nowrap;transition:background .2s}
 .btn-nav:hover{background:var(--accent-dark)}
+.lang-select{width:auto;background:transparent;border:1px solid rgba(255,255,255,0.3);color:var(--white);font-family:'DM Sans',sans-serif;font-size:13px;padding:6px 12px;border-radius:var(--r-sm);cursor:pointer;margin-right:14px;transition:border-color 0.18s}
+.lang-select:hover{border-color:rgba(255,255,255,0.6)}
+.lang-select option{background:#1a1a1a;color:#fff}
+.lang-select:focus{outline:none}
 @media(max-width:640px){.nav-links{display:none}}
 
 /* ── HERO ── */
@@ -271,6 +281,15 @@ footer{background:var(--primary-dark);color:rgba(255,255,255,.55);padding:40px c
     <a href="/guide.html">Visitor Guide</a>
     <a href="/about.html">About</a>
   </div>
+  <select class="lang-select" onchange="location.href=this.value" aria-label="Language">
+    <option value="/">🇬🇧 EN</option>
+    <option value="/ko/">🇰🇷 한국어</option>
+    <option value="/ja/">🇯🇵 日本語</option>
+    <option value="/id/">🇮🇩 Indonesia</option>
+    <option value="/th/">🇹🇭 ภาษาไทย</option>
+    <option value="/fr/">🇫🇷 Français</option>
+    <option value="/pt/">🇵🇹 Português</option>
+  </select>
   <a href="#book" class="btn-nav">Book Now</a>
 </nav>
 
@@ -1009,6 +1028,14 @@ async function submitBooking() {
 updateQtyDisplay();
 updateTotals();
 initCal();
+</script>
+<script>
+(function(){
+  var s = document.querySelector('.lang-select');
+  if (!s) return;
+  var p = location.pathname;
+  s.value = p.startsWith('/ko') ? '/ko/' : p.startsWith('/ja') ? '/ja/' : p.startsWith('/id') ? '/id/' : p.startsWith('/th') ? '/th/' : p.startsWith('/fr') ? '/fr/' : p.startsWith('/pt') ? '/pt/' : '/';
+})();
 </script>
 <script>
 (function(){
