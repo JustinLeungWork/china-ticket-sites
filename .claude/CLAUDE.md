@@ -20,8 +20,8 @@ When the user types `/analytics`, invoke the Skill tool with `skill: "analytics"
 | Site | Domain | Locales |
 |------|---------|---------|
 | terracotta | terracotta-tickets.com | en, ko, ja, id, th, es, fr, pt |
-| mutianyu | mutianyu-tickets.com | en, ko, ja, id, th, fr, pt |
-| zhangjiajie | zhangjiajie-tickets.com | en, ko, ja, id, th, fr, pt |
+| mutianyu | mutianyu-tickets.com | en, ko, ja, id, th, es, fr, pt |
+| zhangjiajie | zhangjiajie-tickets.com | en, ko, ja, id, th, es, fr, pt |
 
 ## Vercel token limitation
 

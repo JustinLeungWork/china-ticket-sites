@@ -13,6 +13,7 @@
     <xhtml:link rel="alternate" hreflang="th"      href="https://mutianyu-tickets.com/th/"/>
     <xhtml:link rel="alternate" hreflang="fr"      href="https://mutianyu-tickets.com/fr/"/>
     <xhtml:link rel="alternate" hreflang="pt"      href="https://mutianyu-tickets.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://mutianyu-tickets.com/es/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://mutianyu-tickets.com/"/>
   </url>
   <url>
@@ -98,5 +99,14 @@
     <lastmod>2026-06-29</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://mutianyu-tickets.com/es/</loc>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://mutianyu-tickets.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://mutianyu-tickets.com/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://mutianyu-tickets.com/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>

@@ -22,8 +22,8 @@ LOCALE_CURRENCY = {
     'THB': ['terracotta/th', 'mutianyu/th', 'zhangjiajie/th'],
     'EUR': [
         'terracotta/es', 'terracotta/fr', 'terracotta/pt',
-        'mutianyu/fr',   'mutianyu/pt',
-        'zhangjiajie/fr','zhangjiajie/pt',
+        'mutianyu/es',   'mutianyu/fr',   'mutianyu/pt',
+        'zhangjiajie/es','zhangjiajie/fr','zhangjiajie/pt',
     ],
 }
 

@@ -13,6 +13,7 @@
     <xhtml:link rel="alternate" hreflang="th"      href="https://zhangjiajie-tickets.com/th/"/>
     <xhtml:link rel="alternate" hreflang="fr"      href="https://zhangjiajie-tickets.com/fr/"/>
     <xhtml:link rel="alternate" hreflang="pt"      href="https://zhangjiajie-tickets.com/pt/"/>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://zhangjiajie-tickets.com/es/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://zhangjiajie-tickets.com/"/>
   </url>
   <url>
@@ -98,5 +99,14 @@
     <lastmod>2026-06-29</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://zhangjiajie-tickets.com/es/</loc>
+    <xhtml:link rel="alternate" hreflang="es"        href="https://zhangjiajie-tickets.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="en"        href="https://zhangjiajie-tickets.com/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://zhangjiajie-tickets.com/"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>

@@ -312,6 +312,16 @@ These are the winnable long-tail queries. OTAs hold head terms; their product pa
 | `ตั๋วนักรบดินเผา จีน ไม่ต้องแอปจีน` | Terracotta Warriors without Chinese app |
 | `ซื้อตั๋วกำแพงเมืองจีน ไม่ต้องวีแชท` | Great Wall without WeChat |
 
+### Spanish — EUR market, Latin American + Spanish tourists, compete with Viator ES
+
+| Query | Notes |
+|-------|-------|
+| `entradas guerreros terracota sin wechat` | Terracotta without WeChat |
+| `comprar entradas guerreros terracota china sin alipay` | Terracotta without Alipay |
+| `entradas gran muralla china sin wechat pay` | Great Wall without WeChat Pay |
+| `entradas zhangjiajie sin aplicacion china` | Zhangjiajie without Chinese app |
+| `guerreros de terracota entradas para extranjeros` | Terracotta for foreigners angle |
+
 ### French + Portuguese — EUR market, compete with Viator FR/PT
 
 | Query | Notes |
