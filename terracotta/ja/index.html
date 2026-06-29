@@ -885,79 +885,14 @@
 </script>
 <script>
 (function(){
-  var s = document.querySelector('.lang-select');
-  if (!s) return;
-  var p = location.pathname;
-  s.value = p.startsWith('/ko') ? '/ko/' : p.startsWith('/ja') ? '/ja/' : p.startsWith('/id') ? '/id/' : p.startsWith('/th') ? '/th/' : p.startsWith('/es') ? '/es/' : '/';
-})();
-</script>
-
-<div class="lang-overlay" id="langOverlay">
-  <div class="lang-modal">
-    <div class="lang-modal-head">
-      <button class="lang-modal-x" id="langClose">×</button>
-      <h3>言語を選択</h3>
-      <p>続行するにはご希望の言語をお選びください</p>
-    </div>
-    <div class="lang-opts">
-      <button class="lang-opt" data-href="/"><span class="lf">🇬🇧</span><span class="ln">English</span></button>
-      <button class="lang-opt" data-href="/ko/" data-code="ko"><span class="lf">🇰🇷</span><span class="ln">한국어</span><span class="ls">Korean</span></button>
-      <button class="lang-opt" data-href="/ja/" data-code="ja"><span class="lf">🇯🇵</span><span class="ln">日本語</span><span class="ls">Japanese</span></button>
-      <button class="lang-opt" data-href="/id/" data-code="id"><span class="lf">🇮🇩</span><span class="ln">Bahasa Indonesia</span><span class="ls">Indonesian</span></button>
-      <button class="lang-opt" data-href="/th/" data-code="th"><span class="lf">🇹🇭</span><span class="ln">ภาษาไทย</span><span class="ls">Thai</span></button>
-      <button class="lang-opt" data-href="/es/" data-code="es"><span class="lf">🇪🇸</span><span class="ln">Español</span><span class="ls">Spanish</span></button>
-      <button class="lang-opt" data-href="/fr/" data-code="fr"><span class="lf">🇫🇷</span><span class="ln">Français</span><span class="ls">French</span></button>
-      <button class="lang-opt" data-href="/pt/" data-code="pt"><span class="lf">🇵🇹</span><span class="ln">Português</span><span class="ls">Portuguese</span></button>
-    </div>
-  </div>
-</div>
-<script>
-(function(){
-  if (localStorage.getItem('lang-chosen') || location.pathname !== '/') return;
-  var overlay = document.getElementById('langOverlay');
-  var nav = (navigator.language || '').toLowerCase().slice(0, 2);
-  var match = overlay.querySelector('[data-code="' + nav + '"]');
-  if (match) { match.classList.add('suggest'); var b = document.createElement('span'); b.className = 'lb'; b.textContent = 'おすすめ'; match.appendChild(b); }
-  setTimeout(function(){ overlay.classList.add('show'); }, 400);
-  overlay.addEventListener('click', function(e){ if (e.target === overlay) dismiss(); });
-  document.getElementById('langClose').addEventListener('click', dismiss);
-  overlay.querySelectorAll('.lang-opt').forEach(function(btn){
-    btn.addEventListener('click', function(){ localStorage.setItem('lang-chosen','1'); location.href = this.dataset.href; });
-  });
-  function dismiss(){ localStorage.setItem('lang-chosen','1'); overlay.classList.remove('show'); }
-})();
-</script>
-<script>
-(function(){
-  var RATES={
-    EUR:{sym:'€',rate:0.92,langs:['fr','de','it','nl','pt','pl','ro','el','cs','sv','fi','da','sk','hu','bg','hr','sl','et','lv','lt']},
-    GBP:{sym:'£',rate:0.79,langs:['en-gb']},
-    AUD:{sym:'A$',rate:1.54,langs:['en-au']},
-    CAD:{sym:'C$',rate:1.37,langs:['en-ca']},
-    SGD:{sym:'S$',rate:1.35,langs:['en-sg','ms-sg']},
-    KRW:{sym:'₩',rate:1360,langs:['ko'],round:100},
-    JPY:{sym:'¥',rate:155,langs:['ja'],round:10},
-    IDR:{sym:'Rp ',rate:16300,langs:['id'],round:1000},
-    THB:{sym:'฿',rate:35,langs:['th'],round:1},
-    MYR:{sym:'RM',rate:4.7,langs:['ms','ms-my']},
-    HKD:{sym:'HK$',rate:7.8,langs:['zh-hk']},
-    TWD:{sym:'NT$',rate:32,langs:['zh-tw']}
-  };
-  var lang=(navigator.language||'').toLowerCase();
-  var base=lang.split('-')[0];
-  var cur=null;
-  for(var code in RATES){
-    var info=RATES[code];
-    if(info.langs.some(function(l){return lang===l||(l.indexOf('-')===-1&&base===l);})){cur=info;break;}
-  }
-  if(!cur)return;
+  var sym='¥',rate=155,round=10;
   document.querySelectorAll('[data-usd]').forEach(function(el){
     var usd=+el.dataset.usd;if(!usd)return;
-    var raw=usd*cur.rate;
-    var val=cur.round?Math.round(raw/cur.round)*cur.round:Math.round(raw);
+    var raw=usd*rate;
+    var val=Math.round(raw/round)*round;
     var hint=document.createElement('span');
     hint.className='local-price-hint';
-    hint.textContent=' (~'+cur.sym+val.toLocaleString()+')';
+    hint.textContent=' (~'+sym+val.toLocaleString()+')';
     el.appendChild(hint);
   });
 })();

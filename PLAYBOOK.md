@@ -358,37 +358,49 @@ npm run admin
 
 ## Currency conversion system
 
-All pages show a local-price hint (e.g. `~€23`) next to USD prices for visitors whose browser language matches a supported currency. The system is purely client-side — no server changes needed.
+Locale pages show a local-price hint (e.g. `~₩34,000`) next to USD prices. The currency is **hardcoded per locale** — no browser detection needed. English pages show USD only (no hint). The system is purely client-side.
 
 ### How it works
 
 1. **`data-usd` attribute** — add `data-usd="25.99"` to any price element. The JS reads this and appends the hint.
-2. **RATES table** — a hardcoded JS object mapping currency codes to symbol, rate, and browser language prefixes.
-3. **Currency detection** — `navigator.language` is lowercased and matched against each currency's `langs` array (exact match or prefix match on the base language code).
-4. **Hint injection** — a `<span class="local-price-hint">` is appended inside the matched element.
+2. **Hardcoded per locale** — each locale page has a tiny inline script with fixed `sym`, `rate`, and optional `round` values for that locale's currency.
+3. **Hint injection** — a `<span class="local-price-hint">` is appended inside the matched element.
 
-### RATES table (current — update rates periodically)
+### Currency per locale
+
+| Locale | Currency | Symbol | Rate (approx) | Rounding |
+|--------|----------|--------|--------------|----------|
+| `/ko/` | Korean Won | ₩ | 1360 | 100 |
+| `/ja/` | Japanese Yen | ¥ | 155 | 10 |
+| `/id/` | Indonesian Rupiah | Rp | 16300 | 1000 |
+| `/th/` | Thai Baht | ฿ | 35 | — |
+| `/es/` | Euro | € | 0.92 | — |
+| `/fr/` | Euro | € | 0.92 | — |
+| `/pt/` | Euro | € | 0.92 | — |
+| `/` (English) | — | — | — | no hint |
+
+Update the `rate` values periodically as exchange rates drift.
+
+### Script template for a locale page
 
 ```javascript
-var RATES = {
-  EUR: { sym:'€',   rate:0.92,  langs:['fr','de','it','nl','pt','pl','ro','el','cs','sv','fi','da','sk','hu','bg','hr','sl','et','lv','lt'] },
-  GBP: { sym:'£',   rate:0.79,  langs:['en-gb'] },
-  AUD: { sym:'A$',  rate:1.54,  langs:['en-au'] },
-  CAD: { sym:'C$',  rate:1.37,  langs:['en-ca'] },
-  SGD: { sym:'S$',  rate:1.35,  langs:['en-sg','ms-sg'] },
-  KRW: { sym:'₩',   rate:1360,  langs:['ko'], round:100 },
-  JPY: { sym:'¥',   rate:155,   langs:['ja'], round:10 },
-  IDR: { sym:'Rp ', rate:16300, langs:['id'], round:1000 },
-  THB: { sym:'฿',   rate:35,    langs:['th'], round:1 },
-  MYR: { sym:'RM',  rate:4.7,   langs:['ms','ms-my'] },
-  HKD: { sym:'HK$', rate:7.8,   langs:['zh-hk'] },
-  TWD: { sym:'NT$', rate:32,    langs:['zh-tw'] },
-};
+<script>
+(function(){
+  var sym='₩', rate=1360, round=100;    // ← change these per locale
+  document.querySelectorAll('[data-usd]').forEach(function(el){
+    var usd=+el.dataset.usd; if(!usd) return;
+    var raw=usd*rate;
+    var val=round ? Math.round(raw/round)*round : Math.round(raw);
+    var hint=document.createElement('span');
+    hint.className='local-price-hint';
+    hint.textContent=' (~'+sym+val.toLocaleString()+')';
+    el.appendChild(hint);
+  });
+})();
+</script>
 ```
 
-- `round` — if set, the converted value is rounded to the nearest multiple (e.g. KRW rounds to 100 won)
-- French (`fr`) and Portuguese (`pt`) both fall into the EUR group — they get euro hints automatically
-- USD visitors see no hint (USD is baseline)
+Drop this just before `</body>`, after all booking JS. English pages omit it entirely.
 
 ### CSS for the hint
 
@@ -396,15 +408,13 @@ var RATES = {
 .local-price-hint { font-size: 0.82em; color: rgba(255,255,255,0.55); margin-left: 4px; white-space: nowrap; }
 ```
 
-Add this to the site's style block. Adjust colour if the price is on a light background.
+Add to the site's style block (adjust colour for light backgrounds).
 
-### Applying to a page
+### Applying to a new locale page
 
-1. Add `data-usd="<price>"` to every price-displaying element
-2. Drop the RATES script block just before `</body>` (after all booking JS)
-3. Add the `.local-price-hint` CSS rule to the style block
-
-The script is already included in all pages in this repo. When creating a new locale page, copy it verbatim — do NOT translate or modify the RATES object.
+1. Add `data-usd="<price>"` to every price-displaying element (already done in existing pages)
+2. Copy the script template above, set the correct `sym`/`rate`/`round` from the table
+3. Drop it before `</body>`
 
 ---
 
@@ -422,7 +432,7 @@ Copy the English `index.html` for each site and translate all visible text:
 - JS strings: DOW/MON arrays, alert() messages, button text, visitor labels
 - Update lang-select JS path detection to include the new locale
 
-**Do NOT change:** CSS, JS logic, class names, IDs, data-* attributes, prices, RATES block.
+**Do NOT change:** CSS, JS logic, class names, IDs, data-* attributes, prices, currency script structure.
 
 ### 2. Add hreflang to ALL pages
 

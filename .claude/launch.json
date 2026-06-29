@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "terracotta",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "terracotta", "-l", "3333"],
+      "port": 3333
+    }
+  ]
+}
