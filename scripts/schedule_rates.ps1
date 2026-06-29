@@ -18,7 +18,8 @@ $LogFile    = Join-Path $LogDir   "update_rates.log"
 if (-not (Test-Path $LogDir)) { New-Item -ItemType Directory $LogDir | Out-Null }
 
 # Find python
-$Python = (Get-Command python -ErrorAction SilentlyContinue)?.Source
+$PythonCmd = Get-Command python -ErrorAction SilentlyContinue
+$Python = if ($PythonCmd) { $PythonCmd.Source } else { $null }
 if (-not $Python) {
     Write-Error "python not found in PATH. Install Python and retry."
     exit 1
