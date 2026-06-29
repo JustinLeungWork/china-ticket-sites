@@ -382,6 +382,16 @@
     .pp-overlay-steps { font-size: 12px; color: rgba(255,255,255,0.55); flex-shrink: 0; }
     #passport-section.fullscreen .pp-overlay-body { max-width: 680px; margin: 0 auto; padding: 28px 24px 60px; }
     #passport-section.fullscreen .back-link { display: none; }
+  
+    /* How-to-book section */
+    .htb-section { padding: var(--section-y, clamp(48px,6vw,72px)) var(--section-x, clamp(20px,5vw,48px)); }
+    .htb-inner { max-width: 780px; margin: 0 auto; }
+    .htb-body > p { font-size: 15.5px; color: var(--muted, #666); line-height: 1.8; margin-bottom: 20px; }
+    .htb-steps { padding-left: 0; list-style: none; counter-reset: htb; margin: 28px 0; }
+    .htb-steps > li { counter-increment: htb; display: flex; gap: 16px; margin-bottom: 22px; align-items: flex-start; font-size: 15px; color: var(--muted, #666); line-height: 1.75; }
+    .htb-steps > li::before { content: counter(htb); min-width: 28px; height: 28px; background: var(--accent, #8B4513); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+    .htb-steps > li strong { color: var(--text, #1a1a1a); }
+    .htb-note { font-size: 14px; color: var(--muted, #666); background: var(--surface, #f7f5f0); border-left: 3px solid var(--accent, #8B4513); padding: 14px 18px; border-radius: 0 4px 4px 0; line-height: 1.7; margin-top: 4px; }
   </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why can't I book on the official museum website?","acceptedAnswer":{"@type":"Answer","text":"The official booking system (bmy.com.cn) requires a Chinese phone number for SMS verification and Chinese payment apps. International visitors without a Chinese SIM or payment method can't complete the process. We hold the necessary accounts to book on your behalf — you pay us with any standard card."}},{"@type":"Question","name":"The museum only allows one ticket per passport — how does that work for groups?","acceptedAnswer":{"@type":"Answer","text":"Each ticket is linked to one passport number. For a group of four, we submit four separate passport numbers and receive four separate QR codes — one per person. That's why we collect full details for every visitor, not just the lead booker."}},{"@type":"Question","name":"How far in advance should I book?","acceptedAnswer":{"@type":"Answer","text":"Tickets are released 7 days in advance. The museum sells out on weekends, Chinese public holidays, and during school holidays. We recommend booking at least 3–4 days ahead for weekdays and 6–7 days ahead for weekend visits. Same-day or next-day availability is rare in peak season."}},{"@type":"Question","name":"What if tickets are sold out?","acceptedAnswer":{"@type":"Answer","text":"If the museum is fully booked for your chosen date, we'll notify you immediately and issue a full refund. We'll also check surrounding dates and let you know what's available so you can rebook without paying again."}},{"@type":"Question","name":"Can I cancel or change my booking?","acceptedAnswer":{"@type":"Answer","text":"Cancellations made 48+ hours before your visit date receive a full refund. Within 48 hours, the ticket is non-refundable. For date changes, contact us at least 72 hours before — we'll try to reschedule subject to availability."}},{"@type":"Question","name":"Is a private English guide worth it?","acceptedAnswer":{"@type":"Answer","text":"For most visitors, yes. The visual impact of Pit 1 is immediate, but the stories behind the site — how the warriors were made, why they were buried, what they tell us about the Qin dynasty — need context to land. Our guides are accredited by the museum and your group of up to 10 has them to yourselves, so you're not straining to hear over 40 other people. It's a flat $150 for the whole group, booked on request — submit a request and we'll confirm availability before you pay anything."}},{"@type":"Question","name":"What does my ticket actually include?","acceptedAnswer":{"@type":"Answer","text":"One ticket covers both the Terracotta Warriors Museum (Pits 1, 2 and 3, plus the Bronze Chariot Hall) and the Lishan Garden mausoleum park — a free shuttle bus runs between the two. The ticket is valid all day and checked three times across the site. Allow around 1.5 hours per location; 3–4 hours for both at a relaxed pace."}},{"@type":"Question","name":"Can I choose my entry time slot?","acceptedAnswer":{"@type":"Answer","text":"Yes — the museum divides the day into eight one-hour entry windows from 08:30 through to 17:00. We'll ask for your preferred slot at checkout and book accordingly. Morning slots (08:30–10:30) are the least crowded; the 10:31–12:30 range tends to be busiest. Arrive at least 30 minutes before your slot to clear the security queue."}},{"@type":"Question","name":"What items are not allowed in the museum?","acceptedAnswer":{"@type":"Answer","text":"The museum prohibits: flammable or explosive items, any bladed weapons or clubs, drones and kites, pets, loudspeakers and video camera rigs, water guns, hoverboards, skateboards, and bicycles. Standard carry-on items — bags, cameras (no tripod or flash), food, water — are all fine. Free luggage storage is available on the east side of the ticket hall if needed."}}]}
@@ -591,6 +601,26 @@
   </div>
 </section>
 
+
+<section class="htb-section">
+  <div class="htb-inner">
+    <div class="section-header" style="text-align:center;margin-bottom:clamp(32px,4vw,48px)">
+      <p class="section-label">Booking guide</p>
+      <h2>How to Buy Terracotta Warriors Tickets Without WeChat or Alipay</h2>
+    </div>
+    <div class="htb-body">
+      <p>China's official booking site (<strong>bmy.com.cn</strong>) requires Alipay or WeChat Pay — both tied to Chinese bank accounts. International visitors with foreign Visa or Mastercard cannot complete the purchase directly. Here's how our service works instead:</p>
+      <ol class="htb-steps">
+        <li><strong>Choose your date and time slot.</strong> The museum runs 8 one-hour entry windows daily from 08:30 to 17:00. Tickets open 7 days in advance. Weekend and public holiday slots sell out quickly — book 4–7 days ahead to be safe.</li>
+        <li><strong>Submit passport details for every visitor.</strong> China's real-name system (<em>实名制</em>) links each ticket to one passport number. You provide name, passport number, and date of birth for each person in your group — the same information the official site would ask for.</li>
+        <li><strong>Pay by card in USD.</strong> Visa, Mastercard, and Apple Pay accepted. Your passport data is stored securely and deleted automatically after your visit date.</li>
+        <li><strong>We submit to the Chinese system on your behalf.</strong> Within 24 hours we enter each visitor's details into bmy.com.cn and obtain the official entry QR codes linked to your passports.</li>
+        <li><strong>Your passport is your ticket at the gate.</strong> Security staff scan your physical passport at the turnstiles — no printed ticket or separate QR code needed. Arrive 30 minutes before your entry slot to clear the security queue.</li>
+      </ol>
+      <p class="htb-note">The museum enforces a daily cap of 65,000 visitors. Walk-up tickets at the gate are occasionally available on quiet weekday mornings in winter, but cannot be guaranteed. Advance booking is strongly recommended from April through October and over any Chinese public holiday.</p>
+    </div>
+  </div>
+</section>
 <section class="faq-section">
   <div class="faq-inner">
     <div class="section-header">

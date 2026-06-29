@@ -6,7 +6,7 @@ Everything needed to understand, operate, and launch a new site in this network.
 
 ## What this network is
 
-We sell attraction tickets to international tourists who cannot buy them directly through China's official booking systems (which require a Chinese phone number + WeChat Pay or Alipay). We hold the necessary Chinese accounts, book on the customer's behalf, and deliver confirmed QR codes by email within 24 hours.
+We sell attraction tickets to international tourists who cannot buy them directly through China's official booking systems. The barrier is **Alipay or WeChat Pay** — both require a Chinese bank account. Do NOT say "requires a Chinese phone number" — that framing is inaccurate (adversarially tested Jun 2026) and will undermine trust with technically savvy tourists. We hold the necessary Chinese accounts, book on the customer's behalf, and deliver confirmed QR codes by email within 24 hours.
 
 **Operator:** Justin Leung (Hong Kong / Singapore)  
 **Live sites:** terracotta-tickets.com (Terracotta Warriors, Xi'an)  
@@ -368,18 +368,18 @@ Locale pages show a local-price hint (e.g. `~₩34,000`) next to USD prices. The
 
 ### Currency per locale
 
-| Locale | Currency | Symbol | Rate (approx) | Rounding |
-|--------|----------|--------|--------------|----------|
-| `/ko/` | Korean Won | ₩ | 1360 | 100 |
-| `/ja/` | Japanese Yen | ¥ | 155 | 10 |
-| `/id/` | Indonesian Rupiah | Rp | 16300 | 1000 |
-| `/th/` | Thai Baht | ฿ | 35 | — |
-| `/es/` | Euro | € | 0.92 | — |
-| `/fr/` | Euro | € | 0.92 | — |
-| `/pt/` | Euro | € | 0.92 | — |
+| Locale | Currency | Symbol | Rate (live, Jun 2026) | Rounding |
+|--------|----------|--------|-----------------------|----------|
+| `/ko/` | Korean Won | ₩ | 1537 | 100 |
+| `/ja/` | Japanese Yen | ¥ | 162 | 10 |
+| `/id/` | Indonesian Rupiah | Rp | 17885 | 1000 |
+| `/th/` | Thai Baht | ฿ | 33 | — |
+| `/es/` | Euro | € | 0.8782 | — |
+| `/fr/` | Euro | € | 0.8782 | — |
+| `/pt/` | Euro | € | 0.8782 | — |
 | `/` (English) | — | — | — | no hint |
 
-Update the `rate` values periodically as exchange rates drift.
+Rates are updated weekly by `scripts/update_rates.py` (Windows Task Scheduler, every Monday 09:00). Run manually: `python scripts/update_rates.py`.
 
 ### Script template for a locale page
 

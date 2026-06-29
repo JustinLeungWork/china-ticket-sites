@@ -125,12 +125,31 @@ Every site must have all of the following in the `<head>` as a JSON-LD array.
 
 Competitors (chinadiscovery, travelchinaguide, chinaxiantour) publish the same 2,000-word guide every year. They all *describe* the Chinese payment barrier — none of them *solve* it. Your content edge is owning the "foreigner who can't use WeChat" angle.
 
-**Write these pages for every site:**
+**Write these pages / sections for every site:**
 
-1. **Homepage** — booking form + 8-10 FAQ Q&As + visitor guide card
+1. **Homepage** — booking form + **"How to Book Without WeChat" prose section** + 8-10 FAQ Q&As + visitor guide card
 2. **Visitor Guide** — how to get there, what to bring, entry tips, prohibited items
 3. **About** — founder story, why the service exists, named person (E-E-A-T)
 4. **"Can foreigners buy [X] tickets without WeChat Pay?"** — this is the money page
+
+### Required: "How to Book Without WeChat" section (on every page, above FAQ)
+
+Every homepage and every locale page must have a visible (non-accordion) prose section above the FAQ that directly targets the informational long-tail queries. Use `<section class="htb-section">` with `class="htb-inner"`. Structure:
+
+```
+H2: How to Buy [Attraction] Tickets Without WeChat or Alipay
+P:  [Explain the Alipay/WeChat Pay barrier — NOT "Chinese phone number"]
+OL: 5 steps (date → passport → pay → we book → gate)
+P.htb-note: [Advance booking / sellout tip specific to attraction]
+```
+
+Key rules:
+- The H2 must contain the exact phrase "Without WeChat or Alipay" — that is the long-tail keyword
+- Frame the barrier as **Alipay/WeChat Pay requiring a Chinese bank account**, NOT "requires a Chinese phone number" (the phone number claim is inaccurate and was adversarially refuted)
+- Step 2 must name the real-name system (实名制) — reassurance content for anxious bookers
+- Step 5 must explain that the physical passport IS the ticket at the gate (unique to China; confusing for tourists)
+- The `htb-note` must include attraction-specific detail (daily cap, advance booking window, peak season)
+- Translate into every locale — this section is the highest-leverage SEO addition per locale page
    - Put the direct answer in the first sentence: "Yes — through [Site Name]."
    - Explain what WeChat Pay requires, why it blocks international visitors
    - Explain exactly how your service handles it
@@ -237,6 +256,75 @@ Once you have 1–2 external references (press mention, directory listing, TripA
 **Machine translation warning:** Google's 2024 Helpful Content updates penalise unedited machine translation. AI draft is fine as a starting point; each locale needs a native human review pass. Budget for this before launch.
 
 **Korea special case:** Naver holds 56% of Korean search. `/ko/` reaches the Google-using ~40% only. For Naver: register on Naver Search Advisor + publish on Naver Blog. 90-day+ effort.
+
+---
+
+## 8. Long-tail keyword targets by locale
+
+*From June 2026 SEO research (105-agent adversarial workflow). Volume figures are directional — verify in a live SEO tool before using as targets.*
+
+### English (all sites)
+
+These are the winnable long-tail queries. OTAs hold head terms; their product pages are transactional and don't produce informational FAQ content.
+
+| Query | Why winnable |
+|-------|-------------|
+| `terracotta warriors tickets without wechat` | OTAs don't explain the payment barrier |
+| `terracotta warriors real name registration` | No specialist FAQ content ranks for this |
+| `how to book terracotta warriors tickets with passport` | Passport-as-ticket is unique and confusing |
+| `terracotta warriors tickets for foreigners` | High-anxiety transactional query |
+| `terracotta warriors advance booking required` | Walk-in vs advance question not well answered |
+| `mutianyu great wall tickets without chinese app` | Same pattern, Mutianyu |
+| `zhangjiajie tickets without alipay` | Same pattern, Zhangjiajie |
+
+### Korean (병마용 / 만리장성 / 장가계) — compete with MyRealTrip
+
+| Query | Notes |
+|-------|-------|
+| `병마용 티켓 예약` | MyRealTrip dominates; standalone locale page can compete |
+| `병마용 실명제 예약` | Your exact service, in Korean |
+| `병마용 한국어 예약` | Korean-language booking angle |
+| `중국 앱 없이 병마용 예약` | "Without Chinese app" — underserved |
+| `시안 여행 병마용` | Broader trip-planning intent |
+
+### Japanese (兵馬俑 / 万里の長城 / 張家界) — compete with VELTRA, KKday JP
+
+| Query | Notes |
+|-------|-------|
+| `兵馬俑 チケット 予約` | Core transactional term |
+| `兵馬俑 実名登録 方法` | Real-name registration how-to |
+| `西安 兵馬俑 個人旅行` | Independent travel angle |
+| `兵馬俑 WeChat なし` | Without WeChat/Chinese app |
+| `兵馬俑 外国人 チケット` | Foreigner ticket angle |
+
+### Indonesian — underserved by Western OTAs
+
+| Query | Notes |
+|-------|-------|
+| `tiket tembok besar cina tanpa aplikasi cina` | Great Wall without Chinese app |
+| `beli tiket terracotta warriors tanpa wechat` | Terracotta without WeChat |
+| `tiket zhangjiajie tanpa alipay` | Zhangjiajie without Alipay |
+
+### Thai — very underserved
+
+| Query | Notes |
+|-------|-------|
+| `ตั๋วนักรบดินเผา จีน ไม่ต้องแอปจีน` | Terracotta Warriors without Chinese app |
+| `ซื้อตั๋วกำแพงเมืองจีน ไม่ต้องวีแชท` | Great Wall without WeChat |
+
+### French + Portuguese — EUR market, compete with Viator FR/PT
+
+| Query | Notes |
+|-------|-------|
+| `billets guerriers terre cuite sans wechat` | FR: Terracotta without WeChat |
+| `ingressos guerreiros terracota sem aplicativo chines` | PT: Terracotta without Chinese app |
+
+### What was adversarially refuted — do NOT use in content
+
+- "requires a Chinese phone number" — **refuted 0-3**. Say "requires Alipay or WeChat Pay (Chinese bank account)" instead.
+- Trip.com as the official workaround — **refuted 0-3**.
+- 7-day advance release window (unverified) — verify against bmy.com.cn before publishing.
+- Specific OTA prices for Korean/Japanese markets — **refuted**, don't benchmark against them.
 
 ---
 

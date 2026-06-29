@@ -305,6 +305,16 @@
       .nav-logo { font-size: 14px; }
       .btn-nav { padding: 8px 16px; }
     }
+  
+    /* How-to-book section */
+    .htb-section { padding: var(--section-y, clamp(48px,6vw,72px)) var(--section-x, clamp(20px,5vw,48px)); }
+    .htb-inner { max-width: 780px; margin: 0 auto; }
+    .htb-body > p { font-size: 15.5px; color: var(--muted, #666); line-height: 1.8; margin-bottom: 20px; }
+    .htb-steps { padding-left: 0; list-style: none; counter-reset: htb; margin: 28px 0; }
+    .htb-steps > li { counter-increment: htb; display: flex; gap: 16px; margin-bottom: 22px; align-items: flex-start; font-size: 15px; color: var(--muted, #666); line-height: 1.75; }
+    .htb-steps > li::before { content: counter(htb); min-width: 28px; height: 28px; background: var(--accent, #8B4513); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+    .htb-steps > li strong { color: var(--text, #1a1a1a); }
+    .htb-note { font-size: 14px; color: var(--muted, #666); background: var(--surface, #f7f5f0); border-left: 3px solid var(--accent, #8B4513); padding: 14px 18px; border-radius: 0 4px 4px 0; line-height: 1.7; margin-top: 4px; }
   </style>
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What do I actually receive?","acceptedAnswer":{"@type":"Answer","text":"Within 24 hours of payment you'll receive a confirmation email with a QR code for each visitor. Show it on your phone at the gate. Staff will also check your passport, so keep it handy."}},{"@type":"Question","name":"Why can't I buy directly?","acceptedAnswer":{"@type":"Answer","text":"China's official system (mutianyu.com) requires a Chinese phone number and Chinese payment apps. Most foreign cards and payment apps don't work. We hold the necessary Chinese accounts and book on your behalf."}},{"@type":"Question","name":"What's the difference between the ticket tiers?","acceptedAnswer":{"@type":"Answer","text":"Admission only: walk up the steps yourself (steep in places). Admission + shuttle: eco-bus takes you to the wall base, saving a long walk. Full experience: cable car takes you directly to the wall top — the easiest option, great for families or those wanting a relaxed visit."}},{"@type":"Question","name":"How far is Mutianyu from Beijing city centre?","acceptedAnswer":{"@type":"Answer","text":"About 70–80km, roughly 1.5–2 hours by car or taxi. We recommend leaving early to avoid traffic and crowds."}},{"@type":"Question","name":"Do I need to book in advance?","acceptedAnswer":{"@type":"Answer","text":"Yes — we need at least 2 days to process your booking on the Chinese system. Same-day and next-day bookings aren't possible."}}]}
@@ -537,6 +547,26 @@
   </div>
 </section>
 
+
+<section class="htb-section">
+  <div class="htb-inner">
+    <div class="section-header" style="text-align:center;margin-bottom:clamp(32px,4vw,48px)">
+      <p class="section-label">Booking guide</p>
+      <h2>How to Buy Mutianyu Great Wall Tickets Without WeChat or Alipay</h2>
+    </div>
+    <div class="htb-body">
+      <p>China's official Mutianyu ticketing site (<strong>mutianyu.com</strong>) requires Alipay or WeChat Pay — both tied to Chinese bank accounts. International visitors with foreign cards cannot complete the purchase. Here's how our service works instead:</p>
+      <ol class="htb-steps">
+        <li><strong>Choose your date.</strong> Unlike some attractions, Mutianyu has no fixed hourly entry slots — you arrive any time during opening hours (07:30–18:00). We need at least 2 days' notice to process your booking on the Chinese system.</li>
+        <li><strong>Submit passport details for every visitor.</strong> China's real-name system links each ticket to one passport. You provide name, passport number, and date of birth for each person in your group.</li>
+        <li><strong>Pay by card in USD.</strong> Visa, Mastercard, and Apple Pay accepted. Your passport data is stored securely and deleted automatically after your visit date.</li>
+        <li><strong>We submit to the Chinese system on your behalf.</strong> Within 24 hours we enter each visitor's details into China's official ticketing system and obtain the entry QR codes linked to your passports.</li>
+        <li><strong>Show your QR code and passport at the gate.</strong> Staff check both your QR code (on your phone) and your physical passport at the entrance — no printed ticket needed.</li>
+      </ol>
+      <p class="htb-note">Mutianyu is about 70–80 km northeast of central Beijing — allow 1.5–2 hours travel time. Leave before 08:00 to beat peak crowds. The wall is busiest between 10:00 and 14:00.</p>
+    </div>
+  </div>
+</section>
 <section class="faq-section">
   <div class="faq-inner">
     <div class="section-header">

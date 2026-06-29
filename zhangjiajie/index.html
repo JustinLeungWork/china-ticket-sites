@@ -269,7 +269,17 @@ footer{background:var(--primary-dark);color:rgba(255,255,255,.55);padding:40px c
 .btn-submit:disabled{opacity:.5;cursor:not-allowed}
 .ov-error{color:#f87171;font-size:13px;margin-top:10px;display:none}
 .ov-passport-note{background:rgba(200,169,98,.12);border:1px solid rgba(200,169,98,.25);border-radius:var(--r-sm);padding:12px 16px;font-size:13px;color:rgba(255,255,255,.75);margin-bottom:20px;line-height:1.6}
-</style>
+
+    /* How-to-book section */
+    .htb-section { padding: var(--section-y, clamp(48px,6vw,72px)) var(--section-x, clamp(20px,5vw,48px)); }
+    .htb-inner { max-width: 780px; margin: 0 auto; }
+    .htb-body > p { font-size: 15.5px; color: var(--muted, #666); line-height: 1.8; margin-bottom: 20px; }
+    .htb-steps { padding-left: 0; list-style: none; counter-reset: htb; margin: 28px 0; }
+    .htb-steps > li { counter-increment: htb; display: flex; gap: 16px; margin-bottom: 22px; align-items: flex-start; font-size: 15px; color: var(--muted, #666); line-height: 1.75; }
+    .htb-steps > li::before { content: counter(htb); min-width: 28px; height: 28px; background: var(--accent, #8B4513); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+    .htb-steps > li strong { color: var(--text, #1a1a1a); }
+    .htb-note { font-size: 14px; color: var(--muted, #666); background: var(--surface, #f7f5f0); border-left: 3px solid var(--accent, #8B4513); padding: 14px 18px; border-radius: 0 4px 4px 0; line-height: 1.7; margin-top: 4px; }
+  </style>
   <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
@@ -551,6 +561,26 @@ footer{background:var(--primary-dark);color:rgba(255,255,255,.55);padding:40px c
 </section>
 
 <!-- ── FAQ ── -->
+
+<section class="htb-section">
+  <div class="htb-inner">
+    <div class="section-header" style="text-align:center;margin-bottom:clamp(32px,4vw,48px)">
+      <p class="section-label">Booking guide</p>
+      <h2>How to Buy Zhangjiajie Park Tickets Without WeChat or Alipay</h2>
+    </div>
+    <div class="htb-body">
+      <p>The official Wulingyuan reservation system requires Alipay or WeChat Pay — both tied to Chinese bank accounts. International visitors with foreign Visa or Mastercard cannot complete the purchase directly. Here's how our service works instead:</p>
+      <ol class="htb-steps">
+        <li><strong>Choose your first entry date.</strong> Your ticket covers 4 consecutive days from that date. You can enter and exit the park freely across all 4 days using the same QR code and your passport.</li>
+        <li><strong>Submit passport details for every adult and youth visitor.</strong> China's real-name system links each ticket to one passport. Children under 14 enter free — no ticket needed, just bring their passport for gate verification.</li>
+        <li><strong>Pay by card in USD.</strong> Visa, Mastercard, and Apple Pay accepted. Your passport data is stored securely and deleted 5 days after your visit.</li>
+        <li><strong>We submit to the Chinese system on your behalf.</strong> Within 24 hours we enter each visitor's details into the official Wulingyuan reservation system and obtain the QR codes linked to your passports.</li>
+        <li><strong>Show your QR code and passport at the park gate.</strong> Staff check both at the entrance — no printed ticket needed. Important: stay in Wulingyuan (武陵源), not Zhangjiajie city — they are 35 km apart.</li>
+      </ol>
+      <p class="htb-note">Zhangjiajie Hehua Airport (DYG) is 30 minutes from the park by taxi. If arriving by train, taxi 35 km from Zhangjiajie Railway Station to Wulingyuan. Book accommodation in Wulingyuan, not Zhangjiajie city.</p>
+    </div>
+  </div>
+</section>
 <section class="faq-section">
   <h2>Frequently asked questions</h2>
   <div class="faq-list">
