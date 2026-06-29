@@ -297,6 +297,8 @@
       .nav-logo { font-size: 14px; }
       .btn-nav { padding: 8px 16px; }
     }
+      .currency-tag { font-size: 13px; font-weight: 400; color: var(--muted); margin-left: 2px; }
+    .local-price-hint { font-size: 13px; font-weight: 400; color: var(--muted); margin-left: 4px; }
   </style>
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"実際に何を受け取りますか？","acceptedAnswer":{"@type":"Answer","text":"お支払いから24時間以内に、訪問者ごとのQRコードが記載された確認メールが届きます。ゲートでスマートフォンの画面を提示してください。スタッフがパスポートも確認しますので、必ずお持ちください。"}},{"@type":"Question","name":"なぜ直接購入できないのですか？","acceptedAnswer":{"@type":"Answer","text":"中国の公式システム（mutianyu.com）では中国の電話番号と中国の決済アプリが必要です。ほとんどの外国のカードや決済アプリは使用できません。当サービスでは必要な中国のアカウントを保有し、お客様に代わって予約します。"}},{"@type":"Question","name":"チケットのランクの違いは何ですか？","acceptedAnswer":{"@type":"Answer","text":"入場券のみ：石段を自力で上り下りします（傾斜が急な箇所があります）。入場券＋シャトル：エコバスで城壁入口まで移動でき、長い坂道を歩かずに済みます。フルエクスペリエンス：ロープウェイのゴンドラで直接城壁の上まで行けます — 最も楽なオプションで、ご家族やゆったり観光したい方に最適です。"}},{"@type":"Question","name":"慕田峪は北京の中心部からどのくらい離れていますか？","acceptedAnswer":{"@type":"Answer","text":"約70〜80km、車やタクシーで約1.5〜2時間です。交通渋滞と混雑を避けるため、早めの出発をお勧めします。"}},{"@type":"Question","name":"事前予約は必要ですか？","acceptedAnswer":{"@type":"Answer","text":"はい — 中国のシステムでの処理に少なくとも2日必要です。当日・翌日の予約は受け付けておりません。"}}]}
@@ -363,7 +365,7 @@
                     <div class="ttc-desc">慕田峪万里の長城への入場。自力で上り下りします — 傾斜が急な箇所があります。</div>
                   </div>
                   <div class="ttc-price">
-                    <div class="price">$11</div>
+                    <div class="price" data-usd="11">$11<span class="currency-tag"> USD</span></div>
                     <div class="per">1名あたり</div>
                   </div>
                 </div>
@@ -378,7 +380,7 @@
                     <div class="ttc-desc">入場券＋ゲートから城壁入口まで往復のエコバス。長い上り坂を歩かずに済みます。</div>
                   </div>
                   <div class="ttc-price">
-                    <div class="price">$14</div>
+                    <div class="price" data-usd="14">$14<span class="currency-tag"> USD</span></div>
                     <div class="per">1名あたり</div>
                   </div>
                 </div>
@@ -393,7 +395,7 @@
                     <div class="ttc-desc">入場券＋シャトルバス＋往復ロープウェイ。ゴンドラで直接城壁の上まで行けます — 最も楽なアクセス方法。</div>
                   </div>
                   <div class="ttc-price">
-                    <div class="price">$33</div>
+                    <div class="price" data-usd="33">$33<span class="currency-tag"> USD</span></div>
                     <div class="per">1名あたり</div>
                   </div>
                 </div>
@@ -798,6 +800,41 @@
   }
 
   function toggleFaq(btn) { btn.closest('.faq-item').classList.toggle('open'); }
+</script>
+<script>
+(function(){
+  var RATES={
+    EUR:{sym:'€',rate:0.92,langs:['fr','de','it','nl','pt','pl','ro','el','cs','sv','fi','da','sk','hu','bg','hr','sl','et','lv','lt']},
+    GBP:{sym:'£',rate:0.79,langs:['en-gb']},
+    AUD:{sym:'A$',rate:1.54,langs:['en-au']},
+    CAD:{sym:'C$',rate:1.37,langs:['en-ca']},
+    SGD:{sym:'S$',rate:1.35,langs:['en-sg','ms-sg']},
+    KRW:{sym:'₩',rate:1360,langs:['ko'],round:100},
+    JPY:{sym:'¥',rate:155,langs:['ja'],round:10},
+    IDR:{sym:'Rp ',rate:16300,langs:['id'],round:1000},
+    THB:{sym:'฿',rate:35,langs:['th'],round:1},
+    MYR:{sym:'RM',rate:4.7,langs:['ms','ms-my']},
+    HKD:{sym:'HK$',rate:7.8,langs:['zh-hk']},
+    TWD:{sym:'NT$',rate:32,langs:['zh-tw']}
+  };
+  var lang=(navigator.language||'').toLowerCase();
+  var base=lang.split('-')[0];
+  var cur=null;
+  for(var code in RATES){
+    var info=RATES[code];
+    if(info.langs.some(function(l){return lang===l||(l.indexOf('-')===-1&&base===l);})){cur=info;break;}
+  }
+  if(!cur)return;
+  document.querySelectorAll('[data-usd]').forEach(function(el){
+    var usd=+el.dataset.usd;if(!usd)return;
+    var raw=usd*cur.rate;
+    var val=cur.round?Math.round(raw/cur.round)*cur.round:Math.round(raw);
+    var hint=document.createElement('span');
+    hint.className='local-price-hint';
+    hint.textContent=' (~'+cur.sym+val.toLocaleString()+')';
+    el.appendChild(hint);
+  });
+})();
 </script>
 </body>
 </html>

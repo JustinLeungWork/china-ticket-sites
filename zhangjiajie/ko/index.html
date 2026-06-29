@@ -261,7 +261,9 @@ footer{background:var(--primary-dark);color:rgba(255,255,255,.55);padding:40px c
 .btn-submit:disabled{opacity:.5;cursor:not-allowed}
 .ov-error{color:#f87171;font-size:13px;margin-top:10px;display:none}
 .ov-passport-note{background:rgba(200,169,98,.12);border:1px solid rgba(200,169,98,.25);border-radius:var(--r-sm);padding:12px 16px;font-size:13px;color:rgba(255,255,255,.75);margin-bottom:20px;line-height:1.6}
-</style>
+    .currency-tag { font-size: 13px; font-weight: 400; color: var(--muted); margin-left: 2px; }
+    .local-price-hint { font-size: 13px; font-weight: 400; color: var(--muted); margin-left: 4px; }
+  </style>
   <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
@@ -425,7 +427,7 @@ footer{background:var(--primary-dark);color:rgba(255,255,255,.55);padding:40px c
   <div class="pricing-cards">
     <div class="pricing-card">
       <h3>기본 입장권<br><small style="font-weight:400;color:var(--muted);font-size:13px">성인 (18세 이상)</small></h3>
-      <div class="pricing-amount">$39 <span>/ 인</span></div>
+      <div class="pricing-amount" data-usd="39">$39<span class="currency-tag"> USD</span> <span>/ 인</span></div>
       <ul class="pricing-includes">
         <li><span class="pi-check">✓</span>모든 공원 구역 입장</li>
         <li><span class="pi-check">✓</span>환경버스 네트워크</li>
@@ -435,7 +437,7 @@ footer{background:var(--primary-dark);color:rgba(255,255,255,.55);padding:40px c
     </div>
     <div class="pricing-card">
       <h3>기본 입장권<br><small style="font-weight:400;color:var(--muted);font-size:13px">청소년 14–17세</small></h3>
-      <div class="pricing-amount">$22 <span>/ 인</span></div>
+      <div class="pricing-amount" data-usd="22">$22<span class="currency-tag"> USD</span> <span>/ 인</span></div>
       <ul class="pricing-includes">
         <li><span class="pi-check">✓</span>모든 공원 구역 입장</li>
         <li><span class="pi-check">✓</span>환경버스 네트워크</li>
@@ -446,7 +448,7 @@ footer{background:var(--primary-dark);color:rgba(255,255,255,.55);padding:40px c
     <div class="pricing-card featured">
       <div class="pricing-badge">가장 인기</div>
       <h3>전체 교통 패키지<br><small style="font-weight:400;color:var(--muted);font-size:13px">성인 (18세 이상)</small></h3>
-      <div class="pricing-amount">$73 <span>/ 인</span></div>
+      <div class="pricing-amount" data-usd="73">$73<span class="currency-tag"> USD</span> <span>/ 인</span></div>
       <ul class="pricing-includes">
         <li><span class="pi-check">✓</span>모든 공원 구역 입장</li>
         <li><span class="pi-check">✓</span>환경버스 네트워크</li>
@@ -1008,6 +1010,41 @@ async function submitBooking() {
 updateQtyDisplay();
 updateTotals();
 initCal();
+</script>
+<script>
+(function(){
+  var RATES={
+    EUR:{sym:'€',rate:0.92,langs:['fr','de','it','nl','pt','pl','ro','el','cs','sv','fi','da','sk','hu','bg','hr','sl','et','lv','lt']},
+    GBP:{sym:'£',rate:0.79,langs:['en-gb']},
+    AUD:{sym:'A$',rate:1.54,langs:['en-au']},
+    CAD:{sym:'C$',rate:1.37,langs:['en-ca']},
+    SGD:{sym:'S$',rate:1.35,langs:['en-sg','ms-sg']},
+    KRW:{sym:'₩',rate:1360,langs:['ko'],round:100},
+    JPY:{sym:'¥',rate:155,langs:['ja'],round:10},
+    IDR:{sym:'Rp ',rate:16300,langs:['id'],round:1000},
+    THB:{sym:'฿',rate:35,langs:['th'],round:1},
+    MYR:{sym:'RM',rate:4.7,langs:['ms','ms-my']},
+    HKD:{sym:'HK$',rate:7.8,langs:['zh-hk']},
+    TWD:{sym:'NT$',rate:32,langs:['zh-tw']}
+  };
+  var lang=(navigator.language||'').toLowerCase();
+  var base=lang.split('-')[0];
+  var cur=null;
+  for(var code in RATES){
+    var info=RATES[code];
+    if(info.langs.some(function(l){return lang===l||(l.indexOf('-')===-1&&base===l);})){cur=info;break;}
+  }
+  if(!cur)return;
+  document.querySelectorAll('[data-usd]').forEach(function(el){
+    var usd=+el.dataset.usd;if(!usd)return;
+    var raw=usd*cur.rate;
+    var val=cur.round?Math.round(raw/cur.round)*cur.round:Math.round(raw);
+    var hint=document.createElement('span');
+    hint.className='local-price-hint';
+    hint.textContent=' (~'+cur.sym+val.toLocaleString()+')';
+    el.appendChild(hint);
+  });
+})();
 </script>
 </body>
 </html>

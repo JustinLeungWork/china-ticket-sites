@@ -297,6 +297,8 @@
       .nav-logo { font-size: 14px; }
       .btn-nav { padding: 8px 16px; }
     }
+      .currency-tag { font-size: 13px; font-weight: 400; color: var(--muted); margin-left: 2px; }
+    .local-price-hint { font-size: 13px; font-weight: 400; color: var(--muted); margin-left: 4px; }
   </style>
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"실제로 무엇을 받게 되나요?","acceptedAnswer":{"@type":"Answer","text":"결제 후 24시간 이내에 방문객 1인당 QR 코드가 포함된 확인 이메일을 받으실 수 있습니다. 입장 게이트에서 휴대폰으로 QR 코드를 제시하시면 됩니다. 직원이 여권도 확인하니 항상 소지하세요."}},{"@type":"Question","name":"공식 웹사이트에서 직접 구매할 수 없는 이유가 무엇인가요?","acceptedAnswer":{"@type":"Answer","text":"중국 공식 시스템(mutianyu.com)은 중국 전화번호와 중국 결제 앱이 필요합니다. 대부분의 외국 카드와 결제 앱은 작동하지 않습니다. 저희는 필요한 중국 계정을 보유하고 있어 대신 예약해 드립니다."}},{"@type":"Question","name":"티켓 종류 간의 차이점은 무엇인가요?","acceptedAnswer":{"@type":"Answer","text":"입장권만: 계단을 직접 오르내립니다(일부 구간이 가파름). 입장권 + 셔틀버스: 에코버스가 성벽 입구까지 데려다 줘 긴 오르막 걷기를 줄여줍니다. 완전 체험: 케이블카가 성벽 정상으로 직접 데려다 줍니다 — 가족이나 여유롭게 즐기고 싶은 분들에게 최적입니다."}},{"@type":"Question","name":"무탄위는 베이징 중심부에서 얼마나 멀리 있나요?","acceptedAnswer":{"@type":"Answer","text":"북동쪽으로 약 70~80km 거리로, 자동차나 택시로 약 1.5~2시간 소요됩니다. 교통 체증과 혼잡을 피하려면 일찍 출발하시길 권장합니다."}},{"@type":"Question","name":"사전에 예약해야 하나요?","acceptedAnswer":{"@type":"Answer","text":"네 — 중국 시스템에서 예약을 처리하려면 최소 2일이 필요합니다. 당일 및 익일 예약은 불가능합니다."}}]}
@@ -363,7 +365,7 @@
                     <div class="ttc-desc">무탄위 만리장성 입장. 계단을 직접 오르내립니다 — 일부 구간이 가파릅니다.</div>
                   </div>
                   <div class="ttc-price">
-                    <div class="price">$11</div>
+                    <div class="price" data-usd="11">$11<span class="currency-tag"> USD</span></div>
                     <div class="per">1인당</div>
                   </div>
                 </div>
@@ -378,7 +380,7 @@
                     <div class="ttc-desc">입장권 + 게이트에서 성벽 입구까지 왕복 에코버스. 긴 오르막 걷기를 줄여줍니다.</div>
                   </div>
                   <div class="ttc-price">
-                    <div class="price">$14</div>
+                    <div class="price" data-usd="14">$14<span class="currency-tag"> USD</span></div>
                     <div class="per">1인당</div>
                   </div>
                 </div>
@@ -393,7 +395,7 @@
                     <div class="ttc-desc">입장권 + 셔틀버스 + 케이블카 왕복. 곤돌라가 성벽 정상으로 직접 데려다 줍니다 — 가장 편한 접근 방법.</div>
                   </div>
                   <div class="ttc-price">
-                    <div class="price">$33</div>
+                    <div class="price" data-usd="33">$33<span class="currency-tag"> USD</span></div>
                     <div class="per">1인당</div>
                   </div>
                 </div>
@@ -798,6 +800,41 @@
   }
 
   function toggleFaq(btn) { btn.closest('.faq-item').classList.toggle('open'); }
+</script>
+<script>
+(function(){
+  var RATES={
+    EUR:{sym:'€',rate:0.92,langs:['fr','de','it','nl','pt','pl','ro','el','cs','sv','fi','da','sk','hu','bg','hr','sl','et','lv','lt']},
+    GBP:{sym:'£',rate:0.79,langs:['en-gb']},
+    AUD:{sym:'A$',rate:1.54,langs:['en-au']},
+    CAD:{sym:'C$',rate:1.37,langs:['en-ca']},
+    SGD:{sym:'S$',rate:1.35,langs:['en-sg','ms-sg']},
+    KRW:{sym:'₩',rate:1360,langs:['ko'],round:100},
+    JPY:{sym:'¥',rate:155,langs:['ja'],round:10},
+    IDR:{sym:'Rp ',rate:16300,langs:['id'],round:1000},
+    THB:{sym:'฿',rate:35,langs:['th'],round:1},
+    MYR:{sym:'RM',rate:4.7,langs:['ms','ms-my']},
+    HKD:{sym:'HK$',rate:7.8,langs:['zh-hk']},
+    TWD:{sym:'NT$',rate:32,langs:['zh-tw']}
+  };
+  var lang=(navigator.language||'').toLowerCase();
+  var base=lang.split('-')[0];
+  var cur=null;
+  for(var code in RATES){
+    var info=RATES[code];
+    if(info.langs.some(function(l){return lang===l||(l.indexOf('-')===-1&&base===l);})){cur=info;break;}
+  }
+  if(!cur)return;
+  document.querySelectorAll('[data-usd]').forEach(function(el){
+    var usd=+el.dataset.usd;if(!usd)return;
+    var raw=usd*cur.rate;
+    var val=cur.round?Math.round(raw/cur.round)*cur.round:Math.round(raw);
+    var hint=document.createElement('span');
+    hint.className='local-price-hint';
+    hint.textContent=' (~'+cur.sym+val.toLocaleString()+')';
+    el.appendChild(hint);
+  });
+})();
 </script>
 </body>
 </html>

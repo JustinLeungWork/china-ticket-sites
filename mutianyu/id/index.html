@@ -297,6 +297,8 @@
       .nav-logo { font-size: 14px; }
       .btn-nav { padding: 8px 16px; }
     }
+      .currency-tag { font-size: 13px; font-weight: 400; color: var(--muted); margin-left: 2px; }
+    .local-price-hint { font-size: 13px; font-weight: 400; color: var(--muted); margin-left: 4px; }
   </style>
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Apa yang sebenarnya saya terima?","acceptedAnswer":{"@type":"Answer","text":"Dalam 24 jam setelah pembayaran, Anda akan menerima email konfirmasi dengan kode QR untuk setiap pengunjung. Tunjukkan di ponsel Anda di gerbang. Petugas juga akan memeriksa paspor Anda, jadi simpan di tempat yang mudah dijangkau."}},{"@type":"Question","name":"Mengapa saya tidak bisa membeli langsung?","acceptedAnswer":{"@type":"Answer","text":"Sistem resmi China (mutianyu.com) memerlukan nomor telepon China dan aplikasi pembayaran China. Sebagian besar kartu dan aplikasi pembayaran asing tidak berfungsi. Kami memiliki akun China yang diperlukan dan melakukan pemesanan atas nama Anda."}},{"@type":"Question","name":"Apa perbedaan antara tingkatan tiket?","acceptedAnswer":{"@type":"Answer","text":"Hanya masuk: naiki tangga sendiri (curam di beberapa tempat). Masuk + shuttle: bus eco membawa Anda ke kaki tembok, menghemat perjalanan jalan kaki yang panjang. Pengalaman lengkap: cable car membawa Anda langsung ke atas tembok — pilihan termudah, bagus untuk keluarga atau mereka yang ingin kunjungan santai."}},{"@type":"Question","name":"Seberapa jauh Mutianyu dari pusat kota Beijing?","acceptedAnswer":{"@type":"Answer","text":"Sekitar 70–80km, kira-kira 1,5–2 jam dengan mobil atau taksi. Kami menyarankan berangkat lebih awal untuk menghindari kemacetan dan kerumunan."}},{"@type":"Question","name":"Apakah saya perlu memesan terlebih dahulu?","acceptedAnswer":{"@type":"Answer","text":"Ya — kami membutuhkan setidaknya 2 hari untuk memproses pemesanan Anda di sistem China. Pemesanan di hari yang sama dan keesokan harinya tidak memungkinkan."}}]}
@@ -363,7 +365,7 @@
                     <div class="ttc-desc">Masuk ke Tembok Besar Mutianyu. Naik atau turun dengan berjalan kaki sendiri — tangga curam di beberapa bagian.</div>
                   </div>
                   <div class="ttc-price">
-                    <div class="price">$11</div>
+                    <div class="price" data-usd="11">$11<span class="currency-tag"> USD</span></div>
                     <div class="per">per orang</div>
                   </div>
                 </div>
@@ -378,7 +380,7 @@
                     <div class="ttc-desc">Masuk + bus eco dari gerbang ke kaki tembok dan kembali. Menghemat perjalanan jalan kaki mendaki yang panjang.</div>
                   </div>
                   <div class="ttc-price">
-                    <div class="price">$14</div>
+                    <div class="price" data-usd="14">$14<span class="currency-tag"> USD</span></div>
                     <div class="per">per orang</div>
                   </div>
                 </div>
@@ -393,7 +395,7 @@
                     <div class="ttc-desc">Tiket masuk + bus shuttle + cable car dua arah. Gondola membawa Anda langsung ke atas tembok — akses termudah.</div>
                   </div>
                   <div class="ttc-price">
-                    <div class="price">$33</div>
+                    <div class="price" data-usd="33">$33<span class="currency-tag"> USD</span></div>
                     <div class="per">per orang</div>
                   </div>
                 </div>
@@ -798,6 +800,41 @@
   }
 
   function toggleFaq(btn) { btn.closest('.faq-item').classList.toggle('open'); }
+</script>
+<script>
+(function(){
+  var RATES={
+    EUR:{sym:'€',rate:0.92,langs:['fr','de','it','nl','pt','pl','ro','el','cs','sv','fi','da','sk','hu','bg','hr','sl','et','lv','lt']},
+    GBP:{sym:'£',rate:0.79,langs:['en-gb']},
+    AUD:{sym:'A$',rate:1.54,langs:['en-au']},
+    CAD:{sym:'C$',rate:1.37,langs:['en-ca']},
+    SGD:{sym:'S$',rate:1.35,langs:['en-sg','ms-sg']},
+    KRW:{sym:'₩',rate:1360,langs:['ko'],round:100},
+    JPY:{sym:'¥',rate:155,langs:['ja'],round:10},
+    IDR:{sym:'Rp ',rate:16300,langs:['id'],round:1000},
+    THB:{sym:'฿',rate:35,langs:['th'],round:1},
+    MYR:{sym:'RM',rate:4.7,langs:['ms','ms-my']},
+    HKD:{sym:'HK$',rate:7.8,langs:['zh-hk']},
+    TWD:{sym:'NT$',rate:32,langs:['zh-tw']}
+  };
+  var lang=(navigator.language||'').toLowerCase();
+  var base=lang.split('-')[0];
+  var cur=null;
+  for(var code in RATES){
+    var info=RATES[code];
+    if(info.langs.some(function(l){return lang===l||(l.indexOf('-')===-1&&base===l);})){cur=info;break;}
+  }
+  if(!cur)return;
+  document.querySelectorAll('[data-usd]').forEach(function(el){
+    var usd=+el.dataset.usd;if(!usd)return;
+    var raw=usd*cur.rate;
+    var val=cur.round?Math.round(raw/cur.round)*cur.round:Math.round(raw);
+    var hint=document.createElement('span');
+    hint.className='local-price-hint';
+    hint.textContent=' (~'+cur.sym+val.toLocaleString()+')';
+    el.appendChild(hint);
+  });
+})();
 </script>
 </body>
 </html>
