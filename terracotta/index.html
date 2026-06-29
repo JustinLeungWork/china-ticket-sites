@@ -172,6 +172,8 @@
     .ticket-pricing { display: flex; align-items: baseline; gap: 8px; }
     .ticket-price { font-size: 28px; font-weight: 600; letter-spacing: -0.01em; }
     .ticket-face { font-size: 12px; color: var(--muted); }
+    .currency-tag { font-size: 13px; font-weight: 400; color: var(--muted); margin-left: 2px; }
+    .local-price-hint { font-size: 13px; font-weight: 400; color: var(--muted); margin-left: 4px; }
     .ticket-fee { font-size: 11.5px; color: var(--muted); margin-top: 5px; }
 
     /* Compact option cards (beside the booking form) */
@@ -427,7 +429,7 @@
           <div class="ticket-body">
             <div class="ticket-name">Full-Price Admission</div>
             <div class="ticket-includes">All 3 excavation pits · Lishan Garden park · Bronze Chariots · free shuttle. One ticket per visitor.</div>
-            <div class="ticket-pricing"><span class="ticket-price">$26</span><span class="ticket-face">per visitor</span></div>
+            <div class="ticket-pricing"><span class="ticket-price" data-usd="26">$26<span class="currency-tag"> USD</span></span><span class="ticket-face">per visitor</span></div>
           </div>
         </div>
         <div class="ticket-card ticket-card--row">
@@ -436,7 +438,7 @@
             <span class="ticket-badge">Optional add-on</span>
             <div class="ticket-name">Private English Guide</div>
             <div class="ticket-includes">Licensed English-speaking guide · ~2.5 hrs · up to 10 people. Tick the box in the form to add it.</div>
-            <div class="ticket-pricing"><span class="ticket-price">$150</span><span class="ticket-face">flat · any group size</span></div>
+            <div class="ticket-pricing"><span class="ticket-price" data-usd="150">$150<span class="currency-tag"> USD</span></span><span class="ticket-face">flat · any group size</span></div>
           </div>
         </div>
       </div>
@@ -917,6 +919,41 @@
     btn.addEventListener('click', function(){ localStorage.setItem('lang-chosen','1'); location.href = this.dataset.href; });
   });
   function dismiss(){ localStorage.setItem('lang-chosen','1'); overlay.classList.remove('show'); }
+})();
+</script>
+<script>
+(function(){
+  var RATES={
+    EUR:{sym:'€',rate:0.92,langs:['fr','de','it','nl','pt','pl','ro','el','cs','sv','fi','da','sk','hu','bg','hr','sl','et','lv','lt']},
+    GBP:{sym:'£',rate:0.79,langs:['en-gb']},
+    AUD:{sym:'A$',rate:1.54,langs:['en-au']},
+    CAD:{sym:'C$',rate:1.37,langs:['en-ca']},
+    SGD:{sym:'S$',rate:1.35,langs:['en-sg','ms-sg']},
+    KRW:{sym:'₩',rate:1360,langs:['ko'],round:100},
+    JPY:{sym:'¥',rate:155,langs:['ja'],round:10},
+    IDR:{sym:'Rp ',rate:16300,langs:['id'],round:1000},
+    THB:{sym:'฿',rate:35,langs:['th'],round:1},
+    MYR:{sym:'RM',rate:4.7,langs:['ms','ms-my']},
+    HKD:{sym:'HK$',rate:7.8,langs:['zh-hk']},
+    TWD:{sym:'NT$',rate:32,langs:['zh-tw']}
+  };
+  var lang=(navigator.language||'').toLowerCase();
+  var base=lang.split('-')[0];
+  var cur=null;
+  for(var code in RATES){
+    var info=RATES[code];
+    if(info.langs.some(function(l){return lang===l||(l.indexOf('-')===-1&&base===l);})){cur=info;break;}
+  }
+  if(!cur)return;
+  document.querySelectorAll('[data-usd]').forEach(function(el){
+    var usd=+el.dataset.usd;if(!usd)return;
+    var raw=usd*cur.rate;
+    var val=cur.round?Math.round(raw/cur.round)*cur.round:Math.round(raw);
+    var hint=document.createElement('span');
+    hint.className='local-price-hint';
+    hint.textContent=' (~'+cur.sym+val.toLocaleString()+')';
+    el.appendChild(hint);
+  });
 })();
 </script>
 </body>
